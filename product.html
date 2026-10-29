@@ -42,8 +42,16 @@
     h1,h2{font-family:Georgia,'Times New Roman',serif;color:var(--maroon);font-weight:normal}
     h1{font-size:clamp(30px,4vw,44px);line-height:1.12;margin:0 0 14px}
     .description{font-size:15px;line-height:1.8;color:var(--muted);white-space:pre-line}
-    .price{font-size:22px;font-weight:bold;color:#332b28;margin:22px 0}
-    .price s{font-size:15px;color:#8b8179;font-weight:normal;margin-right:8px}
+    .availability-badge{display:inline-flex;align-items:center;gap:8px;width:max-content;max-width:100%;padding:8px 12px;border-radius:999px;font-size:12px;font-weight:bold;margin:0 0 15px;border:1px solid transparent}
+    .availability-badge::before{content:"";width:8px;height:8px;border-radius:50%;background:currentColor;flex:0 0 8px}
+    .availability-badge.available{color:#17683a;background:#e8f6ed;border-color:#bfe4cb}
+    .availability-badge.made-to-order{color:#80520c;background:#fff4d9;border-color:#f0d89b}
+    .availability-badge.unavailable{color:#9d2c35;background:#fff0f0;border-color:#efc5c8}
+    .availability-badge.unknown{color:#66584b;background:#f6eee3;border-color:#e8d7bf}
+    .price{font-size:27px;font-weight:bold;color:var(--maroon);margin:22px 0 7px;display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+    .price s{font-size:16px;color:#8b8179;font-weight:normal;margin-right:1px}
+    .discount-badge{font-family:Arial,Helvetica,sans-serif;font-size:12px;font-weight:bold;color:#17683a;background:#e8f6ed;border-radius:999px;padding:5px 9px;white-space:nowrap}
+    .savings{font-size:13px;color:#17683a;font-weight:600;margin:-1px 0 18px}
     .meta{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:14px 0;margin:18px 0;color:var(--muted);font-size:13px}
     .actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
     .btn{display:inline-flex;justify-content:center;align-items:center;gap:8px;padding:13px 18px;border:1px solid var(--maroon);border-radius:3px;background:var(--maroon);color:white;text-decoration:none;font-size:13px;font-weight:bold;cursor:pointer;min-height:45px}
@@ -86,11 +94,13 @@
       <div class="info">
         <div class="category" id="productCategory"></div>
         <h1 id="productName"></h1>
+        <div class="availability-badge unknown" id="availabilityBadge">Ask us to confirm availability</div>
         <div class="description" id="productDescription"></div>
         <div class="meta" id="productMeta" hidden></div>
         <div class="price" id="productPrice"></div>
+        <div class="savings" id="productSavings" hidden></div>
         <div class="actions">
-          <button class="btn" id="enquireButton" type="button">Enquire on WhatsApp →</button>
+          <button class="btn" id="enquireButton" type="button">Order on WhatsApp →</button>
           <a class="btn outline" href="index.html#collection">Continue browsing</a>
         </div>
       </div>
@@ -237,11 +247,41 @@
       if (selected) selected.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "nearest" });
     }
 
+    function renderAvailability(rawValue) {
+      const badge = document.getElementById("availabilityBadge");
+      const raw = String(rawValue || "").trim();
+      const normalized = raw.toLowerCase().replace(/[\s-]+/g, "_");
+      let label = "Ask us to confirm availability";
+      let className = "unknown";
+      if (["available", "in_stock", "instock", "ready_stock", "ready_to_ship"].includes(normalized)) {
+        label = "Available to order";
+        className = "available";
+      } else if (["made_to_order", "made_toorder", "pre_order", "preorder", "on_demand"].includes(normalized)) {
+        label = "Made to order";
+        className = "made-to-order";
+      } else if (["out_of_stock", "unavailable", "sold_out", "soldout", "discontinued"].includes(normalized)) {
+        label = "Currently unavailable";
+        className = "unavailable";
+      } else if (raw) {
+        label = raw.replace(/[_-]+/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+        className = "unknown";
+      }
+      badge.textContent = label;
+      badge.className = `availability-badge ${className}`;
+      const orderButton = document.getElementById("enquireButton");
+      if (className === "unavailable") orderButton.textContent = "Ask About Availability →";
+      else if (className === "unknown") orderButton.textContent = "Check Availability on WhatsApp →";
+      else orderButton.textContent = "Order on WhatsApp →";
+    }
+
     function formatPrice(product) {
       const selling = Number(product.selling_price || 0);
       const reference = Number(product.reference_price || 0);
       const el = document.getElementById("productPrice");
+      const savingsEl = document.getElementById("productSavings");
       el.innerHTML = "";
+      savingsEl.hidden = true;
+      savingsEl.textContent = "";
       if (selling > 0) {
         if (reference > selling) {
           const old = document.createElement("s");
@@ -249,13 +289,23 @@
           el.appendChild(old);
         }
         el.appendChild(document.createTextNode("₹" + selling.toLocaleString("en-IN")));
+        if (reference > selling) {
+          const discount = Math.round(((reference - selling) / reference) * 100);
+          const badge = document.createElement("span");
+          badge.className = "discount-badge";
+          badge.textContent = `${discount}% OFF`;
+          el.appendChild(badge);
+          savingsEl.textContent = `You save ₹${(reference - selling).toLocaleString("en-IN")}`;
+          savingsEl.hidden = false;
+        }
       } else {
         el.textContent = "Price on Request";
       }
     }
     document.getElementById("enquireButton").addEventListener("click", () => {
       const productName = document.getElementById("productName").textContent || "Product";
-      const message = `Hello LAKKA STORIES, I would like to enquire about: ${productName}. Please share the current price and availability.`;
+      const status = document.getElementById("availabilityBadge").textContent || "Please confirm availability";
+      const message = `Hello LAKKA STORIES, I would like to place an order for: ${productName}. Current status shown: ${status}. Please confirm the final price, availability, delivery charges and payment options before I pay.`;
       if (!/^[0-9]{10,15}$/.test(WHATSAPP_BUSINESS_NUMBER)) {
         alert("WhatsApp is not configured yet. Please contact LAKKA STORIES.");
         return;
@@ -286,10 +336,10 @@
         setText("productDescription", data.description || "Contact us for more details about this product.");
         const images = collectGalleryImages(data);
         renderGallery(images, data.name || "Product");
+        renderAvailability(data.availability);
         const meta = document.getElementById("productMeta");
         const bits = [];
         if (data.dimensions) bits.push(`Size: ${data.dimensions}`);
-        if (data.availability) bits.push(`Availability: ${data.availability}`);
         meta.textContent = bits.join(" · ");
         meta.hidden = bits.length === 0;
         formatPrice(data);
