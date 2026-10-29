@@ -50,17 +50,17 @@
     .filter{border:1px solid var(--line);border-radius:18px;background:transparent;color:var(--ink);padding:7px 12px;font-size:11px;cursor:pointer}
     .filter.active,.filter:hover{background:var(--maroon);color:white;border-color:var(--maroon)}
     .grid{max-width:1370px;margin:auto;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:12px}
-    .card{border:1px solid #eee3d5;background:white;border-radius:3px;overflow:hidden;display:flex;flex-direction:column}
+    .card{border:1px solid #eee3d5;background:white;border-radius:3px;overflow:hidden;display:flex;flex-direction:column;cursor:pointer;transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}
+    .card:hover,.card:focus-visible{transform:translateY(-3px);box-shadow:0 8px 22px rgba(87,35,41,.12);border-color:var(--gold);outline:none}
+    .card .price-original{color:#8b8179;font-weight:normal;margin-right:6px}
+    .card .discount-badge{display:inline-block;margin-left:6px;padding:2px 5px;border-radius:2px;background:#f6ead5;color:#8b5e24;font-size:9px;font-weight:bold;white-space:nowrap}
     .photo{height:155px;background:#f6eddf;display:flex;align-items:center;justify-content:center;overflow:hidden}
     .photo img{width:100%;height:100%;object-fit:cover;display:block}
     .card-body{padding:10px 10px 10px;display:flex;flex-direction:column;flex:1}
     .category{font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);font-weight:bold;margin-bottom:4px}
     .card h3{font-size:15px;line-height:1.18;margin-bottom:5px}
     .card p{font-size:11px;line-height:1.35;color:var(--muted);margin-bottom:9px}
-    .price{display:flex;align-items:center;flex-wrap:wrap;gap:6px;font-size:12px;font-weight:bold;color:#332b28;margin-top:auto;margin-bottom:8px}
-    .price-original{font-size:10px;font-weight:normal;color:#8b8179}
-    .price-current{font-size:15px;font-weight:bold;color:var(--maroon)}
-    .discount-badge{display:inline-block;background:#f5e7d0;color:#74333a;border:1px solid #e7d1ac;border-radius:3px;padding:3px 5px;font-size:9px;font-weight:bold;letter-spacing:.02em;white-space:nowrap}
+    .price{font-size:11px;font-weight:bold;color:#332b28;margin-top:auto;margin-bottom:8px}
     .card .btn{width:100%;font-size:10px;padding:8px 4px}
     .empty{grid-column:1/-1;text-align:center;padding:30px;color:var(--muted)}
     .story{background:#faf5ec;padding:55px 22px}
@@ -94,7 +94,7 @@
       .actions{gap:8px;margin:16px 0}.btn{font-size:11px;padding:11px 12px}.trust{padding-top:12px}
       .values{grid-template-columns:repeat(2,minmax(0,1fr));padding:12px;gap:8px}.value{padding:12px 7px}.value b{font-size:14px}.value small{font-size:10px}
       .collection{padding:32px 12px 38px}.section-head{margin-bottom:16px}.section-head h2{font-size:29px;line-height:1.1}.section-head p{font-size:12px}.catalog-tools{align-items:stretch;flex-direction:column;gap:10px}.search{width:100%;padding:11px 12px}.filters{justify-content:flex-start}
-      .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.photo{height:auto;aspect-ratio:1/0.92}.photo img{object-fit:cover}.card-body{padding:10px 9px 10px}.category{font-size:8px}.card h3{font-size:16px;line-height:1.15;margin-bottom:5px}.card p{font-size:11px;line-height:1.35;margin-bottom:8px}.price{font-size:10px;gap:5px;margin-bottom:7px}.price-current{font-size:13px}.price-original{font-size:9px}.discount-badge{font-size:8px;padding:2px 4px}.card .btn{font-size:10px;line-height:1.25;padding:8px 5px;min-height:34px}
+      .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.photo{height:auto;aspect-ratio:1/0.92}.photo img{object-fit:cover}.card-body{padding:10px 9px 10px}.category{font-size:8px}.card h3{font-size:16px;line-height:1.15;margin-bottom:5px}.card p{font-size:11px;line-height:1.35;margin-bottom:8px}.price{font-size:10px;margin-bottom:7px}.card .btn{font-size:10px;line-height:1.25;padding:8px 5px;min-height:34px}
       .story-inner{grid-template-columns:1fr;gap:18px}.story{padding:34px 16px}.story h2{font-size:29px;line-height:1.15}.story p{font-size:12px}.note{padding:19px}.note h3{font-size:20px}.connect{padding:24px 12px}.connect-box{padding:25px 15px}.connect-box h2{font-size:27px;line-height:1.12}.connect-box p{font-size:12px}
       footer{padding:23px 14px}.trust span{font-size:8px;padding:0 5px}
     }
@@ -222,6 +222,30 @@
       filtered.forEach(p => {
         const card = document.createElement("article");
         card.className = "card";
+        card.tabIndex = 0;
+        card.setAttribute("role", "link");
+        card.setAttribute("aria-label", "View details for " + (p.name || "this product"));
+        // Keep the product details navigation available from every catalogue card.
+        const openProductDetails = () => {
+          if (p.id !== undefined && p.id !== null && String(p.id) !== "") {
+            window.location.href = "product.html?id=" + encodeURIComponent(p.id);
+          } else if (p.product_code) {
+            window.location.href = "product.html?product_code=" + encodeURIComponent(p.product_code);
+          } else {
+            showToast("Product details are not available for this item yet.");
+          }
+        };
+        card.addEventListener("click", (event) => {
+          if (event.target.closest("button, a, input")) return;
+          openProductDetails();
+        });
+        card.addEventListener("keydown", (event) => {
+          if (event.target !== card) return;
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            openProductDetails();
+          }
+        });
         const photo = document.createElement("div"); photo.className = "photo";
         if (p.image_url) {
           const img = document.createElement("img");
@@ -245,20 +269,14 @@
             const badge = document.createElement("span");
             badge.className = "discount-badge";
             badge.textContent = discount + "% OFF";
-            price.appendChild(old);
-            const current = document.createElement("span");
-            current.className = "price-current";
-            current.textContent = "₹" + selling.toLocaleString("en-IN");
-            price.append(current, badge);
+            price.append(old, document.createTextNode("₹" + selling.toLocaleString("en-IN") + " "), badge);
           } else {
-            const current = document.createElement("span");
-            current.className = "price-current";
-            current.textContent = "₹" + selling.toLocaleString("en-IN");
-            price.appendChild(current);
+            price.textContent = "₹" + selling.toLocaleString("en-IN");
           }
         } else { price.textContent = "Price on Request"; }
         const btn = document.createElement("button"); btn.className = "btn outline enquiry";
         btn.textContent = "Enquire About This Product"; btn.dataset.product = p.name || "Product";
+        btn.addEventListener("click", (event) => event.stopPropagation());
         body.append(cat,title,desc,price,btn); card.append(photo,body); grid.appendChild(card); setupEnquiry(btn);
       });
       document.getElementById("noResults").hidden = true;
