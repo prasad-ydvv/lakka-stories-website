@@ -24,8 +24,19 @@
     .back{display:inline-block;text-decoration:none;color:var(--maroon);font-size:13px;font-weight:bold;margin:0 0 22px}
     .back:hover{text-decoration:underline}
     .product{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:42px;align-items:start}
-    .image-panel{background:#f8f0e4;border:1px solid var(--line);border-radius:8px;overflow:hidden;display:flex;align-items:center;justify-content:center;min-height:420px}
-    .image-panel img{display:block;width:100%;height:auto;max-height:760px;object-fit:contain}
+    .gallery{min-width:0}
+    .image-panel{position:relative;background:#f8f0e4;border:1px solid var(--line);border-radius:8px;overflow:hidden;display:flex;align-items:center;justify-content:center;min-height:420px;aspect-ratio:4/5}
+    .image-panel img{display:block;width:100%;height:100%;max-height:760px;object-fit:contain}
+    .gallery-nav{position:absolute;top:50%;transform:translateY(-50%);width:40px;height:40px;border:1px solid rgba(87,35,41,.2);border-radius:50%;background:rgba(255,253,248,.94);color:var(--maroon);font-size:22px;cursor:pointer;display:grid;place-items:center;box-shadow:0 2px 10px #422b2a12}
+    .gallery-nav:disabled{opacity:.35;cursor:default}
+    .gallery-prev{left:12px}.gallery-next{right:12px}
+    .gallery-count{position:absolute;right:12px;bottom:12px;background:rgba(87,35,41,.86);color:white;border-radius:20px;padding:4px 9px;font-size:11px;letter-spacing:.04em}
+    .thumbnails{display:flex;gap:10px;overflow-x:auto;padding:12px 2px 4px;scroll-snap-type:x mandatory;scrollbar-width:thin}
+    .thumbnail{flex:0 0 76px;width:76px;height:88px;border:1px solid var(--line);border-radius:5px;padding:3px;background:#fffaf1;cursor:pointer;overflow:hidden;scroll-snap-align:start}
+    .thumbnail img{width:100%;height:100%;object-fit:cover;display:block;border-radius:2px}
+    .thumbnail[aria-current="true"]{border:2px solid var(--maroon);padding:2px;box-shadow:0 0 0 2px #bd8b4522}
+    .thumbnail:focus-visible,.gallery-nav:focus-visible{outline:3px solid rgba(189,139,69,.65);outline-offset:2px}
+    .gallery-note{font-size:11px;color:var(--muted);margin:4px 2px 0}
     .placeholder{padding:80px 20px;color:var(--muted);text-align:center}
     .category{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:bold;margin:8px 0 9px}
     h1,h2{font-family:Georgia,'Times New Roman',serif;color:var(--maroon);font-weight:normal}
@@ -46,7 +57,8 @@
     @media(max-width:700px){
       .nav{padding:12px 14px;gap:10px}.brand strong{font-size:17px}.brand span{font-size:8px}nav{gap:11px;font-size:10px}
       .wrap{padding:20px 14px 36px}.back{margin-bottom:16px}.product{grid-template-columns:1fr;gap:20px}
-      .image-panel{min-height:0;max-height:none}.image-panel img{max-height:70vh;width:100%;object-fit:contain}
+      .image-panel{min-height:0;max-height:none;aspect-ratio:4/5}.image-panel img{max-height:72vh;width:100%;object-fit:contain}
+      .thumbnail{flex-basis:66px;width:66px;height:76px}.gallery-nav{width:36px;height:36px}
       .category{margin-top:0}h1{font-size:32px}.description{font-size:14px}.price{font-size:21px;margin:18px 0}.actions{display:grid;grid-template-columns:1fr}.btn{width:100%}
     }
     @media(max-width:370px){.nav{padding:10px}.brand strong{font-size:15px}nav{gap:8px;font-size:9px}.wrap{padding-left:10px;padding-right:10px}}
@@ -66,7 +78,11 @@
     <a class="back" href="index.html#collection">← Back to collection</a>
     <div id="productState" class="state">Loading product details…</div>
     <article id="productDetails" class="product" hidden>
-      <div class="image-panel" id="imagePanel"></div>
+      <div class="gallery" aria-label="Product photo gallery">
+        <div class="image-panel" id="imagePanel"></div>
+        <div class="thumbnails" id="productThumbnails" aria-label="Choose product photo" hidden></div>
+        <p class="gallery-note" id="galleryNote" hidden>Tap a thumbnail to view another angle.</p>
+      </div>
       <div class="info">
         <div class="category" id="productCategory"></div>
         <h1 id="productName"></h1>
@@ -99,6 +115,128 @@
     function setText(id, value) {
       document.getElementById(id).textContent = value || "";
     }
+    let galleryImages = [];
+    let activeImageIndex = 0;
+
+    function parseImageValue(value) {
+      if (!value) return [];
+      if (Array.isArray(value)) return value.flatMap(parseImageValue);
+      if (typeof value === "object") {
+        return Object.values(value).flatMap(parseImageValue);
+      }
+      if (typeof value !== "string") return [];
+      const trimmed = value.trim();
+      if (!trimmed) return [];
+      if ((trimmed.startsWith("[") && trimmed.endsWith("]")) || (trimmed.startsWith("{") && trimmed.endsWith("}"))) {
+        try { return parseImageValue(JSON.parse(trimmed)); } catch (_) {}
+      }
+      return trimmed.split(/[\n,|]+/).map(part => part.trim()).filter(Boolean);
+    }
+
+    function collectGalleryImages(product) {
+      const possibleFields = [
+        "image_url", "gallery_images", "image_urls", "additional_images", "images",
+        "photo_urls", "product_images", "image_url_2", "image_url_3", "image_url_4", "image_url_5"
+      ];
+      const candidates = possibleFields.flatMap(field => parseImageValue(product[field]));
+      const seen = new Set();
+      return candidates.filter(url => {
+        if (!/^https?:\/\//i.test(url) || seen.has(url)) return false;
+        seen.add(url);
+        return true;
+      });
+    }
+
+    function renderGallery(images, productName) {
+      const panel = document.getElementById("imagePanel");
+      const thumbnails = document.getElementById("productThumbnails");
+      const note = document.getElementById("galleryNote");
+      galleryImages = images;
+      activeImageIndex = 0;
+      panel.innerHTML = "";
+      thumbnails.innerHTML = "";
+
+      if (!images.length) {
+        panel.innerHTML = '<div class="placeholder">Photo coming soon</div>';
+        thumbnails.hidden = true;
+        note.hidden = true;
+        return;
+      }
+
+      const mainImage = document.createElement("img");
+      mainImage.id = "mainProductImage";
+      mainImage.src = images[0];
+      mainImage.alt = `${productName} — photo 1 of ${images.length}`;
+      mainImage.loading = "eager";
+      mainImage.onerror = () => {
+        mainImage.onerror = null;
+        mainImage.alt = "Product photo unavailable";
+        mainImage.style.display = "none";
+        const error = document.createElement("div");
+        error.className = "placeholder";
+        error.textContent = "Product photo unavailable";
+        panel.appendChild(error);
+      };
+      panel.appendChild(mainImage);
+
+      const previous = document.createElement("button");
+      previous.type = "button";
+      previous.className = "gallery-nav gallery-prev";
+      previous.setAttribute("aria-label", "Previous product photo");
+      previous.textContent = "‹";
+      previous.addEventListener("click", () => showGalleryImage(activeImageIndex - 1, productName));
+      const next = document.createElement("button");
+      next.type = "button";
+      next.className = "gallery-nav gallery-next";
+      next.setAttribute("aria-label", "Next product photo");
+      next.textContent = "›";
+      next.addEventListener("click", () => showGalleryImage(activeImageIndex + 1, productName));
+      const count = document.createElement("span");
+      count.className = "gallery-count";
+      count.id = "galleryCount";
+      count.textContent = `1 / ${images.length}`;
+      panel.append(previous, next, count);
+
+      images.forEach((url, index) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "thumbnail";
+        button.setAttribute("aria-label", `View photo ${index + 1}`);
+        button.setAttribute("aria-current", index === 0 ? "true" : "false");
+        const thumb = document.createElement("img");
+        thumb.src = url;
+        thumb.alt = `${productName} thumbnail ${index + 1}`;
+        thumb.loading = "lazy";
+        thumb.onerror = () => { button.hidden = true; };
+        button.appendChild(thumb);
+        button.addEventListener("click", () => showGalleryImage(index, productName));
+        thumbnails.appendChild(button);
+      });
+      thumbnails.hidden = images.length < 2;
+      note.hidden = images.length < 2;
+      previous.hidden = images.length < 2;
+      next.hidden = images.length < 2;
+      count.hidden = images.length < 2;
+    }
+
+    function showGalleryImage(index, productName) {
+      if (!galleryImages.length) return;
+      activeImageIndex = (index + galleryImages.length) % galleryImages.length;
+      const mainImage = document.getElementById("mainProductImage");
+      if (mainImage) {
+        mainImage.style.display = "block";
+        mainImage.src = galleryImages[activeImageIndex];
+        mainImage.alt = `${productName} — photo ${activeImageIndex + 1} of ${galleryImages.length}`;
+      }
+      const count = document.getElementById("galleryCount");
+      if (count) count.textContent = `${activeImageIndex + 1} / ${galleryImages.length}`;
+      document.querySelectorAll(".thumbnail").forEach((button, index) => {
+        button.setAttribute("aria-current", index === activeImageIndex ? "true" : "false");
+      });
+      const selected = document.querySelectorAll(".thumbnail")[activeImageIndex];
+      if (selected) selected.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "nearest" });
+    }
+
     function formatPrice(product) {
       const selling = Number(product.selling_price || 0);
       const reference = Number(product.reference_price || 0);
@@ -134,7 +272,7 @@
         if (!window.supabase || !window.supabase.createClient) throw new Error("Catalogue service could not load.");
         const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
         const { data, error } = await client.from("public_catalogue")
-          .select("id,product_code,name,category,description,dimensions,image_url,reference_price,selling_price,availability")
+          .select("*")
           .eq("id", productId)
           .maybeSingle();
         if (error) throw error;
@@ -146,17 +284,8 @@
         setText("productCategory", data.category || "Collection");
         setText("productName", data.name || "Product");
         setText("productDescription", data.description || "Contact us for more details about this product.");
-        const imagePanel = document.getElementById("imagePanel");
-        imagePanel.innerHTML = "";
-        if (data.image_url) {
-          const img = document.createElement("img");
-          img.src = data.image_url;
-          img.alt = data.name || "Product photo";
-          img.onerror = () => { imagePanel.innerHTML = '<div class="placeholder">Product photo unavailable</div>'; };
-          imagePanel.appendChild(img);
-        } else {
-          imagePanel.innerHTML = '<div class="placeholder">Photo coming soon</div>';
-        }
+        const images = collectGalleryImages(data);
+        renderGallery(images, data.name || "Product");
         const meta = document.getElementById("productMeta");
         const bits = [];
         if (data.dimensions) bits.push(`Size: ${data.dimensions}`);
