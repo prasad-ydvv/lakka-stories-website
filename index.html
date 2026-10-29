@@ -237,16 +237,6 @@
           const current = document.createElement("span"); current.className = "price-current";
           current.textContent = "₹" + selling.toLocaleString("en-IN");
           price.appendChild(current);
-          if (reference > selling) {
-            const old = document.createElement("s"); old.className = "price-original";
-            old.textContent = "₹" + reference.toLocaleString("en-IN");
-            const discount = Math.round(((reference - selling) / reference) * 100);
-            const badge = document.createElement("span"); badge.className = "discount-badge";
-            badge.textContent = discount + "% OFF";
-            const savings = document.createElement("span"); savings.className = "price-savings";
-            savings.textContent = "You save ₹" + (reference - selling).toLocaleString("en-IN");
-            price.append(old, badge, savings);
-          }
         } else { price.textContent = "Price on Request"; }
         const btn = document.createElement("a"); btn.className = "btn outline";
         btn.textContent = "View Details →";
