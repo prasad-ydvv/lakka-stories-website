@@ -100,30 +100,7 @@
       .hero::before{height:165px}.hero-inner{padding:24px 15px 22px}h1{font-size:33px}
       .grid{grid-template-columns:1fr}.photo{aspect-ratio:1.25/1}.card-body{padding:13px}.card h3{font-size:19px}.card p{font-size:12px}.price{font-size:11px}.card .btn{font-size:11px;padding:10px}
     }
-  
-/* Supabase connected catalogue styles */
-.tools{display:flex;gap:12px;justify-content:space-between;align-items:center;flex-wrap:wrap;margin-bottom:20px}
-.search{width:min(100%,330px);padding:12px 13px;border:1px solid var(--line);background:#fffdf8;font:inherit}
-.filters{display:flex;gap:7px;flex-wrap:wrap}
-.filter{padding:8px 13px;border:1px solid var(--line);border-radius:30px;background:white;color:var(--maroon);cursor:pointer;font-size:11px}
-.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
-.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-.grid{grid-template-columns:1fr}
-.card{border:1px solid var(--line);background:#fff;border-radius:4px;overflow:hidden;display:flex;flex-direction:column;min-width:0}
-.photo{aspect-ratio:1/1;background:var(--cream);display:flex;align-items:center;justify-content:center;overflow:hidden}
-.placeholder{color:#a28a6d;font:italic 17px Georgia,serif;padding:18px;text-align:center}
-.body{padding:14px;display:flex;flex-direction:column;flex:1}
-.body{padding:10px}
-.cat{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);font-weight:bold}
-.desc{font-size:12px;color:var(--muted);margin:0 0 12px}
-.price{font-size:13px;font-weight:bold;margin-top:auto;margin-bottom:12px}
-.price{font-size:12px}
-.old{color:#8d8176;text-decoration:line-through;font-weight:normal;margin-right:7px}
-.btn{display:inline-block;background:var(--maroon);color:white;border:1px solid var(--maroon);padding:12px 18px;text-decoration:none;font-weight:bold;font-size:12px;cursor:pointer}
-.state{padding:25px;text-align:center;color:var(--muted);grid-column:1/-1;background:#fcf7ef;border:1px dashed var(--line)}
-@media(max-width:800px){.hero-in{grid-template-columns:1fr}.hero-art{min-height:140px}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.section{padding:35px 13px}.nav{padding:14px}.brand{font-size:20px}.hero{padding:38px 17px}.hero h1{font-size:43px}.section-head h2{font-size:30px}.body{padding:10px}.body h3{font-size:17px}.story-in{grid-template-columns:1fr;padding:32px 18px}.price{font-size:12px}}
-@media(max-width:360px){.grid{grid-template-columns:1fr}}
-</style>
+  </style>
 </head>
 <body>
   <div class="topline">Thoughtful gifts · Timeless stories</div>
@@ -156,7 +133,19 @@
       <div class="value">✦<b>Stories to Share</b><small>Find a gift with character</small></div>
     </section>
 
-    <section class="section" id="collection"><div class="section-head"><div class="eyebrow">The collection</div><h2>Find your little treasure</h2><p>Browse the products below. Prices and availability are shown only when confirmed; contact us if you would like more details.</p></div><div class="tools"><input id="search" class="search" placeholder="Search products…" aria-label="Search products"><div id="filters" class="filters"><button class="filter active" data-filter="All">All products</button></div></div><div id="grid" class="grid"><div class="state">Loading the catalogue…</div></div><div class="status" id="status">Published collection · unpublished products are hidden</div></section>
+    <section class="collection" id="collection">
+      <div class="section-head"><p class="eyebrow">— The collection</p><h2>Find Your Little Treasure</h2><p>Explore our growing collection. Contact us for product details, availability and pricing.</p></div>
+      <div class="catalog-tools">
+        <input class="search" id="search" type="search" placeholder="Search the collection..." aria-label="Search products">
+        <div class="filters" aria-label="Filter products">
+          <button class="filter active" data-filter="All">All</button><button class="filter" data-filter="Toys">Toys</button><button class="filter" data-filter="Gifts">Gifts</button><button class="filter" data-filter="Decor">Decor</button>
+        </div>
+      </div>
+      <div class="grid" id="productGrid">
+        <p class="empty" style="grid-column:1/-1">Loading the collection…</p>
+      </div>
+      <p id="noResults" class="empty" hidden>No matching products found. Try another search.</p>
+    </section>
 
     <section class="story" id="story">
       <div class="story-inner">
@@ -171,17 +160,118 @@
   <footer><strong>LAKKA STORIES</strong><p>Tradition in Every Turn</p><p>Thoughtful gifts. Stories worth sharing.</p><small>© 2026 LAKKA STORIES</small></footer>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script>
-const SUPABASE_URL='https://qguxptvedozdfulahkid.supabase.co';
-const SUPABASE_PUBLISHABLE_KEY='sb_publishable_c5-NfXVIzLNgC821H3EFWQ_fpmSU9Tl';
-const WHATSAPP_BUSINESS_NUMBER='919381317313';
-const $=id=>document.getElementById(id);let allProducts=[];let active='All';
-function money(v){return new Intl.NumberFormat('en-IN',{style:'currency',currency:'INR',maximumFractionDigits:0}).format(Number(v)||0)}
-function enquire(name){const msg=`Hello LAKKA STORIES, I would like to enquire about: ${name}. Please share the current price and availability.`;window.open(`https://wa.me/${WHATSAPP_BUSINESS_NUMBER}?text=${encodeURIComponent(msg)}`,'_blank','noopener,noreferrer')}
-function render(){const term=$('search').value.trim().toLowerCase();const items=allProducts.filter(p=>(active==='All'||p.category===active)&&[p.name,p.description,p.category,p.product_code].some(v=>(v||'').toLowerCase().includes(term)));const grid=$('grid');grid.innerHTML='';if(!items.length){grid.innerHTML='<div class="state">No published products match this search yet. Please check back soon.</div>';return}items.forEach(p=>{const card=document.createElement('article');card.className='card';const photo=document.createElement('div');photo.className='photo';if(p.image_url){const img=document.createElement('img');img.src=p.image_url;img.alt=p.name;img.loading='lazy';img.onerror=()=>{photo.innerHTML='<div class="placeholder">Photo coming soon</div>'};photo.appendChild(img)}else{photo.innerHTML='<div class="placeholder">A little piece of tradition</div>'}const body=document.createElement('div');body.className='body';const cat=document.createElement('div');cat.className='cat';cat.textContent=p.category||'Collection';const title=document.createElement('h3');title.textContent=p.name;const desc=document.createElement('p');desc.className='desc';desc.textContent=(p.description||'Ask us for product details.').slice(0,130);const price=document.createElement('div');price.className='price';if(Number(p.reference_price)>Number(p.selling_price)&&Number(p.selling_price)>0){const old=document.createElement('span');old.className='old';old.textContent=money(p.reference_price);price.appendChild(old)}price.append(document.createTextNode(Number(p.selling_price)>0?money(p.selling_price):'Price on Request'));const btn=document.createElement('button');btn.className='btn enquire';btn.textContent='ENQUIRE ON WHATSAPP';btn.addEventListener('click',()=>enquire(p.name));body.append(cat,title,desc,price,btn);card.append(photo,body);grid.appendChild(card)})}
-function makeFilters(){const cats=[...new Set(allProducts.map(p=>p.category).filter(Boolean))].sort();$('filters').innerHTML='';['All',...cats].forEach(c=>{const b=document.createElement('button');b.className='filter'+(c===active?' active':'');b.dataset.filter=c;b.textContent=c==='All'?'All products':c;b.onclick=()=>{active=c;makeFilters();render()};$('filters').appendChild(b)})}
-async function load(){try{if(!window.supabase){throw new Error('Catalogue service could not load. Please refresh.')}const client=window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY);const {data,error}=await client.from('public_catalogue').select('id,product_code,name,category,description,dimensions,image_url,reference_price,selling_price,availability').order('created_at',{ascending:false});if(error)throw error;allProducts=data||[];makeFilters();render();$('status').textContent=`${allProducts.length} published product${allProducts.length===1?'':'s'} · customer website`; }catch(e){$('grid').innerHTML='<div class="state">Catalogue could not load right now. Check that the public_catalogue view permissions are configured correctly.</div>';$('status').textContent='Preview connection needs checking: '+e.message}}
-$('search').addEventListener('input',render);load();
-</script>
+    // Public project settings only. Never place database passwords or service-role keys here.
+    const SUPABASE_URL = "https://qguxptvedozdfulahkid.supabase.co";
+    const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_c5-NfXVIzLNgC821H3EFWQ_fpmSU9Tl";
+    // IMPORTANT: Add your WhatsApp business number below before publishing.
+    // Use country code + number only, with no +, spaces or dashes. Example format: 919876543210
+    const WHATSAPP_BUSINESS_NUMBER = "919381317313";
+    const toast = document.getElementById("toast");
+    let toastTimer;
+    function showToast(message) {
+      toast.textContent = message;
+      toast.style.display = "block";
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.style.display = "none", 5000);
+    }
+
+    function setupEnquiry(button) {
+      button.addEventListener("click", () => {
+        const product = button.dataset.product || "General catalogue enquiry";
+        if (!/^[0-9]{10,15}$/.test(WHATSAPP_BUSINESS_NUMBER)) {
+          showToast("WhatsApp is not configured yet. Add your business number in index.html before using enquiry buttons.");
+          return;
+        }
+        const message = `Hello LAKKA STORIES, I would like to enquire about: ${product}. Please share the current price and availability.`;
+        window.open(`https://wa.me/${WHATSAPP_BUSINESS_NUMBER}?text=${encodeURIComponent(message)}`, "_blank", "noopener,noreferrer");
+      });
+    }
+    document.querySelectorAll(".enquiry").forEach(setupEnquiry);
+
+    const search = document.getElementById("search");
+    const filters = document.querySelectorAll(".filter");
+    let activeFilter = "All";
+    let catalogueProducts = [];
+    function norm(v){ return String(v || "").trim().toLowerCase(); }
+    function categoryGroup(category) {
+      const c = norm(category);
+      if (c.includes("toy")) return "Toys";
+      if (c.includes("gift")) return "Gifts";
+      if (c.includes("decor") || c.includes("home")) return "Decor";
+      return category || "Other";
+    }
+    function renderCatalogue() {
+      const term = norm(search.value);
+      const grid = document.getElementById("productGrid");
+      const filtered = catalogueProducts.filter(p => {
+        const matchesCategory = activeFilter === "All" || categoryGroup(p.category) === activeFilter;
+        const matchesSearch = [p.name,p.product_code,p.category,p.description].some(v => norm(v).includes(term));
+        return matchesCategory && matchesSearch;
+      });
+      grid.innerHTML = "";
+      if (!filtered.length) {
+        grid.innerHTML = '<p class="empty" style="grid-column:1/-1">No products found. Please try another search or check back soon.</p>';
+        document.getElementById("noResults").hidden = true;
+        return;
+      }
+      filtered.forEach(p => {
+        const card = document.createElement("article");
+        card.className = "card";
+        const photo = document.createElement("div"); photo.className = "photo";
+        if (p.image_url) {
+          const img = document.createElement("img");
+          img.src = p.image_url; img.alt = p.name || "Product photo"; img.loading = "lazy";
+          img.onerror = () => { img.remove(); photo.textContent = "Photo coming soon"; };
+          photo.appendChild(img);
+        } else { photo.textContent = "Photo coming soon"; }
+        const body = document.createElement("div"); body.className = "card-body";
+        const cat = document.createElement("div"); cat.className = "category"; cat.textContent = p.category || "Collection";
+        const title = document.createElement("h3"); title.textContent = p.name || "Product";
+        const desc = document.createElement("p"); desc.textContent = p.description || "Contact us for product details and current availability.";
+        const price = document.createElement("div"); price.className = "price";
+        const selling = Number(p.selling_price || 0);
+        const reference = Number(p.reference_price || 0);
+        if (selling > 0) {
+          if (reference > selling) {
+            const old = document.createElement("s"); old.textContent = "₹" + reference.toLocaleString("en-IN");
+            old.style.marginRight = "6px"; old.style.color = "#8b8179"; price.appendChild(old);
+          }
+          price.appendChild(document.createTextNode("₹" + selling.toLocaleString("en-IN")));
+        } else { price.textContent = "Price on Request"; }
+        const btn = document.createElement("button"); btn.className = "btn outline enquiry";
+        btn.textContent = "Enquire About This Product"; btn.dataset.product = p.name || "Product";
+        body.append(cat,title,desc,price,btn); card.append(photo,body); grid.appendChild(card); setupEnquiry(btn);
+      });
+      document.getElementById("noResults").hidden = true;
+    }
+    search.addEventListener("input", renderCatalogue);
+    filters.forEach(button => button.addEventListener("click", () => {
+      activeFilter = button.dataset.filter;
+      filters.forEach(item => item.classList.toggle("active", item === button));
+      renderCatalogue();
+    }));
+    async function loadPublicCatalogue() {
+      const grid = document.getElementById("productGrid");
+      try {
+        if (!window.supabase || !window.supabase.createClient) throw new Error("Catalogue service could not load. Please refresh.");
+        const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+        const { data, error } = await client.from("public_catalogue")
+          .select("id,product_code,name,category,description,dimensions,image_url,reference_price,selling_price,availability")
+          .order("created_at", { ascending: false });
+        if (error) throw error;
+        catalogueProducts = data || [];
+        renderCatalogue();
+        if (!catalogueProducts.length) {
+          grid.innerHTML = '<p class="empty" style="grid-column:1/-1">Our collection is being prepared. Please check back soon or contact us for enquiries.</p>';
+        }
+      } catch (err) {
+        console.error("Could not load public catalogue:", err);
+        grid.innerHTML = '<p class="empty" style="grid-column:1/-1">We couldn’t load the collection right now. Please refresh the page or contact us on WhatsApp.</p>';
+      }
+    }
+    loadPublicCatalogue();
+  </script>
 </body>
 </html>
