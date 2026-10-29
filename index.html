@@ -54,13 +54,21 @@
     .card:hover,.card:focus-visible{transform:translateY(-3px);box-shadow:0 8px 22px rgba(87,35,41,.12);border-color:var(--gold);outline:none}
     .card .price-original{color:#8b8179;font-weight:normal;margin-right:6px}
     .card .discount-badge{display:inline-block;margin-left:6px;padding:2px 5px;border-radius:2px;background:#f6ead5;color:#8b5e24;font-size:9px;font-weight:bold;white-space:nowrap}
-    .photo{height:155px;background:#f6eddf;display:flex;align-items:center;justify-content:center;overflow:hidden}
-    .photo img{width:100%;height:100%;object-fit:cover;display:block}
-    .card-body{padding:10px 10px 10px;display:flex;flex-direction:column;flex:1}
+    .photo{height:190px;background:#f6eddf;display:flex;align-items:center;justify-content:center;overflow:hidden}
+    .photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s ease}
+    .card:hover .photo img{transform:scale(1.035)}
+    .card-body{padding:13px 12px 12px;display:flex;flex-direction:column;flex:1;gap:3px}
     .category{font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);font-weight:bold;margin-bottom:4px}
-    .card h3{font-size:15px;line-height:1.18;margin-bottom:5px}
+    .card h3{font-size:17px;line-height:1.2;margin-bottom:5px}
     .card p{font-size:11px;line-height:1.35;color:var(--muted);margin-bottom:9px}
-    .price{font-size:11px;font-weight:bold;color:#332b28;margin-top:auto;margin-bottom:8px}
+    .price{font-size:13px;font-weight:bold;color:var(--maroon);margin-top:5px;margin-bottom:10px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+    .card .price-current{font-size:14px;font-weight:700;color:var(--maroon)}
+    .card .price-original{font-size:11px}
+    .card .discount-badge{margin-left:0;padding:3px 6px;font-size:9px}
+    .view-details-hint{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;margin-top:9px;padding:10px 12px;background:var(--maroon);border:1px solid var(--maroon);border-radius:3px;color:#fffaf2;font-size:11px;font-weight:bold;letter-spacing:.04em;text-align:center;transition:background .18s ease,color .18s ease,border-color .18s ease,transform .18s ease}
+    .view-details-hint::after{content:"→";font-size:14px;line-height:1}
+    .card:hover .view-details-hint,.card:focus-visible .view-details-hint{background:var(--gold);border-color:var(--gold);color:#fff}
+    .card:active .view-details-hint{transform:scale(.985)}
     .card .btn{width:100%;font-size:10px;padding:8px 4px}
     .empty{grid-column:1/-1;text-align:center;padding:30px;color:var(--muted)}
     .story{background:#faf5ec;padding:55px 22px}
@@ -80,11 +88,11 @@
     .toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);max-width:calc(100% - 30px);background:#342323;color:white;padding:13px 17px;border-radius:4px;font-size:13px;box-shadow:0 5px 22px #0002;display:none;z-index:10}
     @media (min-width:1101px) and (max-width:1350px){
       .grid{grid-template-columns:repeat(5,minmax(0,1fr))}
-      .photo{height:125px}
+      .photo{height:155px}
     }
     @media (min-width:701px) and (max-width:1100px){
       .grid{grid-template-columns:repeat(4,minmax(0,1fr))}
-      .photo{height:140px}
+      .photo{height:165px}
     }
     @media(max-width:700px){
       .nav{padding:12px 14px;align-items:center;gap:10px}.brand strong{font-size:18px}.brand span{font-size:8px}nav{gap:11px;font-size:10px;padding-top:0;flex-wrap:wrap;justify-content:flex-end}nav a:nth-child(3){display:none}
@@ -94,14 +102,14 @@
       .actions{gap:8px;margin:16px 0}.btn{font-size:11px;padding:11px 12px}.trust{padding-top:12px}
       .values{grid-template-columns:repeat(2,minmax(0,1fr));padding:12px;gap:8px}.value{padding:12px 7px}.value b{font-size:14px}.value small{font-size:10px}
       .collection{padding:32px 12px 38px}.section-head{margin-bottom:16px}.section-head h2{font-size:29px;line-height:1.1}.section-head p{font-size:12px}.catalog-tools{align-items:stretch;flex-direction:column;gap:10px}.search{width:100%;padding:11px 12px}.filters{justify-content:flex-start}
-      .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.photo{height:auto;aspect-ratio:1/0.92}.photo img{object-fit:cover}.card-body{padding:10px 9px 10px}.category{font-size:8px}.card h3{font-size:16px;line-height:1.15;margin-bottom:5px}.card p{font-size:11px;line-height:1.35;margin-bottom:8px}.price{font-size:10px;margin-bottom:7px}.card .btn{font-size:10px;line-height:1.25;padding:8px 5px;min-height:34px}
+      .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.photo{height:auto;aspect-ratio:1/0.95}.photo img{object-fit:cover}.card-body{padding:11px 10px 10px}.category{font-size:8px}.card h3{font-size:16px;line-height:1.2;margin-bottom:3px}.price{font-size:12px;margin-bottom:3px}.view-details-hint{font-size:10px;padding:10px 8px;margin-top:7px}
       .story-inner{grid-template-columns:1fr;gap:18px}.story{padding:34px 16px}.story h2{font-size:29px;line-height:1.15}.story p{font-size:12px}.note{padding:19px}.note h3{font-size:20px}.connect{padding:24px 12px}.connect-box{padding:25px 15px}.connect-box h2{font-size:27px;line-height:1.12}.connect-box p{font-size:12px}
       footer{padding:23px 14px}.trust span{font-size:8px;padding:0 5px}
     }
     @media(max-width:370px){
       .nav{padding:10px 10px}.brand strong{font-size:15px}nav{gap:8px;font-size:9px}
       .hero::before{height:165px}.hero-inner{padding:24px 15px 22px}h1{font-size:33px}
-      .grid{grid-template-columns:1fr}.photo{aspect-ratio:1.25/1}.card-body{padding:13px}.card h3{font-size:19px}.card p{font-size:12px}.price{font-size:11px}.card .btn{font-size:11px;padding:10px}
+      .grid{grid-template-columns:1fr}.photo{aspect-ratio:1.25/1}.card-body{padding:13px}.card h3{font-size:19px}.price{font-size:13px}.view-details-hint{font-size:11px;padding:11px}
     }
   </style>
 </head>
@@ -256,7 +264,6 @@
         const body = document.createElement("div"); body.className = "card-body";
         const cat = document.createElement("div"); cat.className = "category"; cat.textContent = p.category || "Collection";
         const title = document.createElement("h3"); title.textContent = p.name || "Product";
-        const desc = document.createElement("p"); desc.textContent = p.description || "Contact us for product details and current availability.";
         const price = document.createElement("div"); price.className = "price";
         const selling = Number(p.selling_price || 0);
         const reference = Number(p.reference_price || 0);
@@ -269,15 +276,18 @@
             const badge = document.createElement("span");
             badge.className = "discount-badge";
             badge.textContent = discount + "% OFF";
-            price.append(old, document.createTextNode("₹" + selling.toLocaleString("en-IN") + " "), badge);
+            const current = document.createElement("span");
+            current.className = "price-current";
+            current.textContent = "₹" + selling.toLocaleString("en-IN");
+            price.append(current, old, badge);
           } else {
             price.textContent = "₹" + selling.toLocaleString("en-IN");
           }
         } else { price.textContent = "Price on Request"; }
-        const btn = document.createElement("button"); btn.className = "btn outline enquiry";
-        btn.textContent = "Enquire About This Product"; btn.dataset.product = p.name || "Product";
-        btn.addEventListener("click", (event) => event.stopPropagation());
-        body.append(cat,title,desc,price,btn); card.append(photo,body); grid.appendChild(card); setupEnquiry(btn);
+        const viewHint = document.createElement("div");
+        viewHint.className = "view-details-hint";
+        viewHint.textContent = "View Details →";
+        body.append(cat,title,price,viewHint); card.append(photo,body); grid.appendChild(card);
       });
       document.getElementById("noResults").hidden = true;
     }
