@@ -1,13 +1,177 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#632832"><title>LAKKA STORIES | Tradition in Every Turn</title><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<style>
-:root{--cream:#fbf5e9;--paper:#fffdf8;--maroon:#632832;--maroon2:#7d3942;--gold:#b58b4a;--ink:#332725;--muted:#786c63;--line:#eadcc9}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.55 Arial,Helvetica,sans-serif}.top{background:var(--maroon);color:#f8e9cd;text-align:center;padding:8px 12px;font-size:10px;letter-spacing:.18em;text-transform:uppercase}.nav{display:flex;align-items:center;justify-content:space-between;max-width:1180px;margin:auto;padding:18px 24px;border-bottom:1px solid var(--line)}.brand{font:normal 26px Georgia,serif;letter-spacing:.12em;color:var(--maroon)}.brand small{display:block;font:10px Arial,sans-serif;letter-spacing:.22em;color:var(--gold);margin-top:3px}.nav a{color:var(--maroon);text-decoration:none;font-size:12px}.hero{background:linear-gradient(110deg,#f8efdf,#fffaf1 60%,#f3e5d0);padding:66px 24px 56px;border-bottom:1px solid var(--line)}.hero-in{max-width:1100px;margin:auto;display:grid;grid-template-columns:1.1fr .9fr;gap:30px;align-items:center}.eyebrow{color:var(--gold);letter-spacing:.2em;text-transform:uppercase;font-size:10px;font-weight:bold}.hero h1{font:normal clamp(39px,5vw,62px)/1.05 Georgia,serif;color:var(--maroon);margin:14px 0}.hero p{color:var(--muted);max-width:490px;font-size:14px}.hero-art{min-height:210px;border:1px solid #e8d5b7;background:radial-gradient(ellipse at center,#fffdf7 0%,#f2e3ca 68%,#ead4ae 100%);display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;color:#85613c;font:italic 24px Georgia,serif}.btn{display:inline-block;background:var(--maroon);color:white;border:1px solid var(--maroon);padding:12px 18px;text-decoration:none;font-weight:bold;font-size:12px;cursor:pointer}.btn.outline{background:transparent;color:var(--maroon)}.trust{display:flex;gap:18px;flex-wrap:wrap;margin-top:22px;color:#8a704a;font-size:10px;letter-spacing:.08em;text-transform:uppercase}.section{max-width:1180px;margin:auto;padding:48px 24px}.section-head{text-align:center;max-width:650px;margin:0 auto 26px}.section-head h2{font:normal 36px Georgia,serif;color:var(--maroon);margin:7px 0}.section-head p{color:var(--muted);font-size:13px}.tools{display:flex;gap:12px;justify-content:space-between;align-items:center;flex-wrap:wrap;margin-bottom:20px}.search{width:min(100%,330px);padding:12px 13px;border:1px solid var(--line);background:#fffdf8;font:inherit}.filters{display:flex;gap:7px;flex-wrap:wrap}.filter{padding:8px 13px;border:1px solid var(--line);border-radius:30px;background:white;color:var(--maroon);cursor:pointer;font-size:11px}.filter.active{background:var(--maroon);color:white}.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}.card{border:1px solid var(--line);background:#fff;border-radius:4px;overflow:hidden;display:flex;flex-direction:column;min-width:0}.photo{aspect-ratio:1/1;background:var(--cream);display:flex;align-items:center;justify-content:center;overflow:hidden}.photo img{width:100%;height:100%;object-fit:contain;display:block}.photo .placeholder{color:#a28a6d;font:italic 17px Georgia,serif;padding:18px;text-align:center}.body{padding:14px;display:flex;flex-direction:column;flex:1}.cat{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);font-weight:bold}.body h3{font:normal 20px/1.2 Georgia,serif;color:var(--maroon);margin:7px 0}.desc{font-size:12px;color:var(--muted);margin:0 0 12px}.price{font-size:13px;font-weight:bold;margin-top:auto;margin-bottom:12px}.old{color:#8d8176;text-decoration:line-through;font-weight:normal;margin-right:7px}.enquire{width:100%;text-align:center}.state{padding:25px;text-align:center;color:var(--muted);grid-column:1/-1;background:#fcf7ef;border:1px dashed var(--line)}.story{background:#f8f1e6;border-block:1px solid var(--line)}.story-in{max-width:900px;margin:auto;padding:42px 24px;display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:center}.story h2{font:normal 31px Georgia,serif;color:var(--maroon);margin:8px 0}.story p{font-size:13px;color:var(--muted)}.story-note{border-left:2px solid var(--gold);padding:18px 22px;background:#fffaf1;color:#6e5b4b;font:italic 18px Georgia,serif}footer{text-align:center;background:var(--maroon);color:#f8e9cd;padding:28px 16px}footer strong{font:normal 22px Georgia,serif;letter-spacing:.1em}footer p{font-size:11px;margin:7px 0;color:#e7d5c5}.status{font-size:11px;text-align:center;color:#87796c;padding:0 15px 12px}.hidden{display:none!important}@media(max-width:800px){.hero-in{grid-template-columns:1fr}.hero-art{min-height:140px}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.section{padding:35px 13px}.nav{padding:14px}.brand{font-size:20px}.hero{padding:38px 17px}.hero h1{font-size:43px}.section-head h2{font-size:30px}.body{padding:10px}.body h3{font-size:17px}.story-in{grid-template-columns:1fr;padding:32px 18px}.price{font-size:12px}}@media(max-width:360px){.grid{grid-template-columns:1fr}}
-</style></head><body>
-<div class="top">A thoughtful gift · A story worth sharing</div><header class="nav"><div class="brand">LAKKA STORIES<small>TRADITION IN EVERY TURN</small></div><a href="#collection">EXPLORE COLLECTION ↓</a></header>
-<section class="hero"><div class="hero-in"><div><div class="eyebrow">Small stories, timeless charm</div><h1>Gifts with a story<br><em>to tell.</em></h1><p>Explore our carefully curated catalogue of traditional-inspired toys and thoughtful gifts. Ask us about product details, pricing and current availability.</p><a class="btn" href="#collection">EXPLORE THE COLLECTION</a><div class="trust"><span>Thoughtful gifting</span><span>Enquire directly</span><span>Personal service</span></div></div><div class="hero-art">A little piece of tradition,<br>chosen with care.</div></div></section>
-<section class="section" id="collection"><div class="section-head"><div class="eyebrow">The collection</div><h2>Find your little treasure</h2><p>Browse the products below. Prices and availability are shown only when confirmed; contact us if you would like more details.</p></div><div class="tools"><input id="search" class="search" placeholder="Search products…" aria-label="Search products"><div id="filters" class="filters"><button class="filter active" data-filter="All">All products</button></div></div><div id="grid" class="grid"><div class="state">Loading the catalogue…</div></div><div class="status" id="status">Published collection · unpublished products are hidden</div></section>
-<section class="story"><div class="story-in"><div><div class="eyebrow">The idea behind the name</div><h2>Meaningful gifts, thoughtfully chosen.</h2><p>LAKKA STORIES brings together products selected for gifting, collecting and sharing. We believe every gift can carry a small story of its own.</p></div><div class="story-note">“Choose a gift that feels personal, not ordinary.”</div></div></section><footer><strong>LAKKA STORIES</strong><p>Tradition in Every Turn</p><p>Thoughtful gifts. Stories worth sharing.</p><p>© 2026 LAKKA STORIES</p></footer>
-<script>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#572329">
+  <meta name="description" content="LAKKA STORIES — thoughtful gifts and traditional lacquered wooden toys. Ask us about product availability and pricing.">
+  <title>LAKKA STORIES | Tradition in Every Turn</title>
+  <style>
+    :root{--maroon:#572329;--maroon2:#74333a;--cream:#fffdf8;--sand:#f3e7d4;--gold:#bd8b45;--ink:#422b2a;--muted:#786b62;--line:#eadcc9}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--cream);color:var(--ink);font-family:Arial,Helvetica,sans-serif;line-height:1.55}
+    a{color:inherit}
+    .topline{background:var(--maroon);color:#fff7eb;text-align:center;padding:7px 12px;font-size:10px;letter-spacing:.19em;text-transform:uppercase}
+    header{background:#fffdf8;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+    .nav{max-width:1120px;margin:auto;padding:14px 22px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .brand{text-decoration:none;display:block;text-align:center;color:var(--maroon)}
+    .brand strong{display:block;font-family:Georgia,serif;font-size:24px;letter-spacing:.08em;line-height:1.1}
+    .brand span{display:block;font-size:9px;letter-spacing:.2em;color:var(--gold);margin-top:4px}
+    nav{display:flex;align-items:center;gap:22px;font-size:12px}
+    nav a{text-decoration:none}
+    nav a:hover{color:var(--gold)}
+    .hero{background:linear-gradient(90deg,rgba(255,250,241,.30) 0%,rgba(255,250,241,.20) 32%,rgba(255,250,241,0) 58%),url('images/hero-banner.jpg') center center/cover no-repeat,var(--sand);border-bottom:1px solid var(--line)}
+    .hero-inner{max-width:1370px;min-height:375px;margin:auto;padding:48px 28px;display:flex;align-items:center}
+    .hero-copy{max-width:520px}
+    .eyebrow{font-size:10px;font-weight:bold;letter-spacing:.22em;color:var(--gold);text-transform:uppercase;margin:0 0 12px}
+    h1,h2,h3,p{margin-top:0}
+    h1,h2,h3{font-family:Georgia,'Times New Roman',serif;font-weight:normal;color:var(--maroon)}
+    h1{font-size:clamp(36px,5vw,58px);line-height:1.02;margin-bottom:16px}
+    h1 em{display:block;font-weight:normal}
+    .hero-copy>p:not(.eyebrow){font-size:14px;color:#6d5d55;max-width:440px}
+    .actions{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0}
+    .btn{display:inline-flex;justify-content:center;align-items:center;gap:8px;padding:12px 17px;border:1px solid var(--maroon);border-radius:2px;background:var(--maroon);color:white;text-decoration:none;font-size:12px;font-weight:bold;cursor:pointer}
+    .btn.outline{background:transparent;color:var(--maroon)}
+    .trust{display:flex;gap:0;border-top:1px solid var(--line);max-width:440px;padding-top:16px}
+    .trust span{flex:1;text-align:center;font-size:9px;letter-spacing:.09em;text-transform:uppercase;color:#92734d;padding:0 10px;border-right:1px solid var(--line)}
+    .trust span:last-child{border:0}
+    .values{max-width:1040px;margin:-1px auto 0;padding:14px 22px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+    .value{border:1px solid #eee3d5;background:#fffefa;text-align:center;padding:17px 10px;border-radius:3px}
+    .value b{display:block;color:var(--maroon);font-family:Georgia,serif;font-weight:normal;font-size:15px;margin:4px 0}
+    .value small{display:block;color:var(--muted);font-size:10px}
+    .collection{padding:22px 22px 36px;border-top:1px solid #f2e8dc}
+    .section-head{text-align:center;max-width:720px;margin:0 auto 18px}
+    .section-head h2{font-size:clamp(30px,4vw,40px);margin-bottom:8px}
+    .section-head p{font-size:13px;color:var(--muted)}
+    .catalog-tools{max-width:1370px;margin:0 auto 12px;display:flex;justify-content:space-between;gap:16px;align-items:center}
+    .search{width:min(100%,340px);padding:10px 13px;border:1px solid var(--line);background:#fff;border-radius:2px;font:inherit;font-size:12px}
+    .filters{display:flex;gap:7px;flex-wrap:wrap}
+    .filter{border:1px solid var(--line);border-radius:18px;background:transparent;color:var(--ink);padding:7px 12px;font-size:11px;cursor:pointer}
+    .filter.active,.filter:hover{background:var(--maroon);color:white;border-color:var(--maroon)}
+    .grid{max-width:1370px;margin:auto;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:12px}
+    .card{border:1px solid #eee3d5;background:white;border-radius:3px;overflow:hidden;display:flex;flex-direction:column}
+    .photo{height:155px;background:#f6eddf;display:flex;align-items:center;justify-content:center;overflow:hidden}
+    .photo img{width:100%;height:100%;object-fit:cover;display:block}
+    .card-body{padding:10px 10px 10px;display:flex;flex-direction:column;flex:1}
+    .category{font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);font-weight:bold;margin-bottom:4px}
+    .card h3{font-size:15px;line-height:1.18;margin-bottom:5px}
+    .card p{font-size:11px;line-height:1.35;color:var(--muted);margin-bottom:9px}
+    .price{font-size:11px;font-weight:bold;color:#332b28;margin-top:auto;margin-bottom:8px}
+    .card .btn{width:100%;font-size:10px;padding:8px 4px}
+    .empty{grid-column:1/-1;text-align:center;padding:30px;color:var(--muted)}
+    .story{background:#faf5ec;padding:55px 22px}
+    .story-inner{max-width:980px;margin:auto;display:grid;grid-template-columns:1.2fr .8fr;gap:45px;align-items:center}
+    .story h2{font-size:34px;margin-bottom:12px}
+    .story p{font-size:13px;color:var(--muted)}
+    .note{background:var(--sand);padding:25px;border-left:2px solid var(--gold)}
+    .note h3{font-size:22px;margin-bottom:8px}
+    .connect{max-width:980px;margin:0 auto;padding:45px 22px}
+    .connect-box{background:var(--sand);padding:36px 24px;text-align:center}
+    .connect-box h2{font-size:34px;margin-bottom:10px}
+    .connect-box p{font-size:13px;color:var(--muted)}
+    footer{background:var(--maroon);color:#f9eee1;text-align:center;padding:25px 16px}
+    footer strong{font-family:Georgia,serif;font-size:21px;letter-spacing:.08em;font-weight:normal}
+    footer p{font-size:11px;margin:5px 0;color:#e5d2c5}
+    footer small{display:block;border-top:1px solid #754349;max-width:340px;margin:14px auto 0;padding-top:12px;font-size:10px;color:#e5d2c5}
+    .toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);max-width:calc(100% - 30px);background:#342323;color:white;padding:13px 17px;border-radius:4px;font-size:13px;box-shadow:0 5px 22px #0002;display:none;z-index:10}
+    @media (min-width:1101px) and (max-width:1350px){
+      .grid{grid-template-columns:repeat(5,minmax(0,1fr))}
+      .photo{height:125px}
+    }
+    @media (min-width:701px) and (max-width:1100px){
+      .grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+      .photo{height:140px}
+    }
+    @media(max-width:700px){
+      .nav{padding:12px 14px;align-items:center;gap:10px}.brand strong{font-size:18px}.brand span{font-size:8px}nav{gap:11px;font-size:10px;padding-top:0;flex-wrap:wrap;justify-content:flex-end}nav a:nth-child(3){display:none}
+      .hero{background:var(--cream)}
+      .hero::before{content:"";display:block;width:100%;height:190px;background:url('images/hero-banner.jpg') 66% center/cover no-repeat;border-bottom:1px solid var(--line)}
+      .hero-inner{min-height:0;padding:27px 20px 24px;background:var(--cream)}.hero-copy{max-width:100%}.eyebrow{font-size:9px;margin-bottom:9px}h1{font-size:38px;line-height:1.03;margin-bottom:12px}.hero-copy>p:not(.eyebrow){font-size:13px;line-height:1.55}
+      .actions{gap:8px;margin:16px 0}.btn{font-size:11px;padding:11px 12px}.trust{padding-top:12px}
+      .values{grid-template-columns:repeat(2,minmax(0,1fr));padding:12px;gap:8px}.value{padding:12px 7px}.value b{font-size:14px}.value small{font-size:10px}
+      .collection{padding:32px 12px 38px}.section-head{margin-bottom:16px}.section-head h2{font-size:29px;line-height:1.1}.section-head p{font-size:12px}.catalog-tools{align-items:stretch;flex-direction:column;gap:10px}.search{width:100%;padding:11px 12px}.filters{justify-content:flex-start}
+      .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.photo{height:auto;aspect-ratio:1/0.92}.photo img{object-fit:cover}.card-body{padding:10px 9px 10px}.category{font-size:8px}.card h3{font-size:16px;line-height:1.15;margin-bottom:5px}.card p{font-size:11px;line-height:1.35;margin-bottom:8px}.price{font-size:10px;margin-bottom:7px}.card .btn{font-size:10px;line-height:1.25;padding:8px 5px;min-height:34px}
+      .story-inner{grid-template-columns:1fr;gap:18px}.story{padding:34px 16px}.story h2{font-size:29px;line-height:1.15}.story p{font-size:12px}.note{padding:19px}.note h3{font-size:20px}.connect{padding:24px 12px}.connect-box{padding:25px 15px}.connect-box h2{font-size:27px;line-height:1.12}.connect-box p{font-size:12px}
+      footer{padding:23px 14px}.trust span{font-size:8px;padding:0 5px}
+    }
+    @media(max-width:370px){
+      .nav{padding:10px 10px}.brand strong{font-size:15px}nav{gap:8px;font-size:9px}
+      .hero::before{height:165px}.hero-inner{padding:24px 15px 22px}h1{font-size:33px}
+      .grid{grid-template-columns:1fr}.photo{aspect-ratio:1.25/1}.card-body{padding:13px}.card h3{font-size:19px}.card p{font-size:12px}.price{font-size:11px}.card .btn{font-size:11px;padding:10px}
+    }
+  
+/* Supabase connected catalogue styles */
+.tools{display:flex;gap:12px;justify-content:space-between;align-items:center;flex-wrap:wrap;margin-bottom:20px}
+.search{width:min(100%,330px);padding:12px 13px;border:1px solid var(--line);background:#fffdf8;font:inherit}
+.filters{display:flex;gap:7px;flex-wrap:wrap}
+.filter{padding:8px 13px;border:1px solid var(--line);border-radius:30px;background:white;color:var(--maroon);cursor:pointer;font-size:11px}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.grid{grid-template-columns:1fr}
+.card{border:1px solid var(--line);background:#fff;border-radius:4px;overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.photo{aspect-ratio:1/1;background:var(--cream);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.placeholder{color:#a28a6d;font:italic 17px Georgia,serif;padding:18px;text-align:center}
+.body{padding:14px;display:flex;flex-direction:column;flex:1}
+.body{padding:10px}
+.cat{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);font-weight:bold}
+.desc{font-size:12px;color:var(--muted);margin:0 0 12px}
+.price{font-size:13px;font-weight:bold;margin-top:auto;margin-bottom:12px}
+.price{font-size:12px}
+.old{color:#8d8176;text-decoration:line-through;font-weight:normal;margin-right:7px}
+.btn{display:inline-block;background:var(--maroon);color:white;border:1px solid var(--maroon);padding:12px 18px;text-decoration:none;font-weight:bold;font-size:12px;cursor:pointer}
+.state{padding:25px;text-align:center;color:var(--muted);grid-column:1/-1;background:#fcf7ef;border:1px dashed var(--line)}
+@media(max-width:800px){.hero-in{grid-template-columns:1fr}.hero-art{min-height:140px}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.section{padding:35px 13px}.nav{padding:14px}.brand{font-size:20px}.hero{padding:38px 17px}.hero h1{font-size:43px}.section-head h2{font-size:30px}.body{padding:10px}.body h3{font-size:17px}.story-in{grid-template-columns:1fr;padding:32px 18px}.price{font-size:12px}}
+@media(max-width:360px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+  <div class="topline">Thoughtful gifts · Timeless stories</div>
+  <header>
+    <div class="nav">
+      <a class="brand" href="#home" aria-label="LAKKA STORIES home"><strong>LAKKA STORIES</strong><span>TRADITION IN EVERY TURN</span></a>
+      <nav aria-label="Main navigation">
+        <a href="#home">Home</a><a href="#collection">Collection</a><a href="#story">Our Story</a><a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <p class="eyebrow">— A world of thoughtful gifts</p>
+          <h1>Small Treasures.<em>Timeless Stories.</em></h1>
+          <p>Discover traditional wooden toys and meaningful gifts, thoughtfully brought together by LAKKA STORIES.</p>
+          <div class="actions"><a class="btn" href="#collection">Explore the Collection →</a><a class="btn outline" href="#story">Discover Our Story</a></div>
+          <div class="trust"><span>✿<br>Traditional<br>craftsmanship</span><span>♡<br>Thoughtful<br>gifts</span><span>✧<br>Stories for<br>generations</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="values" aria-label="Our values">
+      <div class="value">✿<b>Thoughtful Selection</b><small>A collection chosen with care</small></div>
+      <div class="value">✧<b>Timeless Appeal</b><small>Meaningful gifts and keepsakes</small></div>
+      <div class="value">♡<b>Personal Enquiries</b><small>Ask us about each product</small></div>
+      <div class="value">✦<b>Stories to Share</b><small>Find a gift with character</small></div>
+    </section>
+
+    <section class="section" id="collection"><div class="section-head"><div class="eyebrow">The collection</div><h2>Find your little treasure</h2><p>Browse the products below. Prices and availability are shown only when confirmed; contact us if you would like more details.</p></div><div class="tools"><input id="search" class="search" placeholder="Search products…" aria-label="Search products"><div id="filters" class="filters"><button class="filter active" data-filter="All">All products</button></div></div><div id="grid" class="grid"><div class="state">Loading the catalogue…</div></div><div class="status" id="status">Published collection · unpublished products are hidden</div></section>
+
+    <section class="story" id="story">
+      <div class="story-inner">
+        <div><p class="eyebrow">— Our story</p><h2>Tradition in Every Turn</h2><p>LAKKA STORIES is being created to bring traditional wooden toys and thoughtful gifts to people who value meaningful craftsmanship.</p><p>We want every product to have a story worth sharing and a place in someone's memories.</p><a class="btn" href="#collection">Explore the Collection →</a></div>
+        <aside class="note"><h3>A thoughtful choice, every time.</h3><p>We are building our collection carefully. Contact us for current product availability, details and pricing.</p><a class="btn outline" href="#contact">Get in Touch</a></aside>
+      </div>
+    </section>
+
+    <section class="connect" id="contact"><div class="connect-box"><p class="eyebrow">— Let's connect</p><h2>Found Something You Love?</h2><p>Ask us about a product, its availability and pricing. We'd love to hear from you.</p><button class="btn enquiry" data-product="General catalogue enquiry">Enquire on WhatsApp →</button></div></section>
+  </main>
+
+  <footer><strong>LAKKA STORIES</strong><p>Tradition in Every Turn</p><p>Thoughtful gifts. Stories worth sharing.</p><small>© 2026 LAKKA STORIES</small></footer>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
 const SUPABASE_URL='https://qguxptvedozdfulahkid.supabase.co';
 const SUPABASE_PUBLISHABLE_KEY='sb_publishable_c5-NfXVIzLNgC821H3EFWQ_fpmSU9Tl';
 const WHATSAPP_BUSINESS_NUMBER='919381317313';
@@ -18,4 +182,6 @@ function render(){const term=$('search').value.trim().toLowerCase();const items=
 function makeFilters(){const cats=[...new Set(allProducts.map(p=>p.category).filter(Boolean))].sort();$('filters').innerHTML='';['All',...cats].forEach(c=>{const b=document.createElement('button');b.className='filter'+(c===active?' active':'');b.dataset.filter=c;b.textContent=c==='All'?'All products':c;b.onclick=()=>{active=c;makeFilters();render()};$('filters').appendChild(b)})}
 async function load(){try{if(!window.supabase){throw new Error('Catalogue service could not load. Please refresh.')}const client=window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY);const {data,error}=await client.from('public_catalogue').select('id,product_code,name,category,description,dimensions,image_url,reference_price,selling_price,availability').order('created_at',{ascending:false});if(error)throw error;allProducts=data||[];makeFilters();render();$('status').textContent=`${allProducts.length} published product${allProducts.length===1?'':'s'} · customer website`; }catch(e){$('grid').innerHTML='<div class="state">Catalogue could not load right now. Check that the public_catalogue view permissions are configured correctly.</div>';$('status').textContent='Preview connection needs checking: '+e.message}}
 $('search').addEventListener('input',render);load();
-</script></body></html>
+</script>
+</body>
+</html>
