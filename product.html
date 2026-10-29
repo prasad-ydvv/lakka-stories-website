@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#572329">
+  <meta name="description" content="Explore product details from LAKKA STORIES.">
+  <title>Product Details | LAKKA STORIES</title>
+  <style>
+    :root{--maroon:#572329;--maroon2:#74333a;--cream:#fffdf8;--sand:#f3e7d4;--gold:#bd8b45;--ink:#422b2a;--muted:#786b62;--line:#eadcc9}
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--cream);color:var(--ink);font-family:Arial,Helvetica,sans-serif;line-height:1.55}
+    a{color:inherit}
+    .topline{background:var(--maroon);color:#fff7eb;text-align:center;padding:7px 12px;font-size:10px;letter-spacing:.19em;text-transform:uppercase}
+    header{background:#fffdf8;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+    .nav{max-width:1120px;margin:auto;padding:14px 22px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .brand{text-decoration:none;display:block;text-align:center;color:var(--maroon)}
+    .brand strong{display:block;font-family:Georgia,serif;font-size:24px;letter-spacing:.08em;line-height:1.1}
+    .brand span{display:block;font-size:9px;letter-spacing:.2em;color:var(--gold);margin-top:4px}
+    nav{display:flex;align-items:center;gap:22px;font-size:12px}
+    nav a{text-decoration:none}
+    nav a:hover{color:var(--gold)}
+    .wrap{max-width:1080px;margin:0 auto;padding:28px 22px 55px}
+    .back{display:inline-block;text-decoration:none;color:var(--maroon);font-size:13px;font-weight:bold;margin:0 0 22px}
+    .back:hover{text-decoration:underline}
+    .product{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:42px;align-items:start}
+    .image-panel{background:#f8f0e4;border:1px solid var(--line);border-radius:8px;overflow:hidden;display:flex;align-items:center;justify-content:center;min-height:420px}
+    .image-panel img{display:block;width:100%;height:auto;max-height:760px;object-fit:contain}
+    .placeholder{padding:80px 20px;color:var(--muted);text-align:center}
+    .category{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:bold;margin:8px 0 9px}
+    h1,h2{font-family:Georgia,'Times New Roman',serif;color:var(--maroon);font-weight:normal}
+    h1{font-size:clamp(30px,4vw,44px);line-height:1.12;margin:0 0 14px}
+    .description{font-size:15px;line-height:1.8;color:var(--muted);white-space:pre-line}
+    .price{font-size:22px;font-weight:bold;color:#332b28;margin:22px 0}
+    .price s{font-size:15px;color:#8b8179;font-weight:normal;margin-right:8px}
+    .meta{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:14px 0;margin:18px 0;color:var(--muted);font-size:13px}
+    .actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+    .btn{display:inline-flex;justify-content:center;align-items:center;gap:8px;padding:13px 18px;border:1px solid var(--maroon);border-radius:3px;background:var(--maroon);color:white;text-decoration:none;font-size:13px;font-weight:bold;cursor:pointer;min-height:45px}
+    .btn.outline{background:transparent;color:var(--maroon)}
+    .btn:focus-visible,.back:focus-visible{outline:3px solid rgba(189,139,69,.55);outline-offset:3px}
+    .state{padding:50px 20px;text-align:center;color:var(--muted)}
+    footer{background:var(--maroon);color:#f9eee1;text-align:center;padding:25px 16px}
+    footer strong{font-family:Georgia,serif;font-size:21px;letter-spacing:.08em;font-weight:normal}
+    footer p{font-size:11px;margin:5px 0;color:#e5d2c5}
+    footer small{display:block;border-top:1px solid #754349;max-width:340px;margin:14px auto 0;padding-top:12px;font-size:10px;color:#e5d2c5}
+    @media(max-width:700px){
+      .nav{padding:12px 14px;gap:10px}.brand strong{font-size:17px}.brand span{font-size:8px}nav{gap:11px;font-size:10px}
+      .wrap{padding:20px 14px 36px}.back{margin-bottom:16px}.product{grid-template-columns:1fr;gap:20px}
+      .image-panel{min-height:0;max-height:none}.image-panel img{max-height:70vh;width:100%;object-fit:contain}
+      .category{margin-top:0}h1{font-size:32px}.description{font-size:14px}.price{font-size:21px;margin:18px 0}.actions{display:grid;grid-template-columns:1fr}.btn{width:100%}
+    }
+    @media(max-width:370px){.nav{padding:10px}.brand strong{font-size:15px}nav{gap:8px;font-size:9px}.wrap{padding-left:10px;padding-right:10px}}
+  </style>
+</head>
+<body>
+  <div class="topline">Thoughtful gifts · Timeless stories</div>
+  <header>
+    <div class="nav">
+      <a class="brand" href="index.html#home" aria-label="LAKKA STORIES home"><strong>LAKKA STORIES</strong><span>TRADITION IN EVERY TURN</span></a>
+      <nav aria-label="Main navigation">
+        <a href="index.html#home">Home</a><a href="index.html#collection">Collection</a><a href="index.html#story">Our Story</a><a href="index.html#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+  <main class="wrap">
+    <a class="back" href="index.html#collection">← Back to collection</a>
+    <div id="productState" class="state">Loading product details…</div>
+    <article id="productDetails" class="product" hidden>
+      <div class="image-panel" id="imagePanel"></div>
+      <div class="info">
+        <div class="category" id="productCategory"></div>
+        <h1 id="productName"></h1>
+        <div class="description" id="productDescription"></div>
+        <div class="meta" id="productMeta" hidden></div>
+        <div class="price" id="productPrice"></div>
+        <div class="actions">
+          <button class="btn" id="enquireButton" type="button">Enquire on WhatsApp →</button>
+          <a class="btn outline" href="index.html#collection">Continue browsing</a>
+        </div>
+      </div>
+    </article>
+  </main>
+  <footer><strong>LAKKA STORIES</strong><p>Tradition in Every Turn</p><p>Thoughtful gifts. Stories worth sharing.</p><small>© 2026 LAKKA STORIES</small></footer>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    const SUPABASE_URL = "https://qguxptvedozdfulahkid.supabase.co";
+    const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_c5-NfXVIzLNgC821H3EFWQ_fpmSU9Tl";
+    const WHATSAPP_BUSINESS_NUMBER = "919381317313";
+    const state = document.getElementById("productState");
+    const details = document.getElementById("productDetails");
+    const params = new URLSearchParams(window.location.search);
+    const productId = params.get("id");
+
+    function showState(message) {
+      state.textContent = message;
+      state.hidden = false;
+      details.hidden = true;
+    }
+    function setText(id, value) {
+      document.getElementById(id).textContent = value || "";
+    }
+    function formatPrice(product) {
+      const selling = Number(product.selling_price || 0);
+      const reference = Number(product.reference_price || 0);
+      const el = document.getElementById("productPrice");
+      el.innerHTML = "";
+      if (selling > 0) {
+        if (reference > selling) {
+          const old = document.createElement("s");
+          old.textContent = "₹" + reference.toLocaleString("en-IN");
+          el.appendChild(old);
+        }
+        el.appendChild(document.createTextNode("₹" + selling.toLocaleString("en-IN")));
+      } else {
+        el.textContent = "Price on Request";
+      }
+    }
+    document.getElementById("enquireButton").addEventListener("click", () => {
+      const productName = document.getElementById("productName").textContent || "Product";
+      const message = `Hello LAKKA STORIES, I would like to enquire about: ${productName}. Please share the current price and availability.`;
+      if (!/^[0-9]{10,15}$/.test(WHATSAPP_BUSINESS_NUMBER)) {
+        alert("WhatsApp is not configured yet. Please contact LAKKA STORIES.");
+        return;
+      }
+      window.open(`https://wa.me/${WHATSAPP_BUSINESS_NUMBER}?text=${encodeURIComponent(message)}`, "_blank", "noopener,noreferrer");
+    });
+
+    async function loadProduct() {
+      if (!productId) {
+        showState("No product was selected. Please return to the collection and choose a product.");
+        return;
+      }
+      try {
+        if (!window.supabase || !window.supabase.createClient) throw new Error("Catalogue service could not load.");
+        const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+        const { data, error } = await client.from("public_catalogue")
+          .select("id,product_code,name,category,description,dimensions,image_url,reference_price,selling_price,availability")
+          .eq("id", productId)
+          .maybeSingle();
+        if (error) throw error;
+        if (!data) {
+          showState("We couldn't find that product. It may no longer be available.");
+          return;
+        }
+        document.title = `${data.name || "Product"} | LAKKA STORIES`;
+        setText("productCategory", data.category || "Collection");
+        setText("productName", data.name || "Product");
+        setText("productDescription", data.description || "Contact us for more details about this product.");
+        const imagePanel = document.getElementById("imagePanel");
+        imagePanel.innerHTML = "";
+        if (data.image_url) {
+          const img = document.createElement("img");
+          img.src = data.image_url;
+          img.alt = data.name || "Product photo";
+          img.onerror = () => { imagePanel.innerHTML = '<div class="placeholder">Product photo unavailable</div>'; };
+          imagePanel.appendChild(img);
+        } else {
+          imagePanel.innerHTML = '<div class="placeholder">Photo coming soon</div>';
+        }
+        const meta = document.getElementById("productMeta");
+        const bits = [];
+        if (data.dimensions) bits.push(`Size: ${data.dimensions}`);
+        if (data.availability) bits.push(`Availability: ${data.availability}`);
+        meta.textContent = bits.join(" · ");
+        meta.hidden = bits.length === 0;
+        formatPrice(data);
+        state.hidden = true;
+        details.hidden = false;
+      } catch (error) {
+        console.error("Could not load product details:", error);
+        showState("We couldn't load this product right now. Please go back to the collection or contact us on WhatsApp.");
+      }
+    }
+    loadProduct();
+  </script>
+</body>
+</html>
