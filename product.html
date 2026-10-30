@@ -78,7 +78,7 @@
   </style>
 </head>
 <body>
-  <div class="topline">Thoughtful gifts · Timeless stories</div>
+  <div class="topline">Every Little Treasure Has a Story.</div>
   <header>
     <div class="nav">
       <a class="brand" href="index.html#home" aria-label="LAKKA STORIES home"><strong>LAKKA STORIES</strong><span>EVERY LITTLE TREASURE HAS A STORY</span></a>
@@ -345,7 +345,7 @@
         setText("productCategory", data.category || "Collection");
         setText("productName", data.name || "Product");
         setText("productDescription", data.description || "Contact us for more details about this product.");
-        const storyText = String(data.story || "").trim();
+        const storyText = String(data.story || "").trim().replace(/(?:\r?\n)\s*(?:\*\*)?\*?Every Little Treasure Has a Story\.(?:\*\*)?\*?\s*$/i, "").trim();
         const storySection = document.getElementById("productStory");
         document.getElementById("productStoryText").textContent = storyText;
         storySection.hidden = !storyText;
