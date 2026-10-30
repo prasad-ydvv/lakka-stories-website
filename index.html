@@ -137,6 +137,78 @@
       .hero::before{height:165px}.hero-inner{padding:24px 15px 22px}h1{font-size:33px}
       .grid{grid-template-columns:1fr}.photo{aspect-ratio:1.25/1}.card h3{font-size:18px;line-height:1.22;height:2.44em;min-height:2.44em;max-height:2.44em;-webkit-line-clamp:2}.card-body{padding:13px}.card h3{font-size:19px}.price{font-size:13px}.view-details-hint{font-size:11px;padding:11px}
     }
+
+
+    .craft-highlights{padding:13px 20px;background:#f8f0e4;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+    .craft-inner{max-width:1040px;margin:auto;display:flex;align-items:center;justify-content:center;gap:22px;flex-wrap:wrap}
+    .craft-heading{margin:0}
+    .craft-heading .eyebrow{display:none}
+    .craft-heading h2{font:normal 16px Georgia,serif;color:var(--maroon);margin:0;white-space:nowrap}
+    .craft-grid{display:flex;align-items:center;justify-content:center;gap:0;flex-wrap:wrap}
+    .craft-item{background:transparent;border:0;border-left:1px solid #dfcdb5;padding:2px 15px;min-height:0}
+    .craft-item small{display:inline;color:#98713f;font-size:9px;font-weight:bold;letter-spacing:.08em;text-transform:uppercase;margin:0 5px 0 0}
+    .craft-item strong{display:inline;color:var(--maroon);font:normal 13px Georgia,serif;margin:0}
+    .craft-item span{display:none}
+    .craft-source{display:none}
+    @media(max-width:700px){.craft-highlights{padding:11px 12px}.craft-inner{gap:8px}.craft-heading h2{font-size:15px}.craft-grid{gap:3px 0}.craft-item{padding:3px 8px}.craft-item strong{font-size:12px}.craft-item small{font-size:8px}}
+
+
+
+    /* Final spacing refinement: keep the page compact and product-led */
+    .hero-inner{min-height:310px;padding:34px 28px}
+    .hero-copy>p:not(.eyebrow){margin-bottom:10px}
+    .actions{margin:16px 0}
+    .trust{padding-top:11px}
+    .gift-ideas{padding:22px 18px 24px}
+    .gift-idea-grid{gap:10px}
+    .gift-idea{min-height:128px;padding:15px 16px;gap:5px}
+    .gift-idea strong{font-size:18px}
+    .gift-idea small{font-size:11px}
+    .gift-idea-link{padding-top:4px}
+    .craft-highlights{padding:10px 16px}
+    .collection{padding:18px 18px 28px}
+    .section-head{margin-bottom:13px}
+    .section-head h2{margin-bottom:6px}
+    .section-head p{margin-bottom:8px}
+    .catalog-tools{margin-bottom:9px}
+    .grid{gap:10px}
+    .story{padding:34px 22px}
+    .story-inner{gap:24px}
+    .story h2{margin-bottom:8px}
+    .story p{margin-bottom:9px}
+    .connect{padding:26px 18px}
+    .connect-box{padding:25px 20px}
+    .connect-box h2{font-size:30px}
+    footer{padding:19px 16px}
+    footer small{margin-top:9px;padding-top:9px}
+    @media(max-width:700px){
+      .hero-inner{min-height:290px;padding:28px 18px}
+      .gift-ideas{padding:18px 14px 20px}
+      .gift-idea{min-height:118px;padding:12px}
+      .collection{padding:16px 12px 22px}
+      .story{padding:27px 16px}
+      .connect{padding:20px 14px}
+      .connect-box{padding:22px 16px}
+    }
+
+
+    /* Hero banner framing refinement */
+    .hero{
+      background:
+        linear-gradient(90deg,rgba(255,250,241,.34) 0%,rgba(255,250,241,.24) 34%,rgba(255,250,241,0) 62%),
+        url('images/hero-banner.jpg') center 54%/cover no-repeat,
+        var(--sand);
+    }
+    .hero-inner{min-height:410px}
+    @media(max-width:700px){
+      .hero{background:var(--cream)}
+      .hero::before{
+        height:205px;
+        background:url('images/hero-banner.jpg') 70% 48%/cover no-repeat;
+      }
+      .hero-inner{min-height:0}
+    }
+
   </style>
 </head>
 <body>
@@ -159,43 +231,49 @@
           <h1>A Little Treasure.<em>A Lasting Memory.</em></h1>
           <p>Looking for a thoughtful gift or a special little keepsake? Explore the LAKKA STORIES collection and find a piece that feels just right.</p>
           <div class="actions"><a class="btn" href="#collection">Find Your Treasure →</a><a class="btn outline" href="#giftIdeas">Explore Gift Ideas</a></div>
-          <div class="trust"><span>✿<br>Traditional<br>craftsmanship</span><span>♡<br>Thoughtful<br>gifts</span><span>✧<br>Stories for<br>generations</span></div>
+          <div class="trust"><span>✿<br>Etikoppaka<br>inspiration</span><span>♡<br>Thoughtful<br>gifts</span><span>✧<br>Personal<br>enquiries</span></div>
         </div>
       </div>
     </section>
 
-    <section class="values" aria-label="Our values">
-      <div class="value">✿<b>Thoughtful Selection</b><small>A collection chosen with care</small></div>
-      <div class="value">✧<b>Timeless Appeal</b><small>Meaningful gifts and keepsakes</small></div>
-      <div class="value">♡<b>Personal Enquiries</b><small>Ask us about each product</small></div>
-      <div class="value">✦<b>Stories to Share</b><small>Find a gift with character</small></div>
-    </section>
-
     <section class="gift-ideas" id="giftIdeas" aria-labelledby="giftIdeasTitle">
       <div class="section-head">
-        <p class="eyebrow">— A little inspiration</p>
-        <h2 id="giftIdeasTitle">Find a Treasure for the Moment</h2>
-        <p>Start with the kind of treasure you would like to explore.</p>
+        <p class="eyebrow">— Explore the collection</p>
+        <h2 id="giftIdeasTitle">Explore by Interest</h2>
+        
       </div>
       <div class="gift-idea-grid">
         <button class="gift-idea filter" type="button" data-filter="Gifts">
           <span class="gift-idea-icon" aria-hidden="true">♡</span>
           <strong>Thoughtful Gifts</strong>
-          <small>Explore pieces to make someone's day special</small>
+          <small>Thoughtful pieces for gifting</small>
           <span class="gift-idea-link">Explore gifts →</span>
         </button>
         <button class="gift-idea filter" type="button" data-filter="Toys">
           <span class="gift-idea-icon" aria-hidden="true">✿</span>
           <strong>Charming Toys</strong>
-          <small>Discover playful little treasures</small>
+          <small>Traditional wooden toys</small>
           <span class="gift-idea-link">Explore toys →</span>
         </button>
         <button class="gift-idea filter" type="button" data-filter="Decor">
           <span class="gift-idea-icon" aria-hidden="true">✧</span>
           <strong>Decorative Treasures</strong>
-          <small>Find a special touch for your space</small>
+          <small>Pieces for your home</small>
           <span class="gift-idea-link">Explore decor →</span>
         </button>
+      </div>
+    </section>
+
+
+    <section class="craft-highlights" aria-label="Etikoppaka craft facts">
+      <div class="craft-inner">
+        <div class="craft-heading"><h2>Etikoppaka Craft</h2></div>
+        <div class="craft-grid">
+          <div class="craft-item"><small>Wood</small><strong>Ankudu Karra</strong></div>
+          <div class="craft-item"><small>Colours</small><strong>Vegetable dyes</strong></div>
+          <div class="craft-item"><small>Technique</small><strong>Lac colouring</strong></div>
+          <div class="craft-item"><small>Uses</small><strong>Toys, decor &amp; gifts</strong></div>
+        </div>
       </div>
     </section>
 
@@ -219,15 +297,19 @@
 
     <section class="story" id="story">
       <div class="story-inner">
-        <div><p class="eyebrow">— Our story</p><h2>Stories Behind the Treasures</h2><p>Some little treasures bring a smile without saying a word. A thoughtful gift can become part of a special moment, a keepsake, or a memory shared with someone we love.</p><p>At LAKKA STORIES, we bring together pieces to discover, gift and cherish. Every treasure has the chance to become part of your own story.</p><a class="btn" href="#collection">Explore the Collection →</a></div>
-        <aside class="note"><h3>A thoughtful choice, every time.</h3><p>We are building our collection carefully. Contact us for current product availability, details and pricing.</p><a class="btn outline" href="#contact">Get in Touch</a></aside>
+        <div>
+          <p class="eyebrow">— Our story</p>
+          <h2>Stories Behind the Treasures</h2>
+          <p>LAKKA STORIES brings together little treasures for gifting, decorating and keeping. Explore the collection and find a piece that speaks to you.</p>
+          <a class="btn" href="#collection">Explore the Collection →</a>
+        </div>
       </div>
     </section>
 
-    <section class="connect" id="contact"><div class="connect-box"><p class="eyebrow">— Let's connect</p><h2>Found Something You Love?</h2><p>Ask us about a product, its availability and pricing. We'd love to hear from you.</p><button class="btn enquiry" data-product="General catalogue enquiry">Enquire on WhatsApp →</button></div></section>
+    <section class="connect" id="contact"><div class="connect-box"><p class="eyebrow">— Let's connect</p><h2>Found Something You Love?</h2><p>Enquire on WhatsApp for product details, availability and price.</p><button class="btn enquiry" data-product="General catalogue enquiry">Enquire on WhatsApp →</button></div></section>
   </main>
 
-  <footer><strong>LAKKA STORIES</strong><p>Every Little Treasure Has a Story.</p><p>Thoughtful gifts. Stories worth sharing.</p><small>© 2026 LAKKA STORIES</small></footer>
+  <footer><strong>LAKKA STORIES</strong><p>Every Little Treasure Has a Story.</p><small>© 2026 LAKKA STORIES</small></footer>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
