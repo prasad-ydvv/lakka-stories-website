@@ -4,12 +4,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#572329">
-  <meta name="description" content="LAKKA STORIES — thoughtful gifts and traditional lacquered wooden toys. Ask us about product availability and pricing.">
-  <title>LAKKA STORIES | Every Little Treasure Has a Story</title>
+  <meta name="description" content="Explore product details from LAKKA STORIES.">
+  <title>Product Details | LAKKA STORIES</title>
   <style>
     :root{--maroon:#572329;--maroon2:#74333a;--cream:#fffdf8;--sand:#f3e7d4;--gold:#bd8b45;--ink:#422b2a;--muted:#786b62;--line:#eadcc9}
     *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
     body{margin:0;background:var(--cream);color:var(--ink);font-family:Arial,Helvetica,sans-serif;line-height:1.55}
     a{color:inherit}
     .topline{background:var(--maroon);color:#fff7eb;text-align:center;padding:7px 12px;font-size:10px;letter-spacing:.19em;text-transform:uppercase}
@@ -21,364 +20,366 @@
     nav{display:flex;align-items:center;gap:22px;font-size:12px}
     nav a{text-decoration:none}
     nav a:hover{color:var(--gold)}
-    .hero{background:linear-gradient(90deg,rgba(255,250,241,.30) 0%,rgba(255,250,241,.20) 32%,rgba(255,250,241,0) 58%),url('images/hero-banner.jpg') center center/cover no-repeat,var(--sand);border-bottom:1px solid var(--line)}
-    .hero-inner{max-width:1370px;min-height:375px;margin:auto;padding:48px 28px;display:flex;align-items:center}
-    .hero-copy{max-width:520px}
-    .eyebrow{font-size:10px;font-weight:bold;letter-spacing:.22em;color:var(--gold);text-transform:uppercase;margin:0 0 12px}
-    h1,h2,h3,p{margin-top:0}
-    h1,h2,h3{font-family:Georgia,'Times New Roman',serif;font-weight:normal;color:var(--maroon)}
-    h1{font-size:clamp(36px,5vw,58px);line-height:1.02;margin-bottom:16px}
-    h1 em{display:block;font-weight:normal}
-    .hero-copy>p:not(.eyebrow){font-size:14px;color:#6d5d55;max-width:440px}
-    .actions{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0}
-    .btn{display:inline-flex;justify-content:center;align-items:center;gap:8px;padding:12px 17px;border:1px solid var(--maroon);border-radius:2px;background:var(--maroon);color:white;text-decoration:none;font-size:12px;font-weight:bold;cursor:pointer}
+    .wrap{max-width:1080px;margin:0 auto;padding:28px 22px 55px}
+    .back{display:inline-block;text-decoration:none;color:var(--maroon);font-size:13px;font-weight:bold;margin:0 0 22px}
+    .back:hover{text-decoration:underline}
+    .product{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:42px;align-items:start}
+    .gallery{min-width:0}
+    .image-panel{position:relative;background:#f8f0e4;border:1px solid var(--line);border-radius:8px;overflow:hidden;display:flex;align-items:center;justify-content:center;min-height:420px;aspect-ratio:4/5}
+    .image-panel img{display:block;width:100%;height:100%;max-height:760px;object-fit:contain}
+    .gallery-nav{position:absolute;top:50%;transform:translateY(-50%);width:40px;height:40px;border:1px solid rgba(87,35,41,.2);border-radius:50%;background:rgba(255,253,248,.94);color:var(--maroon);font-size:22px;cursor:pointer;display:grid;place-items:center;box-shadow:0 2px 10px #422b2a12}
+    .gallery-nav:disabled{opacity:.35;cursor:default}
+    .gallery-prev{left:12px}.gallery-next{right:12px}
+    .gallery-count{position:absolute;right:12px;bottom:12px;background:rgba(87,35,41,.86);color:white;border-radius:20px;padding:4px 9px;font-size:11px;letter-spacing:.04em}
+    .thumbnails{display:flex;gap:10px;overflow-x:auto;padding:12px 2px 4px;scroll-snap-type:x mandatory;scrollbar-width:thin}
+    .thumbnail{flex:0 0 76px;width:76px;height:88px;border:1px solid var(--line);border-radius:5px;padding:3px;background:#fffaf1;cursor:pointer;overflow:hidden;scroll-snap-align:start}
+    .thumbnail img{width:100%;height:100%;object-fit:cover;display:block;border-radius:2px}
+    .thumbnail[aria-current="true"]{border:2px solid var(--maroon);padding:2px;box-shadow:0 0 0 2px #bd8b4522}
+    .thumbnail:focus-visible,.gallery-nav:focus-visible{outline:3px solid rgba(189,139,69,.65);outline-offset:2px}
+    .gallery-note{font-size:11px;color:var(--muted);margin:4px 2px 0}
+    .placeholder{padding:80px 20px;color:var(--muted);text-align:center}
+    .category{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:bold;margin:8px 0 9px}
+    h1,h2{font-family:Georgia,'Times New Roman',serif;color:var(--maroon);font-weight:normal}
+    h1{font-size:clamp(30px,4vw,44px);line-height:1.12;margin:0 0 14px}
+    .description{font-size:15px;line-height:1.8;color:var(--muted);white-space:pre-line}
+    .product-story{grid-column:1/-1;background:#faf5ec;border:1px solid var(--line);border-left:3px solid var(--gold);padding:25px 28px;margin-top:2px;border-radius:3px}
+    .product-story .eyebrow{font-size:10px;font-weight:bold;letter-spacing:.2em;color:var(--gold);text-transform:uppercase;margin:0 0 8px}
+    .product-story h2{font-size:27px;margin:0 0 10px}
+    .product-story p{font-size:14px;line-height:1.8;color:var(--muted);white-space:pre-line;margin:0}
+    .product-story .story-tagline{font-family:Georgia,serif;color:var(--maroon);font-size:15px;font-style:italic;margin-top:14px}
+    .availability-badge{display:inline-flex;align-items:center;gap:8px;width:max-content;max-width:100%;padding:8px 12px;border-radius:999px;font-size:12px;font-weight:bold;margin:0 0 15px;border:1px solid transparent}
+    .availability-badge::before{content:"";width:8px;height:8px;border-radius:50%;background:currentColor;flex:0 0 8px}
+    .availability-badge.available{color:#17683a;background:#e8f6ed;border-color:#bfe4cb}
+    .availability-badge.made-to-order{color:#80520c;background:#fff4d9;border-color:#f0d89b}
+    .availability-badge.unavailable{color:#9d2c35;background:#fff0f0;border-color:#efc5c8}
+    .availability-badge.unknown{color:#66584b;background:#f6eee3;border-color:#e8d7bf}
+    .price{font-size:27px;font-weight:bold;color:var(--maroon);margin:22px 0 7px;display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+    .price s{font-size:16px;color:#8b8179;font-weight:normal;margin-right:1px}
+    .discount-badge{font-family:Arial,Helvetica,sans-serif;font-size:12px;font-weight:bold;color:#17683a;background:#e8f6ed;border-radius:999px;padding:5px 9px;white-space:nowrap}
+    .savings{font-size:13px;color:#17683a;font-weight:600;margin:-1px 0 18px}
+    .meta{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:14px 0;margin:18px 0;color:var(--muted);font-size:13px}
+    .actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+    .btn{display:inline-flex;justify-content:center;align-items:center;gap:8px;padding:13px 18px;border:1px solid var(--maroon);border-radius:3px;background:var(--maroon);color:white;text-decoration:none;font-size:13px;font-weight:bold;cursor:pointer;min-height:45px}
     .btn.outline{background:transparent;color:var(--maroon)}
-    .trust{display:flex;gap:0;border-top:1px solid var(--line);max-width:440px;padding-top:16px}
-    .trust span{flex:1;text-align:center;font-size:9px;letter-spacing:.09em;text-transform:uppercase;color:#92734d;padding:0 10px;border-right:1px solid var(--line)}
-    .trust span:last-child{border:0}
-    .values{max-width:1040px;margin:-1px auto 0;padding:14px 22px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-    .value{border:1px solid #eee3d5;background:#fffefa;text-align:center;padding:17px 10px;border-radius:3px}
-    .value b{display:block;color:var(--maroon);font-family:Georgia,serif;font-weight:normal;font-size:15px;margin:4px 0}
-    .value small{display:block;color:var(--muted);font-size:10px}
-    .collection{padding:22px 22px 36px;border-top:1px solid #f2e8dc}
-    .section-head{text-align:center;max-width:720px;margin:0 auto 18px}
-    .section-head h2{font-size:clamp(30px,4vw,40px);margin-bottom:8px}
-    .section-head p{font-size:13px;color:var(--muted)}
-    .catalog-tools{max-width:1370px;margin:0 auto 12px;display:flex;justify-content:space-between;gap:16px;align-items:center}
-    .search{width:min(100%,340px);padding:10px 13px;border:1px solid var(--line);background:#fff;border-radius:2px;font:inherit;font-size:12px}
-    .filters{display:flex;gap:7px;flex-wrap:wrap}
-    .filter{border:1px solid var(--line);border-radius:18px;background:transparent;color:var(--ink);padding:7px 12px;font-size:11px;cursor:pointer}
-    .filter.active,.filter:hover{background:var(--maroon);color:white;border-color:var(--maroon)}
-    .grid{max-width:1370px;margin:auto;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:12px}
-    .card{border:1px solid #eee3d5;background:white;border-radius:3px;overflow:hidden;display:flex;flex-direction:column;cursor:pointer;transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}
-    .card:hover,.card:focus-visible{transform:translateY(-3px);box-shadow:0 8px 22px rgba(87,35,41,.12);border-color:var(--gold);outline:none}
-    .card:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
-    .card .price-original{color:#8b8179;font-weight:normal;margin-right:6px}
-    .card .discount-badge{display:inline-block;margin-left:6px;padding:2px 5px;border-radius:2px;background:#f6ead5;color:#8b5e24;font-size:9px;font-weight:bold;white-space:nowrap}
-    .photo{height:190px;background:#f6eddf;display:flex;align-items:center;justify-content:center;overflow:hidden}
-    .photo img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;transition:transform .35s ease}
-    .card:hover .photo img{transform:scale(1.035)}
-    .card-body{padding:13px 12px 12px;display:flex;flex-direction:column;flex:1;gap:3px;min-width:0}
-    .category{font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);font-weight:bold;margin-bottom:4px}
-    .card h3{font-size:16px;line-height:1.22;margin-bottom:5px;height:2.44em;min-height:2.44em;max-height:2.44em;overflow:hidden;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2}
-    .card p{font-size:11px;line-height:1.35;color:var(--muted);margin-bottom:9px}
-    .price{font-size:13px;font-weight:bold;color:var(--maroon);margin-top:5px;margin-bottom:10px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
-    .card .price-current{font-size:14px;font-weight:700;color:var(--maroon)}
-    .card .price-original{font-size:11px}
-    .card .discount-badge{margin-left:0;padding:3px 6px;font-size:9px}
-    .view-details-hint{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;margin-top:auto;padding:10px 12px;background:var(--maroon);border:1px solid var(--maroon);border-radius:3px;color:#fffaf2;font-size:11px;font-weight:bold;letter-spacing:.04em;text-align:center;transition:background .18s ease,color .18s ease,border-color .18s ease,transform .18s ease}
-    .view-details-hint::after{content:"→";font-size:14px;line-height:1}
-    .card:hover .view-details-hint,.card:focus-visible .view-details-hint{background:var(--gold);border-color:var(--gold);color:#fff}
-    .card:active .view-details-hint{transform:scale(.985)}
-    .card .btn{width:100%;font-size:10px;padding:8px 4px}
-    .empty{grid-column:1/-1;text-align:center;padding:30px;color:var(--muted)}
-    .load-more-wrap{max-width:1370px;margin:22px auto 0;text-align:center}
-    .load-more-btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-width:210px;padding:12px 22px;border:1px solid var(--maroon);border-radius:3px;background:var(--maroon);color:#fffaf2;font:inherit;font-size:12px;font-weight:bold;cursor:pointer;transition:background .18s ease,border-color .18s ease,transform .18s ease}
-    .load-more-btn:hover{background:var(--gold);border-color:var(--gold);transform:translateY(-2px)}
-    .load-more-btn:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
-    .load-more-count{margin:8px 0 0;color:var(--muted);font-size:11px}
-    .story{background:#faf5ec;padding:55px 22px}
-    .story-inner{max-width:980px;margin:auto;display:grid;grid-template-columns:1.2fr .8fr;gap:45px;align-items:center}
-    .story h2{font-size:34px;margin-bottom:12px}
-    .story p{font-size:13px;color:var(--muted)}
-    .note{background:var(--sand);padding:25px;border-left:2px solid var(--gold)}
-    .note h3{font-size:22px;margin-bottom:8px}
-    .connect{max-width:980px;margin:0 auto;padding:45px 22px}
-    .connect-box{background:var(--sand);padding:36px 24px;text-align:center}
-    .connect-box h2{font-size:34px;margin-bottom:10px}
-    .connect-box p{font-size:13px;color:var(--muted)}
+    .btn:focus-visible,.back:focus-visible{outline:3px solid rgba(189,139,69,.55);outline-offset:3px}
+    .state{padding:50px 20px;text-align:center;color:var(--muted)}
+    .purchase-help{max-width:760px;margin:44px auto 0;padding:24px 28px;display:grid;grid-template-columns:42px 1fr;gap:14px;align-items:start;background:#faf5ec;border:1px solid var(--line);border-radius:6px}
+    .purchase-help-mark{color:var(--gold);font-size:27px;line-height:1.2}
+    .purchase-help-kicker{margin:0 0 5px;color:var(--gold);font-size:9px;font-weight:bold;letter-spacing:.2em}
+    .purchase-help h2{font-size:25px;margin:0 0 7px}
+    .purchase-help p:last-child{margin:0;color:var(--muted);font-size:13px;line-height:1.75}
+    @media(max-width:700px){.purchase-help{margin-top:30px;padding:19px 17px;grid-template-columns:28px 1fr;gap:10px}.purchase-help h2{font-size:22px}}
     footer{background:var(--maroon);color:#f9eee1;text-align:center;padding:25px 16px}
     footer strong{font-family:Georgia,serif;font-size:21px;letter-spacing:.08em;font-weight:normal}
     footer p{font-size:11px;margin:5px 0;color:#e5d2c5}
     footer small{display:block;border-top:1px solid #754349;max-width:340px;margin:14px auto 0;padding-top:12px;font-size:10px;color:#e5d2c5}
-    .toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);max-width:calc(100% - 30px);background:#342323;color:white;padding:13px 17px;border-radius:4px;font-size:13px;box-shadow:0 5px 22px #0002;display:none;z-index:10}
-    @media (min-width:1101px) and (max-width:1350px){
-      .grid{grid-template-columns:repeat(5,minmax(0,1fr))}
-      .photo{height:155px}
-    }
-    @media (min-width:701px) and (max-width:1100px){
-      .grid{grid-template-columns:repeat(4,minmax(0,1fr))}
-      .photo{height:165px}
-    }
     @media(max-width:700px){
-      .nav{padding:12px 14px;align-items:center;gap:10px}.brand strong{font-size:18px}.brand span{font-size:8px}nav{gap:11px;font-size:10px;padding-top:0;flex-wrap:wrap;justify-content:flex-end}nav a:nth-child(3){display:none}
-      .hero{background:var(--cream)}
-      .hero::before{content:"";display:block;width:100%;height:190px;background:url('images/hero-banner.jpg') 66% center/cover no-repeat;border-bottom:1px solid var(--line)}
-      .hero-inner{min-height:0;padding:27px 20px 24px;background:var(--cream)}.hero-copy{max-width:100%}.eyebrow{font-size:9px;margin-bottom:9px}h1{font-size:38px;line-height:1.03;margin-bottom:12px}.hero-copy>p:not(.eyebrow){font-size:13px;line-height:1.55}
-      .actions{gap:8px;margin:16px 0}.btn{font-size:11px;padding:11px 12px}.trust{padding-top:12px}
-      .values{grid-template-columns:repeat(2,minmax(0,1fr));padding:12px;gap:8px}.value{padding:12px 7px}.value b{font-size:14px}.value small{font-size:10px}
-      .collection{padding:32px 12px 38px}.section-head{margin-bottom:16px}.section-head h2{font-size:29px;line-height:1.1}.section-head p{font-size:12px}.catalog-tools{align-items:stretch;flex-direction:column;gap:10px}.search{width:100%;padding:11px 12px}.filters{justify-content:flex-start}
-      .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.photo{height:auto;aspect-ratio:1/0.95}.photo img{object-fit:cover}.card h3{font-size:15px;line-height:1.22;height:2.44em;min-height:2.44em;max-height:2.44em;-webkit-line-clamp:2}.card-body{padding:11px 10px 10px}.category{font-size:8px}.card h3{font-size:16px;line-height:1.2;margin-bottom:3px}.price{font-size:12px;margin-bottom:3px}.view-details-hint{font-size:10px;padding:10px 8px;margin-top:7px}
-      .load-more-wrap{margin-top:18px}.load-more-btn{width:100%;max-width:320px}
-      .story-inner{grid-template-columns:1fr;gap:18px}.story{padding:34px 16px}.story h2{font-size:29px;line-height:1.15}.story p{font-size:12px}.note{padding:19px}.note h3{font-size:20px}.connect{padding:24px 12px}.connect-box{padding:25px 15px}.connect-box h2{font-size:27px;line-height:1.12}.connect-box p{font-size:12px}
-      footer{padding:23px 14px}.trust span{font-size:8px;padding:0 5px}
+      .nav{padding:12px 14px;gap:10px}.brand strong{font-size:17px}.brand span{font-size:8px}nav{gap:11px;font-size:10px}
+      .wrap{padding:20px 14px 36px}.back{margin-bottom:16px}.product{grid-template-columns:1fr;gap:20px}.product-story{padding:20px 18px}.product-story h2{font-size:24px}
+      .image-panel{min-height:0;max-height:none;aspect-ratio:4/5}.image-panel img{max-height:72vh;width:100%;object-fit:contain}
+      .thumbnail{flex-basis:66px;width:66px;height:76px}.gallery-nav{width:36px;height:36px}
+      .category{margin-top:0}h1{font-size:32px}.description{font-size:14px}.price{font-size:21px;margin:18px 0}.actions{display:grid;grid-template-columns:1fr}.btn{width:100%}
     }
-    @media(max-width:370px){
-      .nav{padding:10px 10px}.brand strong{font-size:15px}nav{gap:8px;font-size:9px}
-      .hero::before{height:165px}.hero-inner{padding:24px 15px 22px}h1{font-size:33px}
-      .grid{grid-template-columns:1fr}.photo{aspect-ratio:1.25/1}.card h3{font-size:18px;line-height:1.22;height:2.44em;min-height:2.44em;max-height:2.44em;-webkit-line-clamp:2}.card-body{padding:13px}.card h3{font-size:19px}.price{font-size:13px}.view-details-hint{font-size:11px;padding:11px}
-    }
+    @media(max-width:370px){.nav{padding:10px}.brand strong{font-size:15px}nav{gap:8px;font-size:9px}.wrap{padding-left:10px;padding-right:10px}}
   </style>
 </head>
 <body>
   <div class="topline">Every Little Treasure Has a Story.</div>
   <header>
     <div class="nav">
-      <a class="brand" href="#home" aria-label="LAKKA STORIES home"><strong>LAKKA STORIES</strong><span>EVERY LITTLE TREASURE HAS A STORY</span></a>
+      <a class="brand" href="index.html#home" aria-label="LAKKA STORIES home"><strong>LAKKA STORIES</strong><span>EVERY LITTLE TREASURE HAS A STORY</span></a>
       <nav aria-label="Main navigation">
-        <a href="#home">Home</a><a href="#collection">Collection</a><a href="#story">Our Story</a><a href="#contact">Contact</a>
+        <a href="index.html#home">Home</a><a href="index.html#collection">Collection</a><a href="index.html#story">Our Story</a><a href="index.html#contact">Contact</a>
       </nav>
     </div>
   </header>
-
-  <main>
-    <section class="hero" id="home">
-      <div class="hero-inner">
-        <div class="hero-copy">
-          <p class="eyebrow">— A world of thoughtful gifts</p>
-          <h1>Small Treasures.<em>Timeless Stories.</em></h1>
-          <p>Discover traditional wooden toys and meaningful gifts, thoughtfully brought together by LAKKA STORIES.</p>
-          <div class="actions"><a class="btn" href="#collection">Explore the Collection →</a><a class="btn outline" href="#story">Discover Our Story</a></div>
-          <div class="trust"><span>✿<br>Traditional<br>craftsmanship</span><span>♡<br>Thoughtful<br>gifts</span><span>✧<br>Stories for<br>generations</span></div>
+  <main class="wrap">
+    <a class="back" href="index.html#collection">← Back to collection</a>
+    <div id="productState" class="state">Loading product details…</div>
+    <article id="productDetails" class="product" hidden>
+      <div class="gallery" aria-label="Product photo gallery">
+        <div class="image-panel" id="imagePanel"></div>
+        <div class="thumbnails" id="productThumbnails" aria-label="Choose product photo" hidden></div>
+        <p class="gallery-note" id="galleryNote" hidden>Tap a thumbnail to view another angle.</p>
+      </div>
+      <div class="info">
+        <div class="category" id="productCategory"></div>
+        <h1 id="productName"></h1>
+        <div class="availability-badge unknown" id="availabilityBadge">Ask us to confirm availability</div>
+        <div class="description" id="productDescription"></div>
+        <div class="meta" id="productMeta" hidden></div>
+        <div class="price" id="productPrice"></div>
+        <div class="savings" id="productSavings" hidden></div>
+        <div class="actions">
+          <button class="btn" id="enquireButton" type="button">Order on WhatsApp →</button>
+          <a class="btn outline" href="index.html#collection">Continue browsing</a>
         </div>
       </div>
+    </article>
+    <section class="product-story" id="productStory" aria-labelledby="productStoryTitle" hidden>
+      <p class="eyebrow">— A little story to keep</p>
+      <h2 id="productStoryTitle">The Story Behind This Treasure</h2>
+      <p id="productStoryText"></p>
+      <p class="story-tagline">Every Little Treasure Has a Story.</p>
     </section>
-
-    <section class="values" aria-label="Our values">
-      <div class="value">✿<b>Thoughtful Selection</b><small>A collection chosen with care</small></div>
-      <div class="value">✧<b>Timeless Appeal</b><small>Meaningful gifts and keepsakes</small></div>
-      <div class="value">♡<b>Personal Enquiries</b><small>Ask us about each product</small></div>
-      <div class="value">✦<b>Stories to Share</b><small>Find a gift with character</small></div>
-    </section>
-
-    <section class="collection" id="collection">
-      <div class="section-head"><p class="eyebrow">— The collection</p><h2>Find Your Little Treasure</h2><p>Explore our growing collection. Contact us for product details, availability and pricing.</p></div>
-      <div class="catalog-tools">
-        <input class="search" id="search" type="search" placeholder="Search the collection..." aria-label="Search products">
-        <div class="filters" aria-label="Filter products">
-          <button class="filter active" data-filter="All">All</button><button class="filter" data-filter="Toys">Toys</button><button class="filter" data-filter="Gifts">Gifts</button><button class="filter" data-filter="Decor">Decor</button>
-        </div>
-      </div>
-      <div class="grid" id="productGrid">
-        <p class="empty" style="grid-column:1/-1">Loading the collection…</p>
-      </div>
-      <div class="load-more-wrap" id="loadMoreWrap" hidden>
-        <button class="load-more-btn" id="loadMoreBtn" type="button">Load More Products <span aria-hidden="true">↓</span></button>
-        <p class="load-more-count" id="loadMoreCount" aria-live="polite"></p>
-      </div>
-      <p id="noResults" class="empty" hidden>No matching products found. Try another search.</p>
-    </section>
-
-    <section class="story" id="story">
-      <div class="story-inner">
-        <div><p class="eyebrow">— Our story</p><h2>Stories Behind the Treasures</h2><p>Some little treasures bring a smile without saying a word. A thoughtful gift can become part of a special moment, a keepsake, or a memory shared with someone we love.</p><p>At LAKKA STORIES, we bring together pieces to discover, gift and cherish. Every treasure has the chance to become part of your own story.</p><a class="btn" href="#collection">Explore the Collection →</a></div>
-        <aside class="note"><h3>A thoughtful choice, every time.</h3><p>We are building our collection carefully. Contact us for current product availability, details and pricing.</p><a class="btn outline" href="#contact">Get in Touch</a></aside>
+    <section class="purchase-help" aria-labelledby="purchaseHelpTitle">
+      <div class="purchase-help-mark" aria-hidden="true">✦</div>
+      <div>
+        <p class="purchase-help-kicker">HERE TO HELP</p>
+        <h2 id="purchaseHelpTitle">A Thoughtful Purchase</h2>
+        <p>Have a question about this treasure? Use the WhatsApp enquiry button above to ask us about its details, current availability and price before placing an order.</p>
       </div>
     </section>
-
-    <section class="connect" id="contact"><div class="connect-box"><p class="eyebrow">— Let's connect</p><h2>Found Something You Love?</h2><p>Ask us about a product, its availability and pricing. We'd love to hear from you.</p><button class="btn enquiry" data-product="General catalogue enquiry">Enquire on WhatsApp →</button></div></section>
   </main>
-
   <footer><strong>LAKKA STORIES</strong><p>Every Little Treasure Has a Story.</p><p>Thoughtful gifts. Stories worth sharing.</p><small>© 2026 LAKKA STORIES</small></footer>
-  <div class="toast" id="toast" role="status" aria-live="polite"></div>
-
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script>
-    // Public project settings only. Never place database passwords or service-role keys here.
     const SUPABASE_URL = "https://qguxptvedozdfulahkid.supabase.co";
     const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_c5-NfXVIzLNgC821H3EFWQ_fpmSU9Tl";
-    // IMPORTANT: Add your WhatsApp business number below before publishing.
-    // Use country code + number only, with no +, spaces or dashes. Example format: 919876543210
     const WHATSAPP_BUSINESS_NUMBER = "919381317313";
-    const toast = document.getElementById("toast");
-    let toastTimer;
-    function showToast(message) {
-      toast.textContent = message;
-      toast.style.display = "block";
-      clearTimeout(toastTimer);
-      toastTimer = setTimeout(() => toast.style.display = "none", 5000);
+    const state = document.getElementById("productState");
+    const details = document.getElementById("productDetails");
+    const params = new URLSearchParams(window.location.search);
+    const productId = params.get("id");
+
+    function showState(message) {
+      state.textContent = message;
+      state.hidden = false;
+      details.hidden = true;
+    }
+    function setText(id, value) {
+      document.getElementById(id).textContent = value || "";
+    }
+    let galleryImages = [];
+    let activeImageIndex = 0;
+
+    function parseImageValue(value) {
+      if (!value) return [];
+      if (Array.isArray(value)) return value.flatMap(parseImageValue);
+      if (typeof value === "object") {
+        return Object.values(value).flatMap(parseImageValue);
+      }
+      if (typeof value !== "string") return [];
+      const trimmed = value.trim();
+      if (!trimmed) return [];
+      if ((trimmed.startsWith("[") && trimmed.endsWith("]")) || (trimmed.startsWith("{") && trimmed.endsWith("}"))) {
+        try { return parseImageValue(JSON.parse(trimmed)); } catch (_) {}
+      }
+      return trimmed.split(/[\n,|]+/).map(part => part.trim()).filter(Boolean);
     }
 
-    function setupEnquiry(button) {
-      button.addEventListener("click", () => {
-        const product = button.dataset.product || "General catalogue enquiry";
-        if (!/^[0-9]{10,15}$/.test(WHATSAPP_BUSINESS_NUMBER)) {
-          showToast("WhatsApp is not configured yet. Add your business number in index.html before using enquiry buttons.");
-          return;
-        }
-        const message = `Hello LAKKA STORIES, I would like to enquire about: ${product}. Please share the current price and availability.`;
-        window.open(`https://wa.me/${WHATSAPP_BUSINESS_NUMBER}?text=${encodeURIComponent(message)}`, "_blank", "noopener,noreferrer");
+    function collectGalleryImages(product) {
+      const possibleFields = [
+        "image_url", "gallery_images", "image_urls", "additional_images", "images",
+        "photo_urls", "product_images", "image_url_2", "image_url_3", "image_url_4", "image_url_5"
+      ];
+      const candidates = possibleFields.flatMap(field => parseImageValue(product[field]));
+      const seen = new Set();
+      return candidates.filter(url => {
+        if (!/^https?:\/\//i.test(url) || seen.has(url)) return false;
+        seen.add(url);
+        return true;
       });
     }
-    document.querySelectorAll(".enquiry").forEach(setupEnquiry);
 
-    const search = document.getElementById("search");
-    const filters = document.querySelectorAll(".filter");
-    let activeFilter = "All";
-    let catalogueProducts = [];
-    const PRODUCTS_PER_BATCH = 14;
-    let visibleProductCount = PRODUCTS_PER_BATCH;
-    function norm(v){ return String(v || "").trim().toLowerCase(); }
-    function categoryGroup(category) {
-      const c = norm(category);
-      if (c.includes("toy")) return "Toys";
-      if (c.includes("gift")) return "Gifts";
-      if (c.includes("decor") || c.includes("home")) return "Decor";
-      return category || "Other";
-    }
-    function renderCatalogue() {
-      const term = norm(search.value);
-      const grid = document.getElementById("productGrid");
-      const loadMoreWrap = document.getElementById("loadMoreWrap");
-      const loadMoreBtn = document.getElementById("loadMoreBtn");
-      const loadMoreCount = document.getElementById("loadMoreCount");
+    function renderGallery(images, productName) {
+      const panel = document.getElementById("imagePanel");
+      const thumbnails = document.getElementById("productThumbnails");
+      const note = document.getElementById("galleryNote");
+      galleryImages = images;
+      activeImageIndex = 0;
+      panel.innerHTML = "";
+      thumbnails.innerHTML = "";
 
-      const filtered = catalogueProducts.filter(p => {
-        const matchesCategory = activeFilter === "All" || categoryGroup(p.category) === activeFilter;
-        const matchesSearch = [p.name,p.product_code,p.category,p.description].some(v => norm(v).includes(term));
-        return matchesCategory && matchesSearch;
-      });
-
-      const visibleProducts = filtered.slice(0, visibleProductCount);
-      grid.innerHTML = "";
-
-      if (!filtered.length) {
-        grid.innerHTML = '<p class="empty" style="grid-column:1/-1">No products found. Please try another search or check back soon.</p>';
-        loadMoreWrap.hidden = true;
-        document.getElementById("noResults").hidden = true;
+      if (!images.length) {
+        panel.innerHTML = '<div class="placeholder">Photo coming soon</div>';
+        thumbnails.hidden = true;
+        note.hidden = true;
         return;
       }
 
-      visibleProducts.forEach(p => {
-        const card = document.createElement("article");
-        card.className = "card";
-        card.tabIndex = 0;
-        card.setAttribute("role", "link");
-        card.setAttribute("aria-label", "View details for " + (p.name || "this product"));
+      const mainImage = document.createElement("img");
+      mainImage.id = "mainProductImage";
+      mainImage.src = images[0];
+      mainImage.alt = `${productName} — photo 1 of ${images.length}`;
+      mainImage.loading = "eager";
+      mainImage.onerror = () => {
+        mainImage.onerror = null;
+        mainImage.alt = "Product photo unavailable";
+        mainImage.style.display = "none";
+        const error = document.createElement("div");
+        error.className = "placeholder";
+        error.textContent = "Product photo unavailable";
+        panel.appendChild(error);
+      };
+      panel.appendChild(mainImage);
 
-        const openProductDetails = () => {
-          if (p.id !== undefined && p.id !== null && String(p.id) !== "") {
-            window.location.href = "product.html?id=" + encodeURIComponent(p.id);
-          } else if (p.product_code) {
-            window.location.href = "product.html?product_code=" + encodeURIComponent(p.product_code);
-          } else {
-            showToast("Product details are not available for this item yet.");
-          }
-        };
+      const previous = document.createElement("button");
+      previous.type = "button";
+      previous.className = "gallery-nav gallery-prev";
+      previous.setAttribute("aria-label", "Previous product photo");
+      previous.textContent = "‹";
+      previous.addEventListener("click", () => showGalleryImage(activeImageIndex - 1, productName));
+      const next = document.createElement("button");
+      next.type = "button";
+      next.className = "gallery-nav gallery-next";
+      next.setAttribute("aria-label", "Next product photo");
+      next.textContent = "›";
+      next.addEventListener("click", () => showGalleryImage(activeImageIndex + 1, productName));
+      const count = document.createElement("span");
+      count.className = "gallery-count";
+      count.id = "galleryCount";
+      count.textContent = `1 / ${images.length}`;
+      panel.append(previous, next, count);
 
-        card.addEventListener("click", (event) => {
-          if (event.target.closest("button, a, input")) return;
-          openProductDetails();
-        });
-        card.addEventListener("keydown", (event) => {
-          if (event.target !== card) return;
-          if (event.key === "Enter" || event.key === " ") {
-            event.preventDefault();
-            openProductDetails();
-          }
-        });
-
-        const photo = document.createElement("div");
-        photo.className = "photo";
-        if (p.image_url) {
-          const img = document.createElement("img");
-          img.src = p.image_url;
-          img.alt = p.name || "Product photo";
-          img.loading = "lazy";
-          img.onerror = () => { img.remove(); photo.textContent = "Photo coming soon"; };
-          photo.appendChild(img);
-        } else {
-          photo.textContent = "Photo coming soon";
-        }
-
-        const body = document.createElement("div");
-        body.className = "card-body";
-        const cat = document.createElement("div");
-        cat.className = "category";
-        const rawCategory = String(p.category || "").trim();
-        cat.textContent = (!rawCategory || /^(uncategorized|uncategorised|other)$/i.test(rawCategory)) ? "Collection" : rawCategory;
-
-        const title = document.createElement("h3");
-        title.textContent = p.name || "Product";
-
-        const price = document.createElement("div");
-        price.className = "price";
-        const selling = Number(p.selling_price || 0);
-        const reference = Number(p.reference_price || 0);
-
-        if (selling > 0) {
-          if (reference > selling) {
-            const old = document.createElement("s");
-            old.className = "price-original";
-            old.textContent = "₹" + reference.toLocaleString("en-IN");
-            const discount = Math.round(((reference - selling) / reference) * 100);
-            const badge = document.createElement("span");
-            badge.className = "discount-badge";
-            badge.textContent = discount + "% OFF";
-            const current = document.createElement("span");
-            current.className = "price-current";
-            current.textContent = "₹" + selling.toLocaleString("en-IN");
-            price.append(current, old, badge);
-          } else {
-            price.textContent = "₹" + selling.toLocaleString("en-IN");
-          }
-        } else {
-          price.textContent = "Price on Request";
-        }
-
-        const viewHint = document.createElement("div");
-        viewHint.className = "view-details-hint";
-        viewHint.textContent = "View Details";
-        body.append(cat, title, price, viewHint);
-        card.append(photo, body);
-        grid.appendChild(card);
+      images.forEach((url, index) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "thumbnail";
+        button.setAttribute("aria-label", `View photo ${index + 1}`);
+        button.setAttribute("aria-current", index === 0 ? "true" : "false");
+        const thumb = document.createElement("img");
+        thumb.src = url;
+        thumb.alt = `${productName} thumbnail ${index + 1}`;
+        thumb.loading = "lazy";
+        thumb.onerror = () => { button.hidden = true; };
+        button.appendChild(thumb);
+        button.addEventListener("click", () => showGalleryImage(index, productName));
+        thumbnails.appendChild(button);
       });
-
-      const remaining = filtered.length - visibleProducts.length;
-      loadMoreWrap.hidden = remaining <= 0;
-      if (remaining > 0) {
-        loadMoreBtn.innerHTML = 'Load More Products <span aria-hidden="true">↓</span>';
-        loadMoreCount.textContent = `Showing ${visibleProducts.length} of ${filtered.length} products`;
-      } else {
-        loadMoreCount.textContent = "";
-      }
-      document.getElementById("noResults").hidden = true;
+      thumbnails.hidden = images.length < 2;
+      note.hidden = images.length < 2;
+      previous.hidden = images.length < 2;
+      next.hidden = images.length < 2;
+      count.hidden = images.length < 2;
     }
 
-    search.addEventListener("input", () => {
-      visibleProductCount = PRODUCTS_PER_BATCH;
-      renderCatalogue();
+    function showGalleryImage(index, productName) {
+      if (!galleryImages.length) return;
+      activeImageIndex = (index + galleryImages.length) % galleryImages.length;
+      const mainImage = document.getElementById("mainProductImage");
+      if (mainImage) {
+        mainImage.style.display = "block";
+        mainImage.src = galleryImages[activeImageIndex];
+        mainImage.alt = `${productName} — photo ${activeImageIndex + 1} of ${galleryImages.length}`;
+      }
+      const count = document.getElementById("galleryCount");
+      if (count) count.textContent = `${activeImageIndex + 1} / ${galleryImages.length}`;
+      document.querySelectorAll(".thumbnail").forEach((button, index) => {
+        button.setAttribute("aria-current", index === activeImageIndex ? "true" : "false");
+      });
+      const selected = document.querySelectorAll(".thumbnail")[activeImageIndex];
+      if (selected) selected.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "nearest" });
+    }
+
+    function renderAvailability(rawValue) {
+      const badge = document.getElementById("availabilityBadge");
+      const raw = String(rawValue || "").trim();
+      const normalized = raw.toLowerCase().replace(/[\s-]+/g, "_");
+      let label = "Ask us to confirm availability";
+      let className = "unknown";
+      if (["available", "in_stock", "instock", "ready_stock", "ready_to_ship"].includes(normalized)) {
+        label = "Available to order";
+        className = "available";
+      } else if (["made_to_order", "made_toorder", "pre_order", "preorder", "on_demand"].includes(normalized)) {
+        label = "Made to order";
+        className = "made-to-order";
+      } else if (["out_of_stock", "unavailable", "sold_out", "soldout", "discontinued"].includes(normalized)) {
+        label = "Currently unavailable";
+        className = "unavailable";
+      } else if (raw) {
+        label = raw.replace(/[_-]+/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+        className = "unknown";
+      }
+      badge.textContent = label;
+      badge.className = `availability-badge ${className}`;
+      const orderButton = document.getElementById("enquireButton");
+      if (className === "unavailable") orderButton.textContent = "Ask About Availability →";
+      else if (className === "unknown") orderButton.textContent = "Check Availability on WhatsApp →";
+      else orderButton.textContent = "Order on WhatsApp →";
+    }
+
+    function formatPrice(product) {
+      const selling = Number(product.selling_price || 0);
+      const reference = Number(product.reference_price || 0);
+      const el = document.getElementById("productPrice");
+      const savingsEl = document.getElementById("productSavings");
+      el.innerHTML = "";
+      savingsEl.hidden = true;
+      savingsEl.textContent = "";
+      if (selling > 0) {
+        if (reference > selling) {
+          const old = document.createElement("s");
+          old.textContent = "₹" + reference.toLocaleString("en-IN");
+          el.appendChild(old);
+        }
+        el.appendChild(document.createTextNode("₹" + selling.toLocaleString("en-IN")));
+        if (reference > selling) {
+          const discount = Math.round(((reference - selling) / reference) * 100);
+          const badge = document.createElement("span");
+          badge.className = "discount-badge";
+          badge.textContent = `${discount}% OFF`;
+          el.appendChild(badge);
+          savingsEl.textContent = `You save ₹${(reference - selling).toLocaleString("en-IN")}`;
+          savingsEl.hidden = false;
+        }
+      } else {
+        el.textContent = "Price on Request";
+      }
+    }
+    document.getElementById("enquireButton").addEventListener("click", () => {
+      const productName = document.getElementById("productName").textContent || "Product";
+      const status = document.getElementById("availabilityBadge").textContent || "Please confirm availability";
+      const message = `Hello LAKKA STORIES, I would like to place an order for: ${productName}. Current status shown: ${status}. Please confirm the final price, availability, delivery charges and payment options before I pay.`;
+      if (!/^[0-9]{10,15}$/.test(WHATSAPP_BUSINESS_NUMBER)) {
+        alert("WhatsApp is not configured yet. Please contact LAKKA STORIES.");
+        return;
+      }
+      window.open(`https://wa.me/${WHATSAPP_BUSINESS_NUMBER}?text=${encodeURIComponent(message)}`, "_blank", "noopener,noreferrer");
     });
-    document.getElementById("loadMoreBtn").addEventListener("click", () => {
-      visibleProductCount += PRODUCTS_PER_BATCH;
-      renderCatalogue();
-    });
-    filters.forEach(button => button.addEventListener("click", () => {
-      activeFilter = button.dataset.filter;
-      visibleProductCount = PRODUCTS_PER_BATCH;
-      filters.forEach(item => item.classList.toggle("active", item === button));
-      renderCatalogue();
-    }));
-    async function loadPublicCatalogue() {
-      const grid = document.getElementById("productGrid");
+
+    async function loadProduct() {
+      if (!productId) {
+        showState("No product was selected. Please return to the collection and choose a product.");
+        return;
+      }
       try {
-        if (!window.supabase || !window.supabase.createClient) throw new Error("Catalogue service could not load. Please refresh.");
+        if (!window.supabase || !window.supabase.createClient) throw new Error("Catalogue service could not load.");
         const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
         const { data, error } = await client.from("public_catalogue")
-          .select("id,product_code,name,category,description,dimensions,image_url,reference_price,selling_price,availability")
-          .order("created_at", { ascending: false });
+          .select("*")
+          .eq("id", productId)
+          .maybeSingle();
         if (error) throw error;
-        catalogueProducts = data || [];
-        renderCatalogue();
-        if (!catalogueProducts.length) {
-          grid.innerHTML = '<p class="empty" style="grid-column:1/-1">Our collection is being prepared. Please check back soon or contact us for enquiries.</p>';
+        if (!data) {
+          showState("We couldn't find that product. It may no longer be available.");
+          return;
         }
-      } catch (err) {
-        console.error("Could not load public catalogue:", err);
-        grid.innerHTML = '<p class="empty" style="grid-column:1/-1">We couldn’t load the collection right now. Please refresh the page or contact us on WhatsApp.</p>';
+        document.title = `${data.name || "Product"} | LAKKA STORIES`;
+        setText("productCategory", data.category || "Collection");
+        setText("productName", data.name || "Product");
+        setText("productDescription", data.description || "Contact us for more details about this product.");
+        const storyText = String(data.story || "").trim().replace(/(?:\r?\n)\s*(?:\*\*)?\*?Every Little Treasure Has a Story\.(?:\*\*)?\*?\s*$/i, "").trim();
+        const storySection = document.getElementById("productStory");
+        document.getElementById("productStoryText").textContent = storyText;
+        storySection.hidden = !storyText;
+        const images = collectGalleryImages(data);
+        renderGallery(images, data.name || "Product");
+        renderAvailability(data.availability);
+        const meta = document.getElementById("productMeta");
+        const bits = [];
+        if (data.dimensions) bits.push(`Size: ${data.dimensions}`);
+        meta.textContent = bits.join(" · ");
+        meta.hidden = bits.length === 0;
+        formatPrice(data);
+        state.hidden = true;
+        details.hidden = false;
+      } catch (error) {
+        console.error("Could not load product details:", error);
+        showState("We couldn't load this product right now. Please go back to the collection or contact us on WhatsApp.");
       }
     }
-    loadPublicCatalogue();
+    loadProduct();
   </script>
 </body>
 </html>
