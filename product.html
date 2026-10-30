@@ -20,6 +20,9 @@
     nav{display:flex;align-items:center;gap:22px;font-size:12px}
     nav a{text-decoration:none}
     nav a:hover{color:var(--gold)}
+    .mobile-menu-toggle{display:none;border:1px solid var(--line);background:var(--cream);border-radius:4px;width:42px;height:40px;padding:9px;cursor:pointer;color:var(--maroon)}
+    .mobile-menu-toggle span{display:block;height:2px;background:currentColor;margin:4px 0;border-radius:2px;transition:transform .2s,opacity .2s}
+    .mobile-menu-toggle:focus-visible{outline:3px solid rgba(189,139,69,.55);outline-offset:3px}
     .wrap{max-width:1080px;margin:0 auto;padding:28px 22px 55px}
     .back{display:inline-block;text-decoration:none;color:var(--maroon);font-size:13px;font-weight:bold;margin:0 0 22px}
     .back:hover{text-decoration:underline}
@@ -68,21 +71,22 @@
     footer p{font-size:11px;margin:5px 0;color:#e5d2c5}
     footer small{display:block;border-top:1px solid #754349;max-width:340px;margin:14px auto 0;padding-top:12px;font-size:10px;color:#e5d2c5}
     @media(max-width:700px){
-      .nav{padding:12px 14px;gap:10px}.brand strong{font-size:17px}.brand span{font-size:8px}nav{gap:11px;font-size:10px}
+      .nav{position:relative;padding:12px 14px;gap:10px}.brand{text-align:left;min-width:0}.brand strong{font-size:17px}.brand span{font-size:7px;letter-spacing:.14em}.mobile-menu-toggle{display:block;flex:0 0 42px}nav#mainNavigation{display:none;position:absolute;top:100%;left:0;right:0;z-index:20;background:#fffdf8;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:10px 16px 14px;box-shadow:0 8px 16px rgba(66,43,42,.10);flex-direction:column;align-items:stretch;gap:0;font-size:14px}#siteNav.menu-open nav#mainNavigation{display:flex}nav#mainNavigation a{padding:11px 4px;border-bottom:1px solid #f1e7da}nav#mainNavigation a:last-child{border-bottom:0}
       .wrap{padding:20px 14px 36px}.back{margin-bottom:16px}.product{grid-template-columns:1fr;gap:20px}.product-story{padding:20px 18px}.product-story h2{font-size:24px}
       .image-panel{min-height:0;max-height:none;aspect-ratio:4/5}.image-panel img{max-height:72vh;width:100%;object-fit:contain}
       .thumbnail{flex-basis:66px;width:66px;height:76px}.gallery-nav{width:36px;height:36px}
       .category{margin-top:0}h1{font-size:32px}.description{font-size:14px}.price{font-size:21px;margin:18px 0}.actions{display:grid;grid-template-columns:1fr}.btn{width:100%}
     }
-    @media(max-width:370px){.nav{padding:10px}.brand strong{font-size:15px}nav{gap:8px;font-size:9px}.wrap{padding-left:10px;padding-right:10px}}
+    @media(max-width:370px){.nav{padding:10px}.brand strong{font-size:16px}.brand span{font-size:6px}.mobile-menu-toggle{width:38px;height:38px;flex-basis:38px}.wrap{padding-left:10px;padding-right:10px}}
   </style>
 </head>
 <body>
   <div class="topline">Every Little Treasure Has a Story.</div>
   <header>
-    <div class="nav">
+    <div class="nav" id="siteNav">
       <a class="brand" href="index.html#home" aria-label="LAKKA STORIES home"><strong>LAKKA STORIES</strong><span>EVERY LITTLE TREASURE HAS A STORY</span></a>
-      <nav aria-label="Main navigation">
+      <button class="mobile-menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mainNavigation"><span></span><span></span><span></span></button>
+      <nav id="mainNavigation" aria-label="Main navigation">
         <a href="index.html#home">Home</a><a href="index.html#collection">Collection</a><a href="index.html#story">Our Story</a><a href="index.html#contact">Contact</a>
       </nav>
     </div>
@@ -366,6 +370,31 @@
       }
     }
     loadProduct();
+  </script>
+
+  <script>
+    (() => {
+      const menu = document.getElementById("siteNav");
+      const toggle = menu && menu.querySelector(".mobile-menu-toggle");
+      const navigation = document.getElementById("mainNavigation");
+      if (!menu || !toggle || !navigation) return;
+      const closeMenu = () => {
+        menu.classList.remove("menu-open");
+        toggle.setAttribute("aria-expanded", "false");
+        toggle.setAttribute("aria-label", "Open navigation menu");
+      };
+      toggle.addEventListener("click", () => {
+        const isOpen = menu.classList.toggle("menu-open");
+        toggle.setAttribute("aria-expanded", String(isOpen));
+        toggle.setAttribute("aria-label", isOpen ? "Close navigation menu" : "Open navigation menu");
+      });
+      navigation.addEventListener("click", (event) => {
+        if (event.target.closest("a")) closeMenu();
+      });
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") closeMenu();
+      });
+    })();
   </script>
 </body>
 </html>
