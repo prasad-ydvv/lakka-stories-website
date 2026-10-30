@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#572329">
   <meta name="description" content="LAKKA STORIES — thoughtful gifts and traditional lacquered wooden toys. Ask us about product availability and pricing.">
-  <title>LAKKA STORIES | Tradition in Every Turn</title>
+  <title>LAKKA STORIES | Every Little Treasure Has a Story</title>
   <style>
     :root{--maroon:#572329;--maroon2:#74333a;--cream:#fffdf8;--sand:#f3e7d4;--gold:#bd8b45;--ink:#422b2a;--muted:#786b62;--line:#eadcc9}
     *{box-sizing:border-box}
@@ -52,25 +52,31 @@
     .grid{max-width:1370px;margin:auto;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:12px}
     .card{border:1px solid #eee3d5;background:white;border-radius:3px;overflow:hidden;display:flex;flex-direction:column;cursor:pointer;transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}
     .card:hover,.card:focus-visible{transform:translateY(-3px);box-shadow:0 8px 22px rgba(87,35,41,.12);border-color:var(--gold);outline:none}
+    .card:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
     .card .price-original{color:#8b8179;font-weight:normal;margin-right:6px}
     .card .discount-badge{display:inline-block;margin-left:6px;padding:2px 5px;border-radius:2px;background:#f6ead5;color:#8b5e24;font-size:9px;font-weight:bold;white-space:nowrap}
     .photo{height:190px;background:#f6eddf;display:flex;align-items:center;justify-content:center;overflow:hidden}
-    .photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s ease}
+    .photo img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;transition:transform .35s ease}
     .card:hover .photo img{transform:scale(1.035)}
-    .card-body{padding:13px 12px 12px;display:flex;flex-direction:column;flex:1;gap:3px}
+    .card-body{padding:13px 12px 12px;display:flex;flex-direction:column;flex:1;gap:3px;min-width:0}
     .category{font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);font-weight:bold;margin-bottom:4px}
-    .card h3{font-size:17px;line-height:1.2;margin-bottom:5px}
+    .card h3{font-size:16px;line-height:1.22;margin-bottom:5px;height:2.44em;min-height:2.44em;max-height:2.44em;overflow:hidden;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2}
     .card p{font-size:11px;line-height:1.35;color:var(--muted);margin-bottom:9px}
     .price{font-size:13px;font-weight:bold;color:var(--maroon);margin-top:5px;margin-bottom:10px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
     .card .price-current{font-size:14px;font-weight:700;color:var(--maroon)}
     .card .price-original{font-size:11px}
     .card .discount-badge{margin-left:0;padding:3px 6px;font-size:9px}
-    .view-details-hint{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;margin-top:9px;padding:10px 12px;background:var(--maroon);border:1px solid var(--maroon);border-radius:3px;color:#fffaf2;font-size:11px;font-weight:bold;letter-spacing:.04em;text-align:center;transition:background .18s ease,color .18s ease,border-color .18s ease,transform .18s ease}
+    .view-details-hint{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;margin-top:auto;padding:10px 12px;background:var(--maroon);border:1px solid var(--maroon);border-radius:3px;color:#fffaf2;font-size:11px;font-weight:bold;letter-spacing:.04em;text-align:center;transition:background .18s ease,color .18s ease,border-color .18s ease,transform .18s ease}
     .view-details-hint::after{content:"→";font-size:14px;line-height:1}
     .card:hover .view-details-hint,.card:focus-visible .view-details-hint{background:var(--gold);border-color:var(--gold);color:#fff}
     .card:active .view-details-hint{transform:scale(.985)}
     .card .btn{width:100%;font-size:10px;padding:8px 4px}
     .empty{grid-column:1/-1;text-align:center;padding:30px;color:var(--muted)}
+    .load-more-wrap{max-width:1370px;margin:22px auto 0;text-align:center}
+    .load-more-btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-width:210px;padding:12px 22px;border:1px solid var(--maroon);border-radius:3px;background:var(--maroon);color:#fffaf2;font:inherit;font-size:12px;font-weight:bold;cursor:pointer;transition:background .18s ease,border-color .18s ease,transform .18s ease}
+    .load-more-btn:hover{background:var(--gold);border-color:var(--gold);transform:translateY(-2px)}
+    .load-more-btn:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+    .load-more-count{margin:8px 0 0;color:var(--muted);font-size:11px}
     .story{background:#faf5ec;padding:55px 22px}
     .story-inner{max-width:980px;margin:auto;display:grid;grid-template-columns:1.2fr .8fr;gap:45px;align-items:center}
     .story h2{font-size:34px;margin-bottom:12px}
@@ -102,22 +108,23 @@
       .actions{gap:8px;margin:16px 0}.btn{font-size:11px;padding:11px 12px}.trust{padding-top:12px}
       .values{grid-template-columns:repeat(2,minmax(0,1fr));padding:12px;gap:8px}.value{padding:12px 7px}.value b{font-size:14px}.value small{font-size:10px}
       .collection{padding:32px 12px 38px}.section-head{margin-bottom:16px}.section-head h2{font-size:29px;line-height:1.1}.section-head p{font-size:12px}.catalog-tools{align-items:stretch;flex-direction:column;gap:10px}.search{width:100%;padding:11px 12px}.filters{justify-content:flex-start}
-      .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.photo{height:auto;aspect-ratio:1/0.95}.photo img{object-fit:cover}.card-body{padding:11px 10px 10px}.category{font-size:8px}.card h3{font-size:16px;line-height:1.2;margin-bottom:3px}.price{font-size:12px;margin-bottom:3px}.view-details-hint{font-size:10px;padding:10px 8px;margin-top:7px}
+      .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.photo{height:auto;aspect-ratio:1/0.95}.photo img{object-fit:cover}.card h3{font-size:15px;line-height:1.22;height:2.44em;min-height:2.44em;max-height:2.44em;-webkit-line-clamp:2}.card-body{padding:11px 10px 10px}.category{font-size:8px}.card h3{font-size:16px;line-height:1.2;margin-bottom:3px}.price{font-size:12px;margin-bottom:3px}.view-details-hint{font-size:10px;padding:10px 8px;margin-top:7px}
+      .load-more-wrap{margin-top:18px}.load-more-btn{width:100%;max-width:320px}
       .story-inner{grid-template-columns:1fr;gap:18px}.story{padding:34px 16px}.story h2{font-size:29px;line-height:1.15}.story p{font-size:12px}.note{padding:19px}.note h3{font-size:20px}.connect{padding:24px 12px}.connect-box{padding:25px 15px}.connect-box h2{font-size:27px;line-height:1.12}.connect-box p{font-size:12px}
       footer{padding:23px 14px}.trust span{font-size:8px;padding:0 5px}
     }
     @media(max-width:370px){
       .nav{padding:10px 10px}.brand strong{font-size:15px}nav{gap:8px;font-size:9px}
       .hero::before{height:165px}.hero-inner{padding:24px 15px 22px}h1{font-size:33px}
-      .grid{grid-template-columns:1fr}.photo{aspect-ratio:1.25/1}.card-body{padding:13px}.card h3{font-size:19px}.price{font-size:13px}.view-details-hint{font-size:11px;padding:11px}
+      .grid{grid-template-columns:1fr}.photo{aspect-ratio:1.25/1}.card h3{font-size:18px;line-height:1.22;height:2.44em;min-height:2.44em;max-height:2.44em;-webkit-line-clamp:2}.card-body{padding:13px}.card h3{font-size:19px}.price{font-size:13px}.view-details-hint{font-size:11px;padding:11px}
     }
   </style>
 </head>
 <body>
-  <div class="topline">Thoughtful gifts · Timeless stories</div>
+  <div class="topline">Every Little Treasure Has a Story.</div>
   <header>
     <div class="nav">
-      <a class="brand" href="#home" aria-label="LAKKA STORIES home"><strong>LAKKA STORIES</strong><span>TRADITION IN EVERY TURN</span></a>
+      <a class="brand" href="#home" aria-label="LAKKA STORIES home"><strong>LAKKA STORIES</strong><span>EVERY LITTLE TREASURE HAS A STORY</span></a>
       <nav aria-label="Main navigation">
         <a href="#home">Home</a><a href="#collection">Collection</a><a href="#story">Our Story</a><a href="#contact">Contact</a>
       </nav>
@@ -155,12 +162,16 @@
       <div class="grid" id="productGrid">
         <p class="empty" style="grid-column:1/-1">Loading the collection…</p>
       </div>
+      <div class="load-more-wrap" id="loadMoreWrap" hidden>
+        <button class="load-more-btn" id="loadMoreBtn" type="button">Load More Products <span aria-hidden="true">↓</span></button>
+        <p class="load-more-count" id="loadMoreCount" aria-live="polite"></p>
+      </div>
       <p id="noResults" class="empty" hidden>No matching products found. Try another search.</p>
     </section>
 
     <section class="story" id="story">
       <div class="story-inner">
-        <div><p class="eyebrow">— Our story</p><h2>Tradition in Every Turn</h2><p>LAKKA STORIES is being created to bring traditional wooden toys and thoughtful gifts to people who value meaningful craftsmanship.</p><p>We want every product to have a story worth sharing and a place in someone's memories.</p><a class="btn" href="#collection">Explore the Collection →</a></div>
+        <div><p class="eyebrow">— Our story</p><h2>Stories Behind the Treasures</h2><p>Some little treasures bring a smile without saying a word. A thoughtful gift can become part of a special moment, a keepsake, or a memory shared with someone we love.</p><p>At LAKKA STORIES, we bring together pieces to discover, gift and cherish. Every treasure has the chance to become part of your own story.</p><a class="btn" href="#collection">Explore the Collection →</a></div>
         <aside class="note"><h3>A thoughtful choice, every time.</h3><p>We are building our collection carefully. Contact us for current product availability, details and pricing.</p><a class="btn outline" href="#contact">Get in Touch</a></aside>
       </div>
     </section>
@@ -168,7 +179,7 @@
     <section class="connect" id="contact"><div class="connect-box"><p class="eyebrow">— Let's connect</p><h2>Found Something You Love?</h2><p>Ask us about a product, its availability and pricing. We'd love to hear from you.</p><button class="btn enquiry" data-product="General catalogue enquiry">Enquire on WhatsApp →</button></div></section>
   </main>
 
-  <footer><strong>LAKKA STORIES</strong><p>Tradition in Every Turn</p><p>Thoughtful gifts. Stories worth sharing.</p><small>© 2026 LAKKA STORIES</small></footer>
+  <footer><strong>LAKKA STORIES</strong><p>Every Little Treasure Has a Story.</p><p>Thoughtful gifts. Stories worth sharing.</p><small>© 2026 LAKKA STORIES</small></footer>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -205,6 +216,8 @@
     const filters = document.querySelectorAll(".filter");
     let activeFilter = "All";
     let catalogueProducts = [];
+    const PRODUCTS_PER_BATCH = 14;
+    let visibleProductCount = PRODUCTS_PER_BATCH;
     function norm(v){ return String(v || "").trim().toLowerCase(); }
     function categoryGroup(category) {
       const c = norm(category);
@@ -216,24 +229,33 @@
     function renderCatalogue() {
       const term = norm(search.value);
       const grid = document.getElementById("productGrid");
+      const loadMoreWrap = document.getElementById("loadMoreWrap");
+      const loadMoreBtn = document.getElementById("loadMoreBtn");
+      const loadMoreCount = document.getElementById("loadMoreCount");
+
       const filtered = catalogueProducts.filter(p => {
         const matchesCategory = activeFilter === "All" || categoryGroup(p.category) === activeFilter;
         const matchesSearch = [p.name,p.product_code,p.category,p.description].some(v => norm(v).includes(term));
         return matchesCategory && matchesSearch;
       });
+
+      const visibleProducts = filtered.slice(0, visibleProductCount);
       grid.innerHTML = "";
+
       if (!filtered.length) {
         grid.innerHTML = '<p class="empty" style="grid-column:1/-1">No products found. Please try another search or check back soon.</p>';
+        loadMoreWrap.hidden = true;
         document.getElementById("noResults").hidden = true;
         return;
       }
-      filtered.forEach(p => {
+
+      visibleProducts.forEach(p => {
         const card = document.createElement("article");
         card.className = "card";
         card.tabIndex = 0;
         card.setAttribute("role", "link");
         card.setAttribute("aria-label", "View details for " + (p.name || "this product"));
-        // Keep the product details navigation available from every catalogue card.
+
         const openProductDetails = () => {
           if (p.id !== undefined && p.id !== null && String(p.id) !== "") {
             window.location.href = "product.html?id=" + encodeURIComponent(p.id);
@@ -243,6 +265,7 @@
             showToast("Product details are not available for this item yet.");
           }
         };
+
         card.addEventListener("click", (event) => {
           if (event.target.closest("button, a, input")) return;
           openProductDetails();
@@ -254,19 +277,35 @@
             openProductDetails();
           }
         });
-        const photo = document.createElement("div"); photo.className = "photo";
+
+        const photo = document.createElement("div");
+        photo.className = "photo";
         if (p.image_url) {
           const img = document.createElement("img");
-          img.src = p.image_url; img.alt = p.name || "Product photo"; img.loading = "lazy";
+          img.src = p.image_url;
+          img.alt = p.name || "Product photo";
+          img.loading = "lazy";
           img.onerror = () => { img.remove(); photo.textContent = "Photo coming soon"; };
           photo.appendChild(img);
-        } else { photo.textContent = "Photo coming soon"; }
-        const body = document.createElement("div"); body.className = "card-body";
-        const cat = document.createElement("div"); cat.className = "category"; cat.textContent = p.category || "Collection";
-        const title = document.createElement("h3"); title.textContent = p.name || "Product";
-        const price = document.createElement("div"); price.className = "price";
+        } else {
+          photo.textContent = "Photo coming soon";
+        }
+
+        const body = document.createElement("div");
+        body.className = "card-body";
+        const cat = document.createElement("div");
+        cat.className = "category";
+        const rawCategory = String(p.category || "").trim();
+        cat.textContent = (!rawCategory || /^(uncategorized|uncategorised|other)$/i.test(rawCategory)) ? "Collection" : rawCategory;
+
+        const title = document.createElement("h3");
+        title.textContent = p.name || "Product";
+
+        const price = document.createElement("div");
+        price.className = "price";
         const selling = Number(p.selling_price || 0);
         const reference = Number(p.reference_price || 0);
+
         if (selling > 0) {
           if (reference > selling) {
             const old = document.createElement("s");
@@ -283,17 +322,40 @@
           } else {
             price.textContent = "₹" + selling.toLocaleString("en-IN");
           }
-        } else { price.textContent = "Price on Request"; }
+        } else {
+          price.textContent = "Price on Request";
+        }
+
         const viewHint = document.createElement("div");
         viewHint.className = "view-details-hint";
-        viewHint.textContent = "View Details →";
-        body.append(cat,title,price,viewHint); card.append(photo,body); grid.appendChild(card);
+        viewHint.textContent = "View Details";
+        body.append(cat, title, price, viewHint);
+        card.append(photo, body);
+        grid.appendChild(card);
       });
+
+      const remaining = filtered.length - visibleProducts.length;
+      loadMoreWrap.hidden = remaining <= 0;
+      if (remaining > 0) {
+        loadMoreBtn.innerHTML = 'Load More Products <span aria-hidden="true">↓</span>';
+        loadMoreCount.textContent = `Showing ${visibleProducts.length} of ${filtered.length} products`;
+      } else {
+        loadMoreCount.textContent = "";
+      }
       document.getElementById("noResults").hidden = true;
     }
-    search.addEventListener("input", renderCatalogue);
+
+    search.addEventListener("input", () => {
+      visibleProductCount = PRODUCTS_PER_BATCH;
+      renderCatalogue();
+    });
+    document.getElementById("loadMoreBtn").addEventListener("click", () => {
+      visibleProductCount += PRODUCTS_PER_BATCH;
+      renderCatalogue();
+    });
     filters.forEach(button => button.addEventListener("click", () => {
       activeFilter = button.dataset.filter;
+      visibleProductCount = PRODUCTS_PER_BATCH;
       filters.forEach(item => item.classList.toggle("active", item === button));
       renderCatalogue();
     }));
