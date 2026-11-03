@@ -1,0 +1,9 @@
+LAKKA STORIES — Story Section Update
+
+The homepage story section now uses a newly generated Etikoppaka village/artisan illustration as the right-hand visual. The image has been cropped to remove the baked-in headline and button so the website keeps accessible, selectable HTML text and a working Explore the Collection link on the left.
+
+The existing warm cream, maroon and gold palette is retained. The story section remains a responsive two-column composition on desktop and stacks on smaller screens. The crop uses a natural wide aspect ratio to reduce unnecessary height.
+
+No Supabase credentials, product catalogue logic, cart logic, checkout/order-request function, or manager dashboard code was intentionally changed in this update.
+
+After extracting, keep the images/ folder structure intact. Open index.html with Live Server and check desktop and mobile widths. This package has not been deployed to production.

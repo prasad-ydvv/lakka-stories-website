@@ -1,0 +1,24 @@
+LAKKA STORIES — FINAL DESKTOP & MOBILE POLISH
+
+This package builds on the previous complete website package and preserves
+the catalogue, product page, cart, checkout, cart.js, Supabase order request
+integration, manager dashboard, hero banner and product photos.
+
+Final refinements:
+- Desktop Etikoppaka craft heading and subtitle are centered together.
+- Craft feature image is slightly larger and better balanced against the
+  four information columns.
+- Mobile hero image framing is adjusted to show more of the photograph.
+- Mobile craft section has improved spacing, centered copy and a larger
+  but controlled feature image.
+- Our Story illustration spacing is tuned for phone screens.
+- Existing catalogue layout and order flow are retained.
+
+Local verification required:
+1. Back up your current website folder.
+2. Extract this ZIP into a new folder.
+3. Open lakka-stories-website-main in VS Code and run Live Server.
+4. Check desktop and mobile widths, especially the hero, craft panel,
+   catalogue and Our Story.
+5. Test product detail, add-to-cart, cart, checkout and manager workflow
+   before deploying.

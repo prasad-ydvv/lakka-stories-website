@@ -1,0 +1,6 @@
+Our Story section design update:
+- Premium warm cream and muted gold panel matching the Etikoppaka craft banner.
+- New illustrated village artisan artwork included locally in images/.
+- Responsive two-column desktop layout and stacked mobile layout.
+- Story copy, collection link and existing site functionality retained.
+- Artwork is decorative brand illustration, not a documentary photograph.

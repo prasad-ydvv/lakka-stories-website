@@ -1,0 +1,17 @@
+LAKKA STORIES — FINAL VISUAL REFINEMENT V2
+
+Changes made after reviewing the supplied screenshots:
+- Kept the actual hero-banner.jpg and existing product catalogue images.
+- Reduced hero heading size at tablet widths and allowed safe wrapping on phones.
+- Removed the tiny, visually mismatched thumbnails from the three interest cards.
+- Removed the duplicated small fruit-set image from the Etikoppaka craft section.
+- Replaced the craft image with four simple decorative symbols and a balanced facts layout.
+- Kept the approved three brand promises: Etikoppaka Craft, Thoughtful Gifts,
+  and Made to Be Treasured.
+- Desktop: 5 product columns on wide screens, 4 at medium desktop/tablet widths.
+- Mobile: 2 product columns, stacked brand promises and stacked interest cards.
+- Preserved product.html, cart.html, checkout.html, cart.js, Supabase function,
+  manager dashboard, setup files, and all original image assets.
+
+Test using VS Code Live Server at wide desktop, tablet (around 900px), and
+phone (around 390px) widths. This package has not been deployed.

@@ -1,0 +1,57 @@
+LAKKA STORIES — FINAL WEBSITE REVIEW PACKAGE
+
+This package preserves the existing website structure and integrations.
+
+Implemented in this review:
+- Homepage catalogue now fetches published rows from public_catalogue in explicit 500-row pages,
+  so a server-side response limit is less likely to hide products.
+- Catalogue rows are deduplicated by product id while preserving newest-first ordering.
+- Desktop catalogue remains five columns where screen width allows; tablet uses the existing
+  four-column breakpoint; mobile uses two columns, including very narrow phones.
+- Reduced collection spacing and slightly tightened product image/card proportions.
+- Gift-interest hover/focus now retains a light background and readable maroon text instead
+  of switching to white text on a dark tile.
+- Product-card hover and keyboard focus use a dark maroon action state with readable text.
+- Added visible keyboard focus treatment and reduced-motion support.
+
+Preserved:
+- Existing hero-banner.jpg and homepage artwork.
+- Existing product photographs and approved Etikoppaka craft/story artwork.
+- Existing product detail, cart, checkout, cart.js, manager dashboard, SQL/setup notes,
+  Supabase project URL and publishable key, and submit-order-request Edge Function.
+- Existing Price on Request behaviour for products with no confirmed selling price.
+
+Checks completed in this build:
+- JavaScript syntax checks passed for inline scripts in homepage, product, cart, checkout,
+  and manager dashboard.
+- Local image/page references were checked.
+- Source inspection confirms homepage reads from public_catalogue and the cart/checkout
+  preserve Price on Request handling rather than displaying unpriced items as ₹0.
+
+Important limitations:
+- This build environment cannot authenticate to your live Supabase project or submit a real
+  order to your production Edge Function. Therefore live catalogue row count, RLS visibility,
+  manager login, real order insertion, and WhatsApp handoff must still be verified in your
+  own browser with your project credentials before production launch.
+- The ZIP is a tested code package, not a deployment. Do not delete your existing production
+  site or database. Back up your current folder before replacing files.
+
+Local test:
+1. Extract the ZIP and open the lakka-stories-website-main folder in VS Code.
+2. Run index.html with Live Server.
+3. Check desktop at 1440px, tablet at 900px, mobile at 390px and narrow mobile at 360px.
+4. Confirm all expected published products appear. If the catalogue still shows only one,
+   check the public_catalogue view, published status and SELECT/RLS policy in Supabase.
+5. Test product detail, Add to Cart, quantity changes, checkout validation and a clearly
+   identified test order. Check the manager dashboard and WhatsApp draft.
+6. Only deploy after the live Supabase and order-flow checks pass.
+
+Additional visual correction:
+- Removed oversized white padded frame around the Etikoppaka craft banner.
+- The desktop banner now sits on a warm cream full-width section with compact vertical spacing.
+- Mobile continues to use the responsive live-text craft panel.
+
+Visual correction (follow-up):
+- Cropped the original Etikoppaka banner asset to remove its built-in white canvas margins while preserving the artwork.
+- Matched the banner section background to the site's warm cream/gold palette (#fbf3e7 to #f6e8d2).
+- Removed forced 3:1 sizing so the cropped artwork keeps its natural proportions without artificial whitespace.

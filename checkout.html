@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#572329"><title>Checkout Request | LAKKA STORIES</title>
+<style>
+:root{--maroon:#572329;--cream:#fffdf8;--sand:#f3e7d4;--gold:#bd8b45;--ink:#422b2a;--muted:#786b62;--line:#eadcc9}*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font:15px/1.6 Arial,sans-serif}.top{background:var(--maroon);color:white;text-align:center;padding:9px;letter-spacing:.15em;font-size:11px}.wrap{max-width:760px;margin:32px auto;padding:0 18px 55px}h1,h2{font-family:Georgia,serif;color:var(--maroon);font-weight:normal}h1{font-size:34px}.panel{background:#fffaf2;border:1px solid var(--line);padding:22px;border-radius:6px;margin:18px 0}.grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}.field{display:flex;flex-direction:column;gap:5px}.full{grid-column:1/-1}label{font-size:13px;font-weight:bold}input,textarea,select{font:inherit;padding:11px;border:1px solid #d8c9b6;border-radius:4px;background:white}textarea{min-height:75px}.btn{display:inline-block;padding:12px 18px;background:var(--maroon);color:white;border:0;border-radius:4px;font-weight:bold;cursor:pointer}.muted{font-size:12px;color:var(--muted)}.notice{background:#f5ecd9;padding:12px;border-left:3px solid var(--gold);font-size:13px}.checkout-item{display:flex;justify-content:space-between;gap:16px;padding:9px 0;border-bottom:1px solid var(--line)}.checkout-item:last-child{border-bottom:0}.checkout-item strong{color:var(--maroon)}.checkout-summary{display:flex;justify-content:space-between;gap:12px;padding-top:12px;margin-top:8px;border-top:1px solid var(--line);font-weight:bold;color:var(--maroon)}.status{padding:12px;background:#f5ecd9;white-space:pre-wrap;margin-top:12px}.field-error{color:#a1262f;font-size:12px}.field input:focus,.field textarea:focus,.field select:focus{outline:2px solid #bd8b4566;outline-offset:1px}.hidden{display:none}@media(max-width:600px){.grid{grid-template-columns:1fr}.full{grid-column:auto}}
+
+.steps{display:flex;gap:7px;flex-wrap:wrap;margin:0 0 16px;color:var(--muted);font-size:11px}
+.steps span{padding:6px 10px;border:1px solid var(--line);border-radius:20px}
+.steps .active{background:var(--maroon);color:#fff;border-color:var(--maroon)}
+
+</style></head><body><div class="top">LAKKA STORIES · EVERY LITTLE TREASURE HAS A STORY</div><main class="wrap"><div class="steps" aria-label="Order progress"><span>1. Explore</span><span>2. Your cart</span><span class="active">3. Delivery details</span></div><a href="cart.html">← Back to your cart</a><h1>Delivery Details</h1><p class="muted">Enter where you would like us to deliver. Sending this request does not confirm an order or collect payment.</p>
+<div class="panel"><h2>Review your items</h2><div id="items"></div><p class="notice">The server checks current product records. Prices and stock are not taken from your browser cart. If a price or availability is unconfirmed, our team will contact you before accepting the order.</p></div>
+<form id="checkout" class="panel"><h2>Where should we deliver?</h2><div class="grid">
+<div class="field"><label for="name">Full name *</label><input id="name" maxlength="120" required autocomplete="name"></div>
+<div class="field"><label for="phone">Indian mobile number *</label><input id="phone" required inputmode="tel" autocomplete="tel" maxlength="14" placeholder="10-digit mobile number"><span class="muted">Enter a 10-digit Indian mobile number, optionally with +91.</span></div>
+<div class="field"><label for="email">Email (optional)</label><input id="email" type="email" maxlength="180" autocomplete="email"></div>
+<div class="field"><label for="pin">PIN code *</label><input id="pin" required inputmode="numeric" pattern="[0-9]{6}" maxlength="6" autocomplete="postal-code" placeholder="6-digit PIN"><span id="pinStatus" class="muted" aria-live="polite">Enter PIN to check the postal area.</span></div>
+<div class="field"><label for="district">District (from PIN lookup)</label><input id="district" readonly placeholder="Auto-filled after PIN check"></div>
+<div class="field"><label for="state">State (from PIN lookup) *</label><input id="state" required maxlength="100" autocomplete="address-level1" readonly placeholder="Auto-filled after PIN check"></div>
+<div class="field"><label for="postOffice">Post office / locality *</label><select id="postOffice" required disabled><option value="">Select after PIN lookup</option></select></div>
+<div class="field"><label for="city">City / town *</label><input id="city" required maxlength="100" autocomplete="address-level2" placeholder="Enter your town or city"></div>
+<div class="field full"><label for="address">House number / building / street / area *</label><textarea id="address" required minlength="10" maxlength="500" autocomplete="street-address" placeholder="House or flat number, building, street, area and nearby landmark"></textarea><span class="muted">PIN lookup cannot verify your exact house address. Enter the complete delivery address.</span></div>
+<div class="field full"><label for="notes">Delivery instructions (optional)</label><textarea id="notes" maxlength="300"></textarea></div>
+</div><p><label><input type="checkbox" id="consent" required> I agree that LAKKA STORIES may use these details to respond to this order request and arrange delivery if accepted.</label></p>
+<button class="btn" type="submit" id="submit">Send order request</button><div id="status" class="status hidden" role="status"></div></form>
+<p class="muted">Do not enter OTPs, UPI PINs, card details or passwords. This form does not collect payment.</p></main>
+<script src="cart.js"></script><script>
+const PROJECT_URL='https://gsesangwrryzbpudusfl.supabase.co';
+const PUBLISHABLE_KEY='sb_publishable_2zVjR7EYlB4kSX-CtQr71w_xXZ35Ejz';
+const FUNCTION_NAME='submit-order-request';
+const items=LakkaCart.read(), box=document.getElementById('items');
+if(!items.length){
+  box.textContent='Your cart is empty.';
+  document.getElementById('submit').disabled=true;
+}else{
+  let indicativeSubtotal=0, hasPriceOnRequest=false;
+  items.forEach(x=>{
+    const price=Number(x.price)||0, qty=Math.max(1,Number(x.qty)||1);
+    const row=document.createElement('div');row.className='checkout-item';
+    const left=document.createElement('div');
+    const name=document.createElement('strong');name.textContent=x.name+' × '+qty;left.append(name);
+    const detail=document.createElement('div');detail.className='muted';
+    detail.textContent=price>0?LakkaCart.money(price)+' each':'Price on Request';
+    left.append(detail);
+    const amount=document.createElement('strong');
+    if(price>0){const line=price*qty;indicativeSubtotal+=line;amount.textContent=LakkaCart.money(line);}
+    else{hasPriceOnRequest=true;amount.textContent='Price on Request';}
+    row.append(left,amount);box.append(row);
+  });
+  const summary=document.createElement('div');summary.className='checkout-summary';
+  const label=document.createElement('span');label.textContent=hasPriceOnRequest?(indicativeSubtotal>0?'Known subtotal':'Product subtotal'):'Indicative product subtotal';
+  const value=document.createElement('span');value.textContent=hasPriceOnRequest?(indicativeSubtotal>0?LakkaCart.money(indicativeSubtotal)+' + Price on Request':'To be confirmed'):LakkaCart.money(indicativeSubtotal);
+  summary.append(label,value);box.append(summary);
+  const note=document.createElement('p');note.className='muted';
+  note.textContent=hasPriceOnRequest
+    ? 'No zero-price products are being offered for free. LAKKA STORIES will confirm any requested prices, delivery charges and the final COD amount before accepting your request.'
+    : 'This is an indicative subtotal based on the price shown when items were added. The server checks current product prices and availability when you submit.';
+  box.append(note);
+}
+const form=document.getElementById('checkout');
+const pinInput=document.getElementById('pin');
+const pinStatus=document.getElementById('pinStatus');
+const districtInput=document.getElementById('district');
+const stateInput=document.getElementById('state');
+const postOfficeSelect=document.getElementById('postOffice');
+const cityInput=document.getElementById('city');
+let verifiedPin='';
+let pinLookupTimer=null;
+
+function cleanPhone(value){
+  let digits=String(value||'').replace(/\D/g,'');
+  if(digits.startsWith('91') && digits.length===12) digits=digits.slice(2);
+  if(digits.startsWith('0') && digits.length===11) digits=digits.slice(1);
+  return digits;
+}
+function setPinMessage(message, isError=false){
+  pinStatus.textContent=message;
+  pinStatus.style.color=isError?'#a1262f':'';
+}
+function resetPinDetails(){
+  verifiedPin='';
+  districtInput.value='';
+  stateInput.value='';
+  postOfficeSelect.innerHTML='<option value="">Select after PIN lookup</option>';
+  postOfficeSelect.disabled=true;
+}
+async function lookupPin(pin){
+  resetPinDetails();
+  if(!/^[0-9]{6}$/.test(pin)){
+    setPinMessage(pin.length ? 'Enter a valid 6-digit PIN code.' : 'Enter PIN to check the postal area.', !!pin);
+    return;
+  }
+  setPinMessage('Checking PIN code…');
+  try{
+    // Third-party postal directory lookup. Only the PIN is sent; no customer details are shared.
+    const response=await fetch('https://api.postalpincode.in/pincode/'+encodeURIComponent(pin),{headers:{'Accept':'application/json'}});
+    if(!response.ok) throw new Error('PIN lookup service is temporarily unavailable.');
+    const result=await response.json();
+    const record=Array.isArray(result)?result[0]:null;
+    if(!record || record.Status!=='Success' || !Array.isArray(record.PostOffice) || !record.PostOffice.length){
+      setPinMessage('This PIN code was not found. Please check the six digits.',true);
+      return;
+    }
+    const offices=record.PostOffice;
+    const districts=[...new Set(offices.map(x=>x.District).filter(Boolean))];
+    const states=[...new Set(offices.map(x=>x.State).filter(Boolean))];
+    if(states.length!==1 || districts.length!==1){
+      setPinMessage('This PIN has multiple district/state results. Please contact us on WhatsApp to confirm delivery details.',true);
+      return;
+    }
+    districtInput.value=districts[0];
+    stateInput.value=states[0];
+    postOfficeSelect.innerHTML='<option value="">Choose your post office / locality</option>';
+    offices.forEach(office=>{
+      const option=document.createElement('option');
+      option.value=office.Name;
+      option.textContent=office.Name+' ('+(office.BranchType||'Post Office')+')';
+      postOfficeSelect.appendChild(option);
+    });
+    postOfficeSelect.disabled=false;
+    verifiedPin=pin;
+    setPinMessage('PIN found. Select your post office/locality. Enter your city and full street address below.');
+  }catch(error){
+    resetPinDetails();
+    setPinMessage('Could not verify this PIN right now. Please try again later or contact us on WhatsApp. ('+error.message+')',true);
+  }
+}
+pinInput.addEventListener('input',()=>{
+  pinInput.value=pinInput.value.replace(/\D/g,'').slice(0,6);
+  resetPinDetails();
+  clearTimeout(pinLookupTimer);
+  const pin=pinInput.value;
+  if(pin.length===6) pinLookupTimer=setTimeout(()=>lookupPin(pin),350);
+  else setPinMessage(pin.length?'Enter all 6 digits.':'Enter PIN to check the postal area.',false);
+});
+pinInput.addEventListener('blur',()=>{
+  if(pinInput.value.length===6 && verifiedPin!==pinInput.value) lookupPin(pinInput.value);
+});
+document.getElementById('phone').addEventListener('blur',()=>{
+  const field=document.getElementById('phone');
+  const phone=cleanPhone(field.value);
+  if(field.value.trim() && !/^[6-9][0-9]{9}$/.test(phone)){
+    field.setCustomValidity('Enter a valid 10-digit Indian mobile number starting with 6, 7, 8 or 9.');
+  }else field.setCustomValidity('');
+});
+document.getElementById('name').addEventListener('input',e=>{
+  e.target.setCustomValidity(/^[\p{L}][\p{L}\p{M} .'-]{1,118}$/u.test(e.target.value.trim())?'':'Enter your full name using letters, spaces, apostrophe, dot or hyphen.');
+});
+document.getElementById('address').addEventListener('input',e=>{
+  e.target.setCustomValidity(e.target.value.trim().length>=10?'':'Please enter at least 10 characters for your full delivery address.');
+});
+form.addEventListener('submit',async e=>{
+ e.preventDefault();
+ if(!items.length)return;
+ const btn=document.getElementById('submit'),st=document.getElementById('status');
+ const name=document.getElementById('name').value.trim();
+ const phone=cleanPhone(document.getElementById('phone').value);
+ const pin=pinInput.value.trim();
+ const address=document.getElementById('address').value.trim();
+ const city=cityInput.value.trim();
+ const postOffice=postOfficeSelect.value;
+ if(!/^[\p{L}][\p{L}\p{M} .'-]{1,118}$/u.test(name)){
+   document.getElementById('name').setCustomValidity('Enter a valid full name.');form.reportValidity();return;
+ }
+ if(!/^[6-9][0-9]{9}$/.test(phone)){
+   document.getElementById('phone').setCustomValidity('Enter a valid 10-digit Indian mobile number starting with 6, 7, 8 or 9.');form.reportValidity();return;
+ }
+ document.getElementById('phone').setCustomValidity('');
+ if(!/^[0-9]{6}$/.test(pin) || verifiedPin!==pin || !districtInput.value || !stateInput.value || !postOffice){
+   setPinMessage('Please complete a successful PIN lookup and select your post office/locality.',true);
+   pinInput.focus();return;
+ }
+ if(address.length<10 || city.length<2){
+   form.reportValidity();return;
+ }
+ btn.disabled=true;st.classList.remove('hidden');st.textContent='Submitting your request securely…';
+ try{
+  if(PUBLISHABLE_KEY.startsWith('PASTE_'))throw new Error('Checkout setup is incomplete. Please contact LAKKA STORIES through WhatsApp.');
+  const payload={
+    customer_name:name,
+    phone:phone,
+    email:document.getElementById('email').value.trim()||null,
+    pin_code:pin,
+    address:address+'; Post office: '+postOffice+'; District: '+districtInput.value,
+    city:city,
+    state:stateInput.value,
+    notes:document.getElementById('notes').value.trim()||null,
+    items:items.map(x=>({product_id:x.id,quantity:x.qty})),
+    payment_method:'cod'
+  };
+  const res=await fetch(PROJECT_URL+'/functions/v1/'+FUNCTION_NAME,{
+    method:'POST',
+    headers:{'Content-Type':'application/json','apikey':PUBLISHABLE_KEY,'Authorization':'Bearer '+PUBLISHABLE_KEY},
+    body:JSON.stringify(payload)
+  });
+  const data=await res.json();
+  if(!res.ok)throw new Error(data.error||'Could not submit request.');
+  localStorage.removeItem('lakka_stories_cart_v1');
+  LakkaCart.updateCount();
+  form.classList.add('hidden');
+  box.textContent='Request reference: '+data.order_reference;
+  st.textContent='Thank you! Your request has been received. It is not yet a confirmed order. LAKKA STORIES will contact you after checking availability, final price and delivery.';
+ }catch(err){
+  st.textContent=err.message;
+  btn.disabled=false;
+ }
+});
+</script></body></html>

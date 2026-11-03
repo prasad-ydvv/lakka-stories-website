@@ -1,0 +1,4 @@
+The Art of Etikoppaka illustrated banner has been integrated into index.html.
+Desktop: displays the new wide illustrated banner image.
+Mobile: uses the existing responsive HTML craft content so the lettering remains readable.
+The original craft feature image and product catalogue assets are retained.

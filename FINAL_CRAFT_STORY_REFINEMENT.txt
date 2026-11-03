@@ -1,0 +1,23 @@
+LAKKA STORIES — FINAL CRAFT & STORY SECTION REFINEMENT
+
+This package is based on the previously supplied complete website ZIP.
+It retains the catalogue, product page, cart, checkout, cart.js, Supabase
+configuration, order-request Edge Function and manager files.
+
+Latest visual refinements:
+- Etikoppaka craft section: centered heading and subtitle, four evenly sized
+  information columns, feature image aligned on the right, warm rounded panel.
+- Our Story section: larger readable text on the left and village illustration
+  aligned on the right with balanced whitespace.
+- Mobile: craft details reflow into two columns and the image moves below;
+  Our Story becomes a clean vertical layout.
+- Desktop/tablet layouts adapt without horizontal overflow.
+- Existing product and hero images are retained.
+
+Install:
+1. Back up the currently working website folder.
+2. Extract this ZIP into a new folder.
+3. Open lakka-stories-website-main in VS Code.
+4. Start Live Server and inspect desktop and mobile widths.
+5. Test catalogue, product detail, cart, checkout and manager workflow.
+Do not deploy until browser checks are complete.
