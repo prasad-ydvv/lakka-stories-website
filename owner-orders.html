@@ -1,10 +1,165 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>LAKKA STORIES | Orders & Enquiries</title>
 <style>
-:root{--m:#6b2638;--bg:#fbf7ef;--line:#e8dfd3;--muted:#756d66}*{box-sizing:border-box}body{margin:0;background:var(--bg);font:14px system-ui;color:#292522}header{background:var(--m);color:white;padding:18px}header small{color:#f1d9ad;letter-spacing:2px}main{max-width:1000px;margin:auto;padding:14px}.card{background:white;border:1px solid var(--line);border-radius:13px;padding:15px;margin-bottom:12px}h2{font-size:16px;margin:0 0 12px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.full{grid-column:1/-1}label{display:block;font-size:12px;color:var(--muted);margin-bottom:4px}input,select,textarea{width:100%;padding:10px;border:1px solid #d9d0c5;border-radius:8px;font:inherit}textarea{min-height:65px}button{border:0;border-radius:8px;padding:10px 13px;cursor:pointer;font-weight:700}.primary{background:var(--m);color:white}.soft{background:#f1ece5}.danger{background:#faecec;color:#a52d35}.tabs{display:flex;gap:7px;margin:12px 0;overflow:auto}.tab{background:#eee8df;white-space:nowrap}.tab.active{background:var(--m);color:white}.hidden{display:none!important}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.stat{background:#f7f3ed;padding:10px;border-radius:8px}.stat small{display:block;color:var(--muted)}.stat b{font-size:19px}.item{padding:12px 0;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:10px}.item small{display:block;color:var(--muted);margin-top:3px}.item button{padding:7px;font-size:11px}.actions{display:flex;gap:8px;margin-top:12px}.actions button{flex:1}.msg{background:#f8f1dd;padding:9px;margin:9px 0;border-radius:8px}.muted{color:var(--muted);font-size:12px}.report-actions{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}.report-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.report-stat{background:#f7f3ed;padding:12px;border-radius:8px}.report-stat small{display:block;color:var(--muted)}.report-stat b{font-size:18px}.dash-alert{padding:10px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:10px}.dash-alert small{display:block;color:var(--muted);margin-top:3px}.dash-month{display:grid;grid-template-columns:110px 1fr 90px;gap:8px;align-items:center;padding:7px 0;border-top:1px solid var(--line)}.dash-track{height:10px;background:#f1ece5;border-radius:20px;overflow:hidden}.dash-fill{height:100%;background:var(--m);border-radius:20px}@media(max-width:600px){.dash-month{grid-template-columns:80px 1fr 75px}}.filter-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}@media(max-width:600px){.report-grid{grid-template-columns:1fr 1fr}.filter-row{grid-template-columns:1fr}}@media(max-width:600px){.grid{grid-template-columns:1fr}.full{grid-column:auto}.stats{grid-template-columns:1fr 1fr}.item{display:block}.item button{margin:8px 4px 0 0}}
+:root{
+ --brand:#6b2638;--brand-dark:#501b2b;--brand-soft:#f6e9ec;
+ --bg:#f7f3ed;--surface:#fff;--surface-soft:#faf7f2;
+ --line:#e8dfd5;--text:#292522;--muted:#776e67;
+ --gold:#d7b77a;--success:#28734b;--warning:#9a641b;
+ --shadow:0 8px 24px rgba(64,38,28,.055);--radius:16px
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);font:14px/1.5 Inter,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--text)}
+header{background:linear-gradient(120deg,var(--brand-dark),var(--brand));color:#fff;padding:22px max(20px,calc((100vw - 1180px)/2));border-bottom:4px solid var(--gold)}
+header small{color:#f4dfb7;letter-spacing:2.2px;font-size:11px;font-weight:700}
+header h1{font-size:clamp(23px,3vw,31px);line-height:1.2;margin:12px 0 6px}
+header p{margin:0;color:#f7e9e8;font-size:14px}
+main{max-width:1220px;margin:0 auto;padding:20px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px;margin-bottom:16px;box-shadow:var(--shadow)}
+h2{font-size:17px;line-height:1.3;margin:0 0 12px}
+h3{font-size:14px;margin:18px 0 10px}
+p{line-height:1.55}
+.muted{color:var(--muted);font-size:12px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.full{grid-column:1/-1}
+label{display:block;font-size:12px;color:var(--muted);font-weight:650;margin:0 0 5px}
+input,select,textarea{width:100%;padding:11px 12px;border:1px solid #ded4c9;border-radius:10px;background:#fff;color:var(--text);font:inherit;min-height:42px;transition:border-color .15s,box-shadow .15s}
+textarea{min-height:88px}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--brand);box-shadow:0 0 0 3px rgba(107,38,56,.1)}
+button{border:0;border-radius:10px;padding:10px 14px;cursor:pointer;font:inherit;font-weight:700;transition:transform .12s,background .12s,box-shadow .12s}
+button:hover{transform:translateY(-1px)}
+button:focus-visible{outline:3px solid rgba(215,183,122,.8);outline-offset:2px}
+.primary{background:var(--brand);color:#fff}
+.primary:hover{background:var(--brand-dark)}
+.soft{background:#f1ece5;color:#3c342f}
+.soft:hover{background:#e9e0d6}
+.danger{background:#faecec;color:#a52d35}
+.hidden{display:none!important}
+.msg{background:#fbf2dc;border:1px solid #f0dfb8;color:#654a1d;padding:11px 13px;margin:10px 0;border-radius:10px}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.stat,.report-stat{background:var(--surface-soft);border:1px solid #f0e9e1;padding:14px;border-radius:12px;min-width:0}
+.stat small,.report-stat small{display:block;color:var(--muted);font-size:12px;margin-bottom:5px}
+.stat b,.report-stat b{font-size:21px;letter-spacing:-.3px}
+#app>section:first-of-type{position:relative}
+#app>section:first-of-type>div:first-child{align-items:center}
+#logout{white-space:nowrap}
+.tabs.redesigned-nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:16px 0 20px;overflow:visible}
+.nav-group{background:rgba(255,255,255,.75);border:1px solid var(--line);border-radius:14px;padding:12px 13px;min-width:0}
+.nav-group h3{margin:0 0 9px;color:var(--brand);font-size:11px;text-transform:uppercase;letter-spacing:1.15px}
+.nav-links{display:flex;flex-wrap:wrap;gap:7px}
+.tab{background:#f1ece5;color:#51463f;white-space:normal;text-align:left;padding:9px 12px;font-size:12px;border:1px solid transparent}
+.tab:hover{background:var(--brand-soft);color:var(--brand)}
+.tab.active{background:var(--brand);color:#fff;box-shadow:0 3px 8px rgba(107,38,56,.18)}
+.report-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.report-actions{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+.report-stat b{display:block}
+.item{padding:13px 0;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:12px}
+.item small{display:block;color:var(--muted);margin-top:4px}
+.item button{padding:8px 10px;font-size:12px}
+.actions{display:flex;gap:9px;margin-top:13px;flex-wrap:wrap}
+.actions button{flex:1;min-width:120px}
+.filter-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}
+.dash-alert{padding:12px 0;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:10px}
+.dash-alert small{display:block;color:var(--muted);margin-top:3px}
+.dash-month{display:grid;grid-template-columns:110px 1fr 90px;gap:10px;align-items:center;padding:9px 0;border-top:1px solid var(--line)}
+.dash-track{height:10px;background:#f0ebe4;border-radius:20px;overflow:hidden}
+.dash-fill{height:100%;background:linear-gradient(90deg,var(--brand),#a95d6e);border-radius:20px}
+.report-grid+.muted{margin-top:8px}
+#dashboard h2:not(:first-child){margin-top:22px;padding-bottom:7px;border-bottom:1px solid #f0e9e1}
+#dashboard .report-stat{min-height:72px}
+#dashboard .report-stat b{font-size:20px}
+#dashboard #dashAlerts{padding:4px 0}
+@media(max-width:760px){
+ main{padding:13px}
+ .card{padding:15px;border-radius:13px}
+ .tabs.redesigned-nav{grid-template-columns:1fr}
+ .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .report-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:520px){
+ header{padding:18px 15px}
+ .grid,.filter-row{grid-template-columns:1fr}
+ .full{grid-column:auto}
+ .stats,.report-grid{grid-template-columns:1fr 1fr;gap:8px}
+ .stat,.report-stat{padding:11px}
+ .stat b,.report-stat b{font-size:18px}
+ .item{display:block}
+ .item button{margin:8px 4px 0 0}
+ .dash-month{grid-template-columns:65px 1fr 60px;gap:6px;font-size:11px}
+ .actions button{min-width:100%}
+}
+
+/* V27.1 — left sidebar navigation */
+#app{display:grid;grid-template-columns:258px minmax(0,1fr);column-gap:18px;row-gap:0;align-items:start}
+#app>section:first-child{grid-column:1/-1;grid-row:1;margin-bottom:16px}
+#app>.redesigned-nav{grid-column:1;grid-row:2;position:sticky;top:14px;align-self:start;display:flex;flex-direction:column;gap:9px;max-height:calc(100vh - 28px);overflow-y:auto;overscroll-behavior:contain;padding:10px;background:#f0e9e1;border:1px solid var(--line);border-radius:15px;scrollbar-width:thin}
+#app>.redesigned-nav .nav-group{background:#fff;border-radius:11px;padding:10px;border:1px solid #eee5dc}
+#app>.redesigned-nav .nav-group h3{font-size:10px;letter-spacing:1px;margin:0 0 7px;padding:0 3px}
+#app>.redesigned-nav .nav-links{display:flex;flex-direction:column;gap:4px}
+#app>.redesigned-nav .tab{width:100%;display:flex;align-items:center;gap:9px;text-align:left;padding:9px 10px;font-size:12px;border-radius:8px;background:transparent;color:#51463f}
+#app>.redesigned-nav .tab:before{content:"";width:6px;height:6px;border-radius:50%;background:#cbbdaf;flex:0 0 6px}
+#app>.redesigned-nav .tab:hover{background:var(--brand-soft);color:var(--brand)}
+#app>.redesigned-nav .tab.active{background:var(--brand);color:#fff;box-shadow:0 2px 7px rgba(107,38,56,.15)}
+#app>.redesigned-nav .tab.active:before{background:var(--gold)}
+#app>.redesigned-nav~section{grid-column:2;grid-row:2;min-width:0;width:100%}
+#app>.redesigned-nav~section.hidden{display:none!important}
+#app>.redesigned-nav~section:not(.hidden){grid-column:2;grid-row:2}
+@media(max-width:820px){
+ #app{grid-template-columns:210px minmax(0,1fr);column-gap:12px}
+ #app>.redesigned-nav{padding:7px}
+ #app>.redesigned-nav .nav-group{padding:8px}
+ #app>.redesigned-nav .tab{font-size:11px;padding:8px}
+}
+@media(max-width:650px){
+ #app{display:flex;flex-direction:column;gap:10px}
+ #app>section:first-child{width:100%;margin-bottom:0}
+ #app>.redesigned-nav{position:relative;top:auto;width:100%;max-height:none;overflow:visible;display:grid;grid-template-columns:1fr 1fr;gap:7px}
+ #app>.redesigned-nav .nav-group{min-width:0}
+ #app>.redesigned-nav .nav-links{gap:3px}
+ #app>.redesigned-nav .tab{font-size:10px;padding:7px}
+ #app>.redesigned-nav~section{width:100%}
+}
+@media(max-width:390px){
+ #app>.redesigned-nav{grid-template-columns:1fr}
+}
+
 </style></head><body><header><small>LAKKA STORIES · PRIVATE OWNER AREA</small><h1>Orders & Enquiries</h1><p>Record customer enquiries and manage confirmed orders.</p></header><main>
 <section class="card" id="login"><h2>Owner sign in</h2><div id="loginMsg" class="msg hidden"></div><label>Email</label><input id="email" type="email"><br><br><label>Password</label><input id="password" type="password"><div class="actions"><button class="primary" id="loginBtn">Sign in</button></div></section>
 <div id="app" class="hidden"><section class="card"><div style="display:flex;justify-content:space-between"><h2>Business overview</h2><button class="soft" id="logout">Sign out</button></div><div class="stats"><div class="stat"><small>Open enquiries</small><b id="enqCount">0</b></div><div class="stat"><small>Active orders</small><b id="ordCount">0</b></div><div class="stat"><small>Received</small><b id="paid">₹0</b></div><div class="stat"><small>Pending</small><b id="pending">₹0</b></div></div></section>
-<nav class="tabs"><button class="tab active" data-pane="dashboard">Dashboard</button><button class="tab" data-pane="enquiries">Enquiries</button><button class="tab" data-pane="orders">Orders</button><button class="tab" data-pane="form">Add enquiry / order</button><button class="tab" data-pane="reports">Reports</button><button class="tab" data-pane="inventory">Inventory</button><button class="tab" data-pane="suppliers">Suppliers & Purchases</button><button class="tab" data-pane="costs">Product Costs</button></nav>
+<nav class="tabs redesigned-nav" aria-label="Owner dashboard sections">
+<section class="nav-group"><h3>Daily work</h3><div class="nav-links">
+<button class="tab active" data-pane="dashboard" type="button">Dashboard</button>
+<button class="tab" data-pane="enquiries" type="button">Enquiries</button>
+<button class="tab" data-pane="orders" type="button">Orders</button>
+<button class="tab" data-pane="form" type="button">Add enquiry / order</button>
+<button class="tab" data-pane="reports" type="button">Reports</button>
+</div></section>
+<section class="nav-group"><h3>Products & supply</h3><div class="nav-links">
+<button class="tab" data-pane="inventory" type="button">Inventory</button>
+<button class="tab" data-pane="suppliers" type="button">Suppliers & Purchases</button>
+<button class="tab" data-pane="costs" type="button">Product Costs</button>
+<button class="tab" data-pane="sourcing" type="button">Product Sourcing</button>
+</div></section>
+<section class="nav-group"><h3>Orders & delivery</h3><div class="nav-links">
+<button class="tab" data-pane="shipping" type="button">Shipping & Returns</button>
+<button class="tab" data-pane="notifications" type="button">Customer Messages</button>
+<button class="tab" data-pane="documents" type="button">Documents</button>
+</div></section>
+<section class="nav-group"><h3>Money & control</h3><div class="nav-links">
+<button class="tab" data-pane="expenses" type="button">Expenses</button>
+<button class="tab" data-pane="finance" type="button">Financial Summary</button>
+<button class="tab" data-pane="backup" type="button">Backup & Export</button>
+<button class="tab" data-pane="settings" type="button">Business Settings</button>
+</div></section>
+<section class="nav-group"><h3>Customers & insights</h3><div class="nav-links">
+<button class="tab" data-pane="catalogueAudit" type="button">Catalogue Audit</button>
+<button class="tab" data-pane="customers" type="button">Customers</button>
+<button class="tab" data-pane="feedback" type="button">Feedback & Reviews</button>
+<button class="tab" data-pane="analytics" type="button">Sales Analytics</button>
+<button class="tab" data-pane="reorder" type="button">Reorder Planner</button>
+<button class="tab" data-pane="readiness" type="button">Business Readiness</button>
+</div></section>
+</nav>
 <section class="card" id="dashboard"><div style="display:flex;justify-content:space-between;align-items:center;gap:10px"><div><h2>Business control dashboard</h2><p class="muted">A consolidated view of your saved business records. Estimates and actual cash figures are shown separately.</p></div><button class="soft" id="refreshDashboard">Refresh</button></div><div id="dashMsg" class="msg hidden"></div><h2>Sales & customer payments</h2><div class="report-grid"><div class="report-stat"><small>Non-cancelled order value</small><b id="dOrderValue">₹0</b></div><div class="report-stat"><small>Money received</small><b id="dReceived">₹0</b></div><div class="report-stat"><small>Customer payment pending</small><b id="dCustomerPending">₹0</b></div><div class="report-stat"><small>Non-cancelled orders</small><b id="dOrderCount">0</b></div></div><h2 style="margin-top:18px">Supplier purchases & payments</h2><div class="report-grid"><div class="report-stat"><small>Recorded purchase value</small><b id="dPurchaseValue">₹0</b></div><div class="report-stat"><small>Paid to suppliers</small><b id="dSupplierPaid">₹0</b></div><div class="report-stat"><small>Supplier balance pending</small><b id="dSupplierPending">₹0</b></div></div><h2 style="margin-top:18px">Inventory snapshot</h2><div class="report-grid"><div class="report-stat"><small>Tracked products</small><b id="dProducts">0</b></div><div class="report-stat"><small>Physical / recorded units</small><b id="dUnits">0</b></div><div class="report-stat"><small>Low-stock products</small><b id="dLowStock">0</b></div><div class="report-stat"><small>Estimated stock value at received average cost</small><b id="dStockValue">Not available</b></div></div><p class="muted">Stock value is an estimate and includes only products with received purchase cost data. It is not a bank balance or audited inventory valuation.</p><h2 style="margin-top:18px">Product pricing performance</h2><div class="report-grid"><div class="report-stat"><small>Products meeting target margin</small><b id="dMeetTarget">0</b></div><div class="report-stat"><small>Below target / loss</small><b id="dBelowTarget">0</b></div><div class="report-stat"><small>Pricing incomplete</small><b id="dPricingIncomplete">0</b></div></div><h2 style="margin-top:18px">Monthly order value · last 6 months</h2><div id="dashMonthly" class="muted">No order history available.</div><h2 style="margin-top:18px">Business alerts</h2><div id="dashAlerts" class="muted">No alerts.</div><div class="report-actions"><button class="primary" id="exportDashboard">Export business summary CSV</button></div><p class="muted">Important: Order value is not profit. Supplier balances are based on purchase records. Inventory value and product margins are estimates. Cancelled orders are excluded from sales figures; customer payments on cancelled orders should be reviewed separately. This dashboard does not update stock automatically when an order is placed.</p></section><section class="card hidden" id="enquiries"><h2>Customer enquiries</h2><input id="searchE" placeholder="Search enquiries"><div id="enquiryList" class="muted">Loading…</div></section>
 <section class="card hidden" id="orders"><h2>Orders</h2><input id="searchO" placeholder="Search orders"><div id="orderList" class="muted">Loading…</div></section>
 <section class="card hidden" id="inventory"><h2>Product stock tracker</h2><p class="muted">Record the stock you physically own or have confirmed with a supplier. Stock is not automatically deducted when an order is created.</p><div id="inventoryMsg" class="msg hidden"></div><div class="grid"><div><label>Catalogue product</label><select id="invProduct"><option value="">Choose product</option></select></div><div><label>Product name (if not in catalogue)</label><input id="invName" placeholder="Product name"></div><div><label>Available quantity</label><input id="invQty" type="number" min="0" step="1" value="0"></div><div><label>Low-stock alert level</label><input id="invLow" type="number" min="0" step="1" value="2"></div><div class="full"><label>Stock notes / supplier confirmation</label><textarea id="invNotes" placeholder="Example: 5 pieces physically checked on 10 Nov"></textarea></div></div><div class="actions"><button class="primary" id="saveInventory">Save stock record</button><button class="soft" id="clearInventory">Clear</button></div><h2 style="margin-top:18px">Record stock movement</h2><p class="muted">Use Received for new stock, Sold for completed sales, Damaged for unusable items, and Adjustment for a physical-count correction. Adjustment accepts a positive or negative number.</p><div class="grid"><div><label>Product</label><select id="moveProduct"><option value="">Choose stock record</option></select></div><div><label>Movement type</label><select id="moveType"><option>Received</option><option>Sold</option><option>Damaged</option><option>Adjustment</option></select></div><div><label>Quantity (whole number)</label><input id="moveQty" type="number" step="1" value="1"></div><div><label>Reason / reference</label><input id="moveNotes" placeholder="Supplier purchase, sale reference, damage reason"></div><div class="full"><button class="primary" id="saveMovement">Record stock movement</button></div></div><div id="movementMsg" class="msg hidden"></div><h2 style="margin-top:18px">Stock movement history</h2><div class="report-actions"><button class="soft" id="refreshMovements">Refresh history</button><button class="soft" id="exportMovements">Export movement CSV</button></div><div id="movementHistory" class="muted">Loading movement history…</div><h2 style="margin-top:18px">Current stock</h2><div class="report-grid"><div class="report-stat"><small>Tracked products</small><b id="invCount">0</b></div><div class="report-stat"><small>Total units recorded</small><b id="invUnits">0</b></div><div class="report-stat"><small>Low-stock products</small><b id="invLowCount">0</b></div></div><div id="inventoryList" class="muted" style="margin-top:10px">No stock records yet.</div></section>
@@ -12,6 +167,59 @@
 <h2 style="margin-top:22px">Record a purchase</h2><p class="muted">One product per purchase record. Only choose Received if the items physically arrived and were counted.</p><div id="purchaseMsg" class="msg hidden"></div><div class="grid"><div><label>Supplier *</label><select id="purchaseSupplier"><option value="">Choose supplier</option></select></div><div><label>Stock product *</label><select id="purchaseProduct"><option value="">Choose tracked stock item</option></select></div><div><label>Purchase date</label><input id="purchaseDate" type="date"></div><div><label>Quantity (whole units) *</label><input id="purchaseQty" type="number" min="1" step="1" value="1"></div><div><label>Unit purchase cost (₹) *</label><input id="purchaseCost" type="number" min="0" step="0.01" value="0"></div><div><label>Payment status</label><select id="purchasePayment"><option>Unpaid</option><option>Partially Paid</option><option>Paid</option></select></div><div><label>Amount paid (₹)</label><input id="purchasePaid" type="number" min="0" step="0.01" value="0"></div><div><label>Goods status</label><select id="purchaseGoods"><option>Ordered</option><option>Received</option></select></div><div><label>Bill / reference number</label><input id="purchaseRef"></div><div class="full"><label>Purchase notes</label><textarea id="purchaseNotes" placeholder="Transport, packaging condition, bill details, sample observations"></textarea></div><div class="full"><button class="primary" id="savePurchase">Save purchase</button></div></div><h2 style="margin-top:18px">Purchase history</h2><div class="report-actions"><button class="soft" id="refreshPurchases">Refresh</button><button class="soft" id="exportPurchases">Export purchase CSV</button></div><div id="purchaseList" class="muted">No purchases recorded.</div></section>
 <section class="card hidden" id="reports"><h2>Business reports</h2><p class="muted">Reports are calculated from your saved orders. Revenue received is not profit.</p><div class="filter-row"><div><label>From date</label><input id="reportFrom" type="date"></div><div><label>To date</label><input id="reportTo" type="date"></div></div><div class="report-actions"><button class="primary" id="applyReport">Apply dates</button><button class="soft" id="resetReport">All dates</button><button class="soft" id="exportOrders">Export orders CSV</button><button class="soft" id="exportEnquiries">Export enquiries CSV</button></div><div class="report-grid"><div class="report-stat"><small>Orders in period</small><b id="rOrders">0</b></div><div class="report-stat"><small>Order value</small><b id="rValue">₹0</b></div><div class="report-stat"><small>Money received</small><b id="rReceived">₹0</b></div><div class="report-stat"><small>Payment pending</small><b id="rPending">₹0</b></div><div class="report-stat"><small>Delivered</small><b id="rDelivered">0</b></div><div class="report-stat"><small>Cancelled</small><b id="rCancelled">0</b></div></div><h2 style="margin-top:18px">Order status breakdown</h2><div id="statusBreakdown" class="muted">No orders in this period.</div><p class="muted">CSV exports contain customer information. Store downloaded files securely and do not share them publicly.</p></section>
 <section class="card hidden" id="costs"><h2>Product cost & profit estimate</h2><p class="muted">Average purchase cost uses only purchases marked Received. Add per-unit packaging, inbound transport and other costs. Estimates are not verified expenses unless you mark the evidence as Verified.</p><div id="costMsg" class="msg hidden"></div><div class="grid"><div class="full"><label>Tracked stock product *</label><select id="costProduct"><option value="">Choose product</option></select></div><div><label>Packaging cost per unit (₹)</label><input id="costPackaging" type="number" min="0" step="0.01" value="0"></div><div><label>Inbound transport per unit (₹)</label><input id="costTransport" type="number" min="0" step="0.01" value="0"></div><div><label>Other cost per unit (₹)</label><input id="costOther" type="number" min="0" step="0.01" value="0"></div><div><label>Manual planned selling price (₹)</label><input id="manualPrice" type="number" min="0" step="0.01" placeholder="Leave blank to use catalogue price"></div><div><label>Target profit margin (%)</label><input id="targetMargin" type="number" min="1" max="90" step="0.5" value="25"></div><div><label>Cost evidence</label><select id="costEvidence"><option>Estimated</option><option>Verified</option></select></div><div class="full"><label>Evidence / notes</label><textarea id="costNotes" placeholder="Bills, supplier quote, packaging receipt, transport receipt, date checked"></textarea></div><div class="full"><button class="primary" id="saveCost">Save product costs</button><button class="soft" id="clearCost">Clear</button></div></div><h2 style="margin-top:18px">Cost & margin summary</h2><p class="muted">A private planned selling price overrides the catalogue price for this estimate only. It does not update your public website. Profit excludes payment fees, outbound delivery, returns, tax, overhead and your time unless included in Other cost.</p><div id="costSummary" class="muted">Choose a product to view its cost estimate.</div><h2 style="margin-top:18px">All tracked product estimates</h2><div class="report-actions"><button class="soft" id="refreshCosts">Refresh costs</button><button class="soft" id="exportCosts">Export cost CSV</button></div><div id="costList" class="muted">Loading…</div></section>
+<section class="card hidden" id="sourcing">
+<h2>Product sourcing & availability</h2>
+<p class="muted">Connect existing public catalogue products to suppliers. This module does not create duplicate catalogue products or publish availability changes to your website.</p>
+<div id="sourceMsg" class="msg hidden"></div>
+<div class="grid">
+<div><label>Catalogue product *</label><select id="srcProduct"><option value="">Choose existing catalogue product</option></select></div>
+<div><label>Supplier *</label><select id="srcSupplier"><option value="">Choose saved supplier</option></select></div>
+<div><label>Sourcing status</label><select id="srcStatus"><option>Not contacted</option><option>Supplier identified</option><option>Contacted</option><option>Sample requested</option><option>Sample received</option><option>Sample checked</option><option>Approved for sourcing</option></select></div>
+<div><label>Availability status</label><select id="srcAvailability"><option>Not confirmed</option><option>Available</option><option>Limited availability</option><option>Out of stock</option><option>Made to order</option></select></div>
+<div><label>Quoted unit cost (₹)</label><input id="srcCost" type="number" min="0" step="0.01" placeholder="Enter supplier quotation"></div>
+<div><label>Quote / availability checked date</label><input id="srcDate" type="date"></div>
+<div><label>Evidence status</label><select id="srcEvidence"><option>Unverified</option><option>Quote received</option><option>Bill checked</option><option>Sample checked</option><option>Origin evidence checked</option></select></div>
+<div class="full"><label>Evidence / notes</label><textarea id="srcNotes" placeholder="Quote reference, sample observations, origin documents checked, availability confirmation date"></textarea></div>
+</div>
+<div class="actions"><button class="primary" id="saveSource">Save product sourcing record</button><button class="soft" id="clearSource">Clear</button></div>
+<h2 style="margin-top:18px">Saved product sourcing records</h2>
+<div class="report-actions"><button class="soft" id="refreshSources">Refresh</button><button class="soft" id="exportSources">Export sourcing CSV</button></div>
+<div id="sourceList" class="muted">Loading…</div>
+<div class="card" style="margin-top:18px;padding:14px">
+<h2>Supplier quotation comparison</h2>
+<p class="muted">Compare saved supplier quotations for the same catalogue product. Only recorded quotes are shown; availability and authenticity still require evidence.</p>
+<div class="grid">
+<div><label>Choose catalogue product</label><select id="compareProduct"><option value="">Choose product</option></select></div>
+<div style="display:flex;align-items:end"><button class="soft" id="compareRefresh">Refresh comparison</button></div>
+</div>
+<div id="comparisonSummary" class="muted" style="margin-top:12px">Choose a product to compare supplier records.</div>
+<div class="report-actions"><button class="soft" id="exportComparison">Export comparison CSV</button></div>
+</div>
+</section>
+<section class="card hidden" id="shipping">
+<h2>Shipping, dispatch & returns</h2>
+<p class="muted">Record shipping details for an existing order. Shipping costs are recorded estimates or actual charges; they do not automatically change the customer's order total.</p>
+<div id="shippingMsg" class="msg hidden"></div>
+<div class="grid">
+<div class="full"><label>Customer order *</label><select id="shipOrder"><option value="">Choose an existing order</option></select></div>
+<div><label>Courier / delivery partner</label><input id="shipCourier" placeholder="Courier name or self-delivery"></div>
+<div><label>Tracking / consignment ID</label><input id="shipTracking" placeholder="Enter tracking number"></div>
+<div><label>Shipping charge to customer (₹)</label><input id="shipCustomerCost" type="number" min="0" step="0.01" value="0"></div>
+<div><label>Actual courier cost (₹)</label><input id="shipActualCost" type="number" min="0" step="0.01" value="0"></div>
+<div><label>Parcel weight (grams)</label><input id="shipWeight" type="number" min="0" step="1" placeholder="Measured packed weight"></div>
+<div><label>Parcel length (cm)</label><input id="shipLength" type="number" min="0" step="0.1"></div>
+<div><label>Parcel width (cm)</label><input id="shipWidth" type="number" min="0" step="0.1"></div>
+<div><label>Parcel height (cm)</label><input id="shipHeight" type="number" min="0" step="0.1"></div>
+<div><label>Dispatch date</label><input id="shipDispatchDate" type="date"></div>
+<div><label>Delivery status</label><select id="shipStatus"><option>Not packed</option><option>Packed</option><option>Ready for pickup</option><option>Dispatched</option><option>In transit</option><option>Out for delivery</option><option>Delivered</option><option>Delivery failed</option><option>Returned to sender</option></select></div>
+<div><label>Return / issue status</label><select id="shipReturn"><option>None</option><option>Return requested</option><option>Return approved</option><option>Return in transit</option><option>Returned</option><option>Replacement required</option><option>Refund review</option><option>Resolved</option></select></div>
+<div class="full"><label>Dispatch checklist</label><div class="grid"><label><input type="checkbox" id="shipCheckProduct" style="width:auto"> Product checked</label><label><input type="checkbox" id="shipCheckPack" style="width:auto"> Packaging checked</label><label><input type="checkbox" id="shipCheckAddress" style="width:auto"> Address verified</label><label><input type="checkbox" id="shipCheckLabel" style="width:auto"> Shipping label prepared</label></div></div>
+<div class="full"><label>Shipping / delivery / return notes</label><textarea id="shipNotes" placeholder="Pickup reference, parcel condition, delay, delivery proof, return reason"></textarea></div>
+</div>
+<div class="actions"><button class="primary" id="saveShipment">Save shipping record</button><button class="soft" id="clearShipment">Clear</button></div>
+<h2 style="margin-top:18px">Shipment history</h2><div class="report-actions"><button class="soft" id="refreshShipments">Refresh</button><button class="soft" id="exportShipments">Export shipping CSV</button></div>
+<div id="shipmentList" class="muted">No shipping records yet.</div>
+</section>
 <section class="card hidden" id="form"><h2 id="formHeading">Add enquiry</h2><div id="formMsg" class="msg hidden"></div><div class="grid">
 <div><label>Record type</label><select id="type"><option value="enquiry">Enquiry</option><option value="order">Confirmed order</option></select></div>
 <div><label>Customer name *</label><input id="customer"></div><div><label>Phone / WhatsApp *</label><input id="phone" inputmode="tel"></div>
@@ -19,12 +227,292 @@
 <div><label>Amount received (₹)</label><input id="received" type="number" min="0" value="0"></div><div><label>Order status</label><select id="status"><option>New</option><option>Confirmed</option><option>Packed</option><option>Shipped</option><option>Delivered</option><option>Cancelled</option></select></div>
 <div class="full"><label>Delivery address</label><textarea id="address"></textarea></div><div><label>Courier partner</label><input id="courier"></div><div><label>Tracking / AWB ID</label><input id="tracking"></div><div><label>Dispatch date</label><input id="dispatch" type="date"></div><div class="full"><label>Notes / WhatsApp conversation summary</label><textarea id="notes"></textarea></div></div>
 <p class="muted">Add each product as a separate line. Order total = all item quantities × unit prices + delivery. WhatsApp messages must be recorded manually in this first version.</p><div class="actions"><button class="primary" id="save">Save enquiry</button><button class="soft" id="clear">Clear</button></div></section></div></main>
+
+<section class="card hidden" id="notifications">
+<h2>Customer messages & follow-up centre</h2>
+<p class="muted">Prepare customer-specific WhatsApp messages using saved enquiries, orders and shipping records. Messages are drafts only; review and send them yourself.</p>
+<div id="notifyMsg" class="msg hidden"></div>
+<div class="grid">
+  <div><label>Customer record type</label><select id="notifyType"><option value="enquiry">Enquiry</option><option value="order">Order</option></select></div>
+  <div><label>Customer record</label><select id="notifyRecord"><option value="">Choose a customer record</option></select></div>
+  <div><label>Message purpose</label><select id="notifyTemplate">
+    <option value="enquiry_received">Enquiry received</option>
+    <option value="need_details">Request more details</option>
+    <option value="quote">Quotation follow-up</option>
+    <option value="payment">Payment reminder</option>
+    <option value="order_confirmed">Order confirmation</option>
+    <option value="dispatch">Dispatch update</option>
+    <option value="delivered">Delivery check-in</option>
+    <option value="custom">Custom message</option>
+  </select></div>
+  <div><label>Brand / sender label</label><input id="notifyBrand" value="LAKKA STORIES"></div>
+  <div class="full"><label>Message preview (editable)</label><textarea id="notifyPreview" rows="7" placeholder="Choose a customer record and message purpose."></textarea></div>
+</div>
+<div class="actions"><button class="primary" id="buildNotify">Build / refresh message</button><button class="soft" id="openNotify">Open WhatsApp draft</button><button class="soft" id="copyNotify">Copy message</button></div>
+<h2 style="margin-top:20px">Follow-up reminders</h2>
+<p class="muted">This list is calculated from saved enquiry follow-up dates and order/shipping status. It does not send automatic messages or run in the background.</p>
+<div class="report-actions"><button class="soft" id="refreshNotify">Refresh reminders</button></div>
+<div id="notifyReminders" class="muted">Loading reminders…</div>
+<p class="muted">Privacy note: this tool opens WhatsApp with a pre-filled message. Nothing is sent until you review and press Send in WhatsApp. No WhatsApp API connection or automatic scheduled messaging is configured.</p>
+</section>
+
+
+<section class="card hidden" id="settings">
+<h2>Business settings & defaults</h2>
+<p class="muted">Private owner settings for message drafts and planning. These settings do not change your public website, catalogue prices, invoices or courier bookings automatically.</p>
+<div id="settingsMsg" class="msg hidden"></div>
+<h2>Brand & contact details</h2>
+<div class="grid">
+ <div><label>Business / brand name</label><input id="setBrand" maxlength="100" placeholder="LAKKA STORIES"></div>
+ <div><label>WhatsApp number (with country code)</label><input id="setPhone" inputmode="tel" placeholder="91XXXXXXXXXX"></div>
+ <div><label>Business email (optional)</label><input id="setEmail" type="email" placeholder="hello@example.com"></div>
+ <div><label>Business contact number (optional)</label><input id="setContact" inputmode="tel" placeholder="Phone number"></div>
+ <div class="full"><label>Business address (optional)</label><textarea id="setAddress" placeholder="Business correspondence address"></textarea></div>
+ <div><label>Dispatch city / location</label><input id="setDispatch" placeholder="Hyderabad, Telangana"></div>
+ <div><label>Initial sales region</label><select id="setRegion"><option>India</option><option>Local / selected states only</option><option>International (only after compliance review)</option></select></div>
+</div>
+<h2 style="margin-top:18px">Planning defaults</h2>
+<div class="grid">
+ <div><label>Currency</label><select id="setCurrency"><option value="INR">INR – Indian Rupee (₹)</option></select></div>
+ <div><label>Quotation validity (days)</label><input id="setQuoteDays" type="number" min="1" max="90" step="1" value="7"></div>
+ <div><label>Estimated packaging cost per order (₹)</label><input id="setPack" type="number" min="0" step="0.01" placeholder="Leave blank if unknown"></div>
+ <div><label>Estimated shipping cost per order (₹)</label><input id="setShip" type="number" min="0" step="0.01" placeholder="Leave blank if unknown"></div>
+ <div><label>Invoice / order reference prefix</label><input id="setPrefix" maxlength="15" placeholder="LS"></div>
+ <div><label>Default customer message sign-off</label><input id="setSignoff" maxlength="100" placeholder="Thank you, LAKKA STORIES"></div>
+ <div class="full"><label>Default customer terms / notes (optional)</label><textarea id="setTerms" placeholder="Availability and delivery are confirmed separately."></textarea></div>
+</div>
+<div class="actions"><button class="primary" id="saveSettings">Save business settings</button><button class="soft" id="resetSettings">Reset form</button></div>
+<h2 style="margin-top:20px">Saved settings</h2>
+<div id="settingsSummary" class="muted">Load your saved settings to review them here.</div>
+<p class="muted">Safety: leave costs blank until supported by actual quotes or receipts. Estimated packaging and shipping values are planning assumptions only. This module does not calculate tax, issue legally compliant invoices, or establish GST obligations.</p>
+</section>
+
+
+<section class="card hidden" id="documents">
+<h2>Quotation, order & payment documents</h2>
+<p class="muted">Create printable customer documents from saved enquiries and orders. Use the browser print dialog to save as PDF or print. These are business records, not GST tax invoices.</p>
+<div id="docMsg" class="msg hidden"></div>
+<div class="grid">
+ <div><label>Document type</label><select id="docType"><option value="quotation">Customer quotation</option><option value="order">Order confirmation</option><option value="receipt">Payment receipt</option><option value="dispatch">Dispatch summary</option></select></div>
+ <div><label>Customer record</label><select id="docRecord"><option value="">Choose a record</option></select></div>
+ <div class="full"><label>Additional note (optional)</label><textarea id="docNote" placeholder="Quotation validity, delivery note, payment reference, or customer instructions"></textarea></div>
+</div>
+<div class="actions"><button class="primary" id="previewDoc">Preview & print / save PDF</button><button class="soft" id="refreshDocs">Refresh records</button></div>
+<div class="muted" id="docHelp">Choose a quotation and an enquiry, or an order document and a saved order.</div>
+</section>
+
+
+<section class="card hidden" id="expenses">
+<h2>Business expense tracker</h2>
+<p class="muted">Record money actually spent on LAKKA STORIES. Keep estimates separate from paid expenses. Do not enter personal EMIs or household spending here.</p>
+<div id="expenseMsg" class="msg hidden"></div>
+<div class="grid">
+ <div><label>Expense date *</label><input id="exDate" type="date"></div>
+ <div><label>Category *</label><select id="exCategory"><option>Packaging</option><option>Transport / courier</option><option>Product samples</option><option>Supplier travel</option><option>Website / domain / software</option><option>Marketing</option><option>Payment / bank fees</option><option>Returns / damage</option><option>Other business expense</option></select></div>
+ <div><label>Description *</label><input id="exDescription" maxlength="180" placeholder="What was purchased or paid for?"></div>
+ <div><label>Amount actually paid (₹) *</label><input id="exAmount" type="number" min="0.01" step="0.01" placeholder="Enter paid amount"></div>
+ <div><label>Paid to / vendor</label><input id="exVendor" maxlength="120" placeholder="Shop, courier, service provider"></div>
+ <div><label>Payment method</label><select id="exMethod"><option>UPI</option><option>Cash</option><option>Bank transfer</option><option>Card</option><option>Other</option></select></div>
+ <div><label>Bill / transaction reference</label><input id="exReference" maxlength="100" placeholder="Optional reference"></div>
+ <div class="full"><label>Notes</label><textarea id="exNotes" placeholder="Bill details or reason for expense"></textarea></div>
+</div>
+<div class="actions"><button class="primary" id="saveExpense">Save expense</button><button class="soft" id="clearExpense">Clear form</button></div>
+<h2 style="margin-top:20px">Expense summary</h2>
+<div class="grid">
+ <div class="metric"><span class="muted">This month – recorded payments</span><strong id="exMonthTotal">₹0</strong></div>
+ <div class="metric"><span class="muted">All recorded payments</span><strong id="exAllTotal">₹0</strong></div>
+ <div class="metric"><span class="muted">Number of records</span><strong id="exCount">0</strong></div>
+</div>
+<div class="actions"><button class="soft" id="refreshExpenses">Refresh</button><button class="soft" id="exportExpenses">Export expenses CSV</button></div>
+<div id="expenseList" class="list"></div>
+<p class="muted">This is a cash-expense register, not a complete profit-and-loss statement. Product purchase costs should be reconciled with the Purchases module to avoid double-counting. Only enter actual paid amounts supported by your records.</p>
+</section>
+
+
+<section class="card hidden" id="finance">
+<h2>Financial summary & cash flow</h2>
+<p class="muted">A simple view of recorded customer payments, supplier payments and business expenses. This is not accounting software or a profit-and-loss statement.</p>
+<div id="financeMsg" class="msg hidden"></div>
+<div class="actions"><div><label>Reporting month</label><input id="finMonth" type="month"></div><button class="primary" id="refreshFinance">Refresh summary</button><button class="soft" id="exportFinance">Export summary CSV</button></div>
+<h3>Selected month</h3>
+<div class="grid">
+ <div class="metric"><span class="muted">Customer payments received</span><strong id="finReceived">₹0</strong></div>
+ <div class="metric"><span class="muted">Supplier payments made</span><strong id="finSupplierPaid">₹0</strong></div>
+ <div class="metric"><span class="muted">Other business expenses paid</span><strong id="finExpenses">₹0</strong></div>
+ <div class="metric"><span class="muted">Recorded cash movement</span><strong id="finNet">₹0</strong></div>
+</div>
+<h3>Outstanding balances (all open records)</h3>
+<div class="grid">
+ <div class="metric"><span class="muted">Customer balances pending</span><strong id="finCustomerDue">₹0</strong></div>
+ <div class="metric"><span class="muted">Supplier balances pending</span><strong id="finSupplierDue">₹0</strong></div>
+ <div class="metric"><span class="muted">Non-cancelled order value</span><strong id="finOrderValue">₹0</strong></div>
+ <div class="metric"><span class="muted">Recorded purchase value</span><strong id="finPurchaseValue">₹0</strong></div>
+</div>
+<p class="muted">Cash movement = customer payments received − supplier payments made − other expenses paid. It is not profit. Purchase value is shown separately; do not subtract it again from cash movement because supplier payments are already counted. Customer and supplier balances are based on current saved records.</p>
+<h3>Data coverage</h3><div id="finCoverage" class="muted">Load the summary to see record counts.</div>
+</section>
+
+
+<section class="card hidden" id="backup">
+<h2>Business backup & data export</h2>
+<p class="muted">Export your private LAKKA STORIES records for safekeeping. Files are generated in your browser and downloaded to your device. Store them securely because they may contain customer names, phone numbers, addresses and supplier information.</p>
+<div id="backupMsg" class="msg hidden"></div>
+<div class="grid">
+ <div class="metric"><span class="muted">Tables included</span><strong id="backupTableCount">12</strong></div>
+ <div class="metric"><span class="muted">Rows exported</span><strong id="backupRowCount">—</strong></div>
+ <div class="metric"><span class="muted">Last export in this session</span><strong id="backupLast">Not yet</strong></div>
+</div>
+<h3>Full private data backup</h3>
+<p class="muted">Download a JSON snapshot of all supported private business tables, including empty tables. The export is read-only and does not change Supabase data.</p>
+<div class="actions"><button class="primary" id="downloadFullBackup">Download full JSON backup</button><button class="soft" id="downloadAllCsv">Download all CSV files (ZIP)</button></div>
+<h3>Individual table exports</h3>
+<div id="backupTables" class="list"></div>
+<h3>Backup checklist</h3>
+<ul><li>Keep at least two copies in secure locations.</li><li>Do not share backup files publicly or commit them to GitHub.</li><li>Export again after important real orders, purchases or stock changes.</li><li>This is an export tool, not an automatic restore or scheduled backup service.</li></ul>
+<p class="muted">The export uses the signed-in owner's Supabase access and RLS policies. If a table is unavailable or access is denied, the backup reports the error instead of silently treating the table as empty.</p>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+
+<section class="card hidden" id="catalogueAudit">
+<h2>Product catalogue quality & readiness audit</h2>
+<p class="muted">Read-only checks against your existing public catalogue and private sourcing records. This tool does not edit products, delete duplicates or publish changes.</p>
+<div id="catalogueAuditMsg" class="msg hidden"></div>
+<div class="actions"><button class="primary" id="runCatalogueAudit">Run catalogue audit</button><button class="soft" id="exportCatalogueAudit">Export audit CSV</button></div>
+<div class="grid">
+ <div class="metric"><span class="muted">Products checked</span><strong id="auditTotal">—</strong></div>
+ <div class="metric"><span class="muted">Missing images</span><strong id="auditImages">—</strong></div>
+ <div class="metric"><span class="muted">Missing descriptions</span><strong id="auditDescriptions">—</strong></div>
+ <div class="metric"><span class="muted">Missing dimensions</span><strong id="auditDimensions">—</strong></div>
+ <div class="metric"><span class="muted">Missing product codes</span><strong id="auditCodes">—</strong></div>
+ <div class="metric"><span class="muted">Sourcing not approved</span><strong id="auditSourcing">—</strong></div>
+</div>
+<h3>Audit findings</h3>
+<div id="catalogueAuditList" class="list muted">Run the audit to inspect catalogue readiness.</div>
+<p class="muted">Duplicate detection is a review aid based on matching names and product codes. Visually similar images cannot be reliably confirmed as duplicates by this database-only audit. Authenticity evidence must be checked manually; a supplier status alone does not prove Etikoppaka origin.</p>
+</section>
+
+
+<section class="card hidden" id="customers">
+<h2>Customer CRM & repeat customer management</h2>
+<p class="muted">Private customer directory built from customer details you save here and matched order/enquiry history by phone number.</p>
+<div id="customerMsg" class="msg hidden"></div>
+<div class="grid">
+ <div><label>Customer name</label><input id="crmName" placeholder="Customer name"></div>
+ <div><label>Phone / WhatsApp</label><input id="crmPhone" placeholder="10-digit phone number"></div>
+ <div><label>Email (optional)</label><input id="crmEmail" placeholder="Email address"></div>
+ <div><label>City (optional)</label><input id="crmCity" placeholder="City"></div>
+ <div><label>Preferences / interests</label><input id="crmPreferences" placeholder="Gift preferences, interests…"></div>
+ <div><label>Customer notes</label><input id="crmNotes" placeholder="Useful service notes"></div>
+</div>
+<div class="actions"><button class="primary" id="saveCustomer">Save customer</button><button class="soft" id="clearCustomer">Clear form</button></div>
+<div class="grid">
+ <div class="metric"><span class="muted">Saved customers</span><strong id="crmTotal">0</strong></div>
+ <div class="metric"><span class="muted">Repeat customers</span><strong id="crmRepeat">0</strong></div>
+ <div class="metric"><span class="muted">Customers with order history</span><strong id="crmWithOrders">0</strong></div>
+</div>
+<div class="actions"><input id="crmSearch" placeholder="Search name, phone or city"></div>
+<div id="customerList" class="list muted">Loading customer records…</div>
+<h3>Customer history</h3><div id="customerHistory" class="muted">Choose a customer to view matching enquiries and orders.</div>
+<p class="muted">History is matched using phone number. Old records without a phone number cannot be linked. Customer details are private owner data; do not export or share them publicly.</p>
+</section>
+
+
+<section class="card hidden" id="feedback">
+<h2>Customer Feedback & Reviews</h2>
+<p class="muted">Record feedback privately against a customer and optional order. Nothing is published automatically.</p>
+<div id="feedbackMsg" class="msg hidden"></div>
+<div class="grid">
+<div><label>Customer</label><select id="fbCustomer"><option value="">Select customer</option></select></div>
+<div><label>Related order (optional)</label><select id="fbOrder"><option value="">No order linked</option></select></div>
+<div><label>Product name (optional)</label><input id="fbProduct" placeholder="Product name"></div>
+<div><label>Rating</label><select id="fbRating"><option value="">Not rated</option><option value="1">1 – Poor</option><option value="2">2 – Fair</option><option value="3">3 – Good</option><option value="4">4 – Very good</option><option value="5">5 – Excellent</option></select></div>
+<div><label>Feedback date</label><input id="fbDate" type="date"></div>
+<div><label>Feedback request status</label><select id="fbRequest"><option value="not_requested">Not requested</option><option value="requested">Requested</option><option value="received">Received</option><option value="declined">Declined</option></select></div>
+</div>
+<label>Customer feedback</label><textarea id="fbText" rows="3" placeholder="Record the customer's words or feedback"></textarea>
+<div class="grid">
+<div><label>Permission to publish testimonial?</label><select id="fbPermission"><option value="not_asked">Not asked</option><option value="yes">Yes, permission received</option><option value="no">No permission</option></select></div>
+<div><label>Publication status</label><select id="fbPublish"><option value="private">Private</option><option value="approved">Approved for publication</option><option value="published">Published</option></select></div>
+</div>
+<div class="actions"><button class="primary" id="fbSave">Save feedback</button><button class="soft" id="fbClear">Clear</button></div>
+<div class="grid"><div class="metric"><span class="muted">Feedback records</span><strong id="fbCount">0</strong></div><div class="metric"><span class="muted">Average rating</span><strong id="fbAverage">—</strong></div><div class="metric"><span class="muted">Permission received</span><strong id="fbPermCount">0</strong></div></div>
+<div class="actions"><input id="fbSearch" placeholder="Search feedback or customer"></div>
+<div id="fbList" class="list muted">Loading feedback…</div>
+<p class="muted">Privacy rule: feedback remains private unless the customer has explicitly given permission. Selecting “Approved” or “Published” is an internal record only; this dashboard does not publish testimonials to your website.</p>
+</section>
+
+<section class="card hidden" id="analytics">
+<h2>Business Performance & Sales Analytics</h2>
+<p class="muted">A read-only view of recorded orders, enquiries, order items and expenses. Figures reflect data entered in this dashboard, not verified bank receipts or accounting profit.</p>
+<div id="analyticsMsg" class="msg hidden"></div>
+<div class="grid">
+<div><label>From date</label><input id="anFrom" type="date"></div>
+<div><label>To date</label><input id="anTo" type="date"></div>
+</div>
+<div class="actions"><button class="primary" id="anApply">Apply dates</button><button class="soft" id="anClear">Clear dates</button><button class="soft" id="anExport">Export CSV</button></div>
+<div class="grid">
+<div class="metric"><span class="muted">Orders recorded</span><strong id="anOrders">0</strong></div>
+<div class="metric"><span class="muted">Recorded order value</span><strong id="anValue">₹0</strong></div>
+<div class="metric"><span class="muted">Amount marked received</span><strong id="anReceived">₹0</strong></div>
+<div class="metric"><span class="muted">Recorded pending balance</span><strong id="anPending">₹0</strong></div>
+<div class="metric"><span class="muted">Enquiries</span><strong id="anEnquiries">0</strong></div>
+<div class="metric"><span class="muted">Enquiry-to-order rate</span><strong id="anConversion">—</strong></div>
+<div class="metric"><span class="muted">Recorded expenses</span><strong id="anExpenses">₹0</strong></div>
+<div class="metric"><span class="muted">Recorded cash difference*</span><strong id="anDifference">₹0</strong></div>
+</div>
+<h3>Monthly order performance</h3><div id="anMonthly" class="list muted">Loading analytics…</div>
+<h3>Products by recorded order quantity</h3><div id="anProducts" class="list muted">No product data.</div>
+<h3>Customer order activity</h3><div id="anCustomers" class="list muted">No customer data.</div>
+<p class="muted">*Recorded cash difference = amount marked received minus recorded expenses. It is not profit, cash balance or a bank reconciliation. Cancelled orders are excluded from order value. Conversion rate is a simple count ratio for the selected period, not cohort attribution. Product rankings use order-item records.</p>
+</section>
+
+
+<section class="card hidden" id="reorder">
+<h2>Inventory & Reorder Intelligence</h2>
+<p class="muted">Uses your recorded physical stock and manually approved reorder targets. It does not place supplier orders or assume sales demand.</p>
+<div id="reorderMsg" class="msg hidden"></div>
+<div class="grid">
+<div class="metric"><span class="muted">Tracked stock items</span><strong id="rpItems">0</strong></div>
+<div class="metric"><span class="muted">At / below alert level</span><strong id="rpLow">0</strong></div>
+<div class="metric"><span class="muted">Reorder plans set</span><strong id="rpPlans">0</strong></div>
+</div>
+<h3>Set reorder target</h3>
+<div class="grid">
+<div><label>Stock item</label><select id="rpInventory"><option value="">Select stock item</option></select></div>
+<div><label>Target stock quantity (units)</label><input id="rpTarget" type="number" min="0" step="1" placeholder="Enter desired stock level"></div>
+<div><label>Supplier lead time (days, optional)</label><input id="rpLead" type="number" min="0" step="1" placeholder="Only if supplier confirmed"></div>
+<div><label>Planning notes</label><input id="rpNotes" placeholder="Supplier quote / reason / evidence"></div>
+</div>
+<div class="actions"><button class="primary" id="rpSave">Save reorder plan</button><button class="soft" id="rpClear">Clear</button><button class="soft" id="rpRefresh">Refresh</button></div>
+<h3>Reorder review</h3><div id="rpList" class="list muted">Loading stock data…</div>
+<p class="muted">Suggested quantity = your saved target stock minus current recorded stock, never below zero. Review supplier availability, actual demand, cash position and delivery cost before purchasing. No automatic reorder is placed.</p>
+</section>
+
+
+<section class="card hidden" id="readiness">
+<h2>Business Operations & Launch Readiness</h2>
+<p class="muted">A private checklist to help verify the essentials before accepting genuine orders. A task is not verified until you have evidence.</p>
+<div id="readinessMsg" class="msg hidden"></div>
+<div class="grid">
+<div class="metric"><span class="muted">Checklist items</span><strong id="rdTotal">0</strong></div>
+<div class="metric"><span class="muted">Verified with evidence</span><strong id="rdVerified">0</strong></div>
+<div class="metric"><span class="muted">Open / blocked</span><strong id="rdOpen">0</strong></div>
+<div class="metric"><span class="muted">Readiness progress</span><strong id="rdProgress">0%</strong></div>
+</div>
+<div id="rdList" class="list muted">Loading readiness checklist…</div>
+<p class="muted">This checklist is a planning aid, not legal, tax, product-authenticity or financial advice. Do not mark an item Verified without documentary evidence or a completed real-world test. It does not authorize launch automatically.</p>
+</section>
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script>
-const db=supabase.createClient("https://qguxptvedozdfulahkid.supabase.co","sb_publishable_c5-NfXVIzLNgC821H3EFWQ_fpmSU9Tl"),$=x=>document.getElementById(x);let user,es=[],os=[],editId=null,editType=null,ps=[],lines=[],inventory=[],inventoryEditId=null,movements=[],suppliers=[],purchases=[],supplierEditId=null,costInputs=[];
+const db=supabase.createClient("https://qguxptvedozdfulahkid.supabase.co","sb_publishable_c5-NfXVIzLNgC821H3EFWQ_fpmSU9Tl"),$=x=>document.getElementById(x);let user,es=[],os=[],editId=null,editType=null,ps=[],lines=[],inventory=[],inventoryEditId=null,movements=[],suppliers=[],purchases=[],supplierEditId=null,costInputs=[],sourceRows=[],sourceEditId=null;
 const cash=n=>"₹"+(Number(n)||0).toLocaleString("en-IN",{maximumFractionDigits:2}),safe=s=>String(s||"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-function message(id,t){$(id).textContent=t;$(id).classList.remove("hidden")}function pane(p){document.querySelectorAll(".tab").forEach(b=>b.classList.toggle("active",b.dataset.pane===p));["dashboard","enquiries","orders","form","reports","inventory","suppliers","costs"].forEach(x=>$(x).classList.toggle("hidden",x!==p));if(p==="dashboard")loadBusinessDashboard();if(p==="reports")renderReports();if(p==="inventory")renderInventory();if(p==="suppliers")loadSuppliers();if(p==="costs")loadProductCosts()}
-document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>pane(b.dataset.pane));
-function signedIn(s){user=s.user;$ ("login").classList.add("hidden");$("app").classList.remove("hidden");loadAll().then(()=>pane("dashboard"))}function signedOut(){$("app").classList.add("hidden");$("login").classList.remove("hidden")}
+const validPanes=["dashboard","enquiries","orders","form","reports","inventory","suppliers","costs","sourcing","shipping","notifications","settings","documents","expenses","finance","backup","catalogueAudit","customers","feedback","analytics","reorder","readiness"];
+function currentPaneFromUrl(){const p=new URLSearchParams(location.hash.replace(/^#/,"")).get("tab");return validPanes.includes(p)?p:"dashboard"}
+function message(id,t){$(id).textContent=t;$(id).classList.remove("hidden")}function pane(p,writeHistory=false){if(!validPanes.includes(p))p="dashboard";document.querySelectorAll(".tab").forEach(b=>b.classList.toggle("active",b.dataset.pane===p));validPanes.forEach(x=>$(x).classList.toggle("hidden",x!==p));if(writeHistory){const next="#tab="+encodeURIComponent(p);if(location.hash!==next)history.pushState({pane:p},"",next)}if(p==="dashboard")loadBusinessDashboard();if(p==="reports")renderReports();if(p==="inventory")renderInventory();if(p==="suppliers")loadSuppliers();if(p==="costs")loadProductCosts();if(p==="sourcing")loadProductSourcing();if(p==="shipping")loadShipments();if(p==="notifications")loadNotifications();if(p==="settings")loadBusinessSettings();if(p==="documents")loadDocuments();if(p==="expenses")loadExpenses();if(p==="finance")loadFinance();if(p==="backup")loadBackupCentre();if(p==="catalogueAudit")runCatalogueAudit();if(p==="customers")loadCustomers();if(p==="feedback")loadFeedback();if(p==="analytics")loadAnalytics();if(p==="reorder")loadReorderPlanner();if(p==="readiness")loadReadiness()}
+document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>pane(b.dataset.pane,true));
+window.addEventListener("popstate",()=>{if(user&&$("app")&&!$("app").classList.contains("hidden"))pane(currentPaneFromUrl(),false)});
+function signedIn(s){user=s.user;$ ("login").classList.add("hidden");$("app").classList.remove("hidden");loadAll().then(()=>{const p=currentPaneFromUrl();if(!location.hash)history.replaceState({pane:"dashboard"},"",location.pathname+location.search+"#tab=dashboard");pane(p,false)})}function signedOut(){$("app").classList.add("hidden");$("login").classList.remove("hidden")}
 $("loginBtn").onclick=async()=>{let {data,error}=await db.auth.signInWithPassword({email:$("email").value.trim(),password:$("password").value});if(error)message("loginMsg",error.message);else signedIn(data.session)};
 $("logout").onclick=async()=>{await db.auth.signOut();signedOut()};
 async function loadAll(){let p=await db.from("public_catalogue").select("id,name,product_code,selling_price").order("name");ps=p.data||[];populateInventoryProducts();newLine();await Promise.all([loadE(),loadO(),loadInventory()]);summary();if(!$("reports").classList.contains("hidden"))renderReports()}
@@ -70,7 +558,7 @@ function updateTotals(){let sub=lines.reduce((a,x)=>a+(+x.quantity||0)*(+x.unit_
 $("addLine").onclick=()=>newLine();$("delivery").oninput=updateTotals;
 async function loadE(){let r=await db.from("owner_enquiries").select("*").order("created_at",{ascending:false});if(r.error){$("enquiryList").textContent=r.error.message;return}es=r.data||[];renderE()}
 async function loadO(){let r=await db.from("owner_orders").select("*").order("created_at",{ascending:false});if(r.error){$("orderList").textContent=r.error.message;return}os=r.data||[];renderO()}
-function renderE(){let t=$("searchE").value.toLowerCase(),a=es.filter(x=>(x.customer_name+" "+x.phone+" "+x.product_name).toLowerCase().includes(t));$("enquiryList").innerHTML=a.length?a.map(x=>`<div class="item"><div><b>${safe(x.customer_name)} · ${safe(x.product_name||"General enquiry")}</b><small>${safe(x.phone)} · ${safe(x.status)}</small><small>${safe(x.notes||"")}</small></div><div><button class="soft" onclick="edit('enquiry','${x.id}')">Edit</button><button class="primary" onclick="convert('${x.id}')">Convert to order</button><button class="danger" onclick="del('enquiry','${x.id}')">Delete</button></div></div>`).join(""):'No enquiries recorded yet.'}
+function renderE(){let t=$("searchE").value.toLowerCase(),a=es.filter(x=>(x.customer_name+" "+x.phone+" "+x.product_name).toLowerCase().includes(t));$("enquiryList").innerHTML=a.length?a.map(x=>`<div class="item" style="align-items:flex-start"><div style="flex:1;min-width:250px"><b>${safe(x.customer_name)} · ${safe(x.product_name||"General enquiry")}</b><small>${safe(x.phone)} · ${safe(x.status)} · Added ${safe(String(x.created_at||"").slice(0,10))}</small><small>${safe(x.notes||"")}</small><div class="report-grid" style="margin-top:8px"><div class="report-stat"><small>Enquiry stage</small><b>${safe(x.enquiry_stage||"New")}</b></div><div class="report-stat"><small>Quote amount</small><b>${x.quote_amount==null?"Not quoted":cash(x.quote_amount)}</b></div><div class="report-stat"><small>Next follow-up</small><b>${safe(x.follow_up_date||"Not scheduled")}</b></div></div><details style="margin-top:9px"><summary>Follow-up & quotation details</summary><div class="grid" style="margin-top:10px"><div><label>Enquiry stage</label><select id="stage_${x.id}"><option ${(!x.enquiry_stage||x.enquiry_stage==='New')?'selected':''}>New</option><option ${x.enquiry_stage==='Contacted'?'selected':''}>Contacted</option><option ${x.enquiry_stage==='Requirements confirmed'?'selected':''}>Requirements confirmed</option><option ${x.enquiry_stage==='Quote sent'?'selected':''}>Quote sent</option><option ${x.enquiry_stage==='Negotiation'?'selected':''}>Negotiation</option><option ${x.enquiry_stage==='Converted'?'selected':''}>Converted</option><option ${x.enquiry_stage==='Not interested'?'selected':''}>Not interested</option><option ${x.enquiry_stage==='Lost'?'selected':''}>Lost</option></select></div><div><label>Next follow-up date</label><input type="date" id="follow_${x.id}" value="${safe(x.follow_up_date||"")}"></div><div><label>Quote amount (₹)</label><input type="number" min="0" step="0.01" id="quote_${x.id}" value="${x.quote_amount??''}" placeholder="Leave blank if not quoted"></div><div><label>Quote valid until</label><input type="date" id="valid_${x.id}" value="${safe(x.quote_valid_until||"")}"></div><div><label>Last contacted date</label><input type="date" id="contacted_${x.id}" value="${safe(x.last_contacted_at||"")}"></div><div class="full"><label>Follow-up / quotation notes</label><textarea id="followNotes_${x.id}" placeholder="What customer asked, quote details, next action">${safe(x.follow_up_notes||"")}</textarea></div><div class="full"><button class="primary" onclick="saveEnquiryFollowup('${x.id}')">Save follow-up details</button> <button class="soft" onclick="sendEnquiryQuote('${x.id}')">Prepare WhatsApp quote</button></div></div></details></div><div><button class="soft" onclick="edit('enquiry','${x.id}')">Edit enquiry</button><button class="primary" onclick="convert('${x.id}')">Convert to order</button><button class="danger" onclick="del('enquiry','${x.id}')">Delete</button></div></div>`).join(''):'No enquiries recorded yet.'}
 function renderO(){let t=$("searchO").value.toLowerCase(),a=os.filter(x=>(x.customer_name+" "+x.phone+" "+x.product_name+" "+x.tracking_id).toLowerCase().includes(t));$("orderList").innerHTML=a.length?a.map(x=>`<div class="item"><div><b>${safe(x.customer_name)} · ${safe(x.product_name||"Order")}</b><small>${safe(x.phone)} · ${x.quantity} item units · Total ${cash(x.total_amount)}</small><small>${safe(x.order_status)} · ${safe(x.payment_status)} · Received ${cash(x.amount_received)} · Balance ${cash(Math.max(0,x.total_amount-x.amount_received))}</small><small>${safe(x.courier_name)} ${safe(x.tracking_id)}</small></div><div><button class="soft" onclick="edit('order','${x.id}')">Edit</button><button class="soft" onclick="printOrder('${x.id}')">Print summary</button><button class="primary" onclick="whatsAppOrder('${x.id}')">WhatsApp update</button><button class="danger" onclick="del('order','${x.id}')">Delete</button></div></div>`).join(""):'No orders recorded yet.'}
 
 async function fetchOrderDetails(id){let x=os.find(a=>a.id===id);if(!x)return null;let q=await db.from("owner_order_items").select("product_name,quantity,unit_price,line_total").eq("order_id",id).order("created_at");if(q.error){alert(q.error.message);return null}return{x,items:q.data||[]}}
@@ -133,6 +621,23 @@ async function exportOrderCSV(){let a=reportOrders();if(!a.length){alert('No ord
 function exportEnquiryCSV(){if(!es.length){alert('No enquiries to export.');return}let rows=[['Enquiry ID','Date','Customer','Phone','Product','Quantity','Estimated total','Status','Notes']];es.forEach(x=>rows.push([x.id,String(x.created_at||'').slice(0,10),x.customer_name,x.phone,x.product_name,x.quantity,x.total_amount,x.status,x.notes]));downloadCSV('lakka-stories-enquiries.csv',rows)}
 $("applyReport").onclick=renderReports;$("resetReport").onclick=()=>{$("reportFrom").value="";$("reportTo").value="";renderReports()};$("exportOrders").onclick=exportOrderCSV;$("exportEnquiries").onclick=exportEnquiryCSV;
 
+// V13 — enquiry follow-up, quote tracking and WhatsApp quote preparation.
+window.saveEnquiryFollowup=async id=>{
+ const quote=$("quote_"+id).value.trim();
+ if(quote!==""&&(!Number.isFinite(Number(quote))||Number(quote)<0)){alert("Quote amount must be zero or greater.");return}
+ const data={enquiry_stage:$("stage_"+id).value,follow_up_date:$("follow_"+id).value||null,quote_amount:quote===""?null:Number(quote),quote_valid_until:$("valid_"+id).value||null,last_contacted_at:$("contacted_"+id).value||null,follow_up_notes:$("followNotes_"+id).value.trim()};
+ const r=await db.from("owner_enquiries").update(data).eq("id",id);
+ if(r.error){alert("Could not save follow-up details: "+r.error.message);return}
+ await loadE();alert("Enquiry follow-up details saved.");
+};
+window.sendEnquiryQuote=id=>{
+ const x=es.find(z=>z.id===id);if(!x)return;
+ let phone=String(x.phone||"").replace(/\D/g,"");if(phone.length===10)phone="91"+phone;if(!phone){alert("This enquiry has no usable phone number.");return}
+ const amount=$("quote_"+id).value.trim();if(amount===""){alert("Enter a quote amount first, then prepare the WhatsApp message.");return}
+ const valid=$("valid_"+id).value,note=$("followNotes_"+id).value.trim();
+ const msg=`Hello ${x.customer_name}, thank you for your interest in LAKKA STORIES.\n\nProduct: ${x.product_name||"Your requested product"}\nQuoted amount: ₹${Number(amount).toLocaleString("en-IN",{maximumFractionDigits:2})}${valid?"\nQuote valid until: "+valid:""}\n\n${note?"Details: "+note+"\n\n":""}Please let us know if you would like to proceed. This quotation is subject to final product and delivery confirmation. Thank you!`;
+ window.open("https://wa.me/"+phone+"?text="+encodeURIComponent(msg),"_blank","noopener");
+};
 function reset(){["customer","phone","address","courier","tracking","notes"].forEach(x=>$(x).value="");$("delivery").value=0;$("received").value=0;$("type").value="enquiry";$("payment").value="Pending";$("status").value="New";$("dispatch").value="";editId=editType=null;lines=[];newLine();$("formHeading").textContent="Add enquiry";$("save").textContent="Save enquiry";$("formMsg").classList.add("hidden")}
 $("clear").onclick=reset;$("type").onchange=()=>{$("formHeading").textContent=$("type").value==="order"?"Add confirmed order":"Add enquiry";$("save").textContent=$("type").value==="order"?"Save order":"Save enquiry"};
 function payload(type){let valid=lines.filter(x=>(x.product_name||"").trim()&&(+x.quantity||0)>0),sub=valid.reduce((a,x)=>a+(+x.quantity)*(+x.unit_price||0),0),d=+$("delivery").value||0;return{user_id:user.id,customer_name:$("customer").value.trim(),phone:$("phone").value.trim(),product_id:valid[0]?.product_id||null,product_name:valid.map(x=>x.product_name).join(", "),quantity:valid.reduce((a,x)=>a+(+x.quantity||0),0)||1,unit_price:sub,delivery_charge:d,total_amount:sub+d,payment_status:$("payment").value,amount_received:+$("received").value||0,delivery_address:$("address").value,courier_name:$("courier").value,tracking_id:$("tracking").value,dispatch_date:$("dispatch").value||null,notes:$("notes").value,_items:valid.map(x=>({product_id:x.product_id||null,product_name:x.product_name,quantity:+x.quantity,unit_price:+x.unit_price||0,line_total:(+x.quantity)*(+x.unit_price||0)}))}}
@@ -142,4 +647,781 @@ window.del=async(type,id)=>{if(!confirm("Delete this record?"))return;let r=awai
 window.convert=async id=>{let x=es.find(a=>a.id===id);if(!x||!confirm("Convert this enquiry into an order?"))return;let p={...x,user_id:user.id,order_status:"Confirmed"};delete p.id;delete p.status;delete p.created_at;delete p.updated_at;let r=await db.from("owner_orders").insert(p);if(r.error){alert(r.error.message);return}let u=await db.from("owner_enquiries").update({status:"Converted"}).eq("id",id);if(u.error)alert(u.error.message);await loadAll();pane("orders")};
 $("searchE").oninput=renderE;$("searchO").oninput=renderO;
 $('purchaseDate').value=new Date().toISOString().slice(0,10);(async()=>{let {data:{session}}=await db.auth.getSession();if(session)signedIn(session);else signedOut();db.auth.onAuthStateChange((e,s)=>{if(s)signedIn(s);else signedOut()})})();
+
+// V11 — Product sourcing linked to the existing public catalogue.
+function populateSourceSelectors(){
+  const p=$("srcProduct"),s=$("srcSupplier"),c=$("compareProduct");
+  if(p){const old=p.value;p.innerHTML='<option value="">Choose existing catalogue product</option>'+ps.map(x=>`<option value="${safe(x.id)}">${safe(x.name)} ${safe(x.product_code||"")}</option>`).join("");if(ps.some(x=>String(x.id)===old))p.value=old}
+  if(s){const old=s.value;s.innerHTML='<option value="">Choose saved supplier</option>'+suppliers.map(x=>`<option value="${safe(x.id)}">${safe(x.supplier_name)}</option>`).join("");if(suppliers.some(x=>String(x.id)===old))s.value=old}
+  if(c){const old=c.value;c.innerHTML='<option value="">Choose product</option>'+ps.map(x=>`<option value="${safe(x.id)}">${safe(x.name)} ${safe(x.product_code||"")}</option>`).join("");if(ps.some(x=>String(x.id)===old))c.value=old}
+}
+async function loadProductSourcing(){
+  await loadSuppliers();
+  const r=await db.from("owner_product_sources").select("*").order("updated_at",{ascending:false});
+  if(r.error){message("sourceMsg","Sourcing records could not load: "+r.error.message+". Check that the V11 SQL setup has been run.");return}
+  sourceRows=r.data||[];populateSourceSelectors();renderProductSourcing();
+}
+function clearSourceForm(){
+  sourceEditId=null;
+  ["srcProduct","srcSupplier"].forEach(id=>$(id).value="");
+  $("srcStatus").value="Not contacted";$("srcAvailability").value="Not confirmed";
+  $("srcCost").value="";$("srcDate").value="";$("srcEvidence").value="Unverified";$("srcNotes").value="";
+  $("saveSource").textContent="Save product sourcing record";
+}
+function renderProductSourcing(){
+  populateSourceSelectors();
+  const names=Object.fromEntries(suppliers.map(x=>[String(x.id),x.supplier_name]));
+  $("sourceList").innerHTML=sourceRows.length?sourceRows.map(x=>`<div class="item"><div><b>${safe(x.product_name)}</b><small>Supplier: ${safe(x.supplier_name||names[String(x.supplier_id)]||"Unknown")}</small><small>Sourcing: ${safe(x.sourcing_status)} · Availability: ${safe(x.availability_status)}</small><small>Quoted cost: ${x.quoted_unit_cost===null||x.quoted_unit_cost===""?"Not recorded":cash(x.quoted_unit_cost)} · Evidence: ${safe(x.evidence_status||"Unverified")}</small><small>Checked: ${safe(x.last_checked||"Not recorded")} · ${safe(x.notes||"")}</small></div><div><button class="soft" onclick="editSource('${x.id}')">Edit</button><button class="danger" onclick="deleteSource('${x.id}')">Delete</button></div></div>`).join(""):"No sourcing records yet. Select a catalogue product and a saved supplier to begin.";
+}
+$("saveSource").onclick=async()=>{
+  const pid=$("srcProduct").value,sid=$("srcSupplier").value;
+  const prod=ps.find(x=>String(x.id)===String(pid)),sup=suppliers.find(x=>String(x.id)===String(sid));
+  if(!prod||!sup){message("sourceMsg","Choose an existing catalogue product and a saved supplier.");return}
+  const cost=$("srcCost").value.trim();
+  if(cost!==""&&(!Number.isFinite(Number(cost))||Number(cost)<0)){message("sourceMsg","Quoted unit cost must be zero or greater.");return}
+  const data={user_id:user.id,product_id:String(prod.id),product_name:prod.name,supplier_id:String(sup.id),supplier_name:sup.supplier_name,sourcing_status:$("srcStatus").value,availability_status:$("srcAvailability").value,quoted_unit_cost:cost===""?null:Number(cost),last_checked:$("srcDate").value||null,evidence_status:$("srcEvidence").value,notes:$("srcNotes").value.trim(),updated_at:new Date().toISOString()};
+  const q=sourceEditId?await db.from("owner_product_sources").update(data).eq("id",sourceEditId):await db.from("owner_product_sources").insert(data);
+  if(q.error){message("sourceMsg",q.error.message);return}
+  clearSourceForm();await loadProductSourcing();message("sourceMsg","Product sourcing record saved.");
+};
+window.editSource=id=>{
+  const x=sourceRows.find(r=>r.id===id);if(!x)return;sourceEditId=id;
+  $("srcProduct").value=x.product_id;$("srcSupplier").value=x.supplier_id;
+  $("srcStatus").value=x.sourcing_status||"Not contacted";$("srcAvailability").value=x.availability_status||"Not confirmed";
+  $("srcCost").value=x.quoted_unit_cost??"";$("srcDate").value=x.last_checked||"";
+  $("srcEvidence").value=x.evidence_status||"Unverified";$("srcNotes").value=x.notes||"";
+  $("saveSource").textContent="Update sourcing record";window.scrollTo({top:0,behavior:"smooth"});
+};
+window.deleteSource=async id=>{
+  if(!confirm("Delete this product sourcing record? The catalogue product and supplier will remain unchanged."))return;
+  const q=await db.from("owner_product_sources").delete().eq("id",id);
+  if(q.error)alert(q.error.message);else{await loadProductSourcing();message("sourceMsg","Sourcing record deleted.")}
+};
+$("clearSource").onclick=clearSourceForm;
+$("refreshSources").onclick=loadProductSourcing;
+$("exportSources").onclick=()=>{
+  const rows=[["Product","Supplier","Sourcing status","Availability","Quoted unit cost","Checked date","Evidence status","Notes"],...sourceRows.map(x=>[x.product_name,x.supplier_name,x.sourcing_status,x.availability_status,x.quoted_unit_cost,x.last_checked,x.evidence_status,x.notes])];
+  downloadCSV("lakka-stories-product-sourcing.csv",rows);
+};
+
+// V12 — Supplier quotation comparison, reusing V11 product sourcing records.
+function renderSupplierComparison(){
+  const pid=$("compareProduct").value;
+  if(!pid){$("comparisonSummary").textContent="Choose a product to compare supplier records.";return}
+  const rows=sourceRows.filter(x=>String(x.product_id)===String(pid));
+  if(!rows.length){$("comparisonSummary").textContent="No supplier sourcing records exist for this product yet. Add records above for each supplier.";return}
+  const priced=rows.filter(x=>x.quoted_unit_cost!==null&&x.quoted_unit_cost!==""&&Number.isFinite(Number(x.quoted_unit_cost))).sort((a,b)=>Number(a.quoted_unit_cost)-Number(b.quoted_unit_cost));
+  const lowest=priced.length?Number(priced[0].quoted_unit_cost):null;
+  const fmt=v=>v===null||v===""?"Not quoted":cash(v);
+  $("comparisonSummary").innerHTML=`<p><b>${safe(rows[0].product_name)}</b> · ${rows.length} supplier record(s) · ${priced.length} quotation(s) with prices</p>`+
+    `<div class="item"><div><b>Supplier comparison</b><small>Lowest recorded quote: ${lowest===null?"Not available":cash(lowest)}. This is not automatically the best supplier.</small></div></div>`+
+    rows.slice().sort((a,b)=>{
+      const av=a.quoted_unit_cost===null||a.quoted_unit_cost===""?Infinity:Number(a.quoted_unit_cost);
+      const bv=b.quoted_unit_cost===null||b.quoted_unit_cost===""?Infinity:Number(b.quoted_unit_cost);
+      return av-bv;
+    }).map(x=>`<div class="item"><div><b>${safe(x.supplier_name||"Supplier")}${x.quoted_unit_cost!==null&&x.quoted_unit_cost!==""&&Number(x.quoted_unit_cost)===lowest?' · Lowest quote':''}</b><small>Quoted unit cost: ${fmt(x.quoted_unit_cost)} · Availability: ${safe(x.availability_status||"Not confirmed")}</small><small>Sourcing: ${safe(x.sourcing_status||"Not recorded")} · Evidence: ${safe(x.evidence_status||"Unverified")}</small><small>Checked: ${safe(x.last_checked||"Not recorded")} · ${safe(x.notes||"")}</small></div></div>`).join("");
+}
+$("compareProduct").onchange=renderSupplierComparison;
+$("compareRefresh").onclick=async()=>{await loadProductSourcing();renderSupplierComparison()};
+$("exportComparison").onclick=()=>{
+  const pid=$("compareProduct").value;
+  if(!pid){alert("Choose a product first.");return}
+  const rows=sourceRows.filter(x=>String(x.product_id)===String(pid));
+  const data=[["Product","Supplier","Quoted unit cost","Availability","Sourcing status","Evidence status","Checked date","Notes"],...rows.map(x=>[x.product_name,x.supplier_name,x.quoted_unit_cost,x.availability_status,x.sourcing_status,x.evidence_status,x.last_checked,x.notes])];
+  downloadCSV("lakka-stories-supplier-comparison.csv",data);
+};
+
+// V14 — shipping, dispatch and returns management.
+let shipmentRows=[],shipmentEditId=null;
+function populateShipOrders(){const el=$("shipOrder");if(!el)return;const old=el.value;el.innerHTML='<option value="">Choose an existing order</option>'+os.map(o=>`<option value="${safe(o.id)}">${safe(o.customer_name)} · ${safe(o.product_name||"Order")} · ${cash(o.total_amount)}</option>`).join("");if(os.some(o=>String(o.id)===old))el.value=old}
+async function loadShipments(){await loadO();populateShipOrders();const r=await db.from("owner_shipments").select("*").order("created_at",{ascending:false});if(r.error){message("shippingMsg","Shipping records could not load: "+r.error.message+". Run the V14 SQL setup first.");return}shipmentRows=r.data||[];renderShipments()}
+function clearShipmentForm(){shipmentEditId=null;["shipOrder","shipCourier","shipTracking","shipWeight","shipLength","shipWidth","shipHeight","shipDispatchDate","shipNotes"].forEach(id=>$(id).value="");$("shipCustomerCost").value="0";$("shipActualCost").value="0";$("shipStatus").value="Not packed";$("shipReturn").value="None";["shipCheckProduct","shipCheckPack","shipCheckAddress","shipCheckLabel"].forEach(id=>$(id).checked=false);$("saveShipment").textContent="Save shipping record"}
+function renderShipments(){populateShipOrders();const orderMap=Object.fromEntries(os.map(o=>[String(o.id),o]));$("shipmentList").innerHTML=shipmentRows.length?shipmentRows.map(s=>{const o=orderMap[String(s.order_id)]||{};return `<div class="item"><div><b>${safe(o.customer_name||"Order")} · ${safe(o.product_name||s.order_reference||"")}</b><small>${safe(s.courier_name||"Courier not recorded")} · Tracking: ${safe(s.tracking_id||"Not entered")}</small><small>Status: ${safe(s.delivery_status)} · Return: ${safe(s.return_status||"None")}</small><small>Actual courier cost: ${cash(s.actual_courier_cost)} · Customer shipping charge: ${cash(s.customer_shipping_charge)}</small><small>Parcel: ${s.weight_grams??"—"} g · ${s.length_cm??"—"} × ${s.width_cm??"—"} × ${s.height_cm??"—"} cm</small><small>Dispatch: ${safe(s.dispatch_date||"Not dispatched")} · ${safe(s.notes||"")}</small></div><div><button class="soft" onclick="editShipment('${s.id}')">Edit</button><button class="danger" onclick="deleteShipment('${s.id}')">Delete</button></div></div>`}).join(""):"No shipping records yet. Create a record only when you have an actual order to prepare or dispatch."}
+$("saveShipment").onclick=async()=>{const oid=$("shipOrder").value;if(!oid){message("shippingMsg","Choose an existing customer order first.");return}const num=id=>$(id).value.trim()===""?null:Number($(id).value);for(const id of ["shipCustomerCost","shipActualCost","shipWeight","shipLength","shipWidth","shipHeight"]){const v=num(id);if(v!==null&&(!Number.isFinite(v)||v<0)){message("shippingMsg","Shipping costs, weight and dimensions must be zero or greater.");return}}const order=os.find(o=>String(o.id)===String(oid));const data={user_id:user.id,order_id:oid,order_reference:order?order.customer_name+" · "+(order.product_name||"Order"):"",courier_name:$("shipCourier").value.trim(),tracking_id:$("shipTracking").value.trim(),customer_shipping_charge:num("shipCustomerCost")??0,actual_courier_cost:num("shipActualCost")??0,weight_grams:num("shipWeight"),length_cm:num("shipLength"),width_cm:num("shipWidth"),height_cm:num("shipHeight"),dispatch_date:$("shipDispatchDate").value||null,delivery_status:$("shipStatus").value,return_status:$("shipReturn").value,check_product_checked:$("shipCheckProduct").checked,check_packaging_checked:$("shipCheckPack").checked,check_address_verified:$("shipCheckAddress").checked,check_label_prepared:$("shipCheckLabel").checked,notes:$("shipNotes").value.trim(),updated_at:new Date().toISOString()};const q=shipmentEditId?await db.from("owner_shipments").update(data).eq("id",shipmentEditId):await db.from("owner_shipments").insert(data);if(q.error){message("shippingMsg",q.error.message);return}clearShipmentForm();await loadShipments();message("shippingMsg","Shipping record saved.")};
+window.editShipment=id=>{const s=shipmentRows.find(x=>x.id===id);if(!s)return;shipmentEditId=id;const map={shipOrder:"order_id",shipCourier:"courier_name",shipTracking:"tracking_id",shipCustomerCost:"customer_shipping_charge",shipActualCost:"actual_courier_cost",shipWeight:"weight_grams",shipLength:"length_cm",shipWidth:"width_cm",shipHeight:"height_cm",shipDispatchDate:"dispatch_date",shipStatus:"delivery_status",shipReturn:"return_status",shipNotes:"notes"};Object.entries(map).forEach(([a,b])=>$(a).value=s[b]??"");$("shipCheckProduct").checked=!!s.check_product_checked;$("shipCheckPack").checked=!!s.check_packaging_checked;$("shipCheckAddress").checked=!!s.check_address_verified;$("shipCheckLabel").checked=!!s.check_label_prepared;$("saveShipment").textContent="Update shipping record";window.scrollTo({top:0,behavior:"smooth"})};
+window.deleteShipment=async id=>{if(!confirm("Delete this shipping record? The customer order will remain unchanged."))return;const q=await db.from("owner_shipments").delete().eq("id",id);if(q.error)alert(q.error.message);else{await loadShipments();message("shippingMsg","Shipping record deleted.")}};
+$("clearShipment").onclick=clearShipmentForm;$("refreshShipments").onclick=loadShipments;
+$("exportShipments").onclick=()=>{const rows=[["Order ID","Courier","Tracking ID","Customer shipping charge","Actual courier cost","Weight grams","Length cm","Width cm","Height cm","Dispatch date","Delivery status","Return status","Product checked","Packaging checked","Address verified","Label prepared","Notes"],...shipmentRows.map(s=>[s.order_id,s.courier_name,s.tracking_id,s.customer_shipping_charge,s.actual_courier_cost,s.weight_grams,s.length_cm,s.width_cm,s.height_cm,s.dispatch_date,s.delivery_status,s.return_status,s.check_product_checked,s.check_packaging_checked,s.check_address_verified,s.check_label_prepared,s.notes])];downloadCSV("lakka-stories-shipping.csv",rows)};
+
+// V15 — Customer message drafts and follow-up reminder centre.
+let notifyShipments=[];
+function notifyCustomerRows(){
+  const type=$("notifyType").value;
+  const rows=type==="enquiry"?es:os;
+  const el=$("notifyRecord"),old=el.value;
+  el.innerHTML='<option value="">Choose a customer record</option>'+rows.map(x=>
+    `<option value="${safe(x.id)}">${safe(x.customer_name)} · ${safe(x.product_name|| (type==="enquiry"?"Enquiry":"Order"))} · ${safe(x.phone)}</option>`
+  ).join("");
+  if(rows.some(x=>String(x.id)===old))el.value=old;
+}
+function notifySelected(){
+  const type=$("notifyType").value,id=$("notifyRecord").value;
+  return (type==="enquiry"?es:os).find(x=>String(x.id)===String(id));
+}
+function makeCustomerMessage(){
+  const x=notifySelected();
+  if(!x){message("notifyMsg","Choose an enquiry or order first.");return}
+  const brand=$("notifyBrand").value.trim()||"LAKKA STORIES";
+  const template=$("notifyTemplate").value;
+  const name=x.customer_name||"Customer",product=x.product_name||"your selected product";
+  const total=Number(x.total_amount)||Number(x.quote_amount)||0;
+  const balance=Math.max(0,total-(Number(x.amount_received)||0));
+  const valid=x.quote_valid_until?` This quotation is valid until ${x.quote_valid_until}.`:"";
+  const ship=notifyShipments.find(s=>String(s.order_id)===String(x.id));
+  const tracking=ship?.tracking_id||x.tracking_id||"";
+  const courier=ship?.courier_name||x.courier_name||"";
+  const templates={
+    enquiry_received:`Hello ${name}, thank you for contacting ${brand} about ${product}. We have received your enquiry and will get back to you after checking the product details and availability.`,
+    need_details:`Hello ${name}, thank you for your interest in ${product}. Could you please share the quantity and delivery PIN code so we can check availability and delivery options? — ${brand}`,
+    quote:`Hello ${name}, thank you for considering ${brand}. Our current quotation for ${product} is ${cash(x.quote_amount??x.total_amount??0)}.${valid} This is subject to final product availability and delivery confirmation. Please let us know if you would like to proceed.`,
+    payment:`Hello ${name}, a gentle payment reminder from ${brand} for your order of ${product}. The recorded pending amount is ${cash(balance)}. Please contact us if you have already made the payment.`,
+    order_confirmed:`Hello ${name}, thank you for your order with ${brand}. Your order for ${product} has been recorded. Order value: ${cash(total)}. We will share a dispatch update after preparation.`,
+    dispatch:`Hello ${name}, your ${brand} order for ${product} has a shipping update.${courier?` Courier: ${courier}.`:""}${tracking?` Tracking ID: ${tracking}.`:""} Please contact us if you need assistance.`,
+    delivered:`Hello ${name}, we hope your ${brand} order for ${product} has reached you safely. Please let us know if everything arrived in good condition. Thank you for supporting our small business.`,
+    custom:`Hello ${name}, thank you for connecting with ${brand} about ${product}.`
+  };
+  $("notifyPreview").value=templates[template]||templates.custom;
+  message("notifyMsg","Message draft prepared. Please review every detail before sending.");
+}
+async function loadNotifications(){
+  await Promise.all([loadE(),loadO()]);
+  const sh=await db.from("owner_shipments").select("order_id,courier_name,tracking_id,delivery_status,dispatch_date").order("created_at",{ascending:false});
+  notifyShipments=sh.error?[]:(sh.data||[]);
+  notifyCustomerRows();renderNotifyReminders();
+}
+function renderNotifyReminders(){
+  const today=new Date();today.setHours(0,0,0,0);
+  const items=[];
+  es.forEach(x=>{
+    if(x.follow_up_date){
+      const d=new Date(x.follow_up_date+"T00:00:00");
+      items.push({date:x.follow_up_date,kind:"Enquiry follow-up",name:x.customer_name,detail:x.product_name||"Enquiry",phone:x.phone,late:d<today,recordType:"enquiry",id:x.id});
+    }
+  });
+  os.forEach(x=>{
+    const pending=Math.max(0,(Number(x.total_amount)||0)-(Number(x.amount_received)||0));
+    if(pending>0 && !["Cancelled","Refunded"].includes(x.order_status))
+      items.push({date:"",kind:"Payment pending",name:x.customer_name,detail:`${x.product_name||"Order"} · ${cash(pending)} pending`,phone:x.phone,late:false,recordType:"order",id:x.id});
+  });
+  const list=items.sort((a,b)=>(a.date||"9999").localeCompare(b.date||"9999"));
+  $("notifyReminders").innerHTML=list.length?list.map(x=>
+    `<div class="item"><div><b>${safe(x.kind)} · ${safe(x.name)}</b><small>${safe(x.detail)} · ${safe(x.phone)}</small><small>${x.date?`Follow-up date: ${safe(x.date)}${x.late?" · Overdue":""}`:"Review payment status"}</small></div><button class="soft" onclick="openNotifyRecord('${x.recordType}','${x.id}')">Prepare message</button></div>`
+  ).join(""):"No follow-up dates or pending customer payments found in saved records.";
+}
+window.openNotifyRecord=(type,id)=>{
+  $("notifyType").value=type;notifyCustomerRows();$("notifyRecord").value=id;
+  $("notifyTemplate").value=type==="enquiry"?"quote":"payment";
+  makeCustomerMessage();window.scrollTo({top:0,behavior:"smooth"});
+};
+$("notifyType").onchange=()=>{notifyCustomerRows();$("notifyPreview").value=""};
+$("notifyRecord").onchange=()=>{$("notifyPreview").value=""};
+$("buildNotify").onclick=makeCustomerMessage;
+$("refreshNotify").onclick=loadNotifications;
+$("openNotify").onclick=()=>{
+  const x=notifySelected();if(!x){message("notifyMsg","Choose a customer record first.");return}
+  const phone=String(x.phone||"").replace(/\D/g,"");
+  if(!phone){message("notifyMsg","This customer record has no phone number.");return}
+  const text=$("notifyPreview").value.trim();if(!text){message("notifyMsg","Build or enter a message first.");return}
+  const url="https://wa.me/"+phone+"?text="+encodeURIComponent(text);
+  window.open(url,"_blank","noopener");
+};
+$("copyNotify").onclick=async()=>{
+  const text=$("notifyPreview").value.trim();
+  if(!text){message("notifyMsg","Build or enter a message first.");return}
+  try{await navigator.clipboard.writeText(text);message("notifyMsg","Message copied.")}
+  catch(e){message("notifyMsg","Clipboard access unavailable. Select and copy the message manually.")}
+};
+
+
+// V16 — Private business settings and reusable defaults.
+let businessSettings={};
+const settingFields={
+  brand:"setBrand",whatsapp_phone:"setPhone",email:"setEmail",contact_phone:"setContact",
+  business_address:"setAddress",dispatch_location:"setDispatch",sales_region:"setRegion",
+  currency:"setCurrency",quotation_validity_days:"setQuoteDays",packaging_estimate:"setPack",
+  shipping_estimate:"setShip",reference_prefix:"setPrefix",message_signoff:"setSignoff",customer_terms:"setTerms"
+};
+function readSettingsForm(){
+ const out={};
+ Object.entries(settingFields).forEach(([key,id])=>{
+   const v=$(id).value.trim();
+   out[key]=["quotation_validity_days"].includes(key)?(v?Number(v):7):
+     ["packaging_estimate","shipping_estimate"].includes(key)?(v===""?null:Number(v)):v;
+ });
+ return out;
+}
+function fillSettingsForm(data={}){
+ Object.entries(settingFields).forEach(([key,id])=>{
+   const v=data[key];
+   $(id).value=(v===null||v===undefined)?"":String(v);
+ });
+}
+function renderSettingsSummary(data){
+ const rows=[
+  ["Brand",data.brand||"Not set"],["WhatsApp",data.whatsapp_phone||"Not set"],
+  ["Dispatch location",data.dispatch_location||"Not set"],["Sales region",data.sales_region||"India"],
+  ["Quotation validity",`${data.quotation_validity_days||7} days`],
+  ["Packaging estimate",data.packaging_estimate==null?"Not set":cash(data.packaging_estimate)],
+  ["Shipping estimate",data.shipping_estimate==null?"Not set":cash(data.shipping_estimate)]
+ ];
+ $("settingsSummary").innerHTML=rows.map(([k,v])=>`<div class="dash-alert"><span>${safe(k)}</span><b>${safe(v)}</b></div>`).join("");
+}
+async function loadBusinessSettings(){
+ const r=await db.from("owner_business_settings").select("settings").eq("user_id",user.id).maybeSingle();
+ if(r.error){message("settingsMsg","Settings table not available. Run the V16 SQL migration first: "+r.error.message);return}
+ businessSettings=r.data?.settings||{};
+ fillSettingsForm(businessSettings);renderSettingsSummary(businessSettings);
+ if(businessSettings.brand && $("notifyBrand"))$("notifyBrand").value=businessSettings.brand;
+}
+$("saveSettings").onclick=async()=>{
+ const data=readSettingsForm();
+ if(data.whatsapp_phone && !/^[0-9]{8,15}$/.test(data.whatsapp_phone.replace(/[+\s()-]/g,""))){
+   message("settingsMsg","Enter WhatsApp number with country code using digits only, for example 91 followed by the mobile number.");return;
+ }
+ if(data.quotation_validity_days<1||data.quotation_validity_days>90){message("settingsMsg","Quotation validity must be between 1 and 90 days.");return}
+ for(const k of ["packaging_estimate","shipping_estimate"]){
+   if(data[k]!==null&&(!Number.isFinite(data[k])||data[k]<0)){message("settingsMsg","Planning costs must be zero or greater.");return}
+ }
+ const row={user_id:user.id,settings:data,updated_at:new Date().toISOString()};
+ const r=await db.from("owner_business_settings").upsert(row,{onConflict:"user_id"});
+ if(r.error){message("settingsMsg","Could not save settings: "+r.error.message);return}
+ businessSettings=data;renderSettingsSummary(data);
+ if(data.brand && $("notifyBrand"))$("notifyBrand").value=data.brand;
+ message("settingsMsg","Business settings saved privately.");
+};
+$("resetSettings").onclick=()=>{fillSettingsForm(businessSettings);message("settingsMsg","Form restored to the last saved settings.")};
+
+
+// V17 — Printable customer documents (quotation, order confirmation, receipt, dispatch summary).
+function loadDocuments(){
+  loadE();loadO();populateDocRecords();
+}
+function populateDocRecords(){
+  const type=$("docType").value,sel=$("docRecord"),old=sel.value;
+  const rows=type==="quotation"?es:os;
+  sel.innerHTML='<option value="">Choose a record</option>'+rows.map(x=>
+    `<option value="${safe(x.id)}">${safe(x.customer_name)} · ${safe(x.product_name|| (type==="quotation"?"Enquiry":"Order"))} · ${safe(x.phone)}</option>`
+  ).join("");
+  if(rows.some(x=>String(x.id)===old))sel.value=old;
+  $("docHelp").textContent=type==="quotation"?"Choose a saved enquiry with a quotation amount.":"Choose a saved order to create this document.";
+}
+$("docType").onchange=populateDocRecords;
+$("refreshDocs").onclick=loadDocuments;
+function printDocument(title,body,brand){
+  const w=window.open("about:blank","_blank");
+  if(!w){message("docMsg","Please allow pop-ups to preview and print documents.");return}
+  w.document.write(`<!doctype html><html><head><title>${safe(title)}</title><meta name="viewport" content="width=device-width,initial-scale=1"><style>
+  body{font:14px Arial,sans-serif;color:#292522;padding:30px;max-width:780px;margin:auto;line-height:1.5}
+  h1{color:#6b2638;margin-bottom:2px}.muted{color:#6b625b;font-size:12px}
+  h2{border-bottom:2px solid #6b2638;padding-bottom:8px;margin-top:28px}
+  table{width:100%;border-collapse:collapse;margin:18px 0}th,td{padding:9px;border-bottom:1px solid #ddd;text-align:left}
+  .totals{margin-left:auto;width:280px}.totals div{display:flex;justify-content:space-between;padding:5px}
+  .note{background:#f7f2eb;padding:12px;margin-top:20px;white-space:pre-wrap}
+  .foot{margin-top:50px;border-top:1px solid #ddd;padding-top:12px}
+  @media print{body{padding:8px}button{display:none}}
+  </style></head><body>${body}<div class="foot muted">Prepared by ${safe(brand)}. Please retain this document for your records.</div><p class="muted">This document is not a GST tax invoice.</p><script>window.onload=()=>setTimeout(()=>window.print(),250)<\/script></body></html>`);
+  w.document.close();
+}
+$("previewDoc").onclick=async()=>{
+  const type=$("docType").value,id=$("docRecord").value;
+  if(!id){message("docMsg","Choose a customer record first.");return}
+  const brand=(businessSettings?.brand||"LAKKA STORIES").trim();
+  const note=$("docNote").value.trim();
+  const esc=safe;
+  if(type==="quotation"){
+    const x=es.find(a=>String(a.id)===id);if(!x){message("docMsg","Enquiry not found. Refresh records.");return}
+    const amount=x.quote_amount;
+    const valid=x.quote_valid_until||"Not specified";
+    const body=`<h1>${esc(brand)}</h1><h2>Customer Quotation</h2>
+      <p><b>Quotation reference:</b> LS-Q-${esc(String(x.id).slice(0,8).toUpperCase())}<br>
+      <b>Date:</b> ${new Date().toLocaleDateString("en-IN")}<br><b>Customer:</b> ${esc(x.customer_name)}<br><b>Phone:</b> ${esc(x.phone)}</p>
+      <table><thead><tr><th>Description</th><th>Quoted amount</th></tr></thead><tbody><tr><td>${esc(x.product_name||"Product enquiry")}</td><td>${amount==null?"Not recorded":cash(amount)}</td></tr></tbody></table>
+      <p><b>Quotation validity:</b> ${esc(valid)}</p><p>${esc(x.notes||"")}</p>
+      ${note?`<div class="note">${esc(note)}</div>`:""}
+      <p class="muted">This quotation is subject to product availability, final delivery confirmation and agreed payment terms. It is not an order confirmation.</p>`;
+    printDocument("Customer Quotation",body,brand);return;
+  }
+  const x=os.find(a=>String(a.id)===id);if(!x){message("docMsg","Order not found. Refresh records.");return}
+  const q=await db.from("owner_order_items").select("product_name,quantity,unit_price,line_total").eq("order_id",id);
+  if(q.error){message("docMsg",q.error.message);return}
+  const items=q.data||[];
+  const rows=items.map(v=>`<tr><td>${esc(v.product_name)}</td><td>${v.quantity}</td><td>${cash(v.unit_price)}</td><td>${cash(v.line_total)}</td></tr>`).join("");
+  const balance=Math.max(0,(+x.total_amount||0)-(+x.amount_received||0));
+  let heading=type==="receipt"?"Payment Receipt":type==="dispatch"?"Dispatch Summary":"Order Confirmation";
+  let content=`<h1>${esc(brand)}</h1><h2>${heading}</h2>
+   <p><b>Order reference:</b> LS-${esc(String(x.id).slice(0,8).toUpperCase())}<br>
+   <b>Date:</b> ${new Date().toLocaleDateString("en-IN")}<br>
+   <b>Customer:</b> ${esc(x.customer_name)}<br><b>Phone:</b> ${esc(x.phone)}<br>
+   <b>Order status:</b> ${esc(x.order_status||"Not specified")}</p>`;
+  if(type==="dispatch")content+=`<p><b>Delivery address:</b><br>${esc(x.delivery_address||"Not provided")}<br><b>Courier:</b> ${esc(x.courier_name||"Not recorded")}<br><b>Tracking ID:</b> ${esc(x.tracking_id||"Not recorded")}<br><b>Dispatch date:</b> ${esc(x.dispatch_date||"Not recorded")}</p>`;
+  content+=`<table><thead><tr><th>Product</th><th>Qty</th><th>Unit price</th><th>Amount</th></tr></thead><tbody>${rows||"<tr><td colspan='4'>No item lines recorded</td></tr>"}</tbody></table>
+   <div class="totals"><div><span>Delivery</span><b>${cash(x.delivery_charge)}</b></div><div><span>Order total</span><b>${cash(x.total_amount)}</b></div><div><span>Amount received</span><b>${cash(x.amount_received)}</b></div><div><span>Balance</span><b>${cash(balance)}</b></div></div>`;
+  if(type==="receipt")content+=`<p><b>Payment status:</b> ${esc(x.payment_status||"Not recorded")}<br><b>Receipt amount:</b> ${cash(x.amount_received)}<br><b>Payment reference:</b> ${esc(x.payment_reference||"Not recorded")}</p><p class="muted">This receipt records the amount entered in the order record. It is not a tax invoice.</p>`;
+  if(note)content+=`<div class="note">${esc(note)}</div>`;
+  printDocument(heading,content,brand);
+};
+
+
+// V18 — Private business expense register.
+let expenseRows=[],expenseEditId=null;
+function clearExpenseForm(){
+ expenseEditId=null;
+ ["exDate","exDescription","exAmount","exVendor","exReference","exNotes"].forEach(id=>$(id).value="");
+ $("exCategory").value="Packaging";$("exMethod").value="UPI";
+ $("saveExpense").textContent="Save expense";
+}
+async function loadExpenses(){
+ const r=await db.from("owner_expenses").select("*").order("expense_date",{ascending:false}).order("created_at",{ascending:false});
+ if(r.error){message("expenseMsg","Expense table not available. Run the V18 SQL migration first: "+r.error.message);return}
+ expenseRows=r.data||[];renderExpenses();
+}
+function renderExpenses(){
+ const now=new Date(),month=now.toISOString().slice(0,7);
+ const monthRows=expenseRows.filter(x=>String(x.expense_date).slice(0,7)===month);
+ $("exMonthTotal").textContent=cash(monthRows.reduce((a,x)=>a+Number(x.amount||0),0));
+ $("exAllTotal").textContent=cash(expenseRows.reduce((a,x)=>a+Number(x.amount||0),0));
+ $("exCount").textContent=expenseRows.length;
+ $("expenseList").innerHTML=expenseRows.length?expenseRows.map(x=>`<div class="list-row">
+ <div><b>${safe(x.description)}</b><div class="muted">${safe(x.expense_date)} · ${safe(x.category)} · ${cash(x.amount)}</div>
+ <div class="muted">${safe(x.vendor||"Vendor not entered")} · ${safe(x.payment_method||"")} ${x.reference? "· Ref: "+safe(x.reference):""}</div>
+ ${x.notes?`<div class="muted">${safe(x.notes)}</div>`:""}</div>
+ <div class="actions"><button class="soft" data-exedit="${safe(x.id)}">Edit</button><button class="danger" data-exdelete="${safe(x.id)}">Delete</button></div></div>`).join(""):"<p class='muted'>No business expenses recorded. You can keep this empty while testing.</p>";
+ document.querySelectorAll("[data-exedit]").forEach(b=>b.onclick=()=>editExpense(b.dataset.exedit));
+ document.querySelectorAll("[data-exdelete]").forEach(b=>b.onclick=()=>deleteExpense(b.dataset.exdelete));
+}
+function editExpense(id){
+ const x=expenseRows.find(a=>String(a.id)===String(id));if(!x)return;
+ expenseEditId=x.id;
+ $("exDate").value=x.expense_date;$("exCategory").value=x.category;$("exDescription").value=x.description;
+ $("exAmount").value=x.amount;$("exVendor").value=x.vendor||"";$("exMethod").value=x.payment_method||"UPI";
+ $("exReference").value=x.reference||"";$("exNotes").value=x.notes||"";
+ $("saveExpense").textContent="Update expense";$("expenses").scrollIntoView({behavior:"smooth"});
+}
+async function deleteExpense(id){
+ if(!confirm("Delete this expense record? This cannot be undone."))return;
+ const r=await db.from("owner_expenses").delete().eq("id",id);
+ if(r.error){message("expenseMsg",r.error.message);return}
+ message("expenseMsg","Expense record deleted.");await loadExpenses();
+}
+$("saveExpense").onclick=async()=>{
+ const date=$("exDate").value,description=$("exDescription").value.trim(),amount=Number($("exAmount").value);
+ if(!date||!description||!Number.isFinite(amount)||amount<=0){message("expenseMsg","Enter an expense date, description and amount greater than zero.");return}
+ const row={user_id:user.id,expense_date:date,category:$("exCategory").value,description,amount,
+ vendor:$("exVendor").value.trim()||null,payment_method:$("exMethod").value,
+ reference:$("exReference").value.trim()||null,notes:$("exNotes").value.trim()||null};
+ const r=expenseEditId?await db.from("owner_expenses").update(row).eq("id",expenseEditId):await db.from("owner_expenses").insert(row);
+ if(r.error){message("expenseMsg","Could not save expense: "+r.error.message);return}
+ message("expenseMsg",expenseEditId?"Expense updated.":"Expense recorded.");
+ clearExpenseForm();await loadExpenses();
+};
+$("clearExpense").onclick=()=>{clearExpenseForm();message("expenseMsg","Form cleared.")};
+$("refreshExpenses").onclick=loadExpenses;
+$("exportExpenses").onclick=()=>downloadCSV("lakka-stories-business-expenses.csv",[
+ ["Date","Category","Description","Amount paid INR","Vendor","Payment method","Reference","Notes"],
+ ...expenseRows.map(x=>[x.expense_date,x.category,x.description,x.amount,x.vendor,x.payment_method,x.reference,x.notes])
+]);
+
+
+// V19 — Recorded cash flow summary. Distinguishes payments from order/purchase values.
+let financeData={orders:[],purchases:[],expenses:[]};
+function monthKey(d){return String(d||"").slice(0,7)}
+function sumRows(rows,key){return rows.reduce((n,x)=>n+Number(x[key]||0),0)}
+async function loadFinance(){
+ if(!$("finMonth").value)$("finMonth").value=new Date().toISOString().slice(0,7);
+ const [a,b,c]=await Promise.all([
+  db.from("owner_orders").select("id,total_amount,amount_received,order_status,created_at"),
+  db.from("owner_purchases").select("id,total_cost,amount_paid,purchase_date,goods_status"),
+  db.from("owner_expenses").select("id,amount,expense_date,category")
+ ]);
+ const err=[a,b,c].find(x=>x.error);
+ if(err){message("financeMsg","Could not load all financial records: "+err.error.message);return}
+ financeData={orders:a.data||[],purchases:b.data||[],expenses:c.data||[]};
+ renderFinance();
+}
+function renderFinance(){
+ const m=$("finMonth").value;
+ const orders=financeData.orders.filter(x=>monthKey(x.created_at)===m&&!String(x.order_status||"").toLowerCase().includes("cancel"));
+ const purchases=financeData.purchases.filter(x=>monthKey(x.purchase_date)===m);
+ const expenses=financeData.expenses.filter(x=>monthKey(x.expense_date)===m);
+ const received=sumRows(orders,"amount_received"),paid=sumRows(purchases,"amount_paid"),spent=sumRows(expenses,"amount");
+ const orderOpen=financeData.orders.filter(x=>!String(x.order_status||"").toLowerCase().includes("cancel"));
+ const custDue=orderOpen.reduce((n,x)=>n+Math.max(0,Number(x.total_amount||0)-Number(x.amount_received||0)),0);
+ const supplierDue=financeData.purchases.reduce((n,x)=>n+Math.max(0,Number(x.total_cost||0)-Number(x.amount_paid||0)),0);
+ const orderValue=sumRows(orderOpen,"total_amount"),purchaseValue=sumRows(financeData.purchases,"total_cost");
+ $("finReceived").textContent=cash(received);$("finSupplierPaid").textContent=cash(paid);
+ $("finExpenses").textContent=cash(spent);$("finNet").textContent=cash(received-paid-spent);
+ $("finCustomerDue").textContent=cash(custDue);$("finSupplierDue").textContent=cash(supplierDue);
+ $("finOrderValue").textContent=cash(orderValue);$("finPurchaseValue").textContent=cash(purchaseValue);
+ $("finCoverage").textContent=`${orders.length} non-cancelled orders created in selected month · ${purchases.length} purchase records · ${expenses.length} expense records. All-time outstanding balances use ${orderOpen.length} non-cancelled orders and ${financeData.purchases.length} purchases.`;
+}
+$("refreshFinance").onclick=loadFinance;
+$("finMonth").onchange=renderFinance;
+$("exportFinance").onclick=()=>{
+ const m=$("finMonth").value;
+ const rows=[["Metric","Amount INR","Period"],["Customer payments received", $("finReceived").textContent,m],
+ ["Supplier payments made",$("finSupplierPaid").textContent,m],["Other business expenses paid",$("finExpenses").textContent,m],
+ ["Recorded cash movement",$("finNet").textContent,m],["Customer balances pending",$("finCustomerDue").textContent,"All open records"],
+ ["Supplier balances pending",$("finSupplierDue").textContent,"All records"],["Non-cancelled order value",$("finOrderValue").textContent,"All records"],
+ ["Recorded purchase value",$("finPurchaseValue").textContent,"All records"]];
+ downloadCSV("lakka-stories-financial-summary.csv",rows);
+};
+
+
+// V20 — Browser-side export centre. Read-only; owner RLS limits the exported rows.
+const BACKUP_TABLES=[
+ "owner_enquiries","owner_inventory","owner_order_items","owner_orders",
+ "owner_product_cost_inputs","owner_purchases","owner_stock_movements","owner_suppliers",
+ "owner_product_sources","owner_shipments","owner_business_settings","owner_expenses"
+];
+let backupData={},backupRowsTotal=0;
+async function fetchAllOwnerRows(table){
+ const pageSize=500,all=[];
+ for(let start=0;start<50000;start+=pageSize){
+   const r=await db.from(table).select("*").order("created_at",{ascending:true}).range(start,start+pageSize-1);
+   if(r.error){
+     // Some tables may not have created_at; retry without ordering.
+     if(start===0 && /created_at|column/i.test(r.error.message)){
+       const retry=await db.from(table).select("*").range(0,pageSize-1);
+       if(retry.error)throw new Error(table+": "+retry.error.message);
+       all.push(...(retry.data||[]));
+       if((retry.data||[]).length<pageSize)break;
+       for(let offset=pageSize;offset<50000;offset+=pageSize){
+         const next=await db.from(table).select("*").range(offset,offset+pageSize-1);
+         if(next.error)throw new Error(table+": "+next.error.message);
+         all.push(...(next.data||[]));if((next.data||[]).length<pageSize)break;
+       }
+       break;
+     }
+     throw new Error(table+": "+r.error.message);
+   }
+   all.push(...(r.data||[]));
+   if((r.data||[]).length<pageSize)break;
+ }
+ return all;
+}
+function downloadBlob(name,blob){
+ const url=URL.createObjectURL(blob),a=document.createElement("a");
+ a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();
+ setTimeout(()=>URL.revokeObjectURL(url),1500);
+}
+function csvCell(v){
+ if(v===null||v===undefined)return "";
+ const t=typeof v==="object"?JSON.stringify(v):String(v);
+ return '"'+t.replace(/"/g,'""')+'"';
+}
+function tableCsv(rows){
+ if(!rows.length)return "No records\n";
+ const cols=[...new Set(rows.flatMap(r=>Object.keys(r)))];
+ return [cols.map(csvCell).join(","),...rows.map(r=>cols.map(c=>csvCell(r[c])).join(","))].join("\r\n");
+}
+async function loadBackupCentre(){
+ $("backupTableCount").textContent=BACKUP_TABLES.length;
+ $("backupTables").innerHTML=BACKUP_TABLES.map(t=>`<div class="list-row"><div><b>${safe(t)}</b><div class="muted">Private owner data</div></div><button class="soft" data-backup-table="${t}">Export CSV</button></div>`).join("");
+ document.querySelectorAll("[data-backup-table]").forEach(b=>b.onclick=()=>exportOneTable(b.dataset.backupTable));
+}
+async function exportOneTable(table){
+ try{
+  message("backupMsg","Reading "+table+"…");
+  const rows=await fetchAllOwnerRows(table);
+  downloadBlob("lakka-stories-"+table+".csv",new Blob([tableCsv(rows)],{type:"text/csv;charset=utf-8"}));
+  $("backupRowCount").textContent=String(rows.length);
+  $("backupLast").textContent=new Date().toLocaleTimeString();
+  message("backupMsg",`${table}: exported ${rows.length} rows.`);
+ }catch(e){message("backupMsg","Export failed: "+e.message)}
+}
+$("downloadFullBackup").onclick=async()=>{
+ const backup={brand:"LAKKA STORIES",exported_at:new Date().toISOString(),format_version:1,tables:{}};
+ try{
+  let total=0;
+  for(const t of BACKUP_TABLES){
+   message("backupMsg","Exporting "+t+"…");
+   const rows=await fetchAllOwnerRows(t);backup.tables[t]=rows;total+=rows.length;
+  }
+  backupRowsTotal=total;
+  downloadBlob("lakka-stories-private-backup-"+new Date().toISOString().slice(0,10)+".json",
+    new Blob([JSON.stringify(backup,null,2)],{type:"application/json;charset=utf-8"}));
+  $("backupRowCount").textContent=String(total);$("backupLast").textContent=new Date().toLocaleTimeString();
+  message("backupMsg",`Full JSON backup downloaded: ${total} rows across ${BACKUP_TABLES.length} tables.`);
+ }catch(e){message("backupMsg","Backup stopped: "+e.message+". No complete backup file was created.")}
+};
+$("downloadAllCsv").onclick=async()=>{
+ try{
+  const files=[];
+  for(const t of BACKUP_TABLES){
+   message("backupMsg","Preparing CSV: "+t+"…");
+   const rows=await fetchAllOwnerRows(t);
+   files.push({name:"lakka-stories-"+t+".csv",content:tableCsv(rows)});
+  }
+  if(typeof JSZip==="undefined"){message("backupMsg","CSV ZIP library is not available. Use the individual CSV export buttons or full JSON backup.");return}
+  const zip=new JSZip();files.forEach(f=>zip.file(f.name,f.content));
+  const blob=await zip.generateAsync({type:"blob"});
+  downloadBlob("lakka-stories-csv-backup-"+new Date().toISOString().slice(0,10)+".zip",blob);
+  $("backupLast").textContent=new Date().toLocaleTimeString();
+  $("backupRowCount").textContent=String(files.length);
+  message("backupMsg",`Downloaded ${files.length} CSV files in one ZIP.`);
+ }catch(e){message("backupMsg","CSV export failed: "+e.message)}
+};
+
+
+// V21 — Read-only catalogue quality audit.
+let catalogueAuditRows=[];
+function auditMissing(v){return v===null||v===undefined||String(v).trim()===""}
+function auditBuild(products,sources){
+ const byProduct={};sources.forEach(x=>{(byProduct[String(x.product_id)] ||= []).push(x)});
+ return products.map(x=>{
+  const linked=byProduct[String(x.id)]||[],flags=[];
+  if(auditMissing(x.image_url))flags.push("Missing image");
+  if(auditMissing(x.description))flags.push("Missing description");
+  if(auditMissing(x.dimensions))flags.push("Missing dimensions");
+  if(auditMissing(x.product_code))flags.push("Missing product code");
+  if(auditMissing(x.selling_price))flags.push("Selling price missing");
+  if(!linked.length)flags.push("No supplier sourcing record");
+  else if(!linked.some(y=>String(y.sourcing_status||"").toLowerCase().includes("approved")))flags.push("Sourcing not approved");
+  if(!linked.some(y=>String(y.evidence_status||"").toLowerCase().includes("origin")))flags.push("Origin evidence not marked checked");
+  return {...x,flags,sourcingRecords:linked.length};
+ });
+}
+async function runCatalogueAudit(){
+ message("catalogueAuditMsg","Checking catalogue and private sourcing records…");
+ const [p,q]=await Promise.all([
+  db.from("public_catalogue").select("id,product_code,name,category,description,dimensions,image_url,reference_price,selling_price,availability"),
+  db.from("owner_product_sources").select("product_id,sourcing_status,evidence_status")
+ ]);
+ if(p.error){message("catalogueAuditMsg","Catalogue read failed: "+p.error.message);return}
+ if(q.error){message("catalogueAuditMsg","Sourcing records read failed: "+q.error.message);return}
+ catalogueAuditRows=auditBuild(p.data||[],q.data||[]);
+ const n=f=>catalogueAuditRows.filter(x=>x.flags.includes(f)).length;
+ $("auditTotal").textContent=catalogueAuditRows.length;
+ $("auditImages").textContent=n("Missing image");
+ $("auditDescriptions").textContent=n("Missing description");
+ $("auditDimensions").textContent=n("Missing dimensions");
+ $("auditCodes").textContent=n("Missing product code");
+ $("auditSourcing").textContent=catalogueAuditRows.filter(x=>x.flags.includes("No supplier sourcing record")||x.flags.includes("Sourcing not approved")).length;
+ const seen={};
+ catalogueAuditRows.forEach(x=>{
+  const code=String(x.product_code||"").trim().toLowerCase(),name=String(x.name||"").trim().toLowerCase();
+  if(code)(seen["code:"+code] ||= []).push(x.id);
+  if(name)(seen["name:"+name] ||= []).push(x.id);
+ });
+ const duplicateIds=new Set(Object.values(seen).filter(a=>a.length>1).flat().map(String));
+ $("catalogueAuditList").innerHTML=catalogueAuditRows.map(x=>{
+  const flags=x.flags.slice();if(duplicateIds.has(String(x.id)))flags.push("Possible duplicate — manual review");
+  return `<div class="list-row"><div><b>${safe(x.name||"Unnamed product")}</b><div class="muted">${safe(x.product_code||"No code")} · ${safe(x.category||"No category")}</div><div class="muted">${flags.length?safe(flags.join(" · ")):"Basic checks passed"}</div></div><span class="muted">${flags.length?"Review":"OK"}</span></div>`;
+ }).join("")||"<p class='muted'>No catalogue products found.</p>";
+ message("catalogueAuditMsg",`Audit complete: ${catalogueAuditRows.length} products checked. No data was changed.`);
+}
+$("runCatalogueAudit").onclick=runCatalogueAudit;
+$("exportCatalogueAudit").onclick=()=>{
+ if(!catalogueAuditRows.length){message("catalogueAuditMsg","Run the audit first.");return}
+ downloadCSV("lakka-stories-catalogue-audit.csv",[
+ ["Product ID","Product Code","Product Name","Category","Findings","Sourcing records"],
+ ...catalogueAuditRows.map(x=>[x.id,x.product_code,x.name,x.category,x.flags.join("; "),x.sourcingRecords])
+ ]);
+};
+
+
+// V22 — Customer CRM. Customer order/enquiry history is joined client-side by normalized phone.
+let crmRows=[],crmEditId=null;
+function crmNormPhone(v){return String(v||"").replace(/\D/g,"").replace(/^91(?=\d{10}$)/,"")}
+function crmClear(){crmEditId=null;["crmName","crmPhone","crmEmail","crmCity","crmPreferences","crmNotes"].forEach(id=>$(id).value="");$("saveCustomer").textContent="Save customer"}
+async function loadCustomers(){
+ message("customerMsg","Loading private customer directory…");
+ const r=await db.from("owner_customers").select("*").order("customer_name");
+ if(r.error){message("customerMsg","Could not load customers: "+r.error.message+". Run the V22 SQL setup.");return}
+ crmRows=r.data||[];renderCustomers();message("customerMsg","Customer directory loaded.");
+}
+function crmHistory(c){
+ const phone=crmNormPhone(c.phone);
+ return {orders:os.filter(x=>phone&&crmNormPhone(x.phone)===phone),enquiries:es.filter(x=>phone&&crmNormPhone(x.phone)===phone)};
+}
+function renderCustomers(){
+ const search=$("crmSearch").value.toLowerCase();
+ const all=crmRows.map(c=>({...c,...crmHistory(c)}));
+ $("crmTotal").textContent=all.length;
+ $("crmRepeat").textContent=all.filter(c=>c.orders.length>1).length;
+ $("crmWithOrders").textContent=all.filter(c=>c.orders.length>0).length;
+ const visible=all.filter(c=>([c.customer_name,c.phone,c.city,c.email].join(" ").toLowerCase()).includes(search));
+ $("customerList").innerHTML=visible.map(c=>`<div class="list-row"><div><b>${safe(c.customer_name)}</b><div class="muted">${safe(c.phone||"No phone")} · ${safe(c.city||"City not added")}</div><div class="muted">${c.orders.length} orders · ${c.enquiries.length} enquiries</div></div><div class="actions"><button class="soft" onclick="viewCustomer('${c.id}')">History</button><button class="soft" onclick="editCustomer('${c.id}')">Edit</button></div></div>`).join("")||"<p class='muted'>No matching customer records.</p>";
+}
+$("saveCustomer").onclick=async()=>{
+ const name=$("crmName").value.trim(),phone=$("crmPhone").value.trim();
+ if(!name||!phone){message("customerMsg","Customer name and phone number are required.");return}
+ const data={customer_name:name,phone,email:$("crmEmail").value.trim()||null,city:$("crmCity").value.trim()||null,preferences:$("crmPreferences").value.trim()||null,notes:$("crmNotes").value.trim()||null,updated_at:new Date().toISOString()};
+ const q=crmEditId?await db.from("owner_customers").update(data).eq("id",crmEditId):await db.from("owner_customers").insert(data);
+ if(q.error){message("customerMsg",q.error.message);return}
+ crmClear();await loadCustomers();message("customerMsg","Customer profile saved.");
+};
+$("clearCustomer").onclick=crmClear;$("crmSearch").oninput=renderCustomers;
+window.editCustomer=id=>{const c=crmRows.find(x=>x.id===id);if(!c)return;crmEditId=id;const m={crmName:"customer_name",crmPhone:"phone",crmEmail:"email",crmCity:"city",crmPreferences:"preferences",crmNotes:"notes"};Object.keys(m).forEach(k=>$(k).value=c[m[k]]||"");$("saveCustomer").textContent="Update customer";window.scrollTo({top:0,behavior:"smooth"})};
+window.viewCustomer=id=>{
+ const c=crmRows.find(x=>x.id===id);if(!c)return;
+ const h=crmHistory(c);
+ const orderHtml=h.orders.map(o=>`<div class="list-row"><span>Order ${safe(o.order_number||o.id)} · ${safe(o.status||"Status not set")}</span><b>${cash(o.total_amount||0)}</b></div>`).join("")||"<p>No matching orders yet.</p>";
+ const enquiryHtml=h.enquiries.map(e=>`<div class="list-row"><span>${safe(e.product_name||"General enquiry")} · ${safe(e.status||"Enquiry")}</span><span>${safe(e.created_at||"")}</span></div>`).join("")||"<p>No matching enquiries.</p>";
+ $("customerHistory").innerHTML=`<h4>${safe(c.customer_name)}</h4><p>${safe(c.phone)} · ${safe(c.email||"")} · ${safe(c.city||"")}</p><p><b>Preferences:</b> ${safe(c.preferences||"Not recorded")}</p><p><b>Notes:</b> ${safe(c.notes||"None")}</p><h4>Orders (${h.orders.length})</h4>${orderHtml}<h4>Enquiries (${h.enquiries.length})</h4>${enquiryHtml}`;
+};
+
+
+// V23 — private customer feedback and testimonial consent register
+let feedbackRows=[],feedbackEditId=null;
+async function loadFeedback(){
+ const [fr,cr]=await Promise.all([db.from("owner_feedback").select("*").order("feedback_date",{ascending:false}),db.from("owner_customers").select("id,customer_name,phone").order("customer_name")]);
+ if(fr.error){message("feedbackMsg","Could not load feedback: "+fr.error.message+". Run the V23 SQL setup.");return}
+ if(cr.error){message("feedbackMsg","Could not load customers: "+cr.error.message);return}
+ feedbackRows=fr.data||[];
+ $("fbCustomer").innerHTML='<option value="">Select customer</option>'+cr.data.map(c=>`<option value="${c.id}">${safe(c.customer_name)} · ${safe(c.phone)}</option>`).join("");
+ $("fbOrder").innerHTML='<option value="">No order linked</option>'+os.map(o=>`<option value="${o.id}">${safe(o.order_number||o.id)} · ${safe(o.phone||"")}</option>`).join("");
+ renderFeedback();message("feedbackMsg","Feedback register loaded.");
+}
+function renderFeedback(){
+ const rated=feedbackRows.filter(x=>x.rating!==null&&x.rating!==undefined);
+ $("fbCount").textContent=feedbackRows.length;
+ $("fbAverage").textContent=rated.length?(rated.reduce((a,x)=>a+Number(x.rating),0)/rated.length).toFixed(1)+"/5":"—";
+ $("fbPermCount").textContent=feedbackRows.filter(x=>x.publish_permission==="yes").length;
+ const q=$("fbSearch").value.toLowerCase();
+ const rows=feedbackRows.filter(x=>[x.customer_name_snapshot,x.product_name,x.feedback_text,x.request_status].join(" ").toLowerCase().includes(q));
+ $("fbList").innerHTML=rows.map(x=>`<div class="list-row"><div><b>${safe(x.customer_name_snapshot||"Customer")}</b><div>${safe(x.product_name||"General feedback")} · ${x.rating?Number(x.rating)+"/5":"Not rated"} · ${safe(x.feedback_date||"")}</div><div class="muted">${safe(x.feedback_text||"No written feedback")} · ${safe(x.publish_permission||"not_asked")} permission · ${safe(x.publication_status||"private")}</div></div><div class="actions"><button class="soft" onclick="editFeedback('${x.id}')">Edit</button><button class="soft" onclick="deleteFeedback('${x.id}')">Delete</button></div></div>`).join("")||"<p class='muted'>No feedback records yet.</p>";
+}
+function clearFeedback(){feedbackEditId=null;["fbCustomer","fbOrder","fbProduct","fbRating","fbDate","fbRequest","fbText","fbPermission","fbPublish"].forEach(id=>$(id).value="");$("fbRequest").value="not_requested";$("fbPermission").value="not_asked";$("fbPublish").value="private";$("fbSave").textContent="Save feedback"}
+$("fbSave").onclick=async()=>{
+ const cid=$("fbCustomer").value;if(!cid){message("feedbackMsg","Select a customer first.");return}
+ const customer=crmRows.find(c=>c.id===cid);
+ if(!customer){const r=await db.from("owner_customers").select("*").eq("id",cid).maybeSingle();if(r.error||!r.data){message("feedbackMsg","Customer record not found. Refresh the Customers tab first.");return}}
+ const c=customer|| (await db.from("owner_customers").select("*").eq("id",cid).single()).data;
+ const permission=$("fbPermission").value,pub=$("fbPublish").value;
+ if(pub!=="private"&&permission!=="yes"){message("feedbackMsg","Publication status must remain Private until explicit customer permission is recorded.");return}
+ const data={customer_id:cid,customer_name_snapshot:c.customer_name,order_id:$("fbOrder").value||null,product_name:$("fbProduct").value.trim()||null,rating:$("fbRating").value?Number($("fbRating").value):null,feedback_date:$("fbDate").value||null,request_status:$("fbRequest").value,feedback_text:$("fbText").value.trim()||null,publish_permission:permission,publication_status:pub,updated_at:new Date().toISOString()};
+ const q=feedbackEditId?await db.from("owner_feedback").update(data).eq("id",feedbackEditId):await db.from("owner_feedback").insert(data);
+ if(q.error){message("feedbackMsg",q.error.message);return}
+ clearFeedback();await loadFeedback();message("feedbackMsg","Feedback saved privately.");
+};
+$("fbClear").onclick=clearFeedback;$("fbSearch").oninput=renderFeedback;
+window.editFeedback=id=>{const x=feedbackRows.find(a=>a.id===id);if(!x)return;feedbackEditId=id;const m={fbCustomer:"customer_id",fbOrder:"order_id",fbProduct:"product_name",fbRating:"rating",fbDate:"feedback_date",fbRequest:"request_status",fbText:"feedback_text",fbPermission:"publish_permission",fbPublish:"publication_status"};Object.keys(m).forEach(k=>$(k).value=x[m[k]]??"");$("fbSave").textContent="Update feedback";window.scrollTo({top:0,behavior:"smooth"})};
+window.deleteFeedback=async id=>{if(!confirm("Delete this feedback record?"))return;const r=await db.from("owner_feedback").delete().eq("id",id);if(r.error){message("feedbackMsg",r.error.message);return}await loadFeedback();message("feedbackMsg","Feedback record deleted.")};
+
+
+// V24 — read-only performance analytics using existing private records
+let analyticsCache={orders:[],enquiries:[],items:[],expenses:[]};
+function anDate(v){return v?new Date(v+"T00:00:00"):null}
+function anInRange(v,a,b){const d=String(v||"").slice(0,10);return (!a||d>=a)&&(!b||d<=b)}
+function anMoney(v){return cash(Number(v)||0)}
+async function loadAnalytics(){
+ message("analyticsMsg","Loading recorded business data…");
+ const results=await Promise.all([
+ db.from("owner_orders").select("id,customer_name,phone,total_amount,amount_received,order_status,created_at"),
+ db.from("owner_enquiries").select("id,customer_name,phone,status,created_at"),
+ db.from("owner_order_items").select("order_id,product_name,quantity,line_total"),
+ db.from("owner_expenses").select("amount,expense_date,created_at,category")
+ ]);
+ const err=results.find(x=>x.error);
+ if(err){message("analyticsMsg","Could not load analytics: "+err.error.message);return}
+ analyticsCache={orders:results[0].data||[],enquiries:results[1].data||[],items:results[2].data||[],expenses:results[3].data||[]};
+ renderAnalytics();message("analyticsMsg","Analytics loaded from recorded dashboard data.");
+}
+function renderAnalytics(){
+ const a=$("anFrom").value,b=$("anTo").value;
+ const orders=analyticsCache.orders.filter(x=>anInRange(x.created_at,a,b));
+ const enquiries=analyticsCache.enquiries.filter(x=>anInRange(x.created_at,a,b));
+ const expenses=analyticsCache.expenses.filter(x=>anInRange(x.expense_date||x.created_at,a,b));
+ const valid=orders.filter(x=>!["cancelled","canceled"].includes(String(x.order_status||"").toLowerCase()));
+ const value=valid.reduce((n,x)=>n+(Number(x.total_amount)||0),0);
+ const received=valid.reduce((n,x)=>n+(Number(x.amount_received)||0),0);
+ const pending=valid.reduce((n,x)=>n+Math.max(0,(Number(x.total_amount)||0)-(Number(x.amount_received)||0)),0);
+ const expenseTotal=expenses.reduce((n,x)=>n+(Number(x.amount)||0),0);
+ $("anOrders").textContent=valid.length;$("anValue").textContent=anMoney(value);$("anReceived").textContent=anMoney(received);$("anPending").textContent=anMoney(pending);$("anEnquiries").textContent=enquiries.length;
+ $("anConversion").textContent=enquiries.length?(valid.length/enquiries.length*100).toFixed(1)+"%":"—";
+ $("anExpenses").textContent=anMoney(expenseTotal);$("anDifference").textContent=anMoney(received-expenseTotal);
+ const months={};valid.forEach(x=>{const k=String(x.created_at||"").slice(0,7)||"Unknown";(months[k]??={count:0,value:0,received:0}).count++;months[k].value+=Number(x.total_amount)||0;months[k].received+=Number(x.amount_received)||0});
+ $("anMonthly").innerHTML=Object.keys(months).sort().reverse().map(k=>`<div class="list-row"><b>${safe(k)}</b><span>${months[k].count} orders · ${anMoney(months[k].value)} value · ${anMoney(months[k].received)} received</span></div>`).join("")||"<p class='muted'>No orders in this date range.</p>";
+ const ids=new Set(valid.map(x=>x.id)),prods={};analyticsCache.items.filter(x=>ids.has(x.order_id)).forEach(x=>{const k=x.product_name||"Unnamed product";(prods[k]??={qty:0,value:0}).qty+=Number(x.quantity)||0;prods[k].value+=Number(x.line_total)||0});
+ $("anProducts").innerHTML=Object.entries(prods).sort((x,y)=>y[1].qty-x[1].qty).map(([k,v])=>`<div class="list-row"><b>${safe(k)}</b><span>${v.qty} units · ${anMoney(v.value)}</span></div>`).join("")||"<p class='muted'>No product line items in this date range.</p>";
+ const customers={};valid.forEach(x=>{const k=x.phone||x.customer_name||"Unknown";(customers[k]??={name:x.customer_name||"Customer",orders:0,value:0}).orders++;customers[k].value+=Number(x.total_amount)||0});
+ $("anCustomers").innerHTML=Object.values(customers).sort((x,y)=>y.orders-x.orders).slice(0,20).map(x=>`<div class="list-row"><b>${safe(x.name)}</b><span>${x.orders} orders · ${anMoney(x.value)}</span></div>`).join("")||"<p class='muted'>No customer order activity in this date range.</p>";
+}
+$("anApply").onclick=renderAnalytics;
+$("anClear").onclick=()=>{$("anFrom").value="";$("anTo").value="";renderAnalytics()};
+$("anExport").onclick=()=>{
+ const rows=[["Metric","Value"],["Orders recorded",$("anOrders").textContent],["Recorded order value",$("anValue").textContent],["Amount marked received",$("anReceived").textContent],["Recorded pending balance",$("anPending").textContent],["Enquiries",$("anEnquiries").textContent],["Enquiry-to-order rate",$("anConversion").textContent],["Recorded expenses",$("anExpenses").textContent],["Recorded cash difference (not profit)",$("anDifference").textContent]];
+ downloadCSV("lakka-stories-sales-analytics.csv",rows);
+};
+
+
+// V25 — reorder planner based on owner-entered stock targets
+let reorderPlans=[],reorderEditingId=null;
+async function loadReorderPlanner(){
+ const [ir,pr]=await Promise.all([db.from("owner_inventory").select("*").order("product_name"),db.from("owner_inventory_reorder_plans").select("*").order("created_at",{ascending:false})]);
+ if(ir.error){message("reorderMsg","Inventory could not load: "+ir.error.message);return}
+ if(pr.error){message("reorderMsg","Reorder plans could not load: "+pr.error.message+". Run the V25 SQL setup.");return}
+ inventory=ir.data||[];reorderPlans=pr.data||[];
+ $("rpInventory").innerHTML='<option value="">Select stock item</option>'+inventory.map(x=>`<option value="${x.id}">${safe(x.product_name)} · Available ${Number(x.stock_qty)||0}</option>`).join("");
+ renderReorderPlanner();message("reorderMsg","Stock and reorder plans loaded.");
+}
+function renderReorderPlanner(){
+ const latest={};reorderPlans.forEach(p=>{if(!latest[p.inventory_id])latest[p.inventory_id]=p});
+ const low=inventory.filter(x=>(Number(x.stock_qty)||0)<=(Number(x.low_stock_level)||0));
+ $("rpItems").textContent=inventory.length;$("rpLow").textContent=low.length;$("rpPlans").textContent=Object.keys(latest).length;
+ $("rpList").innerHTML=inventory.map(x=>{
+ const p=latest[x.id],qty=Number(x.stock_qty)||0,alert=Number(x.low_stock_level)||0,target=p?Number(p.target_stock):null,needed=p?Math.max(0,target-qty):null;
+ const status=qty<=alert?"At/below alert level":"Above alert level";
+ return `<div class="list-row"><div><b>${safe(x.product_name)}</b><div class="muted">Available: ${qty} · Alert level: ${alert} · ${status}</div><div class="muted">${p?`Target: ${target} · Suggested quantity: ${needed} units · Lead time: ${p.lead_time_days??"Not recorded"} days`:"No reorder target set"}</div><div class="muted">${safe(p?.notes||"")}</div></div><div class="actions"><button class="soft" onclick="editReorderPlan('${x.id}')">Set target</button>${p?`<button class="soft" onclick="deleteReorderPlan('${p.id}')">Remove plan</button>`:""}</div></div>`;
+ }).join("")||"<p class='muted'>No stock records. Add physically verified stock in the Inventory tab first.</p>";
+}
+$("rpInventory").onchange=()=>{const p=reorderPlans.find(x=>x.inventory_id===$("rpInventory").value);if(p){$("rpTarget").value=p.target_stock;$("rpLead").value=p.lead_time_days??"";$("rpNotes").value=p.notes||"";reorderEditingId=p.id}else{reorderEditingId=null;$("rpTarget").value="";$("rpLead").value="";$("rpNotes").value=""}};
+$("rpSave").onclick=async()=>{
+ const id=$("rpInventory").value,target=Number($("rpTarget").value),lead=$("rpLead").value===""?null:Number($("rpLead").value);
+ if(!id){message("reorderMsg","Select a stock item.");return}
+ if($("rpTarget").value===""||!Number.isInteger(target)||target<0){message("reorderMsg","Enter a target stock quantity as a whole number (0 or more).");return}
+ if(lead!==null&&(!Number.isInteger(lead)||lead<0)){message("reorderMsg","Lead time must be a whole number (0 or more).");return}
+ const existing=reorderPlans.find(x=>x.inventory_id===id);
+ const data={inventory_id:id,target_stock:target,lead_time_days:lead,notes:$("rpNotes").value.trim()||null,updated_at:new Date().toISOString()};
+ const q=existing?await db.from("owner_inventory_reorder_plans").update(data).eq("id",existing.id):await db.from("owner_inventory_reorder_plans").insert(data);
+ if(q.error){message("reorderMsg",q.error.message);return}
+ $("rpClear").click();await loadReorderPlanner();message("reorderMsg","Reorder target saved.");
+};
+$("rpClear").onclick=()=>{reorderEditingId=null;$("rpInventory").value="";$("rpTarget").value="";$("rpLead").value="";$("rpNotes").value=""};
+$("rpRefresh").onclick=loadReorderPlanner;
+window.editReorderPlan=id=>{const p=inventory.find(x=>x.id===id);if(!p)return;$("rpInventory").value=id;$("rpInventory").dispatchEvent(new Event("change"));window.scrollTo({top:0,behavior:"smooth"})};
+window.deleteReorderPlan=async id=>{if(!confirm("Remove this reorder plan? Stock records will not be changed."))return;const r=await db.from("owner_inventory_reorder_plans").delete().eq("id",id);if(r.error){message("reorderMsg",r.error.message);return}await loadReorderPlanner();message("reorderMsg","Reorder plan removed.")};
+
+
+// V26 — business launch readiness checklist; user verifies each item with evidence.
+const readinessItems=[
+ {key:"supplier_identity",cat:"Supplier verification",title:"Verify supplier identity and business details",help:"Collect supplier name, address, contact details and a written quotation."},
+ {key:"origin_evidence",cat:"Product authenticity",title:"Verify Etikoppaka origin and product claims",help:"Ask for credible origin/craft documentation and keep supplier evidence. Do not rely only on verbal claims."},
+ {key:"product_quality",cat:"Product quality",title:"Inspect physical product samples",help:"Check finish, defects, dimensions, colour transfer, safety and consistency on actual samples."},
+ {key:"landed_cost",cat:"Product costing",title:"Calculate complete landed cost",help:"Record verified purchase price, packaging, shipping, payment fees, damage allowance and other costs."},
+ {key:"pricing_margin",cat:"Product costing",title:"Approve selling price and margin",help:"Use verified costs and a realistic selling price; do not assume profit."},
+ {key:"shipping_test",cat:"Shipping & returns",title:"Test packing and courier delivery",help:"Confirm actual parcel size, weight, pickup, rates, tracking and delivery experience."},
+ {key:"returns_policy",cat:"Shipping & returns",title:"Write a clear damage, return and refund policy",help:"Define reporting window, evidence, return shipping responsibility and refund process."},
+ {key:"customer_demand",cat:"Customer demand",title:"Validate demand without paid advertising",help:"Collect genuine enquiries or pre-orders; do not buy stock based only on likes or assumptions."},
+ {key:"legal_tax",cat:"Legal & tax",title:"Check applicable registration, invoicing and tax duties",help:"Confirm requirements for your sales model and turnover with official sources or a qualified adviser."},
+ {key:"payments_records",cat:"Operations",title:"Test order, payment and record-keeping workflow",help:"Verify order confirmation, payment reconciliation, receipts, privacy and backup procedures."},
+ {key:"cash_safety",cat:"Financial safety",title:"Confirm launch spending is affordable",help:"Protect essential expenses, loan commitments and emergency savings; avoid borrowing for unverified stock."}
+];
+let readinessRows=[];
+async function loadReadiness(){
+ const r=await db.from("owner_business_readiness").select("*").order("item_key");
+ if(r.error){message("readinessMsg","Could not load readiness checklist: "+r.error.message+". Run the V26 SQL setup.");return}
+ readinessRows=r.data||[];renderReadiness();message("readinessMsg","Readiness checklist loaded. No item is marked verified by default.");
+}
+function renderReadiness(){
+ const verified=readinessItems.filter(i=>{const r=readinessRows.find(x=>x.item_key===i.key);return r&&r.status==="verified"&&String(r.evidence_notes||"").trim().length>0}).length;
+ const blocked=readinessItems.filter(i=>{const r=readinessRows.find(x=>x.item_key===i.key);return !r||r.status!=="verified"}).length;
+ $("rdTotal").textContent=readinessItems.length;$("rdVerified").textContent=verified;$("rdOpen").textContent=blocked;$("rdProgress").textContent=Math.round(verified/readinessItems.length*100)+"%";
+ $("rdList").innerHTML=readinessItems.map(i=>{
+ const r=readinessRows.find(x=>x.item_key===i.key)||{};
+ const status=r.status||"not_started",evidence=r.evidence_notes||"";
+ return `<div class="list-row" style="display:block"><div><b>${safe(i.title)}</b><div class="muted">${safe(i.cat)} · ${safe(i.help)}</div></div><div class="grid"><div><label>Status</label><select id="rdStatus_${i.key}"><option value="not_started" ${status==="not_started"?"selected":""}>Not started</option><option value="in_progress" ${status==="in_progress"?"selected":""}>In progress</option><option value="verified" ${status==="verified"?"selected":""}>Verified</option><option value="blocked" ${status==="blocked"?"selected":""}>Blocked</option></select></div><div><label>Evidence / notes (required to verify)</label><input id="rdEvidence_${i.key}" value="${safe(evidence)}" placeholder="Document reference, test result or notes"></div></div><div class="actions"><button class="soft" onclick="saveReadiness('${i.key}')">Save item</button></div></div>`;
+ }).join("");
+}
+window.saveReadiness=async key=>{
+ const item=readinessItems.find(x=>x.key===key);if(!item)return;
+ const status=$("rdStatus_"+key).value,evidence=$("rdEvidence_"+key).value.trim();
+ if(status==="verified"&&!evidence){message("readinessMsg","Add evidence or notes before marking an item Verified.");return}
+ const data={item_key:key,category:item.cat,item_title:item.title,status,evidence_notes:evidence||null,updated_at:new Date().toISOString()};
+ const q=await db.from("owner_business_readiness").upsert(data,{onConflict:"user_id,item_key"});
+ if(q.error){message("readinessMsg",q.error.message);return}
+ await loadReadiness();message("readinessMsg","Readiness item saved.");
+};
+
 </script></body></html>
