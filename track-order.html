@@ -94,9 +94,9 @@ function renderResult(data){
 }
 form.addEventListener('submit',async e=>{
  e.preventDefault();result.classList.add('hidden');message.classList.add('hidden');
- const reference=document.getElementById('reference').value.trim().toUpperCase();
+ const reference=document.getElementById('reference').value.trim();
  const phone=document.getElementById('phone').value.replace(/\D/g,'');
- if(!/^LS-[A-Z0-9-]{6,40}$/.test(reference)){showMessage('Please enter a valid order reference.',true);return;}
+ if(!/^LS-[A-Z0-9-]{6,40}$/i.test(reference)){showMessage('Please enter a valid order reference.',true);return;}
  let mobile=phone;if(mobile.startsWith('91')&&mobile.length===12)mobile=mobile.slice(2);if(mobile.startsWith('0')&&mobile.length===11)mobile=mobile.slice(1);
  if(!/^[6-9][0-9]{9}$/.test(mobile)){showMessage('Please enter a valid 10-digit Indian mobile number.',true);return;}
  button.disabled=true;button.textContent='Checking…';
