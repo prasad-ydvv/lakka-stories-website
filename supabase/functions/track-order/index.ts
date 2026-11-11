@@ -34,9 +34,9 @@ Deno.serve(async (req) => {
   let input: { order_reference?: unknown; phone?: unknown };
   try { input = await req.json(); } catch { return json({ error: "Enter your order reference and mobile number." }, 400); }
 
-  const reference = String(input.order_reference || "").trim().toUpperCase();
+  const reference = String(input.order_reference || "").trim();
   const phone = String(input.phone || "").replace(/\D/g, "");
-  if (!/^LS-[A-Z0-9-]{6,40}$/.test(reference) || !/^[6-9][0-9]{9}$/.test(phone)) {
+  if (!/^LS-[A-Z0-9-]{6,40}$/i.test(reference) || !/^[6-9][0-9]{9}$/.test(phone)) {
     return json({ error: "Enter a valid order reference and 10-digit registered mobile number." }, 400);
   }
 
