@@ -1667,6 +1667,25 @@ footer{padding:26px 16px}
 .site-footer .footer-links a:hover,.site-footer .footer-links a:focus-visible{color:#e6bd7d;text-decoration:underline;text-underline-offset:4px}
 .site-footer small{display:block;padding-top:13px;border-top:1px solid rgba(255,250,242,.2);color:#e6d7ca;font-size:11px}
 @media(max-width:600px){.site-footer{padding:24px 16px 18px}.site-footer .footer-links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px 12px}.site-footer .footer-links a{padding:9px 6px;border:1px solid rgba(255,250,242,.18);border-radius:4px;font-size:12px}}
+
+/* LAKKA STORIES — ordering guidance */
+.ordering-guide{padding:54px 20px;background:#fbf5eb;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.ordering-guide-inner{max-width:1040px;margin:0 auto}
+.ordering-guide .section-head{text-align:center;margin:0 auto 25px}
+.ordering-guide .section-head h2{font:normal clamp(28px,4vw,36px) Georgia,serif;color:var(--maroon);margin:5px 0 8px}
+.ordering-guide .section-head>p:last-child{color:var(--muted);font-size:13px}
+.ordering-paths{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.ordering-path{background:#fffdf8;border:1px solid var(--line);border-radius:9px;padding:24px;box-shadow:0 7px 22px rgba(66,43,42,.035)}
+.ordering-path-bulk{background:linear-gradient(145deg,#fffaf1,#f8eddd)}
+.ordering-kicker{font-size:10px;letter-spacing:.12em;font-weight:bold;color:#98713f;margin:0 0 10px}
+.ordering-path h3{font:normal 23px Georgia,serif;color:var(--maroon);margin:0 0 12px}
+.ordering-path p,.ordering-path li{font-size:13px;line-height:1.7;color:var(--ink)}
+.ordering-path ol,.ordering-path ul{padding-left:20px;margin:10px 0 15px}
+.ordering-note{padding:11px 13px;background:#f7f0e6;border-left:3px solid var(--gold);font-size:11px!important;color:var(--muted)!important}
+.ordering-link{display:inline-block;margin-top:7px;color:var(--maroon);font-size:13px;font-weight:bold;text-decoration:none;border-bottom:1px solid var(--gold);padding-bottom:3px}
+.ordering-link:hover{text-decoration:underline;text-underline-offset:4px}
+@media(max-width:700px){.ordering-guide{padding:36px 14px}.ordering-paths{grid-template-columns:1fr;gap:12px}.ordering-path{padding:19px 16px}.ordering-path h3{font-size:21px}}
+
 </style>
 </head>
 <body>
@@ -1779,6 +1798,42 @@ footer{padding:26px 16px}
             <span class="why-lakka-icon" aria-hidden="true">☏</span>
             <h3>Personal Assistance</h3>
             <p>Ask us about product details, current availability, pricing and delivery before you order.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    
+    <section class="ordering-guide" id="howOrderingWorks" aria-labelledby="orderingGuideTitle">
+      <div class="ordering-guide-inner">
+        <div class="section-head">
+          <p class="eyebrow">— A simple way to shop</p>
+          <h2 id="orderingGuideTitle">How Ordering Works</h2>
+          <p>Choose the order journey that suits your needs.</p>
+        </div>
+        <div class="ordering-paths">
+          <article class="ordering-path">
+            <p class="ordering-kicker">REGULAR ORDERS · 1–10 PIECES</p>
+            <h3>For a few little treasures</h3>
+            <ol>
+              <li>Explore the collection and add products to your cart.</li>
+              <li>Submit your order request with delivery details.</li>
+              <li>LAKKA STORIES reviews availability, final prices and delivery charges, then contacts you to confirm.</li>
+            </ol>
+            <p class="ordering-note">Online payment and automatic order confirmation are planned for a future update. At present, checkout submits an order request; no payment is collected.</p>
+            <a class="ordering-link" href="index.html#collection">Explore the collection →</a>
+          </article>
+          <article class="ordering-path ordering-path-bulk">
+            <p class="ordering-kicker">BULK ORDERS · 11+ PIECES</p>
+            <h3>For celebrations and special occasions</h3>
+            <p>Planning return gifts, event favours or a larger order? Send us your quantity and requirements. We will review availability and prepare a quotation.</p>
+            <ul>
+              <li>11–29 pieces</li>
+              <li>30–49 pieces</li>
+              <li>50–99 pieces</li>
+              <li>100+ pieces</li>
+            </ul>
+            <a class="ordering-link" href="https://wa.me/919381317313?text=Hello%20LAKKA%20STORIES%2C%20I%20would%20like%20a%20bulk%20order%20quotation.%20Please%20help%20me%20with%20availability%2C%20pricing%20and%20delivery." target="_blank" rel="noopener noreferrer">Enquire about a bulk order →</a>
           </article>
         </div>
       </div>
