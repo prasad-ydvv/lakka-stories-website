@@ -507,7 +507,7 @@ button:focus-visible{outline:3px solid rgba(215,183,122,.8);outline-offset:2px}
 </div></main>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script>
-const db=supabase.createClient("https://qguxptvedozdfulahkid.supabase.co","sb_publishable_c5-NfXVIzLNgC821H3EFWQ_fpmSU9Tl"),$=x=>document.getElementById(x);let user,es=[],os=[],editId=null,editType=null,ps=[],lines=[],inventory=[],inventoryEditId=null,movements=[],suppliers=[],purchases=[],supplierEditId=null,costInputs=[],sourceRows=[],sourceEditId=null;
+const db=supabase.createClient("https://gsesangwrryzbpudusfl.supabase.co","sb_publishable_2zVjR7EYlB4kSX-CtQr71w_xXZ35Ejz"),$=x=>document.getElementById(x);let user,es=[],os=[],editId=null,editType=null,ps=[],lines=[],inventory=[],inventoryEditId=null,movements=[],suppliers=[],purchases=[],supplierEditId=null,costInputs=[],sourceRows=[],sourceEditId=null;
 const cash=n=>"₹"+(Number(n)||0).toLocaleString("en-IN",{maximumFractionDigits:2}),safe=s=>String(s||"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const validPanes=["dashboard","enquiries","orders","form","reports","inventory","suppliers","costs","sourcing","shipping","notifications","settings","documents","expenses","finance","backup","catalogueAudit","customers","feedback","analytics","reorder","readiness"];
 function currentPaneFromUrl(){const p=new URLSearchParams(location.hash.replace(/^#/,"")).get("tab");return validPanes.includes(p)?p:"dashboard"}
