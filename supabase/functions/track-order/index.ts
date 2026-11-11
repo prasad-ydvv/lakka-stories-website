@@ -42,10 +42,12 @@ Deno.serve(async (req) => {
 
   const forwarded = req.headers.get("x-forwarded-for") || req.headers.get("x-real-ip") || "unknown";
   const clientIp = forwarded.split(",")[0].trim().slice(0, 80) || "unknown";
-  const ipHash = await sha256(clientIp);
+  const ipHash = await sha256(clientIp + ":" + serviceKey);
   const db = createClient(supabaseUrl, serviceKey, { auth: { persistSession: false } });
 
   // Keep only a short-lived hash of the caller IP; never store raw IP addresses.
+  // Remove expired hashes so the rate-limit table does not grow indefinitely.
+  await db.from("order_tracking_attempts").delete().lt("attempted_at", new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString());
   const cutoff = new Date(Date.now() - 15 * 60 * 1000).toISOString();
   const { count, error: countError } = await db
     .from("order_tracking_attempts")
