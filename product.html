@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#572329">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <meta name="description" content="Explore product details from LAKKA STORIES.">
   <title>Product Details | LAKKA STORIES</title>
   <style>
@@ -92,6 +93,44 @@
     .description{font-size:16px;line-height:1.85;color:#6f625a}
     .meta{font-size:14px;line-height:1.7}
     @media(max-width:700px){h1{font-size:34px}.description{font-size:15px;line-height:1.75}}
+
+    /* Product detail — premium presentation */
+    .wrap{max-width:1160px;padding-top:30px}
+    .back{display:inline-flex;align-items:center;gap:7px;color:#8b6332;font-size:12px;letter-spacing:.02em}
+    .product{gap:clamp(26px,4vw,52px)}
+    .image-panel{background:radial-gradient(circle at 50% 42%,#fffdf8 0%,#f8f0e4 72%);border:1px solid #e7d8c3;border-radius:12px;box-shadow:0 10px 28px rgba(66,43,42,.07)}
+    .image-panel img{padding:clamp(8px,1.5vw,18px)}
+    .thumbnail{border-radius:7px;transition:border-color .18s ease,box-shadow .18s ease}
+    .info{background:linear-gradient(145deg,#fffdf8 0%,#fbf4e9 100%);border:1px solid #ecdfce;border-radius:12px;padding:clamp(20px,2.7vw,32px);box-shadow:0 8px 24px rgba(66,43,42,.045)}
+    .origin-label{border-radius:999px;letter-spacing:.12em}
+    .category{margin-top:15px}
+    .info h1{margin-bottom:13px}
+    .availability-badge{margin-bottom:14px;padding:7px 11px;font-size:11px}
+    .description{font-size:15px;line-height:1.75}
+    .price{margin:18px 0 5px;font-size:29px}
+    .savings{margin-bottom:14px}
+    .meta{margin:15px 0;padding:12px 0}
+    .actions{gap:9px;margin-top:18px}
+    .actions .btn{flex:1 1 145px;border-radius:5px;min-height:46px;transition:transform .18s ease,box-shadow .18s ease,background .18s ease}
+    .actions .btn:hover{transform:translateY(-1px);box-shadow:0 5px 13px rgba(87,35,41,.12)}
+    .order-help{margin-top:15px;padding:13px 15px;border-radius:7px;background:#fff8ed}
+    .product-story{margin-top:28px;border-radius:10px;padding:clamp(20px,3vw,32px);background:linear-gradient(120deg,#fbf5eb,#fffaf2)}
+    @media(max-width:700px){
+      .wrap{padding:17px 13px 30px}
+      .product{gap:17px}
+      .image-panel{border-radius:10px}
+      .info{padding:19px 16px;border-radius:10px}
+      .info h1{font-size:32px;margin-bottom:11px}
+      .description{font-size:14px;line-height:1.7}
+      .price{font-size:25px;margin:15px 0 5px}
+      .actions{gap:8px;margin-top:15px}
+      .actions .btn{min-height:44px}
+      .product-story{margin-top:20px;padding:19px 16px}
+    }
+    @media(prefers-reduced-motion:reduce){
+      .thumbnail,.actions .btn{transition:none!important}
+    }
+
   </style>
 </head>
 <body>
