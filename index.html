@@ -1403,6 +1403,92 @@ footer{padding:26px 16px}
 }
 
 
+
+/* LAKKA STORIES — Stage 2: hero and storytelling refinement */
+.hero{
+  background:
+    linear-gradient(90deg,rgba(255,250,241,.30) 0%,rgba(255,250,241,.17) 36%,rgba(255,250,241,0) 67%),
+    url('images/hero-banner.jpg') center 52%/cover no-repeat,
+    var(--sand);
+}
+.hero-copy{
+  max-width:500px;
+  padding:clamp(18px,2.2vw,27px);
+  border-left:2px solid rgba(189,139,69,.78);
+  border-radius:0 8px 8px 0;
+  background:linear-gradient(105deg,rgba(255,251,244,.78),rgba(255,251,244,.48));
+  box-shadow:0 8px 28px rgba(67,39,30,.055);
+  backdrop-filter:blur(2px);
+}
+.hero-copy .eyebrow{
+  margin-bottom:13px;
+  letter-spacing:.24em;
+}
+.hero-copy h1{
+  font-size:clamp(42px,4.7vw,58px);
+  line-height:1.02;
+  letter-spacing:-.025em;
+  margin-bottom:14px;
+}
+.hero-copy>p:not(.eyebrow){
+  max-width:410px;
+  font-size:14px;
+  line-height:1.65;
+  color:#62534b;
+  margin-bottom:0;
+}
+.hero-copy .actions{margin:17px 0 0;gap:9px}
+.hero-copy .actions .btn{
+  min-height:42px;
+  padding:10px 17px;
+  border-radius:4px;
+  letter-spacing:.01em;
+}
+.hero-copy .actions .btn.outline{
+  background:rgba(255,253,248,.52);
+  border-color:rgba(87,35,41,.55);
+}
+.story.story-designed .story-inner{
+  background:linear-gradient(115deg,#fffaf1 0%,#f8ecd9 100%)!important;
+  border:1px solid rgba(189,139,69,.24);
+  box-shadow:0 12px 30px rgba(87,35,41,.055);
+}
+.story-designed .story-copy>p:not(.eyebrow){
+  max-width:520px;
+  color:#6e5b50;
+}
+.story-designed .story-signature{
+  color:#9a6c35;
+  letter-spacing:.02em;
+}
+.story-designed .btn{
+  border-radius:4px!important;
+  box-shadow:0 4px 10px rgba(87,35,41,.12);
+}
+.story-art-wrap{
+  background:rgba(255,253,248,.78);
+  border:1px solid rgba(189,139,69,.18);
+  box-shadow:0 8px 22px rgba(87,35,41,.07);
+}
+@media(max-width:700px){
+  .hero{background:var(--cream)}
+  .hero-copy{
+    padding:16px 15px 15px;
+    border-left-width:2px;
+    background:linear-gradient(105deg,rgba(255,250,241,.92),rgba(255,250,241,.72));
+    box-shadow:none;
+    backdrop-filter:none;
+  }
+  .hero-copy h1{font-size:clamp(34px,8vw,42px);line-height:1.05}
+  .hero-copy>p:not(.eyebrow){font-size:13px;line-height:1.58}
+  .hero-copy .actions{margin-top:13px;gap:8px}
+  .hero-copy .actions .btn{min-height:40px;padding:9px 12px;font-size:11px}
+  .story.story-designed .story-inner{
+    background:linear-gradient(145deg,#fffaf1,#f7ead5)!important;
+    box-shadow:0 6px 18px rgba(87,35,41,.05);
+  }
+}
+
 /* LAKKA STORIES — refined catalogue finish */
 .collection{
   padding-top:22px!important;
@@ -1596,7 +1682,7 @@ footer{padding:26px 16px}
         <div class="story-copy">
           <p class="eyebrow">— OUR STORY · ROOTED IN ANDHRA PRADESH</p>
           <h2>Stories Behind the Treasures</h2>
-          <p>LAKKA STORIES brings together little treasures for gifting, decorating and keeping. Explore the collection and find a piece that speaks to you.</p>
+          <p>From playful wooden toys to thoughtful keepsake gifts, discover colourful treasures inspired by the Etikoppaka craft tradition. Each piece brings a little character, colour and joy into everyday moments.</p>
           <div class="story-signature"><span aria-hidden="true">✦</span> Little pieces. Lasting memories.</div>
           <a class="btn" href="#collection">Explore the Collection <span aria-hidden="true">→</span></a>
         </div>
