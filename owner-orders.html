@@ -226,7 +226,7 @@ button:focus-visible{outline:3px solid rgba(215,183,122,.8);outline-offset:2px}
 <div class="full"><label>Products in this record</label><div id="lineItems"></div><button type="button" class="soft" id="addLine" style="margin-top:8px">+ Add another product</button><div class="msg" id="orderTotals">Items subtotal: ₹0 · Delivery: ₹0 · Total: ₹0</div></div><div><label>Delivery charge (₹)</label><input id="delivery" type="number" min="0" value="0"></div><div><label>Payment status</label><select id="payment"><option>Pending</option><option>Partially Paid</option><option>Paid</option><option>Refunded</option></select></div>
 <div><label>Amount received (₹)</label><input id="received" type="number" min="0" value="0"></div><div><label>Order status</label><select id="status"><option>New</option><option>Confirmed</option><option>Packed</option><option>Shipped</option><option>Delivered</option><option>Cancelled</option></select></div>
 <div class="full"><label>Delivery address</label><textarea id="address"></textarea></div><div><label>Courier partner</label><input id="courier"></div><div><label>Tracking / AWB ID</label><input id="tracking"></div><div><label>Dispatch date</label><input id="dispatch" type="date"></div><div class="full"><label>Notes / WhatsApp conversation summary</label><textarea id="notes"></textarea></div></div>
-<p class="muted">Add each product as a separate line. Order total = all item quantities × unit prices + delivery. WhatsApp messages must be recorded manually in this first version.</p><div class="actions"><button class="primary" id="save">Save enquiry</button><button class="soft" id="clear">Clear</button></div></section></div></main>
+<p class="muted">Add each product as a separate line. Order total = all item quantities × unit prices + delivery. WhatsApp messages must be recorded manually in this first version.</p><div class="actions"><button class="primary" id="save">Save enquiry</button><button class="soft" id="clear">Clear</button></div></section>
 
 <section class="card hidden" id="notifications">
 <h2>Customer messages & follow-up centre</h2>
@@ -503,6 +503,8 @@ button:focus-visible{outline:3px solid rgba(215,183,122,.8);outline-offset:2px}
 <div id="rdList" class="list muted">Loading readiness checklist…</div>
 <p class="muted">This checklist is a planning aid, not legal, tax, product-authenticity or financial advice. Do not mark an item Verified without documentary evidence or a completed real-world test. It does not authorize launch automatically.</p>
 </section>
+
+</div></main>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script>
 const db=supabase.createClient("https://qguxptvedozdfulahkid.supabase.co","sb_publishable_c5-NfXVIzLNgC821H3EFWQ_fpmSU9Tl"),$=x=>document.getElementById(x);let user,es=[],os=[],editId=null,editType=null,ps=[],lines=[],inventory=[],inventoryEditId=null,movements=[],suppliers=[],purchases=[],supplierEditId=null,costInputs=[],sourceRows=[],sourceEditId=null;
