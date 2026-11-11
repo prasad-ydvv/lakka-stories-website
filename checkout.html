@@ -8,6 +8,19 @@
 .steps .active{background:var(--maroon);color:#fff;border-color:var(--maroon)}
 
 
+
+/* Consent alignment and clear order-request action */
+.consent-row{margin:17px 0 14px}
+.consent-row label{display:flex;align-items:flex-start;gap:10px;max-width:100%;font-size:12px;line-height:1.55;font-weight:600;cursor:pointer}
+.consent-row input[type="checkbox"]{appearance:auto;-webkit-appearance:checkbox;flex:0 0 18px;width:18px;height:18px;min-height:18px;margin:1px 0 0;padding:0;accent-color:var(--maroon);cursor:pointer}
+.submit-order{min-width:220px}
+@media(max-width:600px){
+ .consent-row{margin:16px 0 13px}
+ .consent-row label{gap:10px;font-size:12px;line-height:1.55}
+ .consent-row input[type="checkbox"]{flex-basis:20px;width:20px;height:20px;min-height:20px}
+ .submit-order{display:block;width:100%;min-height:50px;margin-top:4px;font-size:14px}
+}
+
 /* LAKKA STORIES — delivery details refinement */
 body{background:linear-gradient(180deg,#fffdf8 0%,#fbf5eb 100%)}
 .top{padding:10px 12px;letter-spacing:.17em}
@@ -71,8 +84,8 @@ input[readonly]{background:#f7f0e6;color:#6f6258}
 <div class="field"><label for="city">City / town *</label><input id="city" required maxlength="100" autocomplete="address-level2" placeholder="Enter your town or city"></div>
 <div class="field full"><label for="address">House number / building / street / area *</label><textarea id="address" required minlength="10" maxlength="500" autocomplete="street-address" placeholder="House or flat number, building, street, area and nearby landmark"></textarea><span class="muted">PIN lookup cannot verify your exact house address. Enter the complete delivery address.</span></div>
 <div class="field full"><label for="notes">Delivery instructions (optional)</label><textarea id="notes" maxlength="300"></textarea></div>
-</div><p><label><input type="checkbox" id="consent" required> I agree that LAKKA STORIES may use these details to respond to this order request and arrange delivery if accepted.</label></p>
-<button class="btn" type="submit" id="submit">Send order request</button><div id="status" class="status hidden" role="status"></div></form>
+</div><p class="consent-row"><label for="consent"><input type="checkbox" id="consent" required> <span>I agree that LAKKA STORIES may use these details to respond to this order request and arrange delivery if accepted.</span></label></p>
+<button class="btn submit-order" type="submit" id="submit">Send order request</button><div id="status" class="status hidden" role="status"></div></form>
 <p class="muted">Do not enter OTPs, UPI PINs, card details or passwords. This form does not collect payment.</p></main>
 <script src="cart.js"></script><script>
 const PROJECT_URL='https://gsesangwrryzbpudusfl.supabase.co';
