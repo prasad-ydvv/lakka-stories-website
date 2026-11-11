@@ -81,6 +81,11 @@
     .card h3{font-size:17px;line-height:1.3;margin:0 0 6px;min-height:0;height:auto;max-height:none;overflow:visible;display:block}
     .card p{font-size:11px;line-height:1.35;color:var(--muted);margin-bottom:9px}
     .price{font-size:13px;font-weight:bold;color:var(--maroon);margin-top:5px;margin-bottom:10px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+    .catalogue-availability{display:inline-flex;align-items:center;width:max-content;max-width:100%;margin:0 0 8px;padding:4px 8px;border-radius:999px;font-size:10px;font-weight:700;line-height:1.3;border:1px solid transparent}
+    .catalogue-availability.available{color:#17683a;background:#e8f6ed;border-color:#bfe4cb}
+    .catalogue-availability.made-to-order{color:#80520c;background:#fff4d9;border-color:#f0d89b}
+    .catalogue-availability.unavailable{color:#9d2c35;background:#fff0f0;border-color:#efc5c8}
+    .catalogue-availability.unknown{color:#66584b;background:#f6eee3;border-color:#e8d7bf}
     .card .price-current{font-size:14px;font-weight:700;color:var(--maroon)}
     .card .price-original{font-size:11px}
     .card .discount-badge{margin-left:0;padding:3px 6px;font-size:9px}
@@ -1571,6 +1576,21 @@ footer{padding:26px 16px}
       if (c.includes("decor") || c.includes("home")) return "Decor";
       return category || "Other";
     }
+    function catalogueAvailability(rawValue) {
+      const raw = String(rawValue || "").trim();
+      const normalized = raw.toLowerCase().replace(/[\\s-]+/g, "_");
+      if (["available", "in_stock", "instock", "ready_stock", "ready_to_ship"].includes(normalized)) {
+        return {label:"Available to order", className:"available"};
+      }
+      if (["made_to_order", "made_toorder", "pre_order", "preorder", "on_demand"].includes(normalized)) {
+        return {label:"Made to order", className:"made-to-order"};
+      }
+      if (["out_of_stock", "unavailable", "sold_out", "soldout", "discontinued"].includes(normalized)) {
+        return {label:"Currently unavailable", className:"unavailable"};
+      }
+      return {label:raw ? raw.replace(/[_-]+/g, " ").replace(/\\b\\w/g, ch => ch.toUpperCase()) : "Ask us to confirm availability", className:"unknown"};
+    }
+
     function renderCatalogue() {
       const term = norm(search.value);
       const grid = document.getElementById("productGrid");
@@ -1671,6 +1691,11 @@ footer{padding:26px 16px}
           price.textContent = "Price on Request";
         }
 
+        const availability = catalogueAvailability(p.availability);
+        const availabilityBadge = document.createElement("span");
+        availabilityBadge.className = "catalogue-availability " + availability.className;
+        availabilityBadge.textContent = availability.label;
+
         const viewHint = document.createElement("div");
         viewHint.className = "view-details-hint";
         viewHint.textContent = "View Details";
@@ -1684,7 +1709,7 @@ footer{padding:26px 16px}
             showToast((p.name || "Product") + " added to your cart.");
           }
         });
-        body.append(cat, title, price, viewHint, addButton);
+        body.append(cat, title, price, availabilityBadge, viewHint, addButton);
         card.append(photo, body);
         grid.appendChild(card);
       });
