@@ -514,9 +514,45 @@ function currentPaneFromUrl(){const p=new URLSearchParams(location.hash.replace(
 function message(id,t){$(id).textContent=t;$(id).classList.remove("hidden")}function pane(p,writeHistory=false){if(!validPanes.includes(p))p="dashboard";document.querySelectorAll(".tab").forEach(b=>b.classList.toggle("active",b.dataset.pane===p));validPanes.forEach(x=>$(x).classList.toggle("hidden",x!==p));if(writeHistory){const next="#tab="+encodeURIComponent(p);if(location.hash!==next)history.pushState({pane:p},"",next)}if(p==="dashboard")loadBusinessDashboard();if(p==="reports")renderReports();if(p==="inventory")renderInventory();if(p==="suppliers")loadSuppliers();if(p==="costs")loadProductCosts();if(p==="sourcing")loadProductSourcing();if(p==="shipping")loadShipments();if(p==="notifications")loadNotifications();if(p==="settings")loadBusinessSettings();if(p==="documents")loadDocuments();if(p==="expenses")loadExpenses();if(p==="finance")loadFinance();if(p==="backup")loadBackupCentre();if(p==="catalogueAudit")runCatalogueAudit();if(p==="customers")loadCustomers();if(p==="feedback")loadFeedback();if(p==="analytics")loadAnalytics();if(p==="reorder")loadReorderPlanner();if(p==="readiness")loadReadiness()}
 document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>pane(b.dataset.pane,true));
 window.addEventListener("popstate",()=>{if(user&&$("app")&&!$("app").classList.contains("hidden"))pane(currentPaneFromUrl(),false)});
-function signedIn(s){user=s.user;$ ("login").classList.add("hidden");$("app").classList.remove("hidden");loadAll().then(()=>{const p=currentPaneFromUrl();if(!location.hash)history.replaceState({pane:"dashboard"},"",location.pathname+location.search+"#tab=dashboard");pane(p,false)})}function signedOut(){$("app").classList.add("hidden");$("login").classList.remove("hidden")}
-$("loginBtn").onclick=async()=>{let {data,error}=await db.auth.signInWithPassword({email:$("email").value.trim(),password:$("password").value});if(error)message("loginMsg",error.message);else signedIn(data.session)};
-$("logout").onclick=async()=>{await db.auth.signOut();signedOut()};
+let activeAuthUserId=null,authLoadVersion=0;
+function signedIn(session){
+  if(!session?.user)return signedOut();
+  const nextUserId=session.user.id;
+  if(activeAuthUserId===nextUserId&&!$("app").classList.contains("hidden"))return;
+  activeAuthUserId=nextUserId;user=session.user;
+  $("login").classList.add("hidden");$("app").classList.remove("hidden");
+  const version=++authLoadVersion;
+  Promise.resolve().then(async()=>{
+    await loadAll();
+    if(version!==authLoadVersion||activeAuthUserId!==nextUserId)return;
+    const p=currentPaneFromUrl();
+    if(!location.hash)history.replaceState({pane:"dashboard"},"",location.pathname+location.search+"#tab=dashboard");
+    pane(p,false);
+  }).catch(error=>{
+    if(version===authLoadVersion)message("loginMsg","Dashboard loading failed. Please refresh and sign in again.");
+  });
+}
+function signedOut(){
+  ++authLoadVersion;activeAuthUserId=null;user=null;
+  $("app").classList.add("hidden");$("login").classList.remove("hidden");
+}
+$("loginBtn").onclick=async()=>{
+  $("loginBtn").disabled=true;
+  $("loginMsg").classList.add("hidden");
+  try{
+    const {error}=await db.auth.signInWithPassword({email:$("email").value.trim(),password:$("password").value});
+    if(error)message("loginMsg",error.message);
+  }catch(error){message("loginMsg","Sign-in failed. Please try again.");}
+  finally{$("loginBtn").disabled=false;}
+};
+$("logout").onclick=async()=>{
+  $("logout").disabled=true;
+  try{
+    const {error}=await db.auth.signOut();
+    if(error)message("loginMsg","Sign-out failed. Please try again.");
+  }catch(error){message("loginMsg","Sign-out failed. Please try again.");}
+  finally{$("logout").disabled=false;}
+};
 async function loadAll(){let p=await db.from("public_catalogue").select("id,name,product_code,selling_price").order("name");ps=p.data||[];populateInventoryProducts();newLine();await Promise.all([loadE(),loadO(),loadInventory()]);summary();if(!$("reports").classList.contains("hidden"))renderReports()}
 
 function dashMoney(n){return cash(Number(n)||0)}
@@ -648,7 +684,18 @@ window.edit=async(type,id)=>{let x=(type==="order"?os:es).find(a=>a.id===id);if(
 window.del=async(type,id)=>{if(!confirm("Delete this record?"))return;let r=await db.from(type==="order"?"owner_orders":"owner_enquiries").delete().eq("id",id);if(r.error)alert(r.error.message);else{await loadAll()}};
 window.convert=async id=>{let x=es.find(a=>a.id===id);if(!x||!confirm("Convert this enquiry into an order?"))return;let p={...x,user_id:user.id,order_status:"Confirmed"};delete p.id;delete p.status;delete p.created_at;delete p.updated_at;let r=await db.from("owner_orders").insert(p);if(r.error){alert(r.error.message);return}let u=await db.from("owner_enquiries").update({status:"Converted"}).eq("id",id);if(u.error)alert(u.error.message);await loadAll();pane("orders")};
 $("searchE").oninput=renderE;$("searchO").oninput=renderO;
-$('purchaseDate').value=new Date().toISOString().slice(0,10);(async()=>{let {data:{session}}=await db.auth.getSession();if(session)signedIn(session);else signedOut();db.auth.onAuthStateChange((e,s)=>{if(s)signedIn(s);else signedOut()})})();
+$('purchaseDate').value=new Date().toISOString().slice(0,10);
+db.auth.onAuthStateChange((event,session)=>{
+  // Defer dashboard work until the Supabase auth callback has returned.
+  queueMicrotask(()=>{if(session)signedIn(session);else signedOut();});
+});
+(async()=>{
+  try{
+    const {data:{session},error}=await db.auth.getSession();
+    if(error)throw error;
+    if(session)signedIn(session);else signedOut();
+  }catch(error){signedOut();message("loginMsg","Could not restore your session. Please sign in again.");}
+})();
 
 // V11 — Product sourcing linked to the existing public catalogue.
 function populateSourceSelectors(){
