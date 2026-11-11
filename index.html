@@ -1623,6 +1623,7 @@ footer{padding:26px 16px}
 
 /* Final mobile cart visibility override */
     @media(max-width:700px){.mobile-cart-shortcut{display:inline-flex!important}}
+    header.scroll-fixed{position:fixed!important;top:0!important;left:0!important;right:0!important;width:100%!important;z-index:10000!important;box-shadow:0 3px 12px rgba(66,43,42,.10)}
 </style>
 </head>
 <body>
@@ -2056,5 +2057,33 @@ footer{padding:26px 16px}
       });
     })();
   </script>
+<script>
+(function(){
+  const header=document.querySelector('body > header');
+  const announcement=document.querySelector('.topline');
+  if(!header||!announcement)return;
+  const spacer=document.createElement('div');
+  spacer.setAttribute('aria-hidden','true');
+  spacer.style.height='0px';
+  spacer.style.display='block';
+  header.parentNode.insertBefore(spacer,header);
+  function syncHeader(){
+    const threshold=announcement.offsetTop+announcement.offsetHeight;
+    const shouldFix=window.scrollY>=threshold;
+    if(shouldFix&&!header.classList.contains('scroll-fixed')){
+      spacer.style.height=header.offsetHeight+'px';
+      header.classList.add('scroll-fixed');
+    }else if(!shouldFix&&header.classList.contains('scroll-fixed')){
+      header.classList.remove('scroll-fixed');
+      spacer.style.height='0px';
+    }else if(shouldFix){
+      spacer.style.height=header.offsetHeight+'px';
+    }
+  }
+  window.addEventListener('scroll',syncHeader,{passive:true});
+  window.addEventListener('resize',syncHeader);
+  syncHeader();
+})();
+</script>
 </body>
 </html>
