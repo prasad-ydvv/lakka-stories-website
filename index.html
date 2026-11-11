@@ -81,8 +81,7 @@
     .card h3{font-size:17px;line-height:1.3;margin:0 0 6px;min-height:0;height:auto;max-height:none;overflow:visible;display:block}
     .card p{font-size:11px;line-height:1.35;color:var(--muted);margin-bottom:9px}
     .price{font-size:13px;font-weight:bold;color:var(--maroon);margin-top:5px;margin-bottom:10px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
-    .photo{position:relative}
-    .catalogue-availability{position:absolute;left:9px;top:9px;z-index:2;display:inline-flex;align-items:center;width:max-content;max-width:calc(100% - 18px);margin:0;padding:5px 9px;border-radius:999px;font-size:10px;font-weight:700;line-height:1.3;border:1px solid transparent;box-shadow:0 2px 8px rgba(40,25,15,.12);backdrop-filter:blur(5px)}
+    .catalogue-availability{display:inline-flex;align-items:center;width:max-content;max-width:100%;margin:0 0 5px;padding:3px 7px;border-radius:999px;font-size:9px;font-weight:700;line-height:1.25;border:1px solid transparent}
     .catalogue-availability.available{color:#17683a;background:#e8f6ed;border-color:#bfe4cb}
     .catalogue-availability.made-to-order{color:#80520c;background:#fff4d9;border-color:#f0d89b}
     .catalogue-availability.unavailable{color:#9d2c35;background:#fff0f0;border-color:#efc5c8}
@@ -1696,7 +1695,6 @@ footer{padding:26px 16px}
         const availabilityBadge = document.createElement("span");
         availabilityBadge.className = "catalogue-availability " + availability.className;
         availabilityBadge.textContent = availability.label;
-        photo.appendChild(availabilityBadge);
 
         const viewHint = document.createElement("div");
         viewHint.className = "view-details-hint";
@@ -1711,7 +1709,7 @@ footer{padding:26px 16px}
             showToast((p.name || "Product") + " added to your cart.");
           }
         });
-        body.append(cat, title, price, viewHint, addButton);
+        body.append(cat, title, price, availabilityBadge, viewHint, addButton);
         card.append(photo, body);
         grid.appendChild(card);
       });
