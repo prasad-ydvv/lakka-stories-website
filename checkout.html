@@ -47,6 +47,18 @@ input[readonly]{background:#f7f0e6;color:#6f6258}
 .btn:disabled{opacity:.65;cursor:not-allowed;transform:none;box-shadow:none}
 .status{border-radius:6px;line-height:1.6}
 .field-error{font-weight:600}
+/* Clear order-request success state */
+.success-panel{background:#fffaf2;border:1px solid var(--line);border-top:4px solid #63845c;border-radius:10px;padding:clamp(20px,4vw,30px);margin:22px 0;box-shadow:0 8px 24px rgba(66,43,42,.045)}
+.success-heading{display:flex;align-items:center;gap:12px;margin:0 0 10px;color:#456b40;font:600 22px/1.3 Arial,sans-serif}
+.success-icon{display:grid;place-items:center;flex:0 0 38px;width:38px;height:38px;border-radius:50%;background:#e8f0e3;color:#456b40;font-size:23px}
+.success-reference{margin:18px 0;padding:13px 15px;background:#f5ecd9;border:1px dashed #bd8b45;border-radius:6px}
+.success-reference span{display:block;color:var(--muted);font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+.success-reference strong{display:block;margin-top:4px;color:var(--maroon);font:600 clamp(20px,4vw,26px)/1.3 Georgia,serif;overflow-wrap:anywhere}
+.success-next{font-size:13px;line-height:1.7;color:var(--muted)}
+.success-home{display:inline-block;margin-top:10px;color:var(--maroon);font-weight:bold;text-decoration:none}
+.success-home:hover{text-decoration:underline}
+@media(max-width:600px){.success-panel{padding:19px 15px;margin:16px 0}.success-heading{font-size:19px}.success-home{display:block;text-align:center;padding:12px;border:1px solid var(--line);border-radius:5px}}
+
 .wrap>a{color:#8b6332;font-size:13px;text-decoration:none}
 .wrap>a:hover{text-decoration:underline}
 @media(max-width:600px){
@@ -72,7 +84,7 @@ input[readonly]{background:#f7f0e6;color:#6f6258}
 @media(prefers-reduced-motion:reduce){.btn{transition:none!important}}
 
 </style></head><body><div class="top">LAKKA STORIES · EVERY LITTLE TREASURE HAS A STORY</div><main class="wrap"><div class="steps" aria-label="Order progress"><span>1. Explore</span><span>2. Your cart</span><span class="active">3. Delivery details</span></div><a href="cart.html">← Back to your cart</a><h1>Delivery Details</h1><p class="muted">Enter where you would like us to deliver. Sending this request does not confirm an order or collect payment.</p>
-<div class="panel"><h2>Review your items</h2><div id="items"></div><p class="notice">The server checks current product records. Prices and stock are not taken from your browser cart. If a price or availability is unconfirmed, our team will contact you before accepting the order.</p></div>
+<div class="panel" id="orderReview"><h2>Review your items</h2><div id="items"></div><p class="notice">The server checks current product records. Prices and stock are not taken from your browser cart. If a price or availability is unconfirmed, our team will contact you before accepting the order.</p></div>
 <form id="checkout" class="panel"><h2>Where should we deliver?</h2><div class="grid">
 <div class="field"><label for="name">Full name *</label><input id="name" maxlength="120" required autocomplete="name"></div>
 <div class="field"><label for="phone">Indian mobile number *</label><input id="phone" required inputmode="tel" autocomplete="tel" maxlength="14" placeholder="10-digit mobile number"><span class="muted">Enter a 10-digit Indian mobile number, optionally with +91.</span></div>
@@ -86,6 +98,13 @@ input[readonly]{background:#f7f0e6;color:#6f6258}
 <div class="field full"><label for="notes">Delivery instructions (optional)</label><textarea id="notes" maxlength="300"></textarea></div>
 </div><p class="consent-row"><label for="consent"><input type="checkbox" id="consent" required> <span>I agree that LAKKA STORIES may use these details to respond to this order request and arrange delivery if accepted.</span></label></p>
 <button class="btn submit-order" type="submit" id="submit">Send order request</button><div id="status" class="status hidden" role="status"></div></form>
+<section id="orderSuccess" class="success-panel hidden" role="status" aria-live="polite" tabindex="-1">
+  <h2 class="success-heading"><span class="success-icon" aria-hidden="true">✓</span>Thank you! Your request has been received.</h2>
+  <p class="success-next">Your order request is awaiting review. It is not yet a confirmed order, and no payment has been collected.</p>
+  <div class="success-reference"><span>Order reference</span><strong id="successReference"></strong></div>
+  <p class="success-next">Our team will contact you after checking product availability, final price and delivery charges. Please keep your order reference for future communication.</p>
+  <a class="success-home" href="index.html">Continue browsing LAKKA STORIES</a>
+</section>
 <p class="muted">Do not enter OTPs, UPI PINs, card details or passwords. This form does not collect payment.</p></main>
 <script src="cart.js"></script><script>
 const PROJECT_URL='https://gsesangwrryzbpudusfl.supabase.co';
@@ -261,8 +280,11 @@ form.addEventListener('submit',async e=>{
   localStorage.removeItem('lakka_stories_cart_v1');
   LakkaCart.updateCount();
   form.classList.add('hidden');
-  box.textContent='Request reference: '+data.order_reference;
-  st.textContent='Thank you! Your request has been received. It is not yet a confirmed order. LAKKA STORIES will contact you after checking availability, final price and delivery.';
+  document.getElementById('orderReview').classList.add('hidden');
+  document.getElementById('successReference').textContent=String(data.order_reference||'Pending confirmation');
+  const successPanel=document.getElementById('orderSuccess');
+  successPanel.classList.remove('hidden');
+  successPanel.focus();
  }catch(err){
   st.textContent=err.message;
   btn.disabled=false;
