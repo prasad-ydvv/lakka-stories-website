@@ -1637,7 +1637,27 @@ footer{padding:26px 16px}
         -webkit-tap-highlight-color: transparent;
       }
     }
-    </style>
+    
+    /* Touch devices: do not leave hover styling stuck after a tap. */
+    @media (hover: none) and (pointer: coarse) {
+      .add-cart-card:hover,
+      .add-cart-card:focus:not(:focus-visible) {
+        background: #fffdf8 !important;
+        color: var(--maroon) !important;
+        border-color: var(--maroon) !important;
+        box-shadow: none !important;
+        transform: none !important;
+      }
+      .add-cart-card:active {
+        background: var(--maroon) !important;
+        color: #fff !important;
+      }
+      .card:hover {
+        transform: none !important;
+        box-shadow: none !important;
+      }
+    }
+</style>
 </head>
 <body>
   <div class="topline">Every Little Treasure Has a Story.</div>
