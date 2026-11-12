@@ -1671,62 +1671,6 @@ footer{padding:26px 16px}
 
 
 
-    /* FINAL FIX — prevent the Explore by Interest heading and cards from overlapping */
-    #giftIdeas{
-      display:block!important;
-      position:relative!important;
-      height:auto!important;
-      min-height:0!important;
-      overflow:visible!important;
-      padding:24px 20px 28px!important;
-    }
-    #giftIdeas > .section-head{
-      display:block!important;
-      position:relative!important;
-      inset:auto!important;
-      transform:none!important;
-      width:100%!important;
-      height:auto!important;
-      min-height:0!important;
-      margin:0 auto 16px!important;
-      padding:0!important;
-      overflow:visible!important;
-      text-align:center!important;
-    }
-    #giftIdeas > .section-head .eyebrow{display:block!important;margin:0 0 7px!important}
-    #giftIdeas > .section-head h2{display:block!important;margin:0!important;line-height:1.15!important}
-    #giftIdeas > .gift-idea-grid{
-      display:grid!important;
-      position:relative!important;
-      inset:auto!important;
-      transform:none!important;
-      width:100%!important;
-      max-width:900px!important;
-      height:auto!important;
-      min-height:0!important;
-      margin:0 auto!important;
-      padding:0!important;
-      grid-template-columns:repeat(3,minmax(0,1fr))!important;
-      align-items:stretch!important;
-      gap:12px!important;
-      overflow:visible!important;
-    }
-    #giftIdeas .gift-idea{
-      position:relative!important;
-      inset:auto!important;
-      transform:none;
-      box-sizing:border-box!important;
-      width:100%!important;
-      height:auto!important;
-      min-height:112px!important;
-      margin:0!important;
-    }
-    @media(max-width:700px){
-      #giftIdeas{padding:20px 13px 22px!important}
-      #giftIdeas > .gift-idea-grid{grid-template-columns:minmax(0,1fr)!important;max-width:460px!important;gap:9px!important}
-      #giftIdeas .gift-idea{min-height:96px!important}
-    }
-
     /* WP1 homepage design pass — give each product room to be seen and read */
 @media (min-width: 1101px) {
   .collection .grid {
@@ -1763,6 +1707,101 @@ footer{padding:26px 16px}
   .collection .view-details-hint,
   .collection .add-cart-card { min-height: 34px; }
 }
+  
+    /* LAKKA STORIES — isolated Explore by Interest component */
+    #giftIdeas.ls-interest-section{
+      display:block;
+      position:relative;
+      box-sizing:border-box;
+      width:100%;
+      height:auto;
+      min-height:0;
+      padding:24px 20px 28px;
+      overflow:visible;
+      background:#fffaf2;
+      border-top:1px solid #eadcc9;
+      border-bottom:1px solid #eadcc9;
+    }
+    #giftIdeas .ls-interest-heading{
+      display:block;
+      position:static;
+      width:100%;
+      height:auto;
+      margin:0 auto 15px;
+      padding:0;
+      text-align:center;
+    }
+    #giftIdeas .ls-interest-eyebrow{
+      display:block;
+      margin:0 0 6px;
+      color:#a77b43;
+      font-size:9px;
+      letter-spacing:.2em;
+      text-transform:uppercase;
+    }
+    #giftIdeas .ls-interest-heading h2{
+      display:block;
+      margin:0;
+      color:#572329;
+      font:normal clamp(26px,3vw,34px)/1.15 Georgia,serif;
+    }
+    #giftIdeas .ls-interest-grid{
+      display:grid;
+      position:static;
+      width:100%;
+      max-width:900px;
+      height:auto;
+      min-height:0;
+      margin:0 auto;
+      padding:0;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:12px;
+      align-items:stretch;
+    }
+    #giftIdeas .ls-interest-card{
+      display:grid;
+      position:relative;
+      box-sizing:border-box;
+      width:100%;
+      min-width:0;
+      min-height:104px;
+      height:auto;
+      margin:0;
+      padding:9px;
+      grid-template-columns:76px minmax(0,1fr);
+      align-items:center;
+      gap:10px;
+      overflow:hidden;
+      border:1px solid #eadcc9;
+      border-radius:11px;
+      background:linear-gradient(120deg,#fff8ed,#f7ead8);
+      color:#422b2a;
+      text-align:left;
+      cursor:pointer;
+    }
+    #giftIdeas .ls-interest-card:hover{transform:translateY(-2px);box-shadow:0 5px 14px rgba(69,32,39,.08)}
+    #giftIdeas .ls-interest-image{
+      display:block;
+      width:76px;
+      height:82px;
+      margin:0;
+      object-fit:contain;
+      border-radius:7px;
+    }
+    #giftIdeas .ls-interest-copy{display:flex;min-width:0;flex-direction:column;align-items:flex-start;gap:3px}
+    #giftIdeas .ls-interest-icon{color:#bd8b45;font-size:15px;line-height:1}
+    #giftIdeas .ls-interest-card strong{display:block;color:#572329;font:600 15px/1.15 Georgia,serif}
+    #giftIdeas .ls-interest-card small{display:block;color:#786b62;font-size:10px;line-height:1.3}
+    #giftIdeas .ls-interest-link{display:block;margin-top:2px;color:#572329;font-size:9px;font-weight:700}
+    @media(max-width:700px){
+      #giftIdeas.ls-interest-section{padding:20px 13px 22px}
+      #giftIdeas .ls-interest-heading{margin-bottom:12px}
+      #giftIdeas .ls-interest-heading h2{font-size:26px}
+      #giftIdeas .ls-interest-grid{max-width:460px;grid-template-columns:minmax(0,1fr);gap:9px}
+      #giftIdeas .ls-interest-card{min-height:92px;grid-template-columns:76px minmax(0,1fr);padding:8px}
+      #giftIdeas .ls-interest-image{width:76px;height:74px}
+    }
+
   </style>
   <link rel="stylesheet" href="assets/css/design-system.css">
 </head>
@@ -1798,20 +1837,20 @@ footer{padding:26px 16px}
       <div class="brand-promise"><span class="promise-icon" aria-hidden="true">✧</span><span><strong>Made to Be Treasured</strong><small>Little pieces, lasting memories</small></span></div>
     </section>
 
-    <section class="gift-ideas" id="giftIdeas" aria-labelledby="giftIdeasTitle">
-      <div class="section-head">
-        <p class="eyebrow">— Explore the collection</p>
+    <section class="ls-interest-section" id="giftIdeas" aria-labelledby="giftIdeasTitle">
+      <div class="ls-interest-heading">
+        <p class="ls-interest-eyebrow">— Explore the collection</p>
         <h2 id="giftIdeasTitle">Explore by Interest</h2>
         
       </div>
-      <div class="gift-idea-grid">
-        <button class="gift-idea filter" type="button" data-filter="Gifts">
-          <img class="interest-image" src="images/approved-gift-box.webp" alt="Decorative gift box" loading="lazy">
-          <span class="interest-copy">
-            <span class="gift-idea-icon" aria-hidden="true">♡</span>
+      <div class="ls-interest-grid">
+        <button class="ls-interest-card filter" type="button" data-filter="Gifts">
+          <img class="ls-interest-image" src="images/approved-gift-box.webp" alt="Decorative gift box" loading="lazy">
+          <span class="ls-interest-copy">
+            <span class="ls-interest-icon" aria-hidden="true">♡</span>
             <strong>Thoughtful Gifts</strong>
             <small>Thoughtful pieces for gifting</small>
-            <span class="gift-idea-link">Explore gifts →</span>
+            <span class="ls-interest-link">Explore gifts →</span>
           </span>
         </button>
         <button class="gift-idea filter" type="button" data-filter="Toys">
