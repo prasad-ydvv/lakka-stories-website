@@ -9,6 +9,20 @@
   <link rel="stylesheet" href="assets/css/design-system.css">
   <title>Bulk Gifting Enquiries | LAKKA STORIES</title>
   <style>
+
+    .mobile-menu-toggle{display:none;border:1px solid var(--ls-line);background:var(--ls-ivory);border-radius:4px;width:42px;height:40px;padding:9px;cursor:pointer;color:var(--ls-maroon)}
+    .mobile-menu-toggle span{display:block;height:2px;background:currentColor;margin:4px 0;border-radius:2px}
+    @media(max-width:700px){
+      .nav{position:relative;gap:10px}
+      .brand{text-align:left;min-width:0}
+      .brand strong{font-size:18px}
+      .brand span{font-size:7px}
+      .mobile-menu-toggle{display:block;flex:0 0 42px}
+      nav#mainNavigation{display:none;position:absolute;top:100%;left:0;right:0;z-index:20;background:var(--ls-ivory);border-top:1px solid var(--ls-line);border-bottom:1px solid var(--ls-line);padding:10px 16px 14px;box-shadow:0 8px 16px rgba(66,43,42,.10);flex-direction:column;align-items:stretch;gap:0}
+      #siteNav.menu-open nav#mainNavigation{display:flex}
+      nav#mainNavigation a{padding:11px 4px;border-bottom:1px solid #f1e7da}
+      nav#mainNavigation a:last-child{border-bottom:0}
+    }
     .bulk-wrap{max-width:980px;margin:0 auto;padding:clamp(28px,5vw,58px) var(--ls-page-gutter) 64px}
     .bulk-hero{background:linear-gradient(135deg,#fffaf1,#f3e7d4);border:1px solid var(--ls-line);border-radius:10px;padding:clamp(24px,5vw,52px);text-align:center}
     .bulk-hero h1{font-size:clamp(34px,5vw,52px);line-height:1.08;margin:8px auto 14px;max-width:720px}
