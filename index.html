@@ -1844,32 +1844,29 @@ footer{padding:26px 16px}
         
       </div>
       <div class="ls-interest-grid">
-        <button class="ls-interest-card filter" type="button" data-filter="Gifts">
-          <img class="ls-interest-image" src="images/approved-gift-box.webp" alt="Decorative gift box" loading="lazy">
-          <span class="ls-interest-copy">
-            <span class="ls-interest-icon" aria-hidden="true">♡</span>
-            <strong>Thoughtful Gifts</strong>
-            <small>Thoughtful pieces for gifting</small>
-            <span class="ls-interest-link">Explore gifts →</span>
-          </span>
+        <button class="ls-interest-card filter" type="button" data-filter="Traditional Toys">
+          <img class="ls-interest-image" src="images/approved-rocking-horse.webp" alt="Traditional wooden toy" loading="lazy">
+          <span class="ls-interest-copy"><span class="ls-interest-icon" aria-hidden="true">✿</span><strong>Traditional Toys</strong><small>Playful pieces rooted in craft</small><span class="ls-interest-link">Explore toys →</span></span>
         </button>
-        <button class="gift-idea filter" type="button" data-filter="Toys">
-          <img class="interest-image" src="images/approved-rocking-horse.webp" alt="Traditional wooden rocking horse" loading="lazy">
-          <span class="interest-copy">
-            <span class="gift-idea-icon" aria-hidden="true">✿</span>
-            <strong>Charming Toys</strong>
-            <small>Traditional wooden toys</small>
-            <span class="gift-idea-link">Explore toys →</span>
-          </span>
+        <button class="ls-interest-card filter" type="button" data-filter="Gifts & Keepsakes">
+          <img class="ls-interest-image" src="images/approved-gift-box.webp" alt="Thoughtful gift keepsake" loading="lazy">
+          <span class="ls-interest-copy"><span class="ls-interest-icon" aria-hidden="true">♡</span><strong>Gifts &amp; Keepsakes</strong><small>Little treasures for special moments</small><span class="ls-interest-link">Explore gifts →</span></span>
         </button>
-        <button class="gift-idea filter" type="button" data-filter="Decor">
-          <img class="interest-image" src="images/approved-decorative-pot.webp" alt="Colourful decorative lacquer pot" loading="lazy">
-          <span class="interest-copy">
-            <span class="gift-idea-icon" aria-hidden="true">✧</span>
-            <strong>Decorative Treasures</strong>
-            <small>Pieces for your home</small>
-            <span class="gift-idea-link">Explore decor →</span>
-          </span>
+        <button class="ls-interest-card filter" type="button" data-filter="Wedding & Return Gifts">
+          <img class="ls-interest-image" src="images/approved-gift-box.webp" alt="Gift packaging inspiration" loading="lazy">
+          <span class="ls-interest-copy"><span class="ls-interest-icon" aria-hidden="true">❀</span><strong>Wedding &amp; Return Gifts</strong><small>Planning a celebration?</small><span class="ls-interest-link">Enquire with us →</span></span>
+        </button>
+        <button class="ls-interest-card filter" type="button" data-filter="Home Décor">
+          <img class="ls-interest-image" src="images/approved-decorative-pot.webp" alt="Decorative lacquer piece" loading="lazy">
+          <span class="ls-interest-copy"><span class="ls-interest-icon" aria-hidden="true">✧</span><strong>Home Décor</strong><small>Colourful pieces for your space</small><span class="ls-interest-link">Explore décor →</span></span>
+        </button>
+        <button class="ls-interest-card filter" type="button" data-filter="Functional & Lifestyle">
+          <img class="ls-interest-image" src="images/approved-craft-bull-rings.webp" alt="Handcrafted wooden objects" loading="lazy">
+          <span class="ls-interest-copy"><span class="ls-interest-icon" aria-hidden="true">⌂</span><strong>Functional &amp; Lifestyle</strong><small>Looking for something useful?</small><span class="ls-interest-link">Enquire with us →</span></span>
+        </button>
+        <button class="ls-interest-card filter" type="button" data-filter="Corporate Gifting">
+          <img class="ls-interest-image" src="images/approved-gift-box.webp" alt="Gifting inspiration" loading="lazy">
+          <span class="ls-interest-copy"><span class="ls-interest-icon" aria-hidden="true">◇</span><strong>Corporate Gifting</strong><small>Thoughtful gifts for your team or clients</small><span class="ls-interest-link">Enquire with us →</span></span>
         </button>
       </div>
     </section>
@@ -1926,7 +1923,7 @@ footer{padding:26px 16px}
       <div class="catalog-tools">
         <input class="search" id="search" type="search" placeholder="Search the collection..." aria-label="Search products">
         <div class="filters" aria-label="Filter products">
-          <button class="filter active" data-filter="All">All</button><button class="filter" data-filter="Toys">Toys</button><button class="filter" data-filter="Gifts">Gifts</button><button class="filter" data-filter="Decor">Decor</button>
+          <button class="filter active" data-filter="All">All</button><button class="filter" data-filter="Traditional Toys">Traditional Toys</button><button class="filter" data-filter="Gifts & Keepsakes">Gifts &amp; Keepsakes</button><button class="filter" data-filter="Wedding & Return Gifts">Wedding &amp; Return Gifts</button><button class="filter" data-filter="Home Décor">Home Décor</button><button class="filter" data-filter="Functional & Lifestyle">Functional &amp; Lifestyle</button><button class="filter" data-filter="Corporate Gifting">Corporate Gifting</button>
         </div>
       </div>
       <div class="grid" id="productGrid">
@@ -2001,10 +1998,16 @@ footer{padding:26px 16px}
     function norm(v){ return String(v || "").trim().toLowerCase(); }
     function categoryGroup(category) {
       const c = norm(category);
-      if (c.includes("toy")) return "Toys";
-      if (c.includes("gift")) return "Gifts";
-      if (c.includes("decor") || c.includes("home")) return "Decor";
-      return category || "Other";
+      const canonical = {
+        "traditional toys":"Traditional Toys",
+        "gifts & keepsakes":"Gifts & Keepsakes",
+        "wedding & return gifts":"Wedding & Return Gifts",
+        "home décor":"Home Décor",
+        "home decor":"Home Décor",
+        "functional & lifestyle":"Functional & Lifestyle",
+        "corporate gifting":"Corporate Gifting"
+      };
+      return canonical[c] || (String(category || "").trim() || "Other");
     }
     function catalogueAvailability(rawValue) {
       const raw = String(rawValue || "").trim();
@@ -2038,7 +2041,25 @@ footer{padding:26px 16px}
       grid.innerHTML = "";
 
       if (!filtered.length) {
-        grid.innerHTML = '<p class="empty" style="grid-column:1/-1">No products found. Please try another search or check back soon.</p>';
+        if (activeFilter !== "All" && !term) {
+          const message = document.createElement("div");
+          message.className = "empty category-empty";
+          message.style.gridColumn = "1/-1";
+          const heading = document.createElement("strong");
+          heading.textContent = activeFilter;
+          const copy = document.createElement("p");
+          copy.textContent = "We'd love to help you explore this collection. Enquire with us for details and current availability.";
+          const link = document.createElement("a");
+          link.className = "btn";
+          link.href = "https://wa.me/" + WHATSAPP_BUSINESS_NUMBER + "?text=" + encodeURIComponent("Hello LAKKA STORIES, I would like to enquire about the " + activeFilter + " collection. Please share details and current availability.");
+          link.target = "_blank";
+          link.rel = "noopener noreferrer";
+          link.textContent = "Enquire with us on WhatsApp";
+          message.append(heading, copy, link);
+          grid.appendChild(message);
+        } else {
+          grid.innerHTML = '<p class="empty" style="grid-column:1/-1">No matching products found. Please try another search or check back soon.</p>';
+        }
         loadMoreWrap.hidden = true;
         document.getElementById("noResults").hidden = true;
         return;
