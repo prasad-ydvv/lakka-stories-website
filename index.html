@@ -1669,6 +1669,7 @@ footer{padding:26px 16px}
 @media(max-width:600px){.site-footer{padding:24px 16px 18px}.site-footer .footer-links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px 12px}.site-footer .footer-links a{padding:9px 6px;border:1px solid rgba(255,250,242,.18);border-radius:4px;font-size:12px}}
 
 </style>
+  <link rel="stylesheet" href="assets/css/design-system.css">
 </head>
 <body>
   <div class="topline">Every Little Treasure Has a Story.</div>
@@ -1678,7 +1679,7 @@ footer{padding:26px 16px}
       <a class="mobile-cart-shortcut" href="cart.html" aria-label="Open cart">Cart (<span data-cart-count>0</span>)</a>
       <button class="mobile-menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mainNavigation"><span></span><span></span><span></span></button>
       <nav id="mainNavigation" aria-label="Main navigation">
-        <a href="#home">Home</a><a href="#collection">Collection</a><a href="#story">Our Story</a><a href="#contact">Contact</a><a href="track-order.html">Track Order</a><a class="cart-nav" href="cart.html">Cart (<span data-cart-count>0</span>)</a>
+        <a href="#home">Home</a><a href="#collection">Collection</a><a href="#story">Our Story</a><a href="#contact">Contact</a><a href="bulk-gifting.html">Bulk Gifting</a><a href="track-order.html">Track Order</a><a class="cart-nav" href="cart.html">Cart (<span data-cart-count>0</span>)</a>
       </nav>
     </div>
   </header>
@@ -2132,3 +2133,41 @@ footer{padding:26px 16px}
 </script>
 </body>
 </html>
+
+
+/* WP1 homepage design pass — give each product room to be seen and read */
+@media (min-width: 1101px) {
+  .collection .grid {
+    max-width: 1180px;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 18px !important;
+  }
+  .collection .photo { height: 218px; }
+  .collection .card-body { padding: 13px 13px 14px !important; }
+  .collection .card h3 {
+    font-size: 16px !important;
+    line-height: 1.3 !important;
+    min-height: 2.6em;
+    max-height: 2.6em;
+  }
+  .collection .card .price { font-size: 14px; }
+  .collection .catalogue-availability { font-size: 9px; }
+  .collection .view-details-hint,
+  .collection .add-cart-card { min-height: 38px; font-size: 11px; }
+}
+@media (min-width: 701px) and (max-width: 1100px) {
+  .collection .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px !important;
+  }
+  .collection .photo { height: 190px; }
+  .collection .card h3 { font-size: 15px !important; }
+  .collection .card .price { font-size: 13px; }
+}
+@media (max-width: 700px) {
+  .collection .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .collection .photo { aspect-ratio: 1 / 1; height: auto; }
+  .collection .card .price { line-height: 1.35; }
+  .collection .view-details-hint,
+  .collection .add-cart-card { min-height: 34px; }
+}
