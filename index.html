@@ -1670,6 +1670,63 @@ footer{padding:26px 16px}
 
 
 
+
+    /* FINAL FIX — prevent the Explore by Interest heading and cards from overlapping */
+    #giftIdeas{
+      display:block!important;
+      position:relative!important;
+      height:auto!important;
+      min-height:0!important;
+      overflow:visible!important;
+      padding:24px 20px 28px!important;
+    }
+    #giftIdeas > .section-head{
+      display:block!important;
+      position:relative!important;
+      inset:auto!important;
+      transform:none!important;
+      width:100%!important;
+      height:auto!important;
+      min-height:0!important;
+      margin:0 auto 16px!important;
+      padding:0!important;
+      overflow:visible!important;
+      text-align:center!important;
+    }
+    #giftIdeas > .section-head .eyebrow{display:block!important;margin:0 0 7px!important}
+    #giftIdeas > .section-head h2{display:block!important;margin:0!important;line-height:1.15!important}
+    #giftIdeas > .gift-idea-grid{
+      display:grid!important;
+      position:relative!important;
+      inset:auto!important;
+      transform:none!important;
+      width:100%!important;
+      max-width:900px!important;
+      height:auto!important;
+      min-height:0!important;
+      margin:0 auto!important;
+      padding:0!important;
+      grid-template-columns:repeat(3,minmax(0,1fr))!important;
+      align-items:stretch!important;
+      gap:12px!important;
+      overflow:visible!important;
+    }
+    #giftIdeas .gift-idea{
+      position:relative!important;
+      inset:auto!important;
+      transform:none;
+      box-sizing:border-box!important;
+      width:100%!important;
+      height:auto!important;
+      min-height:112px!important;
+      margin:0!important;
+    }
+    @media(max-width:700px){
+      #giftIdeas{padding:20px 13px 22px!important}
+      #giftIdeas > .gift-idea-grid{grid-template-columns:minmax(0,1fr)!important;max-width:460px!important;gap:9px!important}
+      #giftIdeas .gift-idea{min-height:96px!important}
+    }
+
     /* WP1 homepage design pass — give each product room to be seen and read */
 @media (min-width: 1101px) {
   .collection .grid {
