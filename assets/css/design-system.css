@@ -1,0 +1,95 @@
+/* LAKKA STORIES — shared design foundation
+   WP1: shared visual tokens and safe cross-page component defaults.
+   Page-specific layouts and existing behaviour remain in their page files. */
+:root {
+  --ls-maroon: #572329;
+  --ls-maroon-deep: #452027;
+  --ls-ivory: #fffdf8;
+  --ls-sand: #f3e7d4;
+  --ls-gold: #bd8b45;
+  --ls-ink: #422b2a;
+  --ls-muted: #786b62;
+  --ls-line: #eadcc9;
+  --ls-radius: 5px;
+  --ls-shadow-soft: 0 8px 24px rgba(66, 43, 42, .07);
+  --maroon: var(--ls-maroon);
+  --maroon2: #74333a;
+  --cream: var(--ls-ivory);
+  --sand: var(--ls-sand);
+  --gold: var(--ls-gold);
+  --ink: var(--ls-ink);
+  --muted: var(--ls-muted);
+  --line: var(--ls-line);
+}
+html { scroll-behavior: smooth; }
+body {
+  color: var(--ls-ink);
+  background-color: var(--ls-ivory);
+  font-family: Arial, Helvetica, sans-serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3, h4 {
+  color: var(--ls-maroon);
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 400;
+  text-wrap: balance;
+}
+p { text-wrap: pretty; }
+a { text-underline-offset: 3px; }
+:where(a, button, input, textarea, select, [tabindex]):focus-visible {
+  outline: 2px solid rgba(189, 139, 69, .9);
+  outline-offset: 3px;
+}
+:where(.topline, .top) {
+  background: var(--ls-maroon);
+  color: #fffaf2;
+}
+:where(header, .nav) { border-color: var(--ls-line); }
+:where(.brand, .brand strong, .footer-brand) { color: var(--ls-maroon); }
+:where(.brand span) { color: var(--ls-gold); }
+:where(.btn, button, .contact, .load-more-btn) {
+  border-radius: 3px;
+  transition: background-color .18s ease, border-color .18s ease,
+    color .18s ease, box-shadow .18s ease, transform .18s ease;
+}
+:where(.btn, .contact, .load-more-btn) {
+  background-color: var(--ls-maroon);
+  border-color: var(--ls-maroon);
+}
+:where(.btn:hover, .contact:hover, .load-more-btn:hover) {
+  background-color: var(--ls-maroon-deep);
+  border-color: var(--ls-maroon-deep);
+}
+:where(.btn.outline) {
+  color: var(--ls-maroon);
+  background: transparent;
+  border-color: var(--ls-maroon);
+}
+:where(input, textarea, select, .search) {
+  border-color: #ddcdb8;
+  border-radius: 4px;
+  color: var(--ls-ink);
+  background-color: #fff;
+}
+:where(input, textarea, select):focus {
+  border-color: var(--ls-gold);
+}
+:where(.panel, .summary, .note, .connect-box, .value, .gift-idea) {
+  border-color: var(--ls-line);
+}
+:where(.panel, .summary) { box-shadow: var(--ls-shadow-soft); }
+:where(.muted, .intro, .card p) { color: var(--ls-muted); }
+:where(.site-footer, footer) {
+  background-color: var(--ls-maroon);
+  color: #fffaf2;
+}
+:where(.site-footer a, footer a) { color: #fffaf2; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}
