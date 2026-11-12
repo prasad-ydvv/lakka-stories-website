@@ -78,7 +78,7 @@ Deno.serve(async (req: Request): Promise<Response> => {
   }
 
   const reference = String(input.order_reference ?? "").trim();
-  const phone = String(input.phone ?? "").replace(/\\D/g, "");
+  const phone = String(input.phone ?? "").replace(/\D/g, "");
 
   if (!/^LS-[A-Z0-9-]{6,40}$/i.test(reference) || !/^[6-9][0-9]{9}$/.test(phone)) {
     return jsonResponse({
