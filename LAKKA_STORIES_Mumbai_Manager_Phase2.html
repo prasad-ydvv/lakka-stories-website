@@ -142,8 +142,8 @@
      actions.append(save,whatsapp);edit.append(actions);card.append(edit);host.append(card);
    });
  }
- $('ordersBtn').onclick=async()=>{show('editorPanel',false);show('productsList',false);show('ordersPanel',true);$('ordersBtn').disabled=true;await loadWebsiteOrders();$('ordersBtn').disabled=false;};
- $('backToProductsBtn').onclick=()=>{show('ordersPanel',false);show('productsList',true);};
+ $('ordersBtn').onclick=async()=>{show('editorPanel',false);$('productsList').closest('.panel').classList.add('hidden');show('ordersPanel',true);$('ordersBtn').disabled=true;await loadWebsiteOrders();$('ordersBtn').disabled=false;};
+ $('backToProductsBtn').onclick=()=>{show('ordersPanel',false);$('productsList').closest('.panel').classList.remove('hidden');show('productsList',true);};
  $('refreshOrdersBtn').onclick=loadWebsiteOrders;
  $('mgrOrderFilter').onchange=renderWebsiteOrders;$('mgrOrderSearch').oninput=renderWebsiteOrders;
  async function loadProducts(){if(!client||!currentUser)return;status('listStatus','Loading products…');const {data,error}=await client.from('products').select('*').order('created_at',{ascending:false});if(error){status('listStatus','Could not load products: '+error.message+'\nCheck that the manager security SQL patch has been run.');return;}products=data||[];renderProducts();status('listStatus','Loaded from Supabase. Changes saved here will be stored in the database.');}
