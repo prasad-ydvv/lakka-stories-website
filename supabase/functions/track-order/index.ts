@@ -140,7 +140,7 @@ Deno.serve(async (req: Request): Promise<Response> => {
 
   const { data, error: orderError } = await db
     .from("orders")
-    .select("order_reference, order_status, created_at, updated_at")
+    .select("order_reference, order_status, courier_name, tracking_number, tracking_url, dispatched_at, created_at, updated_at")
     .eq("order_reference", reference)
     .eq("phone", phone)
     .maybeSingle();
@@ -161,6 +161,10 @@ Deno.serve(async (req: Request): Promise<Response> => {
   return jsonResponse({
     order_reference: data.order_reference,
     order_status: data.order_status,
+    courier_name: data.order_status === "dispatched" || data.order_status === "delivered" ? data.courier_name : null,
+    tracking_number: data.order_status === "dispatched" || data.order_status === "delivered" ? data.tracking_number : null,
+    tracking_url: (data.order_status === "dispatched" || data.order_status === "delivered") && typeof data.tracking_url === "string" && data.tracking_url.startsWith("https://") ? data.tracking_url : null,
+    dispatched_at: data.order_status === "dispatched" || data.order_status === "delivered" ? data.dispatched_at : null,
     created_at: data.created_at,
     updated_at: data.updated_at,
   });
