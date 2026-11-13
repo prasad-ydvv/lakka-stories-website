@@ -288,7 +288,12 @@
         <h1 id="productName"></h1>
         <div class="availability-badge unknown" id="availabilityBadge">Ask us to confirm availability</div>
         <div class="description" id="productDescription"></div>
-        <div class="meta" id="productMeta" hidden></div>
+        <div class="price" id="productPrice"></div>
+        <div class="savings" id="productSavings" hidden></div>
+        <div class="actions">
+          <button class="btn" id="addToCartButton" type="button">Add to Cart</button><button class="btn outline" id="enquireButton" type="button">Ask us on WhatsApp →</button>
+          <a class="btn outline" href="index.html#collection">Continue browsing</a>
+        </div>
         <section class="product-specs" aria-labelledby="productSpecsTitle">
           <h2 id="productSpecsTitle">Product Information</h2>
           <p class="product-specs-intro">We are confirming detailed specifications with our supplier. We will update this section as verified information becomes available.</p>
@@ -301,12 +306,6 @@
           </dl>
           <p class="specs-note">For exact product details, please contact LAKKA STORIES before ordering. We will confirm the information rather than make assumptions.</p>
         </section>
-        <div class="price" id="productPrice"></div>
-        <div class="savings" id="productSavings" hidden></div>
-        <div class="actions">
-          <button class="btn" id="addToCartButton" type="button">Add to Cart</button><button class="btn outline" id="enquireButton" type="button">Ask us on WhatsApp →</button>
-          <a class="btn outline" href="index.html#collection">Continue browsing</a>
-        </div>
         <div class="order-help"><strong>How to Request This Product</strong><p>Products with verified availability can be added to your cart. Products awaiting confirmation or marked made to order are enquiry-only. We will confirm availability, final price, delivery charges and payment options with you before confirming the order. No payment is collected with an order request.</p></div>
       </div>
     </article>
@@ -556,11 +555,6 @@
         const images = collectGalleryImages(data);
         renderGallery(images, data.name || "Product");
         renderAvailability(data.availability);
-        const meta = document.getElementById("productMeta");
-        const bits = [];
-        if (data.dimensions) bits.push(`Size: ${data.dimensions}`);
-        meta.textContent = bits.join(" · ");
-        meta.hidden = bits.length === 0;
         const dimensionsValue = document.getElementById("specDimensions");
         if (data.dimensions && String(data.dimensions).trim()) {
           dimensionsValue.textContent = String(data.dimensions).trim();
