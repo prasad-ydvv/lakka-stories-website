@@ -1862,6 +1862,87 @@ footer{padding:26px 16px}
       #giftIdeas .ls-interest-card{transition:none}
     }
 
+  
+    /* Premium, consistent Explore by Interest cards */
+    #giftIdeas.ls-interest-section{
+      padding:clamp(34px,4.5vw,58px) 22px clamp(38px,4.5vw,58px);
+      background:linear-gradient(180deg,#fffaf2 0%,#f7efe4 100%);
+      border-top:1px solid #eadcc9;border-bottom:1px solid #eadcc9;
+    }
+    #giftIdeas .ls-interest-heading{max-width:760px;margin:0 auto 28px;text-align:center}
+    #giftIdeas .ls-interest-eyebrow{margin:0 0 9px;color:#a77b43;font-size:10px;letter-spacing:.22em;text-transform:uppercase}
+    #giftIdeas .ls-interest-heading h2{margin:0;color:#572329;font:normal clamp(31px,3.6vw,43px)/1.12 Georgia,serif}
+    #giftIdeas .ls-interest-grid{
+      width:100%;max-width:1120px;margin:0 auto;
+      display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:18px;align-items:stretch;
+    }
+    #giftIdeas .ls-interest-card{
+      appearance:none;-webkit-appearance:none;
+      display:grid;grid-template-columns:126px minmax(0,1fr);
+      align-items:center;gap:18px;
+      width:100%;min-width:0;min-height:166px;height:100%;
+      margin:0;padding:15px;
+      overflow:hidden;text-align:left;
+      border:1px solid #e8d7c1;border-radius:15px;
+      background:#fffdfa;color:#422b2a;
+      box-shadow:0 4px 14px rgba(66,43,42,.045);
+      cursor:pointer;
+      transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease,background .2s ease;
+    }
+    #giftIdeas .ls-interest-card:hover{
+      transform:translateY(-3px);border-color:#bd8b45;background:#fffaf1;
+      box-shadow:0 11px 25px rgba(66,43,42,.09);
+    }
+    #giftIdeas .ls-interest-card:focus-visible{outline:3px solid rgba(189,139,69,.65);outline-offset:3px}
+    #giftIdeas .ls-interest-card.is-selected{
+      border-color:#bd8b45;background:#fff7e9;
+      box-shadow:inset 0 0 0 1px #bd8b45,0 7px 18px rgba(66,43,42,.07);
+    }
+    #giftIdeas .ls-interest-image{
+      display:block;width:126px;height:126px;min-width:126px;
+      margin:0;padding:0;object-fit:cover;object-position:center;
+      border:1px solid #efe1ce;border-radius:11px;
+      background:#f5ead9;
+    }
+    #giftIdeas .ls-interest-copy{
+      display:flex;min-width:0;min-height:126px;
+      flex-direction:column;align-items:flex-start;justify-content:center;gap:7px;
+    }
+    #giftIdeas .ls-interest-card strong{
+      display:block;margin:0;color:#572329;
+      font:600 clamp(17px,1.5vw,20px)/1.18 Georgia,serif;
+    }
+    #giftIdeas .ls-interest-card small{
+      display:block;margin:0;color:#74665d;
+      font:normal 12px/1.5 Arial,Helvetica,sans-serif;
+    }
+    #giftIdeas .ls-interest-link{
+      display:inline-flex;align-items:center;gap:6px;margin-top:3px;
+      color:#74333a;font-size:11px;font-weight:700;letter-spacing:.015em;
+    }
+    #giftIdeas .ls-interest-link span{font-size:15px;line-height:1;transition:transform .2s ease}
+    #giftIdeas .ls-interest-card:hover .ls-interest-link span{transform:translateX(3px)}
+    @media(max-width:900px){
+      #giftIdeas .ls-interest-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+      #giftIdeas .ls-interest-card{grid-template-columns:112px minmax(0,1fr);min-height:150px;gap:14px}
+      #giftIdeas .ls-interest-image{width:112px;height:112px;min-width:112px}
+      #giftIdeas .ls-interest-copy{min-height:112px}
+    }
+    @media(max-width:620px){
+      #giftIdeas.ls-interest-section{padding:30px 14px 34px}
+      #giftIdeas .ls-interest-heading{margin-bottom:20px}
+      #giftIdeas .ls-interest-heading h2{font-size:30px}
+      #giftIdeas .ls-interest-grid{max-width:480px;grid-template-columns:minmax(0,1fr);gap:11px}
+      #giftIdeas .ls-interest-card{grid-template-columns:104px minmax(0,1fr);min-height:132px;padding:11px;gap:13px}
+      #giftIdeas .ls-interest-image{width:104px;height:104px;min-width:104px}
+      #giftIdeas .ls-interest-copy{min-height:104px;gap:6px}
+      #giftIdeas .ls-interest-card strong{font-size:17px}
+      #giftIdeas .ls-interest-card small{font-size:11px}
+      #giftIdeas .ls-interest-link{font-size:10px}
+    }
+    @media(prefers-reduced-motion:reduce){#giftIdeas .ls-interest-card,#giftIdeas .ls-interest-link span{transition:none}}
+
   </style>
   <link rel="stylesheet" href="assets/css/design-system.css">
 </head>
@@ -1899,34 +1980,34 @@ footer{padding:26px 16px}
 
     <section class="ls-interest-section" id="giftIdeas" aria-labelledby="giftIdeasTitle">
       <div class="ls-interest-heading">
-        <p class="ls-interest-eyebrow">— Explore the collection</p>
-        <h2 id="giftIdeasTitle">Explore by Interest</h2>
+        <p class="ls-interest-eyebrow">A LITTLE SOMETHING FOR EVERY OCCASION</p>
+        <h2 id="giftIdeasTitle">Find a Treasure to Love</h2>
         
       </div>
       <div class="ls-interest-grid">
         <button class="ls-interest-card filter" type="button" data-filter="Traditional Toys">
           <img class="ls-interest-image" src="images/interest-traditional-toys.jpg" alt="Premium Etikoppaka-style lacquer rocking horse toy" loading="lazy">
-          <span class="ls-interest-copy"><span class="ls-interest-icon" aria-hidden="true">✿</span><strong>Traditional Toys</strong><small>Colourful playthings inspired by a timeless craft</small><span class="ls-interest-link">Explore collection →</span></span>
+          <span class="ls-interest-copy"><strong>Traditional Toys</strong><small>Playful wooden treasures for curious little imaginations</small><span class="ls-interest-link">Discover collection <span aria-hidden="true">→</span></span></span>
         </button>
         <button class="ls-interest-card filter" type="button" data-filter="Gifts & Keepsakes">
           <img class="ls-interest-image" src="images/interest-gifts-keepsakes.jpg" alt="Premium colourful lacquer wooden keepsake boxes" loading="lazy">
-          <span class="ls-interest-copy"><span class="ls-interest-icon" aria-hidden="true">♡</span><strong>Gifts &amp; Keepsakes</strong><small>Keepsakes chosen to make moments memorable</small><span class="ls-interest-link">Explore collection →</span></span>
+          <span class="ls-interest-copy"><strong>Gifts &amp; Keepsakes</strong><small>Small, thoughtful treasures worth holding on to</small><span class="ls-interest-link">Discover collection <span aria-hidden="true">→</span></span></span>
         </button>
         <button class="ls-interest-card filter" type="button" data-filter="Wedding & Return Gifts">
           <img class="ls-interest-image" src="images/interest-wedding-gifts.jpg" alt="Traditional wooden wedding return gift dolls" loading="lazy">
-          <span class="ls-interest-copy"><span class="ls-interest-icon" aria-hidden="true">❀</span><strong>Wedding &amp; Return Gifts</strong><small>Thoughtful keepsakes for weddings and celebrations</small><span class="ls-interest-link">Explore collection →</span></span>
+          <span class="ls-interest-copy"><strong>Wedding &amp; Return Gifts</strong><small>Meaningful favours for weddings and joyful gatherings</small><span class="ls-interest-link">Discover collection <span aria-hidden="true">→</span></span></span>
         </button>
         <button class="ls-interest-card filter" type="button" data-filter="Home Décor">
           <img class="ls-interest-image" src="images/interest-home-decor.jpg" alt="Colourful floral lacquer wooden home décor vase" loading="lazy">
-          <span class="ls-interest-copy"><span class="ls-interest-icon" aria-hidden="true">✧</span><strong>Home Décor</strong><small>Bring warmth and colour to your favourite spaces</small><span class="ls-interest-link">Explore collection →</span></span>
+          <span class="ls-interest-copy"><strong>Home Décor</strong><small>Handcrafted accents to brighten your home</small><span class="ls-interest-link">Discover collection <span aria-hidden="true">→</span></span></span>
         </button>
         <button class="ls-interest-card filter" type="button" data-filter="Functional & Lifestyle">
           <img class="ls-interest-image" src="images/interest-functional-lifestyle.jpg" alt="Functional lacquer wooden phone stand and desk accessory" loading="lazy">
-          <span class="ls-interest-copy"><span class="ls-interest-icon" aria-hidden="true">⌂</span><strong>Functional &amp; Lifestyle</strong><small>Craft-led pieces for everyday living</small><span class="ls-interest-link">Enquire with us →</span></span>
+          <span class="ls-interest-copy"><strong>Functional &amp; Lifestyle</strong><small>Useful accents that bring craft into daily life</small><span class="ls-interest-link">Discover collection <span aria-hidden="true">→</span></span></span>
         </button>
         <button class="ls-interest-card filter" type="button" data-filter="Corporate Gifting">
           <img class="ls-interest-image" src="images/interest-corporate-gifting.jpg" alt="Premium wooden gift hamper for corporate gifting" loading="lazy">
-          <span class="ls-interest-copy"><span class="ls-interest-icon" aria-hidden="true">◇</span><strong>Corporate Gifting</strong><small>Memorable gifts for teams, clients and occasions</small><span class="ls-interest-link">Enquire with us →</span></span>
+          <span class="ls-interest-copy"><strong>Corporate Gifting</strong><small>Thoughtful gifting for teams, partners and celebrations</small><span class="ls-interest-link">Discover collection <span aria-hidden="true">→</span></span></span>
         </button>
       </div>
     </section>
