@@ -2380,7 +2380,7 @@ footer{padding:26px 16px}
       if (["out_of_stock", "unavailable", "sold_out", "soldout", "discontinued"].includes(normalized)) {
         return {label:"Currently unavailable", className:"unavailable"};
       }
-      return {label:raw ? raw.replace(/[_-]+/g, " ").replace(/\\b\\w/g, ch => ch.toUpperCase()) : "Ask us to confirm availability", className:"unknown"};
+      return {label:!raw || normalized === "ask" ? "Ask us to confirm availability" : raw.replace(/[_-]+/g, " ").replace(/\\b\\w/g, ch => ch.toUpperCase()), className:"unknown"};
     }
 
     function renderCatalogue() {
