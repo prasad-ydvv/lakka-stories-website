@@ -263,6 +263,10 @@
 .spec-pending{color:#786b62!important;font-weight:normal!important;font-style:italic}
 .specs-note{margin:12px 0 0;padding:10px 11px;border-left:3px solid var(--gold);background:#f8f0e4;color:#6f625a;font-size:11px;line-height:1.55}
 @media(max-width:700px){.product-specs{margin:13px 0 3px;padding:13px}.product-specs h2{font-size:18px}.spec-row{grid-template-columns:minmax(95px,.85fr) minmax(0,1.15fr);gap:8px;font-size:11px}}
+    /* Honest product image and sourcing disclosure */
+    .product-image-disclosure{grid-column:1/-1;margin:12px 0 0;padding:12px 15px;background:#fbf2e4;border:1px solid #ead8bb;border-left:3px solid var(--gold);border-radius:6px;color:var(--muted);font-size:12px;line-height:1.6}
+    .product-image-disclosure strong{color:var(--maroon)}
+    @media(max-width:700px){.product-image-disclosure{margin:10px 0 0;font-size:11px}}
 </style>
   <link rel="stylesheet" href="assets/css/design-system.css">
 </head>
@@ -287,6 +291,7 @@
         <div class="thumbnails" id="productThumbnails" aria-label="Choose product photo" hidden></div>
         <p class="gallery-note" id="galleryNote" hidden>Tap a thumbnail to view another angle.</p>
       </div>
+      <p class="product-image-disclosure" role="note"><strong>Image &amp; authenticity note:</strong> Product images may be illustrative and may not represent the exact item available. Please ask us whether a current item photo is available. We confirm product-specific origin details and specifications with our supplier before confirming an order.</p>
       <div class="info">
         <div class="origin-label">ETIKOPPAKA • ANDHRA PRADESH</div>
         <div class="category" id="productCategory"></div>
@@ -301,7 +306,7 @@
         </div>
         <section class="product-specs" aria-labelledby="productSpecsTitle">
           <h2 id="productSpecsTitle">Product Information</h2>
-          <p class="product-specs-intro">We are confirming detailed specifications with our supplier. We will update this section as verified information becomes available.</p>
+          <p class="product-specs-intro">Product-specific details are confirmed with our supplier before an order is accepted. We display only information that has been verified; anything not yet confirmed is marked below.</p>
           <dl class="spec-list">
             <div class="spec-row"><dt>Size / dimensions</dt><dd id="specDimensions" class="spec-pending">Please enquire to confirm</dd></div>
             <div class="spec-row"><dt>Material</dt><dd class="spec-pending">To be confirmed</dd></div>
