@@ -133,10 +133,21 @@
        if(!result.data){status('ordersStatus','No order was updated. Your manager account may not be authorised by the orders RLS policy.');return;}
        await loadWebsiteOrders();
      };
-     const whatsapp=orderNode('button','soft','Contact customer on WhatsApp');whatsapp.type='button';whatsapp.onclick=()=>{
-       let digits=String(o.phone||'').replace(/\D/g,'');if(digits.length===10)digits='91'+digits;
-       if(!/^91[6-9]\d{9}$/.test(digits)){status('ordersStatus','This record does not contain a valid Indian mobile number.');return;}
-       const textMsg='Hello '+(o.customer_name||'')+', this is LAKKA STORIES regarding your order request '+o.order_reference+'. We would like to confirm product availability, final price and delivery details.';
+     const whatsapp=orderNode('button','soft','Send current status update on WhatsApp');whatsapp.type='button';whatsapp.onclick=()=>{
+       let digits=String(o.phone||'').replace(/\\D/g,'');if(digits.length===10)digits='91'+digits;
+       if(!/^91[6-9]\\d{9}$/.test(digits)){status('ordersStatus','This record does not contain a valid Indian mobile number.');return;}
+       const greeting='Hello '+(o.customer_name||'')+', this is LAKKA STORIES regarding your order request '+o.order_reference+'. ';
+       const amount=o.final_payable!==null&&o.final_payable!==undefined?' The agreed final payable amount is '+orderMoney(o.final_payable)+'.':'';
+       const messages={
+         pending_review:greeting+'We have received your request and are checking product availability, final pricing and delivery options. We will update you before confirming the order.',
+         awaiting_customer_confirmation:greeting+'Please review the final product and delivery details shared with you and reply to confirm whether you would like to proceed.'+amount,
+         confirmed:greeting+'Your order is confirmed.'+amount+' We will share dispatch information when it is ready.',
+         rejected:greeting+'Unfortunately, we are unable to accept this order request at the moment. Please reply if you would like us to clarify or suggest an alternative.',
+         dispatched:greeting+'Your order has been dispatched. We will share available shipment or tracking details with you separately.',
+         delivered:greeting+'Our records show that your order has been delivered. We hope you enjoy your LAKKA STORIES treasure. Please contact us if you need any assistance.',
+         cancelled:greeting+'Your order request has been cancelled. If you believe this is incorrect or need assistance, please reply to this message.'
+       };
+       const textMsg=messages[o.order_status]||greeting+'Please contact us for an update on your order request.';
        window.open('https://wa.me/'+digits+'?text='+encodeURIComponent(textMsg),'_blank','noopener');
      };
      actions.append(save,whatsapp);edit.append(actions);card.append(edit);host.append(card);
