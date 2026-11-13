@@ -118,7 +118,10 @@
     .actions .btn{flex:1 1 145px;border-radius:5px;min-height:46px;transition:transform .18s ease,box-shadow .18s ease,background .18s ease}
     .actions .btn:hover{transform:translateY(-1px);box-shadow:0 5px 13px rgba(87,35,41,.12)}
     .order-help{margin-top:15px;padding:13px 15px;border-radius:7px;background:#fff8ed}
-    .product-story{margin-top:28px;border-radius:10px;padding:clamp(20px,3vw,32px);background:linear-gradient(120deg,#fbf5eb,#fffaf2)}
+    .product-story{grid-column:1/-1;width:100%;margin:0;border-radius:10px;padding:clamp(22px,3vw,34px);background:linear-gradient(120deg,#fbf5eb,#fffaf2);box-shadow:0 6px 20px rgba(66,43,42,.035)}
+    .product-story h2{font-size:clamp(23px,2.4vw,29px);line-height:1.25}
+    .product-story p{max-width:1000px}
+    .product-story .story-tagline{margin-top:14px}
     @media(max-width:700px){
       .wrap{padding:17px 13px 30px}
       .product{gap:17px}
@@ -129,7 +132,7 @@
       .price{font-size:25px;margin:15px 0 5px}
       .actions{gap:8px;margin-top:15px}
       .actions .btn{min-height:44px}
-      .product-story{margin-top:20px;padding:19px 16px}
+      .product-story{grid-column:1;padding:19px 16px;margin-top:0}
     }
 
     /* Mobile refinement — compact gallery and clearer buying actions */
@@ -185,7 +188,7 @@
       .order-help{margin-top:12px;padding:11px 12px}
       .order-help strong{font-size:12px}
       .order-help p{font-size:11px;line-height:1.5}
-      .product-story{margin-top:16px;padding:18px 15px;border-radius:9px}
+      .product-story{grid-column:1;margin-top:0;padding:18px 15px;border-radius:9px}
       .product-story .eyebrow{font-size:9px;margin-bottom:6px}
       .product-story h2{font-size:22px;line-height:1.2;margin-bottom:8px}
       .product-story p{font-size:12px;line-height:1.65}
@@ -279,18 +282,10 @@
     <a class="back" href="index.html#collection">← Back to collection</a>
     <div id="productState" class="state">Loading product details…</div>
     <article id="productDetails" class="product" hidden>
-      <div class="product-left">
-        <div class="gallery" aria-label="Product photo gallery">
-          <div class="image-panel" id="imagePanel"></div>
-          <div class="thumbnails" id="productThumbnails" aria-label="Choose product photo" hidden></div>
-          <p class="gallery-note" id="galleryNote" hidden>Tap a thumbnail to view another angle.</p>
-        </div>
-        <section class="product-story" id="productStory" aria-labelledby="productStoryTitle" hidden>
-          <p class="eyebrow">— A little story to keep</p>
-          <h2 id="productStoryTitle">The Story Behind This Treasure</h2>
-          <p id="productStoryText"></p>
-          <p class="story-tagline">Every Little Treasure Has a Story.</p>
-        </section>
+      <div class="gallery" aria-label="Product photo gallery">
+        <div class="image-panel" id="imagePanel"></div>
+        <div class="thumbnails" id="productThumbnails" aria-label="Choose product photo" hidden></div>
+        <p class="gallery-note" id="galleryNote" hidden>Tap a thumbnail to view another angle.</p>
       </div>
       <div class="info">
         <div class="origin-label">ETIKOPPAKA • ANDHRA PRADESH</div>
@@ -317,7 +312,12 @@
           <p class="specs-note">For exact product details, please contact LAKKA STORIES before ordering. We will confirm the information rather than make assumptions.</p>
         </section>
       </div>
-
+      <section class="product-story" id="productStory" aria-labelledby="productStoryTitle" hidden>
+        <p class="eyebrow">— A little story to keep</p>
+        <h2 id="productStoryTitle">The Story Behind This Treasure</h2>
+        <p id="productStoryText"></p>
+        <p class="story-tagline">Every Little Treasure Has a Story.</p>
+      </section>
     </article>
   </main>
   <footer class="site-footer"><div class="footer-brand">LAKKA STORIES</div><p>Every Little Treasure Has a Story.</p><nav class="footer-links" aria-label="Footer navigation"><a href="index.html#home">Home</a><a href="index.html#collection">Collection</a><a href="index.html#story">Our Story</a><a href="index.html#contact">Contact</a><a href="track-order.html">Track Order</a><a href="delivery-returns.html">Delivery &amp; Returns</a><a href="cart.html">Cart</a></nav><small>© 2026 LAKKA STORIES · Authentic Etikoppaka Wooden Toys</small></footer>
