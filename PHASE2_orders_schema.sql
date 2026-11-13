@@ -13,7 +13,7 @@ create table if not exists public.orders (
   city text not null,
   state text not null,
   notes text,
-  payment_method text not null default 'cod' check (payment_method = 'cod'),
+  payment_method text not null default 'to_be_agreed' check (payment_method in ('cod','to_be_agreed')),
   order_status text not null default 'pending_review'
     check (order_status in ('pending_review','awaiting_customer_confirmation','confirmed','rejected','dispatched','delivered','cancelled')),
   payment_status text not null default 'not_collected'
