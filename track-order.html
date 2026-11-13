@@ -28,7 +28,7 @@ button:disabled{opacity:.65;cursor:wait}
 .timeline p{margin:0 0 12px}
 .hidden{display:none!important}
 @media(max-width:600px){.wrap{margin:22px auto;padding:0 13px 38px}.panel{padding:18px 15px}.top{font-size:9px}}
-</style>
+\n.shipment-details{margin:16px 0;padding:14px 16px;border:1px solid #ead8bb;border-left:3px solid #bd8b45;border-radius:7px;background:#fbf2e4}.shipment-details h3{margin:0 0 8px;color:#6b3037;font:normal 18px Georgia,serif}.shipment-details p{margin:5px 0;font-size:13px}.shipment-details a{display:inline-block;margin-top:7px;color:#6b3037;font-weight:700;text-underline-offset:3px}\n</style>
   <link rel="stylesheet" href="assets/css/design-system.css">
 </head>
 <body>
@@ -52,6 +52,7 @@ button:disabled{opacity:.65;cursor:wait}
 <p class="muted">ORDER REFERENCE</p><div id="resultReference" class="ref"></div>
 <div id="resultStatus" class="status"></div>
 <div id="timeline" class="timeline"></div>
+<div id="shipmentDetails" class="shipment-details"></div>
 <p id="updated" class="muted"></p>
 </section>
 <p class="muted">For help with your order, please use the contact details shared by LAKKA STORIES. Never share OTPs, UPI PINs or passwords.</p>
@@ -91,6 +92,14 @@ function renderResult(data){
   steps.forEach((step,index)=>{const p=document.createElement('p');p.textContent=(index<current?'✓ ':index===current?'● ':'○ ')+step[1];p.style.fontWeight=index===current?'bold':'normal';p.style.opacity=index<=current?'1':'.55';timeline.append(p);});
  }
  document.getElementById('updated').textContent='Last updated: '+safeDate(data.updated_at||data.created_at);
+ const shipment=document.getElementById('shipmentDetails');shipment.replaceChildren();
+ if(['dispatched','delivered'].includes(status)&&(data.courier_name||data.tracking_number||data.tracking_url)){
+  const heading=document.createElement('h3');heading.textContent='Shipment details';shipment.append(heading);
+  if(data.courier_name){const p=document.createElement('p');p.textContent='Courier: '+data.courier_name;shipment.append(p);}
+  if(data.tracking_number){const p=document.createElement('p');p.textContent='Tracking number: '+data.tracking_number;shipment.append(p);}
+  if(data.dispatched_at){const p=document.createElement('p');p.textContent='Dispatched: '+safeDate(data.dispatched_at);shipment.append(p);}
+  if(typeof data.tracking_url==='string'&&data.tracking_url.startsWith('https://')){const a=document.createElement('a');a.href=data.tracking_url;a.target='_blank';a.rel='noopener noreferrer';a.textContent='Track parcel with courier →';shipment.append(a);}
+ }
  result.classList.remove('hidden');
 }
 form.addEventListener('submit',async e=>{
