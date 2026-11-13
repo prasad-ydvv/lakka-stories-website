@@ -134,7 +134,6 @@
        save.disabled=true;status('ordersStatus','Saving '+o.order_reference+'…');
        const courierName=courier.value.trim(),trackingNumber=trackingNo.value.trim(),trackingLink=trackingUrl.value.trim();
        if(trackingLink){try{const parsed=new URL(trackingLink);if(parsed.protocol!=='https:'){status('ordersStatus','Tracking URL must begin with https://');return;}}catch{status('ordersStatus','Enter a valid HTTPS tracking URL.');return;}}
-       if(nextStatus==='dispatched'&&!courierName&&!trackingNumber&&!trackingLink){status('ordersStatus','Add at least a courier name, tracking number or tracking URL before marking the order dispatched.');return;}
        const patch={order_status:nextStatus,payment_status:paySelect.value,final_delivery_charge:feeNum,final_payable:payNum,price_needs_confirmation:!confirm.checked,courier_name:courierName||null,tracking_number:trackingNumber||null,tracking_url:trackingLink||null,dispatched_at:nextStatus==='dispatched'?(o.dispatched_at||new Date().toISOString()):o.dispatched_at||null,updated_at:new Date().toISOString()};
        const result=await client.from('orders').update(patch).eq('id',o.id).select('id').maybeSingle();
        save.disabled=false;
