@@ -250,18 +250,6 @@ document.getElementById('address').addEventListener('input',e=>{
   e.target.setCustomValidity(e.target.value.trim().length>=10?'':'Please enter at least 10 characters for your full delivery address.');
 });
 
-const paymentCod=document.getElementById('paymentCod');
-const paymentOnline=document.getElementById('paymentOnline');
-const onlinePreviewArea=document.getElementById('onlinePreviewArea');
-const cashfreeDemo=document.getElementById('cashfreeDemo');
-const cashfreeDemoResult=document.getElementById('cashfreeDemoResult');
-function updatePaymentPreview(){
-  const online=paymentOnline.checked;
-  onlinePreviewArea.classList.toggle('hidden',!online);
-  if(!online){cashfreeDemo.classList.add('hidden');cashfreeDemoResult.classList.add('hidden');}
-}
-paymentCod.addEventListener('change',updatePaymentPreview);
-paymentOnline.addEventListener('change',updatePaymentPreview);
 form.addEventListener('submit',async e=>{
  e.preventDefault();
  if(!items.length)return;
