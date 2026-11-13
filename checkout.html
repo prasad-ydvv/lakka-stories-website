@@ -57,6 +57,10 @@ input[readonly]{background:#f7f0e6;color:#6f6258}
 .success-next{font-size:13px;line-height:1.7;color:var(--muted)}
 .success-home{display:inline-block;margin-top:10px;color:var(--maroon);font-weight:bold;text-decoration:none}
 .success-home:hover{text-decoration:underline}
+.success-whatsapp{display:inline-flex;align-items:center;justify-content:center;min-height:44px;margin:8px 0 5px;padding:11px 16px;border-radius:5px;background:var(--maroon);color:#fff;text-decoration:none;font-weight:bold;font-size:13px}
+.success-whatsapp:hover{background:#6b3037;text-decoration:none}
+.success-whatsapp-note{margin:2px 0 10px;font-size:12px}
+
 @media(max-width:600px){.success-panel{padding:19px 15px;margin:16px 0}.success-heading{font-size:19px}.success-home{display:block;text-align:center;padding:12px;border:1px solid var(--line);border-radius:5px}}
 
 .wrap>a{color:#8b6332;font-size:13px;text-decoration:none}
@@ -107,6 +111,8 @@ input[readonly]{background:#f7f0e6;color:#6f6258}
   <p class="success-next">Your order is not confirmed yet. No payment has been collected.</p>
   <div class="success-reference"><span>Order reference</span><strong id="successReference"></strong></div>
   <p class="success-next">Our team will check product availability and confirm the final product price and delivery charge with you. We will discuss the available payment method before confirming your order. Please keep your order reference for future communication.</p>
+  <a class="success-whatsapp" id="successWhatsApp" href="#" target="_blank" rel="noopener noreferrer">Send my reference to WhatsApp →</a>
+  <p class="success-next success-whatsapp-note">Optional: this opens a message with your order reference. Your request is still awaiting review; sending a WhatsApp message does not confirm the order.</p>
   <a class="success-home" href="track-order.html">Track your order status</a><br><a class="success-home" href="index.html">Continue browsing LAKKA STORIES</a>
 </section>
 <p class="muted">Do not enter OTPs, UPI PINs, card details or passwords. This form does not collect payment.</p></main>
@@ -285,7 +291,10 @@ form.addEventListener('submit',async e=>{
   LakkaCart.updateCount();
   form.classList.add('hidden');
   document.getElementById('orderReview').classList.add('hidden');
-  document.getElementById('successReference').textContent=String(data.order_reference||'Pending confirmation');
+  const orderReference=String(data.order_reference||'Pending confirmation');
+  document.getElementById('successReference').textContent=orderReference;
+  const followupMessage='Hello LAKKA STORIES, I submitted an order request. My reference is '+orderReference+'. Please help me with the availability, final price, delivery charge and next steps.';
+  document.getElementById('successWhatsApp').href='https://wa.me/919381317313?text='+encodeURIComponent(followupMessage);
   const successPanel=document.getElementById('orderSuccess');
   successPanel.classList.remove('hidden');
   successPanel.focus();
