@@ -452,7 +452,7 @@
       } else if (["out_of_stock", "unavailable", "sold_out", "soldout", "discontinued"].includes(normalized)) {
         label = "Currently unavailable";
         className = "unavailable";
-      } else if (raw) {
+      } else if (raw && normalized !== "ask") {
         label = raw.replace(/[_-]+/g, " ").replace(/\b\w/g, c => c.toUpperCase());
         className = "unknown";
       }
