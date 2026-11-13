@@ -248,6 +248,16 @@
 .site-footer .footer-links a:hover,.site-footer .footer-links a:focus-visible{color:#e6bd7d;text-decoration:underline;text-underline-offset:4px}
 .site-footer small{display:block;padding-top:13px;border-top:1px solid rgba(255,250,242,.2);color:#e6d7ca;font-size:11px}
 @media(max-width:600px){.site-footer{padding:24px 16px 18px}.site-footer .footer-links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px 12px}.site-footer .footer-links a{padding:9px 6px;border:1px solid rgba(255,250,242,.18);border-radius:4px;font-size:12px}}
+
+    /* Product information panel — verified facts only. */
+.product-specs{margin:16px 0 4px;padding:16px;background:#fffaf2;border:1px solid var(--line);border-radius:8px}
+.product-specs h2{font-size:19px;margin:0 0 5px}
+.product-specs-intro{margin:0 0 12px;color:var(--muted);font-size:12px;line-height:1.55}
+.spec-list{margin:0}.spec-row{display:grid;grid-template-columns:minmax(105px,.8fr) minmax(0,1.2fr);gap:12px;padding:9px 0;border-top:1px solid #eee2d2;font-size:12px;line-height:1.5}
+.spec-row dt{color:#75665d;font-weight:600}.spec-row dd{margin:0;color:var(--maroon);font-weight:600}
+.spec-pending{color:#786b62!important;font-weight:normal!important;font-style:italic}
+.specs-note{margin:12px 0 0;padding:10px 11px;border-left:3px solid var(--gold);background:#f8f0e4;color:#6f625a;font-size:11px;line-height:1.55}
+@media(max-width:700px){.product-specs{margin:13px 0 3px;padding:13px}.product-specs h2{font-size:18px}.spec-row{grid-template-columns:minmax(95px,.85fr) minmax(0,1.15fr);gap:8px;font-size:11px}}
 </style>
   <link rel="stylesheet" href="assets/css/design-system.css">
 </head>
@@ -279,6 +289,18 @@
         <div class="availability-badge unknown" id="availabilityBadge">Ask us to confirm availability</div>
         <div class="description" id="productDescription"></div>
         <div class="meta" id="productMeta" hidden></div>
+        <section class="product-specs" aria-labelledby="productSpecsTitle">
+          <h2 id="productSpecsTitle">Product Information</h2>
+          <p class="product-specs-intro">We are confirming detailed specifications with our supplier. We will update this section as verified information becomes available.</p>
+          <dl class="spec-list">
+            <div class="spec-row"><dt>Size / dimensions</dt><dd id="specDimensions" class="spec-pending">Please enquire to confirm</dd></div>
+            <div class="spec-row"><dt>Material</dt><dd class="spec-pending">To be confirmed</dd></div>
+            <div class="spec-row"><dt>Finish</dt><dd class="spec-pending">To be confirmed</dd></div>
+            <div class="spec-row"><dt>Package contents</dt><dd class="spec-pending">Please enquire to confirm</dd></div>
+            <div class="spec-row"><dt>Care instructions</dt><dd class="spec-pending">Please enquire to confirm</dd></div>
+          </dl>
+          <p class="specs-note">For exact product details, please contact LAKKA STORIES before ordering. We will confirm the information rather than make assumptions.</p>
+        </section>
         <div class="price" id="productPrice"></div>
         <div class="savings" id="productSavings" hidden></div>
         <div class="actions">
@@ -539,6 +561,14 @@
         if (data.dimensions) bits.push(`Size: ${data.dimensions}`);
         meta.textContent = bits.join(" · ");
         meta.hidden = bits.length === 0;
+        const dimensionsValue = document.getElementById("specDimensions");
+        if (data.dimensions && String(data.dimensions).trim()) {
+          dimensionsValue.textContent = String(data.dimensions).trim();
+          dimensionsValue.classList.remove("spec-pending");
+        } else {
+          dimensionsValue.textContent = "Please enquire to confirm";
+          dimensionsValue.classList.add("spec-pending");
+        }
         formatPrice(data);
         state.hidden = true;
         details.hidden = false;
