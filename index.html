@@ -2158,6 +2158,38 @@ footer{padding:26px 16px}
       #giftIdeas .ls-interest-card,#giftIdeas .ls-interest-link span{transition:none}
     }
 
+
+    /* How Ordering Works — customer journey and order-request clarity */
+    .how-ordering{padding:38px clamp(14px,3vw,34px) 42px;background:linear-gradient(180deg,#fbf4e9 0%,#fffdf8 100%);border-top:1px solid rgba(189,139,69,.2);border-bottom:1px solid rgba(189,139,69,.2)}
+    .how-ordering-inner{max-width:1120px;margin:0 auto}
+    .how-ordering-heading{text-align:center;max-width:680px;margin:0 auto 24px}
+    .how-ordering-heading .eyebrow{margin-bottom:8px}
+    .how-ordering-heading h2{font-size:clamp(27px,3.2vw,36px);line-height:1.15;margin:0 0 9px}
+    .how-ordering-heading>p:last-child{font-size:13px;line-height:1.65;color:var(--muted);margin:0}
+    .ordering-steps{list-style:none;counter-reset:ordering;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:0;padding:0}
+    .ordering-step{min-width:0;padding:19px 16px 18px;background:#fffefa;border:1px solid var(--line);border-radius:8px;box-shadow:0 3px 12px rgba(87,35,41,.035)}
+    .ordering-number{display:grid;place-items:center;width:39px;height:39px;margin-bottom:13px;border-radius:50%;background:#f5e8d4;border:1px solid #e3c99f;color:var(--maroon);font:normal 15px Georgia,serif}
+    .ordering-step h3{font-size:17px;line-height:1.25;margin:0 0 8px}
+    .ordering-step p{font-size:12px;line-height:1.6;color:var(--muted);margin:0}
+    .ordering-actions{display:flex;justify-content:center;align-items:center;gap:10px;flex-wrap:wrap;margin-top:21px}
+    .ordering-actions .btn{min-width:150px}
+    .ordering-bulk-link{flex-basis:100%;text-align:center;margin-top:5px;color:var(--maroon);font-size:12px;font-weight:bold;text-decoration:none}
+    .ordering-bulk-link:hover{text-decoration:underline;color:var(--gold)}
+    @media(max-width:850px){.ordering-steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media(max-width:700px){
+      .how-ordering{padding:27px 13px 30px}
+      .how-ordering-heading{margin-bottom:16px}
+      .how-ordering-heading h2{font-size:27px}
+      .ordering-steps{grid-template-columns:1fr;gap:9px}
+      .ordering-step{display:grid;grid-template-columns:39px minmax(0,1fr);column-gap:12px;padding:13px}
+      .ordering-number{grid-row:1/3;margin:0}
+      .ordering-step h3{align-self:end;font-size:15px;margin-bottom:4px}
+      .ordering-step p{font-size:11px}
+      .ordering-actions{display:grid;grid-template-columns:1fr;gap:9px;margin-top:17px}
+      .ordering-actions .btn{width:100%}
+      .ordering-bulk-link{line-height:1.5;margin-top:2px}
+    }
+
   </style>
   <link rel="stylesheet" href="assets/css/design-system.css">
 </head>
@@ -2274,6 +2306,40 @@ footer{padding:26px 16px}
     </section>
 
     
+
+    <section class="how-ordering" id="howOrderingWorks" aria-labelledby="howOrderingTitle">
+      <div class="how-ordering-inner">
+        <div class="how-ordering-heading">
+          <p class="eyebrow">— A SIMPLE, THOUGHTFUL PROCESS</p>
+          <h2 id="howOrderingTitle">How Ordering Works</h2>
+          <p>From choosing a little treasure to receiving it at your doorstep, we’ll guide you at every step.</p>
+        </div>
+        <ol class="ordering-steps">
+          <li class="ordering-step">
+            <span class="ordering-number" aria-hidden="true">01</span>
+            <div><h3>Explore the collection</h3><p>Find a product you love and open its details to see the listed price and availability.</p></div>
+          </li>
+          <li class="ordering-step">
+            <span class="ordering-number" aria-hidden="true">02</span>
+            <div><h3>Check availability</h3><p>Products marked “Available to order” can be added to your cart. For other products, send us an enquiry and we’ll check with our supplier.</p></div>
+          </li>
+          <li class="ordering-step">
+            <span class="ordering-number" aria-hidden="true">03</span>
+            <div><h3>Send an order request</h3><p>Share your delivery details through checkout. This is only a request—no payment is collected and your order is not confirmed yet.</p></div>
+          </li>
+          <li class="ordering-step">
+            <span class="ordering-number" aria-hidden="true">04</span>
+            <div><h3>Confirm, then dispatch</h3><p>We’ll contact you to confirm product availability, final price, delivery charges, estimated timeline and payment method. After you agree, we’ll proceed and share dispatch or tracking details when available.</p></div>
+          </li>
+        </ol>
+        <div class="ordering-actions">
+          <a class="btn" href="#collection">Explore the Collection <span aria-hidden="true">→</span></a>
+          <a class="btn outline" href="delivery-returns.html">Delivery &amp; Returns</a>
+          <a class="ordering-bulk-link" href="bulk-gifting.html">Planning a bulk or event order? Enquire about bulk gifting →</a>
+        </div>
+      </div>
+    </section>
+
     <section class="collection" id="collection">
       <div class="section-head"><p class="eyebrow">— The collection</p><h2>Find Your Little Treasure</h2><p>Explore our growing collection. Contact us for product details, availability and pricing.</p></div>
       <div class="catalog-tools">
