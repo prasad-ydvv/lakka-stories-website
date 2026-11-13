@@ -43,6 +43,12 @@ Deno.serve(async (req) => {
     if (!products || products.length !== ids.length || products.some((p: any) => !p.is_published)) {
       return json({ error: "One or more products are unavailable. Please contact us." }, 409);
     }
+    // Option A: only explicitly verified, orderable products may enter an order request.
+    // Missing, unknown, made-to-order and out-of-stock values remain enquiry-only.
+    const enquiryOnly = products.filter((p: any) => String(p.availability || "").trim().toLowerCase() !== "available");
+    if (enquiryOnly.length) {
+      return json({ error: "Some items are enquiry-only because availability is not verified. Please remove them from your cart and contact us on WhatsApp." , enquiry_only_products: enquiryOnly.map((p: any) => ({ id: p.id, name: p.name })) }, 409);
+    }
 
     const productMap = new Map(products.map((p: any) => [p.id, p]));
     let subtotal = 0;
@@ -52,7 +58,7 @@ Deno.serve(async (req) => {
       const qty = Number(item.quantity);
       if (!Number.isInteger(qty) || qty < 1 || qty > 99) return json({ error: "Invalid product quantity." }, 400);
       const unit = Number(p.selling_price) || 0;
-      const pending = unit <= 0 || p.availability !== "available";
+      const pending = unit <= 0;
       const line = pending ? 0 : unit * qty;
       subtotal += line;
       lines.push({ product_id: p.id, product_name: p.name, quantity: qty, unit_price: pending ? 0 : unit,
