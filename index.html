@@ -2380,7 +2380,7 @@ footer{padding:26px 16px}
       if (["out_of_stock", "unavailable", "sold_out", "soldout", "discontinued"].includes(normalized)) {
         return {label:"Currently unavailable", className:"unavailable"};
       }
-      return {label:raw ? raw.replace(/[_-]+/g, " ").replace(/\\b\\w/g, ch => ch.toUpperCase()) : "Ask us to confirm availability", className:"unknown"};
+      return {label:!raw || normalized === "ask" ? "Ask us to confirm availability" : raw.replace(/[_-]+/g, " ").replace(/\\b\\w/g, ch => ch.toUpperCase()), className:"unknown"};
     }
 
     function renderCatalogue() {
@@ -2513,12 +2513,19 @@ footer{padding:26px 16px}
         const addButton = document.createElement("button");
         addButton.type = "button";
         addButton.className = "add-cart-card";
-        addButton.textContent = "Add to Cart";
+        const canOrder = String(p.availability || "").trim().toLowerCase() === "available";
+        addButton.textContent = canOrder ? "Add to Cart" : "Enquire on WhatsApp";
+        addButton.setAttribute("aria-label", (canOrder ? "Add " : "Enquire about ") + (p.name || "product"));
         addButton.addEventListener("click", (event) => {
           event.stopPropagation();
-          if (window.LakkaCart && window.LakkaCart.add({id:p.id,name:p.name,price:p.selling_price,image:p.image_url})) {
-            showToast((p.name || "Product") + " added to your cart.");
+          if (!canOrder) {
+            const message = `Hello LAKKA STORIES, I would like to enquire about: ${p.name || "this product"}. Please confirm current availability, price and delivery.`;
+            window.open(`https://wa.me/${WHATSAPP_BUSINESS_NUMBER}?text=${encodeURIComponent(message)}`, "_blank", "noopener,noreferrer");
+            return;
           }
+          if (window.LakkaCart && window.LakkaCart.add({id:p.id,name:p.name,price:p.selling_price,image:p.image_url,availability:p.availability})) {
+            showToast((p.name || "Product") + " added to your cart.");
+          } else showToast("Please enquire with us to confirm availability.");
         });
         body.append(cat, title, price, viewHint, addButton);
         card.append(photo, body);

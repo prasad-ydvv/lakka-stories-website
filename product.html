@@ -284,7 +284,7 @@
           <button class="btn" id="addToCartButton" type="button">Add to Cart</button><button class="btn outline" id="enquireButton" type="button">Ask us on WhatsApp →</button>
           <a class="btn outline" href="index.html#collection">Continue browsing</a>
         </div>
-        <div class="order-help"><strong>How to Request This Product</strong><p>Interested in this product? Add it to your cart and submit an order request, or contact us on WhatsApp. We will confirm availability, final price, delivery charges and payment options with you before confirming the order. No payment is collected with an order request.</p></div>
+        <div class="order-help"><strong>How to Request This Product</strong><p>Products with verified availability can be added to your cart. Products awaiting confirmation or marked made to order are enquiry-only. We will confirm availability, final price, delivery charges and payment options with you before confirming the order. No payment is collected with an order request.</p></div>
       </div>
     </article>
     <section class="product-story" id="productStory" aria-labelledby="productStoryTitle" hidden>
@@ -452,16 +452,17 @@
       } else if (["out_of_stock", "unavailable", "sold_out", "soldout", "discontinued"].includes(normalized)) {
         label = "Currently unavailable";
         className = "unavailable";
-      } else if (raw) {
+      } else if (raw && normalized !== "ask") {
         label = raw.replace(/[_-]+/g, " ").replace(/\b\w/g, c => c.toUpperCase());
         className = "unknown";
       }
       badge.textContent = label;
       badge.className = `availability-badge ${className}`;
       const orderButton = document.getElementById("enquireButton");
-      if (className === "unavailable") orderButton.textContent = "Ask About Availability →";
-      else if (className === "unknown") orderButton.textContent = "Check Availability on WhatsApp →";
-      else orderButton.textContent = "Order on WhatsApp →";
+      const addButton = document.getElementById("addToCartButton");
+      const canOrder = normalized === "available";
+      addButton.hidden = !canOrder;
+      orderButton.textContent = canOrder ? "Ask a Question on WhatsApp →" : "Enquire About Availability →";
     }
 
     function formatPrice(product) {
@@ -541,7 +542,8 @@
         state.hidden = true;
         details.hidden = false;
         document.getElementById("addToCartButton").addEventListener("click", () => {
-          if (window.LakkaCart && window.LakkaCart.add({id:data.id,name:data.name,price:data.selling_price,image:data.image_url})) {
+          if (String(data.availability || "").trim().toLowerCase() !== "available") { alert("This product is enquiry-only until availability is verified. Please enquire on WhatsApp."); return; }
+          if (window.LakkaCart && window.LakkaCart.add({id:data.id,name:data.name,price:data.selling_price,image:data.image_url,availability:data.availability})) {
             const button=document.getElementById("addToCartButton");
             button.textContent="Added to Cart ✓";
             setTimeout(()=>button.textContent="Add to Cart",1800);
