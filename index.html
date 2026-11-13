@@ -1971,6 +1971,96 @@ footer{padding:26px 16px}
       }
     }
 
+  
+    /* FINAL FIX: keep category image and text in separate, matching grid columns */
+    #giftIdeas .ls-interest-card{
+      display:grid !important;
+      grid-template-columns:112px minmax(0,1fr) !important;
+      align-items:center !important;
+      column-gap:16px !important;
+      min-width:0 !important;
+      min-height:154px !important;
+      height:auto !important;
+      padding:14px !important;
+      overflow:hidden !important;
+      box-sizing:border-box !important;
+    }
+    #giftIdeas .ls-interest-image{
+      display:block !important;
+      position:static !important;
+      float:none !important;
+      width:112px !important;
+      min-width:0 !important;
+      max-width:112px !important;
+      height:112px !important;
+      min-height:112px !important;
+      max-height:112px !important;
+      aspect-ratio:1 / 1 !important;
+      margin:0 !important;
+      padding:0 !important;
+      box-sizing:border-box !important;
+      object-fit:cover !important;
+      object-position:center !important;
+      transform:none !important;
+      clip-path:none !important;
+      border:1px solid #efe1ce !important;
+      border-radius:10px !important;
+      background:#f7ead7 !important;
+    }
+    #giftIdeas .ls-interest-copy{
+      display:flex !important;
+      position:static !important;
+      min-width:0 !important;
+      width:auto !important;
+      max-width:100% !important;
+      min-height:0 !important;
+      flex-direction:column !important;
+      align-items:flex-start !important;
+      justify-content:center !important;
+      gap:7px !important;
+      overflow-wrap:anywhere !important;
+    }
+    #giftIdeas .ls-interest-card strong,
+    #giftIdeas .ls-interest-card small,
+    #giftIdeas .ls-interest-link{
+      max-width:100% !important;
+      overflow-wrap:anywhere !important;
+    }
+    @media(max-width:900px){
+      #giftIdeas .ls-interest-card{
+        grid-template-columns:100px minmax(0,1fr) !important;
+        column-gap:13px !important;
+        min-height:140px !important;
+        padding:12px !important;
+      }
+      #giftIdeas .ls-interest-image{
+        width:100px !important;
+        max-width:100px !important;
+        height:100px !important;
+        min-height:100px !important;
+        max-height:100px !important;
+      }
+    }
+    @media(max-width:620px){
+      #giftIdeas .ls-interest-grid{
+        grid-template-columns:minmax(0,1fr) !important;
+      }
+      #giftIdeas .ls-interest-card{
+        grid-template-columns:88px minmax(0,1fr) !important;
+        column-gap:12px !important;
+        min-height:116px !important;
+        padding:10px !important;
+      }
+      #giftIdeas .ls-interest-image{
+        width:88px !important;
+        max-width:88px !important;
+        height:88px !important;
+        min-height:88px !important;
+        max-height:88px !important;
+      }
+      #giftIdeas .ls-interest-copy{gap:5px !important}
+    }
+
   </style>
   <link rel="stylesheet" href="assets/css/design-system.css">
 </head>
