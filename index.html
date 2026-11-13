@@ -1943,6 +1943,34 @@ footer{padding:26px 16px}
     }
     @media(prefers-reduced-motion:reduce){#giftIdeas .ls-interest-card,#giftIdeas .ls-interest-link span{transition:none}}
 
+  
+    /* Crop decorative borders embedded in the category artwork.
+       Keep the product image filling its own card frame consistently. */
+    #giftIdeas .ls-interest-card{overflow:hidden}
+    #giftIdeas .ls-interest-image{
+      display:block;
+      width:156px;
+      height:156px;
+      min-width:156px;
+      object-fit:cover;
+      object-position:center;
+      clip-path:inset(7% 3% 5% 10% round 9px);
+      transform:scale(1.12);
+      transform-origin:center;
+      border:0;
+      border-radius:10px;
+      background:#f7ead7;
+    }
+    @media(max-width:700px){
+      #giftIdeas .ls-interest-image{
+        width:104px;
+        height:104px;
+        min-width:104px;
+        clip-path:inset(7% 3% 5% 10% round 8px);
+        transform:scale(1.12);
+      }
+    }
+
   </style>
   <link rel="stylesheet" href="assets/css/design-system.css">
 </head>
