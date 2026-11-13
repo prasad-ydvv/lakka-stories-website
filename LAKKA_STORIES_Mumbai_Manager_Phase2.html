@@ -134,8 +134,8 @@
        await loadWebsiteOrders();
      };
      const whatsapp=orderNode('button','soft','Send current status update on WhatsApp');whatsapp.type='button';whatsapp.onclick=()=>{
-       let digits=String(o.phone||'').replace(/\\D/g,'');if(digits.length===10)digits='91'+digits;
-       if(!/^91[6-9]\\d{9}$/.test(digits)){status('ordersStatus','This record does not contain a valid Indian mobile number.');return;}
+       let digits=String(o.phone||'').replace(/\D/g,'');if(digits.length===10)digits='91'+digits;
+       if(!/^91[6-9]\d{9}$/.test(digits)){status('ordersStatus','This record does not contain a valid Indian mobile number.');return;}
        const greeting='Hello '+(o.customer_name||'')+', this is LAKKA STORIES regarding your order request '+o.order_reference+'. ';
        const amount=o.final_payable!==null&&o.final_payable!==undefined?' The agreed final payable amount is '+orderMoney(o.final_payable)+'.':'';
        const messages={
