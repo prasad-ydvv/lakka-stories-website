@@ -60,7 +60,7 @@
  async function loadWebsiteOrders(){
    if(!client||!currentUser)return;
    status('ordersStatus','Loading customer order requests…');
-   const {data,error}=await client.from('orders').select('id,order_reference,customer_name,phone,email,pin_code,address,city,state,notes,payment_method,order_status,payment_status,subtotal,final_delivery_charge,final_payable,price_needs_confirmation,created_at,updated_at').order('created_at',{ascending:false}).limit(200);
+   const {data,error}=await client.from('orders').select('id,order_reference,customer_name,phone,email,pin_code,address,city,state,notes,payment_method,order_status,payment_status,subtotal,final_delivery_charge,final_payable,price_needs_confirmation,courier_name,tracking_number,tracking_url,dispatched_at,created_at,updated_at').order('created_at',{ascending:false}).limit(200);
    if(error){managerOrders=[];managerOrderItems=[];renderWebsiteOrders();status('ordersStatus','Could not load website orders: '+error.message+' Check that PHASE2_orders_schema.sql was applied and your signed-in manager account matches the manager UID in its RLS policies.');return;}
    managerOrders=data||[];
    if(managerOrders.length){
@@ -97,7 +97,7 @@
      else itemBox.append(orderNode('p','muted','No item rows were returned for this request.'));
      card.append(itemBox);
      const totals=orderNode('div','order-grid');
-     totals.append(orderField('Delivery charge',o.final_delivery_charge===null?'Not set':orderMoney(o.final_delivery_charge)),orderField('Final payable',o.final_payable===null?'Not set':orderMoney(o.final_payable)),orderField('Price confirmation needed',o.price_needs_confirmation?'Yes':'No'),orderField('Last updated',o.updated_at?new Date(o.updated_at).toLocaleString('en-IN'):'—'));
+     totals.append(orderField('Delivery charge',o.final_delivery_charge===null?'Not set':orderMoney(o.final_delivery_charge)),orderField('Final payable',o.final_payable===null?'Not set':orderMoney(o.final_payable)),orderField('Price confirmation needed',o.price_needs_confirmation?'Yes':'No'),orderField('Courier',o.courier_name||'Not set'),orderField('Tracking number',o.tracking_number||'Not set'),orderField('Dispatched at',o.dispatched_at?new Date(o.dispatched_at).toLocaleString('en-IN'):'Not set'),orderField('Last updated',o.updated_at?new Date(o.updated_at).toLocaleString('en-IN'):'—'));
      card.append(totals);
      const edit=orderNode('div','order-edit');edit.append(orderNode('strong','','Review and update this request'));
      const grid=orderNode('div','grid');
@@ -110,7 +110,13 @@
      const payable=orderNode('input');payable.type='number';payable.min='0';payable.step='0.01';payable.placeholder='Agree with customer first';payable.value=o.final_payable??'';payable.id='mgrPay_'+o.id;payWrap.append(payable);
      const payStatusWrap=orderNode('div','field');payStatusWrap.append(orderNode('label','','Payment status'));
      const paySelect=orderNode('select');[['not_collected','Not collected'],['collected','Collected'],['remitted','Remitted'],['refunded','Refunded']].forEach(([v,l])=>{const opt=orderNode('option','',l);opt.value=v;opt.selected=(o.payment_status||'not_collected')===v;paySelect.append(opt);});payStatusWrap.append(paySelect);
-     grid.append(statusWrap,feeWrap,payWrap,payStatusWrap);
+     const courierWrap=orderNode('div','field');courierWrap.append(orderNode('label','','Courier name'));
+     const courier=orderNode('input');courier.type='text';courier.maxLength=80;courier.placeholder='e.g. DTDC, India Post';courier.value=o.courier_name||'';courier.id='mgrCourier_'+o.id;courierWrap.append(courier);
+     const trackingNoWrap=orderNode('div','field');trackingNoWrap.append(orderNode('label','','Tracking / AWB number'));
+     const trackingNo=orderNode('input');trackingNo.type='text';trackingNo.maxLength=100;trackingNo.placeholder='Enter courier tracking number';trackingNo.value=o.tracking_number||'';trackingNo.id='mgrTrackingNo_'+o.id;trackingNoWrap.append(trackingNo);
+     const trackingUrlWrap=orderNode('div','field');trackingUrlWrap.append(orderNode('label','','Tracking URL (optional)'));
+     const trackingUrl=orderNode('input');trackingUrl.type='url';trackingUrl.maxLength=500;trackingUrl.placeholder='https://…';trackingUrl.value=o.tracking_url||'';trackingUrl.id='mgrTrackingUrl_'+o.id;trackingUrlWrap.append(trackingUrl);
+     grid.append(statusWrap,feeWrap,payWrap,payStatusWrap,courierWrap,trackingNoWrap,trackingUrlWrap);
      const confirmWrap=orderNode('label');confirmWrap.style.display='flex';confirmWrap.style.alignItems='center';confirmWrap.style.gap='9px';confirmWrap.style.margin='8px 0';
      const confirm=orderNode('input');confirm.type='checkbox';confirm.style.width='18px';confirm.style.minHeight='18px';confirm.checked=!o.price_needs_confirmation;
      confirmWrap.append(confirm,document.createTextNode('I have verified product availability and agreed the final price and delivery with the customer.'));
@@ -126,7 +132,10 @@
        if(confirm.checked&&payNum===null){status('ordersStatus','Enter the agreed final payable amount before marking price confirmation complete.');return;}
        if(['dispatched','delivered'].includes(nextStatus)&&o.order_status!=='confirmed'&&o.order_status!=='dispatched'){status('ordersStatus','Confirm the order first before marking it dispatched or delivered.');return;}
        save.disabled=true;status('ordersStatus','Saving '+o.order_reference+'…');
-       const patch={order_status:nextStatus,payment_status:paySelect.value,final_delivery_charge:feeNum,final_payable:payNum,price_needs_confirmation:!confirm.checked,updated_at:new Date().toISOString()};
+       const courierName=courier.value.trim(),trackingNumber=trackingNo.value.trim(),trackingLink=trackingUrl.value.trim();
+       if(trackingLink){try{const parsed=new URL(trackingLink);if(parsed.protocol!=='https:'){status('ordersStatus','Tracking URL must begin with https://');return;}}catch{status('ordersStatus','Enter a valid HTTPS tracking URL.');return;}}
+       if(nextStatus==='dispatched'&&!courierName&&!trackingNumber&&!trackingLink){status('ordersStatus','Add at least a courier name, tracking number or tracking URL before marking the order dispatched.');return;}
+       const patch={order_status:nextStatus,payment_status:paySelect.value,final_delivery_charge:feeNum,final_payable:payNum,price_needs_confirmation:!confirm.checked,courier_name:courierName||null,tracking_number:trackingNumber||null,tracking_url:trackingLink||null,dispatched_at:nextStatus==='dispatched'?(o.dispatched_at||new Date().toISOString()):o.dispatched_at||null,updated_at:new Date().toISOString()};
        const result=await client.from('orders').update(patch).eq('id',o.id).select('id').maybeSingle();
        save.disabled=false;
        if(result.error){status('ordersStatus','Update failed: '+result.error.message+' Check manager UPDATE permission in the orders RLS policy.');return;}
@@ -143,7 +152,7 @@
          awaiting_customer_confirmation:greeting+'Please review the final product and delivery details shared with you and reply to confirm whether you would like to proceed.'+amount,
          confirmed:greeting+'Your order is confirmed.'+amount+' We will share dispatch information when it is ready.',
          rejected:greeting+'Unfortunately, we are unable to accept this order request at the moment. Please reply if you would like us to clarify or suggest an alternative.',
-         dispatched:greeting+'Your order has been dispatched. We will share available shipment or tracking details with you separately.',
+         dispatched:greeting+'Your order has been dispatched.'+(o.courier_name?' Courier: '+o.courier_name+'.':'')+(o.tracking_number?' Tracking number: '+o.tracking_number+'.':'')+(o.tracking_url?' Track it here: '+o.tracking_url:' We will share tracking details when available.'),
          delivered:greeting+'Our records show that your order has been delivered. We hope you enjoy your LAKKA STORIES treasure. Please contact us if you need any assistance.',
          cancelled:greeting+'Your order request has been cancelled. If you believe this is incorrect or need assistance, please reply to this message.'
        };
