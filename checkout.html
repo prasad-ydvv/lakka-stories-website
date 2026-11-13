@@ -113,31 +113,14 @@ input[readonly]{background:#f7f0e6;color:#6f6258}
 <div class="field full"><label for="address">House number / building / street / area *</label><textarea id="address" required minlength="10" maxlength="500" autocomplete="street-address" placeholder="House or flat number, building, street, area and nearby landmark"></textarea><span class="muted">PIN lookup cannot verify your exact house address. Enter the complete delivery address.</span></div>
 <div class="field full"><label for="notes">Delivery instructions (optional)</label><textarea id="notes" maxlength="300"></textarea></div>
 </div>
-<div class="field full" id="paymentSection">
-<label>Payment method *</label>
-<div class="payment-options" role="radiogroup" aria-label="Choose payment method">
-<label class="payment-choice" for="paymentCod"><input type="radio" name="paymentChoice" id="paymentCod" value="cod" checked><span><strong>Cash on Delivery</strong><small>Pay when your parcel arrives. Existing order request flow.</small></span></label>
-<label class="payment-choice" for="paymentOnline"><input type="radio" name="paymentChoice" id="paymentOnline" value="online-demo"><span><strong>Pay Online</strong><small>UPI, cards and net banking · Cashfree preview</small></span></label>
-</div>
-<div id="onlinePreviewArea" class="hidden">
-<p class="notice">This is a visual preview only. Cashfree is not connected, no payment will be collected, and no order will be marked as paid.</p>
-<button class="btn" type="button" id="openCashfreePreview">Preview online payment</button>
-<div id="cashfreeDemo" class="payment-demo hidden" aria-live="polite">
-<div class="payment-demo-head"><strong style="color:var(--maroon)">Secure payment</strong><span class="demo-tag">Demo preview only</span></div>
-<p class="muted">Illustrative Cashfree-style checkout. Choose a sample payment method to see the confirmation screen.</p>
-<div class="demo-methods"><div class="demo-method">▣ UPI</div><div class="demo-method">▤ Credit / Debit Card</div><div class="demo-method">▥ Net Banking</div><div class="demo-method">▣ Wallets</div></div>
-<button class="btn" type="button" id="simulateDemoPayment">Simulate demo payment</button>
-<div id="cashfreeDemoResult" class="demo-result hidden"></div>
-</div>
-</div>
-</div>
+<div class="notice" id="paymentNotice"><strong>No payment at this step.</strong><br>You will not be charged now. We will first check product availability and confirm the final product price and delivery charge with you. We will discuss the available payment method with you before confirming your order. LAKKA STORIES does not collect payment through this request form.</div>
 <p class="consent-row"><label for="consent"><input type="checkbox" id="consent" required> <span>I agree that LAKKA STORIES may use these details to respond to this order request and arrange delivery if accepted.</span></label></p>
 <button class="btn submit-order" type="submit" id="submit">Send order request</button><div id="status" class="status hidden" role="status"></div></form>
 <section id="orderSuccess" class="success-panel hidden" role="status" aria-live="polite" tabindex="-1">
-  <h2 class="success-heading"><span class="success-icon" aria-hidden="true">✓</span>Thank you! Your request has been received.</h2>
-  <p class="success-next">Your order request is awaiting review. It is not yet a confirmed order, and no payment has been collected.</p>
+  <h2 class="success-heading"><span class="success-icon" aria-hidden="true">✓</span>Your order request has been received!</h2>
+  <p class="success-next">Your order is not confirmed yet. No payment has been collected.</p>
   <div class="success-reference"><span>Order reference</span><strong id="successReference"></strong></div>
-  <p class="success-next">Our team will contact you after checking product availability, final price and delivery charges. Please keep your order reference for future communication.</p>
+  <p class="success-next">Our team will check product availability and confirm the final product price and delivery charge with you. We will discuss the available payment method before confirming your order. Please keep your order reference for future communication.</p>
   <a class="success-home" href="track-order.html">Track your order status</a><br><a class="success-home" href="index.html">Continue browsing LAKKA STORIES</a>
 </section>
 <p class="muted">Do not enter OTPs, UPI PINs, card details or passwords. This form does not collect payment.</p></main>
@@ -279,23 +262,9 @@ function updatePaymentPreview(){
 }
 paymentCod.addEventListener('change',updatePaymentPreview);
 paymentOnline.addEventListener('change',updatePaymentPreview);
-document.getElementById('openCashfreePreview').addEventListener('click',()=>{
-  cashfreeDemo.classList.remove('hidden');
-  cashfreeDemoResult.classList.add('hidden');
-});
-document.getElementById('simulateDemoPayment').addEventListener('click',()=>{
-  cashfreeDemoResult.textContent='Demo completed successfully. This is not a real payment: no money was charged, no payment was verified, and no order was created. Select Cash on Delivery to submit a real order request.';
-  cashfreeDemoResult.classList.remove('hidden');
-});
-
 form.addEventListener('submit',async e=>{
  e.preventDefault();
  if(!items.length)return;
- if(paymentOnline.checked){
-   const st=document.getElementById('status');st.classList.remove('hidden');
-   st.textContent='Online payment is currently a demo preview only. No payment has been processed. Please select Cash on Delivery to submit an order request.';
-   return;
- }
  const btn=document.getElementById('submit'),st=document.getElementById('status');
  const name=document.getElementById('name').value.trim();
  const phone=cleanPhone(document.getElementById('phone').value);
@@ -329,8 +298,7 @@ form.addEventListener('submit',async e=>{
     city:city,
     state:stateInput.value,
     notes:document.getElementById('notes').value.trim()||null,
-    items:items.map(x=>({product_id:x.id,quantity:x.qty})),
-    payment_method:'cod'
+    items:items.map(x=>({product_id:x.id,quantity:x.qty}))
   };
   const res=await fetch(PROJECT_URL+'/functions/v1/'+FUNCTION_NAME,{
     method:'POST',
