@@ -2195,6 +2195,14 @@ footer{padding:26px 16px}
     .catalog-transparency strong{display:block;color:var(--maroon);font:600 14px Georgia,serif;margin-bottom:4px}
     .catalog-transparency p{margin:0;color:var(--muted);font-size:12px;line-height:1.6}
     @media(max-width:700px){.catalog-transparency{margin:0 0 13px;padding:11px 12px}.catalog-transparency p{font-size:11px}}
+
+    /* Customer feedback invitation — no unverified public reviews */
+    .customer-feedback{padding:28px 20px;background:linear-gradient(135deg,#fbf1e2,#fffaf3)}
+    .customer-feedback-inner{max-width:850px;margin:0 auto;padding:24px 28px;text-align:center;border:1px solid #ead8bb;border-radius:12px;background:rgba(255,255,255,.72)}
+    .customer-feedback h2{margin:5px 0 10px;color:var(--maroon);font-family:Georgia,serif;font-size:clamp(22px,3vw,30px);font-weight:normal}
+    .customer-feedback p:not(.eyebrow){max-width:650px;margin:0 auto 16px;color:var(--muted);font-size:13px;line-height:1.7}
+    .customer-feedback .btn{display:inline-flex;align-items:center;justify-content:center;text-decoration:none}
+    @media(max-width:700px){.customer-feedback{padding:18px 13px}.customer-feedback-inner{padding:19px 15px}.customer-feedback p:not(.eyebrow){font-size:12px}}
 </style>
   <link rel="stylesheet" href="assets/css/design-system.css">
 </head>
@@ -2380,7 +2388,8 @@ footer{padding:26px 16px}
       </div>
     </section>
 
-    <section class="connect" id="contact"><div class="connect-box"><p class="eyebrow">— Let's connect</p><h2>Found Something You Love?</h2><p>Enquire on WhatsApp for product details, availability and price.</p><button class="btn enquiry" data-product="General catalogue enquiry">Enquire on WhatsApp →</button></div></section>
+    <section class="customer-feedback" aria-labelledby="customerFeedbackTitle"><div class="customer-feedback-inner"><p class="eyebrow">— Your experience matters</p><h2 id="customerFeedbackTitle">Have You Received Your Little Treasure?</h2><p>If you have purchased from LAKKA STORIES, we would love to hear how it went. Share your honest feedback with us on WhatsApp. We will never publish your words or photos without your permission.</p><a class="btn" href="https://wa.me/919381317313?text=Hello%20LAKKA%20STORIES%2C%20I%20would%20like%20to%20share%20feedback%20about%20my%20purchase.%20Please%20let%20me%20know%20what%20details%20you%20need." target="_blank" rel="noopener noreferrer">Share your feedback on WhatsApp →</a></div></section>
+  <section class="connect" id="contact"><div class="connect-box"><p class="eyebrow">— Let's connect</p><h2>Found Something You Love?</h2><p>Enquire on WhatsApp for product details, availability and price.</p><button class="btn enquiry" data-product="General catalogue enquiry">Enquire on WhatsApp →</button></div></section>
   </main>
 
   <footer class="site-footer"><div class="footer-brand">LAKKA STORIES</div><p>Etikoppaka Wooden Toys & Keepsakes</p><nav class="footer-links" aria-label="Footer navigation"><a href="#home">Home</a><a href="#collection">Collection</a><a href="#story">Our Story</a><a href="#contact">Contact</a><a href="track-order.html">Track Order</a><a href="delivery-returns.html">Delivery &amp; Returns</a><a href="faq.html">FAQs</a><a href="cart.html">Cart</a></nav><small>© 2026 LAKKA STORIES · Etikoppaka Wooden Toys & Keepsakes</small></footer>
