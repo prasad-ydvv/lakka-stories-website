@@ -2,16 +2,20 @@
    WP1: shared visual tokens and safe cross-page component defaults.
    Page-specific layouts and existing behaviour remain in their page files. */
 :root {
+  /* LAKKA STORIES Premium Heritage palette */
   --ls-maroon: #572329;
   --ls-maroon-deep: #452027;
-  --ls-ivory: #fffdf8;
-  --ls-sand: #f3e7d4;
-  --ls-gold: #bd8b45;
-  --ls-ink: #422b2a;
-  --ls-muted: #786b62;
-  --ls-line: #eadcc9;
-  --ls-radius: 5px;
-  --ls-shadow-soft: 0 8px 24px rgba(66, 43, 42, .07);
+  --ls-ivory: #fff9f0;
+  --ls-sand: #ead9bf;
+  --ls-gold: #c18a3d;
+  --ls-ink: #33302d;
+  --ls-muted: #756a60;
+  --ls-line: #e8d9c5;
+  --ls-radius: 6px;
+  --ls-radius-card: 8px;
+  --ls-shadow-soft: 0 7px 22px rgba(69, 32, 39, .055);
+  --ls-font-display: Georgia, "Times New Roman", serif;
+  --ls-font-body: Inter, "Aptos", Arial, Helvetica, sans-serif;
   --maroon: var(--ls-maroon);
   --maroon2: #74333a;
   --cream: var(--ls-ivory);
@@ -287,4 +291,126 @@ nav a:hover, nav a[aria-current="page"] { color: var(--ls-gold); }
   :where(.brand span) { letter-spacing: .11em; }
   :where(.panel) { padding: 16px 13px; }
   :where(.btn) { padding: 10px 12px; }
+}
+
+/* =========================================================
+   LAKKA STORIES — Premium Heritage Design System v1.0
+   Phase 1: shared design foundation only.
+   Page layouts, content, URLs and application behaviour stay
+   in their existing page files.
+   ========================================================= */
+:root {
+  --maroon: var(--ls-maroon);
+  --maroon2: #74333a;
+  --cream: var(--ls-ivory);
+  --sand: var(--ls-sand);
+  --gold: var(--ls-gold);
+  --ink: var(--ls-ink);
+  --muted: var(--ls-muted);
+  --line: var(--ls-line);
+}
+html { color-scheme: light; }
+body {
+  color: var(--ls-ink);
+  background-color: var(--ls-ivory);
+  font-family: var(--ls-font-body);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3, h4, .brand strong, .footer-brand {
+  font-family: var(--ls-font-display);
+}
+:where(.topline, .top) {
+  background: var(--ls-maroon);
+  color: #fffaf2;
+}
+:where(header, .nav) {
+  border-color: var(--ls-line);
+}
+:where(.brand, .brand strong, .footer-brand) {
+  color: var(--ls-maroon);
+}
+:where(.brand span, .eyebrow, .category) {
+  color: var(--ls-gold);
+}
+:where(.btn, .load-more-btn, .view-details-hint, .submit-order) {
+  border-radius: 5px;
+  font-family: var(--ls-font-body);
+  font-weight: 650;
+  letter-spacing: .01em;
+}
+:where(.btn:not(.outline), .load-more-btn, .submit-order) {
+  background-color: var(--ls-maroon);
+  border-color: var(--ls-maroon);
+  color: #fffaf2;
+}
+:where(.btn:not(.outline):hover, .load-more-btn:hover, .submit-order:hover) {
+  background-color: var(--ls-maroon-deep);
+  border-color: var(--ls-maroon-deep);
+}
+:where(.btn.outline, .filter, .mobile-menu-toggle) {
+  border-color: var(--ls-line);
+  border-radius: 5px;
+}
+:where(input, textarea, select, .search) {
+  border-color: #ddcdb8;
+  border-radius: 5px;
+  font-family: var(--ls-font-body);
+}
+:where(input:focus, textarea:focus, select:focus) {
+  border-color: var(--ls-gold);
+}
+:where(.panel, .summary, .note, .connect-box, .value, .gift-idea, .card) {
+  border-color: var(--ls-line);
+}
+:where(.panel, .summary, .card, .gift-idea) {
+  box-shadow: var(--ls-shadow-soft);
+}
+:where(.site-footer, footer) {
+  background: var(--ls-maroon);
+  color: #fffaf2;
+}
+:where(.site-footer a, footer a) { color: #fffaf2; }
+
+/* Minimal line-icon convention for shared controls.
+   Icons remain decorative unless the control has an accessible label. */
+.ls-icon {
+  display: inline-block;
+  width: 1.15em;
+  height: 1.15em;
+  flex: 0 0 auto;
+  color: currentColor;
+  vertical-align: -.18em;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.ls-icon-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 42px;
+  min-height: 42px;
+  padding: 9px 11px;
+  border: 1px solid var(--ls-line);
+  border-radius: 5px;
+  background: #fffaf2;
+  color: var(--ls-maroon);
+  cursor: pointer;
+}
+.ls-icon-button .ls-icon { width: 18px; height: 18px; }
+:where(a, button, input, textarea, select, [tabindex]):focus-visible {
+  outline: 2px solid rgba(193, 138, 61, .78);
+  outline-offset: 3px;
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
 }
