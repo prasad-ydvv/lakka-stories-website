@@ -88,34 +88,71 @@ input[readonly]{background:#f7f0e6;color:#6f6258}
 @media(prefers-reduced-motion:reduce){.btn{transition:none!important}}
 
 
+
+
+/* Simplified checkout UX v1 — progressive disclosure, compact form. */
+.order-review{padding:15px 17px}
+.order-review-heading{display:flex;justify-content:space-between;align-items:center;gap:12px;color:var(--maroon);font-size:14px}
+.order-review-heading span{font-weight:700}
+.disclosure,.optional-fields,.privacy-details,.safety-details{margin-top:10px;color:var(--muted);font-size:12px}
+.disclosure summary,.optional-fields summary,.privacy-details summary,.safety-details summary{color:var(--maroon);cursor:pointer;font-weight:600;list-style:none}
+.disclosure summary::-webkit-details-marker,.optional-fields summary::-webkit-details-marker,.privacy-details summary::-webkit-details-marker,.safety-details summary::-webkit-details-marker{display:none}
+.disclosure summary:after,.optional-fields summary:after,.privacy-details summary:after,.safety-details summary:after{content:"＋";float:right;color:var(--gold);font-size:15px}
+.disclosure[open] summary:after,.optional-fields[open] summary:after,.privacy-details[open] summary:after,.safety-details[open] summary:after{content:"−"}
+.disclosure p,.privacy-details p,.safety-details p{margin:8px 0 0;padding:10px 12px;background:#f8f0e4;border-left:2px solid var(--gold);border-radius:3px;line-height:1.55}
+.optional-fields{padding-top:12px;border-top:1px solid var(--line);font-size:12px}
+.optional-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin-top:13px}
+.field-hint{font-size:11px;color:var(--muted);min-height:1em}
+.payment-summary{margin:16px 0 10px;padding:12px 14px;background:#f8f0e4;border-left:3px solid var(--gold);border-radius:4px;font-size:12px;line-height:1.5}
+.payment-summary>strong{color:var(--maroon)}
+.payment-summary .disclosure{margin-top:7px}
+.privacy-details,.safety-details{margin:10px 0;color:var(--muted);font-size:12px}
+#checkout h2{margin-bottom:16px}
+#checkout .grid{gap:13px}
+#checkout .field{gap:5px}
+#checkout label{font-size:12px}
+#checkout .field-hint{font-size:11px}
+#checkout .consent-row label{font-size:12px;line-height:1.45}
+#checkout .submit-order{width:100%;min-height:50px;font-size:14px}
+@media(max-width:600px){.optional-grid{grid-template-columns:1fr}.order-review{padding:14px 13px}.order-review-heading{font-size:13px}.checkout-item{padding:8px 0}.checkout-summary{padding-top:10px}}
+
 </style>  <link rel="stylesheet" href="assets/css/design-system.css">
-</head><body><div class="top">LAKKA STORIES · EVERY LITTLE TREASURE HAS A STORY</div><main class="wrap"><div class="steps" aria-label="Order progress"><span>1. Explore</span><span>2. Your cart</span><span class="active">3. Delivery details</span></div><a href="cart.html">← Back to your cart</a><h1>Delivery Details</h1><p class="muted">Enter where you would like us to deliver. Sending this request does not confirm an order or collect payment.</p>
-<div class="panel" id="orderReview"><h2>Review your items</h2><div id="items"></div><p class="notice">Only products marked Available after a manager verification can be submitted in an order request. Products marked Ask for availability, Made to order or Out of stock are enquiry-only and must be removed from the cart. The server rechecks availability; a previously added item may be rejected if its status has changed.</p></div>
-<form id="checkout" class="panel"><h2>Where should we deliver?</h2><div class="grid">
-<div class="field"><label for="name">Full name *</label><input id="name" maxlength="120" required autocomplete="name"></div>
-<div class="field"><label for="phone">Indian mobile number *</label><input id="phone" required inputmode="tel" autocomplete="tel" maxlength="14" placeholder="10-digit mobile number"><span class="muted">Enter a 10-digit Indian mobile number, optionally with +91.</span></div>
-<div class="field"><label for="email">Email (optional)</label><input id="email" type="email" maxlength="180" autocomplete="email"></div>
-<div class="field"><label for="pin">PIN code *</label><input id="pin" required inputmode="numeric" pattern="[0-9]{6}" maxlength="6" autocomplete="postal-code" placeholder="6-digit PIN"><span id="pinStatus" class="muted" aria-live="polite">Enter PIN to check the postal area.</span></div>
-<div class="field"><label for="district">District (from PIN lookup)</label><input id="district" readonly placeholder="Auto-filled after PIN check"></div>
-<div class="field"><label for="state">State (from PIN lookup) *</label><input id="state" required maxlength="100" autocomplete="address-level1" readonly placeholder="Auto-filled after PIN check"></div>
-<div class="field"><label for="postOffice">Post office / locality *</label><select id="postOffice" required disabled><option value="">Select after PIN lookup</option></select></div>
-<div class="field"><label for="city">City / town *</label><input id="city" required maxlength="100" autocomplete="address-level2" placeholder="Enter your town or city"></div>
-<div class="field full"><label for="address">House number / building / street / area *</label><textarea id="address" required minlength="10" maxlength="500" autocomplete="street-address" placeholder="House or flat number, building, street, area and nearby landmark"></textarea><span class="muted">PIN lookup cannot verify your exact house address. Enter the complete delivery address.</span></div>
-<div class="field full"><label for="notes">Delivery instructions (optional)</label><textarea id="notes" maxlength="300"></textarea></div>
+</head><body><div class="top">LAKKA STORIES · EVERY LITTLE TREASURE HAS A STORY</div><main class="wrap"><div class="steps" aria-label="Order progress"><span>1. Explore</span><span>2. Your cart</span><span class="active">3. Delivery details</span></div><a href="cart.html">← Back to cart</a><h1>Delivery Details</h1>
+<section class="panel order-review" id="orderReview" aria-label="Order summary">
+  <div class="order-review-heading"><strong>Order summary</strong><span id="orderSummaryLabel">Review items</span></div>
+  <details class="disclosure"><summary>Review items</summary><div id="items"></div></details>
+  <details class="disclosure"><summary>Availability and pricing</summary><p class="notice">We check product availability and current prices before accepting your request. Products that are unavailable or enquiry-only cannot be submitted as an order.</p></details>
+</section>
+<form id="checkout" class="panel"><h2>Delivery address</h2><div class="grid">
+<div class="field"><label for="name">Full name *</label><input id="name" maxlength="120" required autocomplete="name" placeholder="Your name"></div>
+<div class="field"><label for="phone">Mobile number *</label><input id="phone" required inputmode="tel" autocomplete="tel" maxlength="14" placeholder="10-digit mobile number"></div>
+<div class="field"><label for="pin">PIN code *</label><input id="pin" required inputmode="numeric" pattern="[0-9]{6}" maxlength="6" autocomplete="postal-code" placeholder="6-digit PIN"><span id="pinStatus" class="field-hint" aria-live="polite">Enter your PIN code.</span></div>
+<input id="district" type="hidden">
+<input id="state" type="hidden">
+<div class="field"><label for="postOffice">Post office / locality *</label><select id="postOffice" required disabled><option value="">Select post office</option></select></div>
+<div class="field"><label for="city">City / town *</label><input id="city" required maxlength="100" autocomplete="address-level2" placeholder="City or town"></div>
+<div class="field full"><label for="address">House number, street and area *</label><textarea id="address" required minlength="10" maxlength="500" autocomplete="street-address" placeholder="House / flat, building, street and area"></textarea></div>
 </div>
-<div class="notice" id="paymentNotice"><strong>No payment at this step.</strong><br>You will not be charged now. We will confirm the final product price and delivery charge with you. We will discuss the available payment method with you before confirming your order. LAKKA STORIES does not collect payment through this request form.</div>
-<p class="consent-row"><label for="consent"><input type="checkbox" id="consent" required> <span>I agree that LAKKA STORIES may use these details to respond to this order request and arrange delivery if accepted.</span></label></p>
+<details class="optional-fields"><summary>Add email or delivery instructions (optional)</summary><div class="optional-grid">
+<div class="field"><label for="email">Email</label><input id="email" type="email" maxlength="180" autocomplete="email" placeholder="Email address"></div>
+<div class="field"><label for="notes">Delivery instructions</label><textarea id="notes" maxlength="300" placeholder="Landmark or delivery preference"></textarea></div>
+</div></details>
+<div class="payment-summary"><strong>No payment now.</strong> Final price and delivery charge will be confirmed before acceptance.
+  <details class="disclosure"><summary>Payment information</summary><p>Submitting this request does not charge you. LAKKA STORIES will confirm the final amount and discuss the available payment method before accepting the order. This form does not collect payment.</p></details>
+</div>
+<details class="privacy-details"><summary>How we use your details</summary><p>We use your contact and delivery details to respond to this order request and arrange delivery if the request is accepted.</p></details>
+<p class="consent-row"><label for="consent"><input type="checkbox" id="consent" required> <span>I agree to be contacted about this order request.</span></label></p>
 <button class="btn submit-order" type="submit" id="submit">Send order request</button><div id="status" class="status hidden" role="status"></div></form>
 <section id="orderSuccess" class="success-panel hidden" role="status" aria-live="polite" tabindex="-1">
   <h2 class="success-heading"><span class="success-icon" aria-hidden="true">✓</span>Your order request has been received!</h2>
-  <p class="success-next">Your order is not confirmed yet. No payment has been collected.</p>
+  <p class="success-next">Request received. No payment has been collected.</p>
   <div class="success-reference"><span>Order reference</span><strong id="successReference"></strong></div>
-  <p class="success-next">Our team will check product availability and confirm the final product price and delivery charge with you. We will discuss the available payment method before confirming your order. Please keep your order reference for future communication.</p>
+  <p class="success-next">We'll confirm availability, final price and delivery charge before accepting your order.</p>
   <a class="success-whatsapp" id="successWhatsApp" href="#" target="_blank" rel="noopener noreferrer">Send my reference to WhatsApp →</a>
-  <p class="success-next success-whatsapp-note">Optional: this opens a message with your order reference. Your request is still awaiting review; sending a WhatsApp message does not confirm the order.</p>
+  <details class="disclosure success-whatsapp-note"><summary>About this message</summary><p>Your request is still awaiting review. Sending a WhatsApp message does not confirm the order.</p></details>
   <a class="success-home" href="track-order.html">Track your order status</a><br><a class="success-home" href="index.html">Continue browsing LAKKA STORIES</a>
 </section>
-<p class="muted">Do not enter OTPs, UPI PINs, card details or passwords. This form does not collect payment.</p></main>
+<details class="safety-details"><summary>Safety information</summary><p>Never share OTPs, UPI PINs, card details or passwords in an order request.</p></details></main>
 <script src="cart.js"></script><script>
 const PROJECT_URL='https://gsesangwrryzbpudusfl.supabase.co';
 const PUBLISHABLE_KEY='sb_publishable_2zVjR7EYlB4kSX-CtQr71w_xXZ35Ejz';
@@ -123,6 +160,7 @@ const FUNCTION_NAME='submit-order-request';
 const items=LakkaCart.read(), box=document.getElementById('items');
 if(!items.length){
   box.textContent='Your cart is empty.';
+  document.getElementById('orderSummaryLabel').textContent='Empty cart';
   document.getElementById('submit').disabled=true;
 }else{
   let indicativeSubtotal=0, hasPriceOnRequest=false;
@@ -143,10 +181,12 @@ if(!items.length){
   const label=document.createElement('span');label.textContent=hasPriceOnRequest?(indicativeSubtotal>0?'Known subtotal':'Product subtotal'):'Indicative product subtotal';
   const value=document.createElement('span');value.textContent=hasPriceOnRequest?(indicativeSubtotal>0?LakkaCart.money(indicativeSubtotal)+' + Price on Request':'To be confirmed'):LakkaCart.money(indicativeSubtotal);
   summary.append(label,value);box.append(summary);
+  const compactSummary=document.getElementById('orderSummaryLabel');
+  compactSummary.textContent=hasPriceOnRequest?(indicativeSubtotal>0?LakkaCart.money(indicativeSubtotal)+' + enquiry':'Price to confirm'):LakkaCart.money(indicativeSubtotal);
   const note=document.createElement('p');note.className='muted';
   note.textContent=hasPriceOnRequest
-    ? 'No zero-price products are being offered for free. LAKKA STORIES will confirm any requested prices, delivery charges and the final amount and available payment method before accepting your request.'
-    : 'This is an indicative subtotal based on the price shown when items were added. The server checks current product prices and availability when you submit.';
+    ? 'Prices on request are confirmed by LAKKA STORIES before acceptance.'
+    : 'Indicative subtotal. Current prices and availability are checked before acceptance.';
   box.append(note);
 }
 const form=document.getElementById('checkout');
@@ -197,7 +237,7 @@ async function lookupPin(pin){
     const districts=[...new Set(offices.map(x=>x.District).filter(Boolean))];
     const states=[...new Set(offices.map(x=>x.State).filter(Boolean))];
     if(states.length!==1 || districts.length!==1){
-      setPinMessage('This PIN has multiple district/state results. Please contact us on WhatsApp to confirm delivery details.',true);
+      setPinMessage('PIN details need confirmation. Please contact us on WhatsApp.',true);
       return;
     }
     districtInput.value=districts[0];
@@ -211,10 +251,10 @@ async function lookupPin(pin){
     });
     postOfficeSelect.disabled=false;
     verifiedPin=pin;
-    setPinMessage('PIN found. Select your post office/locality. Enter your city and full street address below.');
+    setPinMessage('PIN verified. Select your post office.');
   }catch(error){
     resetPinDetails();
-    setPinMessage('Could not verify this PIN right now. Please try again later or contact us on WhatsApp. ('+error.message+')',true);
+    setPinMessage('PIN lookup unavailable. Please try again or contact us on WhatsApp.',true);
   }
 }
 pinInput.addEventListener('input',()=>{
