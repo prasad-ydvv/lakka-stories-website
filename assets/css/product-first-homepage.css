@@ -1,0 +1,189 @@
+/* LAKKA STORIES — product-first homepage layout.
+   Visual layer only; catalogue data, filters, pagination and cart behaviour are unchanged. */
+
+body:has(#productGrid) .collection {
+  padding: clamp(24px,3vw,38px) clamp(14px,2.2vw,28px) 42px;
+  background: linear-gradient(180deg,#fffdf8 0%,#fbf6ed 100%);
+  border-top: 0;
+}
+body:has(#productGrid) .collection .section-head {
+  max-width: 900px;
+  margin-bottom: 20px;
+}
+body:has(#productGrid) .collection .section-head .eyebrow {
+  margin-bottom: 7px;
+}
+body:has(#productGrid) .collection .section-head h2 {
+  font-size: clamp(31px,3.4vw,43px);
+  margin-bottom: 7px;
+}
+body:has(#productGrid) .collection .section-head p {
+  margin-bottom: 0;
+  font-size: 13px;
+}
+body:has(#productGrid) .catalog-transparency {
+  max-width: 1320px;
+  margin: 0 auto 14px;
+  padding: 10px 14px;
+  border-radius: 5px;
+  font-size: 11px;
+}
+body:has(#productGrid) .catalog-transparency p {
+  margin: 3px 0 0;
+  line-height: 1.45;
+}
+body:has(#productGrid) .catalog-tools {
+  max-width: 1320px;
+  margin-bottom: 14px;
+  align-items: center;
+}
+body:has(#productGrid) .search {
+  min-height: 43px;
+  border-radius: 5px;
+  font-size: 13px;
+}
+body:has(#productGrid) .filters {
+  gap: 7px;
+}
+body:has(#productGrid) .filter {
+  padding: 8px 13px;
+  font-size: 11px;
+}
+body:has(#productGrid) .grid {
+  max-width: 1320px;
+  grid-template-columns: repeat(4,minmax(0,1fr));
+  gap: 16px;
+}
+body:has(#productGrid) .card {
+  border-radius: 7px;
+  box-shadow: 0 4px 15px rgba(66,43,42,.045);
+}
+body:has(#productGrid) .photo {
+  height: 245px;
+  background: #f5ecdf;
+}
+body:has(#productGrid) .card-body {
+  padding: 14px 13px 13px;
+  gap: 5px;
+}
+body:has(#productGrid) .card h3 {
+  font-size: 17px;
+  line-height: 1.3;
+  margin-bottom: 4px;
+}
+body:has(#productGrid) .price {
+  margin-top: 4px;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+body:has(#productGrid) .view-details-hint {
+  min-height: 40px;
+  border-radius: 4px;
+  font-size: 11px;
+}
+body:has(#productGrid) .card .add-cart-card {
+  min-height: 39px;
+  border-radius: 4px;
+}
+body:has(#productGrid) .load-more-wrap {
+  margin-top: 25px;
+}
+body:has(#productGrid) .ls-interest-section {
+  padding-top: 30px;
+  padding-bottom: 32px;
+}
+body:has(#productGrid) .ls-interest-heading h2 {
+  margin-bottom: 12px;
+}
+@media (min-width: 1101px) {
+  body:has(#productGrid) .grid { grid-template-columns: repeat(4,minmax(0,1fr)); }
+  body:has(#productGrid) .photo { height: 255px; }
+}
+@media (min-width: 701px) and (max-width: 1100px) {
+  body:has(#productGrid) .grid { grid-template-columns: repeat(3,minmax(0,1fr)); }
+  body:has(#productGrid) .photo { height: 225px; }
+}
+@media (max-width: 700px) {
+  body:has(#productGrid) .collection {
+    padding: 24px 12px 30px;
+  }
+  body:has(#productGrid) .collection .section-head {
+    margin-bottom: 13px;
+  }
+  body:has(#productGrid) .collection .section-head h2 {
+    font-size: 29px;
+  }
+  body:has(#productGrid) .collection .section-head p {
+    font-size: 12px;
+  }
+  body:has(#productGrid) .catalog-transparency {
+    padding: 9px 11px;
+    margin-bottom: 11px;
+    font-size: 10px;
+  }
+  body:has(#productGrid) .catalog-tools {
+    gap: 9px;
+    margin-bottom: 11px;
+  }
+  body:has(#productGrid) .filters {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding: 2px 1px 7px;
+    scrollbar-width: thin;
+    -webkit-overflow-scrolling: touch;
+  }
+  body:has(#productGrid) .filter {
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+  body:has(#productGrid) .grid {
+    grid-template-columns: repeat(2,minmax(0,1fr));
+    gap: 11px;
+  }
+  body:has(#productGrid) .photo {
+    height: auto;
+    aspect-ratio: 1 / 1.08;
+  }
+  body:has(#productGrid) .photo img {
+    object-fit: contain;
+  }
+  body:has(#productGrid) .card-body {
+    padding: 10px 9px 10px;
+    gap: 4px;
+  }
+  body:has(#productGrid) .card h3 {
+    min-height: 2.5em;
+    max-height: 2.5em;
+    font-size: 14px;
+    line-height: 1.25;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+  body:has(#productGrid) .price {
+    font-size: 12px;
+    gap: 4px;
+    margin: 3px 0 6px;
+  }
+  body:has(#productGrid) .view-details-hint {
+    min-height: 37px;
+    padding: 9px 5px;
+    font-size: 10px;
+  }
+  body:has(#productGrid) .card .add-cart-card {
+    min-height: 36px;
+    font-size: 10px;
+  }
+  body:has(#productGrid) .ls-interest-section {
+    padding: 22px 12px 25px;
+  }
+}
+@media (max-width: 370px) {
+  body:has(#productGrid) .grid { gap: 8px; }
+  body:has(#productGrid) .photo { aspect-ratio: 1 / 1.05; }
+  body:has(#productGrid) .card-body { padding: 8px 7px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  body:has(#productGrid) .card { transition: none; }
+}
