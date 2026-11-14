@@ -446,13 +446,14 @@
       const button = document.getElementById("mobileAddToCartButton");
       const primary = document.getElementById("addToCartButton");
       const available = String(product.availability || "").trim().toLowerCase() === "available";
-      if (!available || !(Number(product.selling_price) > 0)) {
+      if (!available) {
         bar.hidden = true;
         return;
       }
-      price.textContent = "₹" + Number(product.selling_price).toLocaleString("en-IN");
+      const sellingPrice = Number(product.selling_price || 0);
+      price.textContent = sellingPrice > 0 ? "₹" + sellingPrice.toLocaleString("en-IN") : "Price on Request";
       const reference = Number(product.reference_price || 0);
-      if (reference > Number(product.selling_price)) {
+      if (sellingPrice > 0 && reference > sellingPrice) {
         const note = document.createElement("small");
         note.textContent = "MRP ₹" + reference.toLocaleString("en-IN");
         price.appendChild(note);
@@ -466,11 +467,18 @@
         }
       };
       if ("IntersectionObserver" in window) {
+        let primaryVisible = false;
+        let footerVisible = false;
         buyBarObserver = new IntersectionObserver(entries => {
-          const visible = entries.some(entry => entry.isIntersecting && entry.intersectionRatio > 0);
-          bar.hidden = !window.matchMedia("(max-width: 700px)").matches || visible;
+          entries.forEach(entry => {
+            if (entry.target === primary) primaryVisible = entry.isIntersecting && entry.intersectionRatio > 0;
+            if (entry.target === document.querySelector(".site-footer")) footerVisible = entry.isIntersecting && entry.intersectionRatio > 0;
+          });
+          bar.hidden = !window.matchMedia("(max-width: 700px)").matches || primaryVisible || footerVisible;
         }, {threshold:0.01});
         buyBarObserver.observe(primary);
+        const footer = document.querySelector(".site-footer");
+        if (footer) buyBarObserver.observe(footer);
         window.addEventListener("resize", update, {passive:true});
       } else {
         window.addEventListener("scroll", update, {passive:true});
