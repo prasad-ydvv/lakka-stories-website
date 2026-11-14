@@ -374,17 +374,17 @@ body:has(.product) .mobile-buy-bar {
   body:has(.hero) .ls-interest-card { transition: none; }
 }
 
-/* HOME — compact brand promises for balanced desktop and mobile hero */
+/* HOME — distinct desktop and mobile promise layouts */
 body:has(.hero) .hero { position: relative; }
 body:has(.hero) .hero-copy .brand-promises {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  align-items: stretch;
+  align-items: start;
   gap: 8px;
   width: 100%;
   max-width: 100%;
-  margin: 18px 0 0;
-  padding: 12px 0 0;
+  margin: 16px 0 0;
+  padding: 11px 0 0;
   background: transparent;
   border: 0;
   border-top: 1px solid rgba(183,123,53,.28);
@@ -396,7 +396,7 @@ body:has(.hero) .hero-copy .brand-promise {
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  gap: 5px;
+  gap: 4px;
   padding: 2px 7px 0;
   background: transparent;
   border: 0;
@@ -406,52 +406,54 @@ body:has(.hero) .hero-copy .brand-promise {
 body:has(.hero) .hero-copy .promise-icon {
   width: auto;
   flex: 0 0 auto;
-  font-size: 20px;
+  font-size: 18px;
   line-height: 1;
   color: #a56d2e;
 }
 body:has(.hero) .hero-copy .brand-promise strong {
-  font-size: 12px;
+  font-size: 11px;
   line-height: 1.2;
 }
 body:has(.hero) .hero-copy .brand-promise small {
   margin-top: 0;
   font-size: 9px;
-  line-height: 1.25;
+  line-height: 1.2;
 }
 @media (max-width: 700px) {
-  body:has(.hero) .hero .brand-promises {
-    position: absolute;
-    z-index: 3;
-    top: 10px;
-    left: 10px;
-    width: min(46%, 176px);
-    margin: 0;
-    padding: 7px 9px;
+  body:has(.hero) .hero-copy .brand-promises {
+    position: static !important;
+    inset: auto !important;
+    transform: none !important;
+    z-index: auto;
+    display: grid;
     grid-template-columns: 1fr;
+    width: 100%;
+    max-width: 100%;
+    margin: 14px 0 0;
+    padding: 7px 11px;
     gap: 0;
-    background: rgba(255,249,240,.94);
+    background: rgba(255,249,240,.98);
     border: 1px solid rgba(232,217,197,.95);
     border-left: 2px solid var(--ls-gold);
     border-radius: 5px;
-    box-shadow: 0 5px 14px rgba(69,32,39,.09);
-    backdrop-filter: blur(3px);
+    box-shadow: 0 4px 12px rgba(69,32,39,.05);
+    backdrop-filter: none;
   }
-  body:has(.hero) .hero .brand-promise {
+  body:has(.hero-copy) .hero-copy .brand-promise {
     min-height: 0;
     flex-direction: row;
     align-items: center;
-    gap: 6px;
-    padding: 6px 0;
+    gap: 9px;
+    padding: 7px 0;
     border: 0;
-    border-top: 1px solid rgba(183,123,53,.20);
+    border-top: 1px solid rgba(183,123,53,.18);
   }
-  body:has(.hero) .hero .brand-promise:first-child { border-top: 0; }
-  body:has(.hero) .hero .promise-icon {
-    flex: 0 0 17px;
-    width: 17px;
-    font-size: 15px;
+  body:has(.hero-copy) .hero-copy .brand-promise:first-child { border-top: 0; }
+  body:has(.hero-copy) .hero-copy .promise-icon {
+    flex: 0 0 20px;
+    width: 20px;
+    font-size: 16px;
   }
-  body:has(.hero) .hero .brand-promise strong { font-size: 9px; }
-  body:has(.hero) .hero .brand-promise small { display: none; }
+  body:has(.hero-copy) .hero-copy .brand-promise strong { font-size: 11px; }
+  body:has(.hero-copy) .hero-copy .brand-promise small { display: block; font-size: 9px; }
 }
