@@ -291,13 +291,15 @@
       .product-specs{margin:13px 0 3px;padding:14px}
       .product-specs h2{font-size:19px}
       .spec-row{grid-template-columns:minmax(95px,.85fr) minmax(0,1.15fr);gap:9px;font-size:12px}
-      body{padding-bottom:env(safe-area-inset-bottom)}
+      /* Reserve space so the fixed purchase bar never covers the page's final content. */
+      body{padding-bottom:calc(82px + env(safe-area-inset-bottom))}
       .mobile-buy-bar{position:fixed;left:0;right:0;bottom:0;z-index:11000;display:flex;align-items:center;gap:12px;padding:10px 13px calc(10px + env(safe-area-inset-bottom));background:rgba(255,253,248,.98);border-top:1px solid var(--line);box-shadow:0 -5px 20px rgba(66,43,42,.12)}
-      .mobile-buy-price{min-width:0;flex:1;color:var(--maroon);font-size:17px;font-weight:700;line-height:1.2}
+      .mobile-buy-price{min-width:0;flex:1 1 auto;overflow:hidden;color:var(--maroon);font-size:17px;font-weight:700;line-height:1.2}
       .mobile-buy-price small{display:block;color:var(--muted);font-size:10px;font-weight:400;margin-top:3px}
-      .mobile-buy-bar .btn{flex:0 0 auto;min-width:145px;min-height:46px}
+      /* The page's general mobile .btn rule sets width:100%; override it for this compact bar. */
+      .mobile-buy-bar .btn{display:inline-flex;width:auto!important;max-width:55%;flex:0 0 auto;white-space:nowrap;min-width:145px;min-height:46px}
     }
-    @media(max-width:380px){.mobile-buy-bar{gap:8px;padding-left:10px;padding-right:10px}.mobile-buy-bar .btn{min-width:125px;padding:10px 12px}}
+    @media(max-width:380px){.mobile-buy-bar{gap:8px;padding-left:10px;padding-right:10px}.mobile-buy-bar .btn{min-width:125px;max-width:52%;padding:10px 12px}}
     @media(prefers-reduced-motion:reduce){.image-zoom{scroll-behavior:auto}}
 </style>
   <link rel="stylesheet" href="assets/css/design-system.css">
