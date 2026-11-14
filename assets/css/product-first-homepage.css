@@ -187,3 +187,22 @@ body:has(#productGrid) .ls-interest-heading h2 {
 @media (prefers-reduced-motion: reduce) {
   body:has(#productGrid) .card { transition: none; }
 }
+/* Distinguish the two customer actions without changing their behaviour. */
+body:has(#productGrid) .add-cart-card.cart-action {
+  border-color: var(--ls-maroon);
+  background: #fffdf8;
+  color: var(--ls-maroon);
+}
+body:has(#productGrid) .add-cart-card.cart-action:hover {
+  background: var(--ls-maroon);
+  color: #fffaf2;
+}
+body:has(#productGrid) .add-cart-card.whatsapp-action {
+  border-color: #23734b;
+  background: #f2faf5;
+  color: #17683a;
+}
+body:has(#productGrid) .add-cart-card.whatsapp-action:hover {
+  background: #e4f3e9;
+  color: #125b32;
+}
