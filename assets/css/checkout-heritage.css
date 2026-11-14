@@ -524,3 +524,114 @@ body:has(#checkout) #checkout .submit-order {
     padding-right: 7px;
   }
 }
+
+
+/* CART MOBILE REFINEMENT — fix empty-state contrast and reduce summary height.
+   CSS only: cart data, quantity controls and order-request actions are unchanged. */
+body:has(#cartItems) .empty a.btn {
+  color: #fffaf2;
+  background: #572329;
+  border-color: #572329;
+}
+body:has(#cartItems) .empty a.btn:hover {
+  color: #fffaf2;
+  background: #452027;
+  border-color: #452027;
+}
+@media (max-width: 700px) {
+  body:has(#cartItems) .wrap {
+    padding-top: 17px;
+    padding-bottom: 26px;
+  }
+  body:has(#cartItems) .steps {
+    margin-bottom: 12px;
+  }
+  body:has(#cartItems) h1 {
+    margin-bottom: 10px;
+    font-size: 29px;
+  }
+  body:has(#cartItems) #cartItems {
+    padding: 0 10px;
+  }
+  body:has(#cartItems) .item {
+    grid-template-columns: 68px minmax(0,1fr);
+    gap: 8px 11px;
+    padding: 11px 0;
+  }
+  body:has(#cartItems) .item img {
+    width: 68px;
+    height: 72px;
+  }
+  body:has(#cartItems) .item h3 {
+    font-size: 14px;
+    line-height: 1.25;
+    margin-bottom: 3px;
+  }
+  body:has(#cartItems) .item .muted {
+    font-size: 11px;
+  }
+  body:has(#cartItems) .qty {
+    gap: 7px;
+    margin-top: 6px;
+  }
+  body:has(#cartItems) .qty button {
+    width: 34px;
+    min-width: 34px;
+    height: 34px;
+    min-height: 34px;
+    font-size: 17px;
+  }
+  body:has(#cartItems) .remove {
+    min-height: 28px;
+    margin-top: 2px;
+    font-size: 11px;
+  }
+  body:has(#cartItems) .item .line-total {
+    font-size: 13px;
+  }
+  body:has(#cartItems) .summary {
+    margin-top: 11px;
+    padding: 13px 12px;
+  }
+  body:has(#cartItems) .summary-row {
+    margin: 4px 0;
+    font-size: 12px;
+  }
+  body:has(#cartItems) .summary-row.total {
+    margin-top: 8px;
+    padding-top: 9px;
+    font-size: 18px;
+  }
+  body:has(#cartItems) .more-info {
+    margin-top: 8px;
+  }
+  body:has(#cartItems) .more-info .note {
+    margin-top: 6px;
+    padding: 8px 9px;
+    font-size: 10px;
+  }
+  body:has(#cartItems) .actions {
+    grid-template-columns: repeat(2,minmax(0,1fr));
+    gap: 7px;
+    margin-top: 12px;
+  }
+  body:has(#cartItems) .actions .btn {
+    min-height: 42px;
+    padding: 9px 8px;
+    font-size: 11px;
+    line-height: 1.25;
+  }
+  body:has(#cartItems) .actions .btn:nth-child(2) {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    min-height: 46px;
+    font-size: 12px;
+  }
+  body:has(#cartItems) .actions .btn:first-child { grid-column: 1; grid-row: 2; }
+  body:has(#cartItems) .actions .btn:nth-child(3) { grid-column: 2; grid-row: 2; }
+  body:has(#cartItems) .empty {
+    min-height: 230px;
+    padding: 25px 14px;
+  }
+  body:has(#cartItems) .empty h2 { font-size: 22px; }
+}
