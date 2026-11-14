@@ -663,3 +663,69 @@ body:has(.hero) .hero > .hero-inner > .brand-promises .brand-promise small {
     width: min(43%, 158px);
   }
 }
+
+
+/* HERO PROMISES — keep the product photograph completely unobstructed.
+   The three trust points sit inside the text card, beneath the main CTA. */
+body:has(.hero) .hero > .hero-inner > .hero-copy { max-width: 700px; }
+body:has(.hero) .hero > .hero-inner > .hero-copy > .brand-promises {
+  position: static;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  width: 100%;
+  max-width: none;
+  margin: 20px 0 0;
+  padding: 13px 0 0;
+  gap: 12px;
+  transform: none;
+  background: transparent;
+  border: 0;
+  border-top: 1px solid rgba(183,123,53,.28);
+  border-radius: 0;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+body:has(.hero) .hero > .hero-inner > .hero-copy > .brand-promises .brand-promise {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 7px;
+  min-width: 0;
+  min-height: 0;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+body:has(.hero) .hero > .hero-inner > .hero-copy > .brand-promises .promise-icon {
+  flex: 0 0 18px;
+  width: 18px;
+  color: #a56d2e;
+  font-size: 16px;
+}
+body:has(.hero) .hero > .hero-inner > .hero-copy > .brand-promises .brand-promise strong {
+  display: block;
+  color: var(--ls-maroon);
+  font-size: 12px;
+  line-height: 1.2;
+}
+body:has(.hero) .hero > .hero-inner > .hero-copy > .brand-promises .brand-promise small {
+  display: block;
+  margin-top: 2px;
+  color: #66574e;
+  font-size: 9px;
+  line-height: 1.2;
+}
+@media (max-width: 700px) {
+  body:has(.hero) .hero > .hero-inner > .hero-copy { max-width: none; }
+  body:has(.hero) .hero > .hero-inner > .hero-copy > .brand-promises {
+    grid-template-columns: 1fr;
+    margin-top: 16px;
+    padding-top: 9px;
+    gap: 8px;
+  }
+  body:has(.hero) .hero > .hero-inner > .hero-copy > .brand-promises .brand-promise { gap: 8px; }
+  body:has(.hero) .hero > .hero-inner > .hero-copy > .brand-promises .brand-promise strong { font-size: 11px; }
+  body:has(.hero) .hero > .hero-inner > .hero-copy > .brand-promises .brand-promise small { font-size: 9px; }
+}
