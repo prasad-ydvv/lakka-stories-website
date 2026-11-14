@@ -1,0 +1,87 @@
+/* LAKKA STORIES — Phase 4 customer-care and information page consistency.
+   Presentation only: navigation, FAQ search, tracking and policy content untouched. */
+:where(body:has(.bulk-wrap), body:has(.faq-group), body:has(.policy-section), body:has(#trackingForm)) {
+  background:
+    radial-gradient(ellipse at 10% 0%, rgba(193,138,61,.06), transparent 32rem),
+    linear-gradient(180deg,#fffdf8 0%,#f8f1e7 100%);
+  color:var(--ls-ink,#422b2a);
+}
+body:has(.bulk-wrap) .bulk-wrap,
+body:has(.faq-group) main,
+body:has(.policy-section) main,
+body:has(#trackingForm) .wrap {
+  padding-top:clamp(28px,4vw,48px);
+}
+:where(body:has(.bulk-wrap),body:has(.faq-group),body:has(.policy-section),body:has(#trackingForm)) h1 {
+  letter-spacing:-.025em;
+}
+body:has(.bulk-wrap) .bulk-hero,
+body:has(.faq-group) .contact-panel,
+body:has(#trackingForm) .panel {
+  border:1px solid var(--ls-line);
+  box-shadow:0 10px 28px rgba(66,43,42,.05);
+}
+body:has(.bulk-wrap) .bulk-card,
+body:has(.faq-group) .faq-item {
+  border-color:var(--ls-line);
+  box-shadow:0 4px 15px rgba(66,43,42,.04);
+  transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;
+}
+body:has(.bulk-wrap) .bulk-card:hover,
+body:has(.faq-group) .faq-item:hover {
+  border-color:var(--ls-gold);
+  box-shadow:0 10px 24px rgba(66,43,42,.08);
+}
+body:has(.faq-group) .faq-item summary {
+  color:var(--ls-maroon);
+}
+body:has(.faq-group) .search-wrap input,
+body:has(#trackingForm) input {
+  border-color:#ddcdb8;
+  border-radius:5px;
+  background:#fff;
+}
+body:has(.faq-group) .search-wrap input:focus,
+body:has(#trackingForm) input:focus {
+  border-color:var(--ls-gold);
+  box-shadow:0 0 0 3px rgba(189,139,69,.13);
+}
+body:has(.policy-section) .policy-section {
+  border-color:var(--ls-line);
+}
+body:has(.policy-section) .notice {
+  border-left-color:var(--ls-gold);
+  border-radius:5px;
+  background:#f8f0e4;
+}
+body:has(#trackingForm) button {
+  border-radius:5px;
+  background:var(--ls-maroon);
+  box-shadow:0 3px 9px rgba(69,32,39,.08);
+}
+body:has(#trackingForm) button:hover:not(:disabled) {
+  background:var(--ls-maroon-deep);
+}
+body:has(#trackingForm) .result {
+  border-top:3px solid var(--ls-gold);
+}
+:where(body:has(.bulk-wrap),body:has(.faq-group),body:has(.policy-section),body:has(#trackingForm)) .site-footer {
+  border-top:3px solid var(--ls-gold);
+}
+@media(max-width:700px) {
+  body:has(.bulk-wrap) .bulk-wrap,
+  body:has(.faq-group) main,
+  body:has(.policy-section) main,
+  body:has(#trackingForm) .wrap {
+    padding-top:25px;
+  }
+  body:has(.faq-group) .faq-item summary {
+    padding-right:42px;
+  }
+}
+@media(prefers-reduced-motion:reduce) {
+  body:has(.bulk-wrap) .bulk-card,
+  body:has(.faq-group) .faq-item {
+    transition:none;
+  }
+}
