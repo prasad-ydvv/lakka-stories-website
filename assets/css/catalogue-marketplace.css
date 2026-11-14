@@ -15,8 +15,9 @@ body:has(.hero) .collection .card {
 }
 body:has(.hero) .collection .photo {
   position: relative;
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 4 / 5;
   height: auto;
+  max-height: 430px;
   background: #f7f0e6;
   border-bottom: 1px solid #f0e6d9;
 }
@@ -84,7 +85,7 @@ body:has(.hero) .collection .add-cart-card:hover { background: #74333a; border-c
   body:has(.hero) .collection .catalog-tools { align-items: center; }
   body:has(.hero) .collection .filters { justify-content: flex-end; }
 }
-@media (max-width: 700px) {
+@media (max-width: 900px) {
   body:has(.hero) .collection { padding: 26px 12px 48px; }
   body:has(.hero) .collection .section-head { margin-bottom: 15px; }
   body:has(.hero) .collection .catalog-tools { gap: 9px; }
