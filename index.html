@@ -2203,6 +2203,34 @@ footer{padding:26px 16px}
   <link rel="stylesheet" href="assets/css/catalogue-marketplace.css?v=20261114-mobile-sort-v2">
   <link rel="stylesheet" href="assets/css/product-first-homepage.css">
   <link rel="stylesheet" href="assets/css/about-heritage.css">
+
+  <style id="lakka-catalogue-photo-sizing">
+    /* Final catalogue image sizing: override legacy inline homepage rules.
+       Portrait card area fills its width; image fills the frame cleanly. */
+    .collection #productGrid .photo {
+      display: block !important;
+      width: 100% !important;
+      height: auto !important;
+      aspect-ratio: 2 / 3 !important;
+      padding: 0 !important;
+      overflow: hidden !important;
+      background: #f3e9dc !important;
+    }
+    .collection #productGrid .photo img {
+      display: block !important;
+      width: 100% !important;
+      height: 100% !important;
+      max-width: none !important;
+      max-height: none !important;
+      padding: 0 !important;
+      object-fit: cover !important;
+      object-position: center center !important;
+    }
+    @media (max-width: 700px) {
+      .collection #productGrid .photo { aspect-ratio: 2 / 3 !important; }
+    }
+  </style>
+
 </head>
 <body>
   <div class="topline">Every Little Treasure Has a Story.</div>
