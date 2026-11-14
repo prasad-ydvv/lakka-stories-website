@@ -214,3 +214,14 @@ body:has(.hero) .collection .card .add-cart-card.whatsapp-action:hover {
   background: #e2f2e8 !important;
   border-color: #246344 !important;
 }
+
+/* Mobile sort control: prevent selected option text from clipping */
+@media (max-width: 700px) {
+  .catalogue-sort-row select {
+    width: 168px;
+    max-width: 168px;
+    font-size: 11px;
+    padding-left: 9px;
+    padding-right: 25px;
+  }
+}
