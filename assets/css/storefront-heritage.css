@@ -420,8 +420,9 @@ body:has(.hero) .hero-copy .brand-promise small {
   line-height: 1.2;
 }
 @media (max-width: 700px) {
+  body:has(.hero) .hero { position: relative !important; }
   body:has(.hero) .hero-inner,
-  body:has(.hero) .hero-copy { position: static; }
+  body:has(.hero) .hero-copy { position: static !important; }
   body:has(.hero) .hero .brand-promises {
     position: absolute !important;
     top: 16px;
