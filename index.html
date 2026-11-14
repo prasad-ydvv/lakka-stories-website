@@ -2506,7 +2506,7 @@ footer{padding:26px 16px}
         viewHint.textContent = "View Details";
         const addButton = document.createElement("button");
         addButton.type = "button";
-        addButton.className = "add-cart-card";
+        addButton.className = "add-cart-card " + (canOrder ? "cart-action" : "whatsapp-action");
         const canOrder = availability.className === "available" && Number(p.selling_price || 0) > 0;
         addButton.textContent = canOrder ? "Add to Cart" : "Enquire on WhatsApp";
         addButton.setAttribute("aria-label", (canOrder ? "Add " : "Enquire about ") + (p.name || "product"));
