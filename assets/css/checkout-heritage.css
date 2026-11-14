@@ -209,3 +209,139 @@ body:has(#checkout) .status {
     transition: none;
   }
 }
+
+
+/* PHASE 3 — cart and checkout hierarchy.
+   Desktop cart: product list beside a clear order summary.
+   Smaller screens: a single, comfortable reading column. */
+@media (min-width: 901px) {
+  body:has(#cartItems) .wrap {
+    display: grid;
+    grid-template-columns: minmax(0, 1.55fr) minmax(290px, .8fr);
+    grid-template-areas:
+      "steps steps"
+      "heading heading"
+      "items summary";
+    align-items: start;
+    column-gap: 24px;
+    row-gap: 0;
+    max-width: 1120px;
+  }
+  body:has(#cartItems) .steps { grid-area: steps; }
+  body:has(#cartItems) h1 { grid-area: heading; }
+  body:has(#cartItems) #cartItems { grid-area: items; min-width: 0; }
+  body:has(#cartItems) #cartSummary {
+    grid-area: summary;
+    position: sticky;
+    top: 108px;
+    min-width: 0;
+    margin-top: 0;
+  }
+  body:has(#cartItems) #cartSummary .actions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+  body:has(#cartItems) #cartSummary .actions .btn { width: 100%; }
+  body:has(#cartItems) #cartSummary .actions .btn:first-child {
+    background: transparent;
+    color: #572329;
+  }
+}
+@media (min-width: 701px) and (max-width: 900px) {
+  body:has(#cartItems) .wrap { max-width: 760px; }
+  body:has(#cartItems) #cartSummary { margin-top: 16px; }
+}
+
+/* Make the order-request journey feel like one coherent storefront. */
+body:has(#checkout) .top {
+  padding: 11px 14px;
+  font-size: 10px;
+  line-height: 1.4;
+  letter-spacing: .18em;
+}
+body:has(#checkout) .wrap {
+  max-width: 850px;
+}
+body:has(#checkout) .wrap > a:first-of-type {
+  min-height: 36px;
+  padding: 7px 0;
+}
+body:has(#checkout) .order-review {
+  margin-top: 16px;
+}
+body:has(#checkout) .order-review-heading {
+  min-height: 28px;
+}
+body:has(#checkout) .disclosure summary,
+body:has(#checkout) .optional-fields summary,
+body:has(#checkout) .privacy-details summary,
+body:has(#checkout) .safety-details summary {
+  padding: 5px 0;
+}
+body:has(#checkout) #checkout {
+  margin-top: 18px;
+}
+body:has(#checkout) #checkout .field-hint {
+  font-size: 11px;
+  line-height: 1.45;
+}
+body:has(#checkout) .payment-summary {
+  margin-top: 18px;
+  padding: 14px 15px;
+  line-height: 1.6;
+}
+body:has(#checkout) .consent-row {
+  margin: 18px 0 14px;
+}
+body:has(#checkout) .submit-order {
+  width: 100%;
+  min-height: 52px;
+  font-size: 14px;
+}
+body:has(#checkout) .success-panel {
+  max-width: 720px;
+  margin: 28px auto;
+}
+body:has(#checkout) .success-reference {
+  padding: 16px 18px;
+}
+body:has(#checkout) .success-whatsapp {
+  padding: 12px 18px;
+}
+
+/* Keyboard focus and reduced-motion comfort across the final purchase steps. */
+body:has(#cartItems) .btn:focus-visible,
+body:has(#cartItems) .qty button:focus-visible,
+body:has(#cartItems) .remove:focus-visible,
+body:has(#checkout) .btn:focus-visible,
+body:has(#checkout) summary:focus-visible,
+body:has(#checkout) .success-home:focus-visible,
+body:has(#checkout) .success-whatsapp:focus-visible {
+  outline: 3px solid rgba(189,139,69,.55);
+  outline-offset: 3px;
+}
+@media (max-width: 700px) {
+  body:has(#cartItems) .wrap {
+    display: block;
+  }
+  body:has(#cartItems) #cartSummary {
+    position: static;
+  }
+  body:has(#cartItems) #cartSummary .actions {
+    gap: 9px;
+  }
+  body:has(#checkout) .wrap {
+    max-width: 560px;
+  }
+  body:has(#checkout) .success-whatsapp {
+    display: flex;
+    width: 100%;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  body:has(#cartItems) .item,
+  body:has(#cartItems) .qty button,
+  body:has(#cartItems) .remove {
+    transition: none !important;
+  }
+}
