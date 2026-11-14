@@ -579,3 +579,87 @@ body:has(.hero) .hero > .hero-inner > .brand-promises .brand-promise small {
     padding: 4px 7px;
   }
 }
+
+
+/* HERO PROMISES — image-first, blended treatment.
+   Keep the toy subjects unobstructed: no opaque card or blur panel. */
+body:has(.hero) .hero > .hero-inner > .brand-promises {
+  top: 22px;
+  right: 22px;
+  left: auto;
+  transform: none;
+  width: 220px;
+  max-width: 220px;
+  padding: 0;
+  gap: 0;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+body:has(.hero) .hero > .hero-inner > .brand-promises .brand-promise {
+  gap: 8px;
+  padding: 8px 0;
+  border-top: 1px solid rgba(255,249,240,.34);
+}
+body:has(.hero) .hero > .hero-inner > .brand-promises .brand-promise:first-child {
+  border-top: 0;
+}
+body:has(.hero) .hero > .hero-inner > .brand-promises .promise-icon {
+  flex-basis: 20px;
+  width: 20px;
+  color: #f0c47d;
+  text-shadow: 0 1px 4px rgba(40,20,12,.55);
+}
+body:has(.hero) .hero > .hero-inner > .brand-promises .brand-promise strong,
+body:has(.hero) .hero > .hero-inner > .brand-promises .brand-promise small {
+  color: #fffaf0;
+  text-shadow: 0 1px 5px rgba(35,18,10,.78);
+}
+@media (max-width: 700px) {
+  body:has(.hero) .hero > .hero-inner > .brand-promises {
+    top: 12px;
+    left: 12px;
+    right: auto;
+    width: min(43%, 174px);
+    max-width: 174px;
+    padding: 0;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    backdrop-filter: none;
+  }
+  body:has(.hero) .hero > .hero-inner > .brand-promises .brand-promise {
+    gap: 6px;
+    padding: 5px 0;
+    border-top: 1px solid rgba(111,66,36,.18);
+  }
+  body:has(.hero) .hero > .hero-inner > .brand-promises .promise-icon {
+    flex-basis: 16px;
+    width: 16px;
+    font-size: 14px;
+    color: #a56d2e;
+    text-shadow: none;
+  }
+  body:has(.hero) .hero > .hero-inner > .brand-promises .brand-promise strong {
+    color: #57252b;
+    font-size: 10px;
+    line-height: 1.12;
+    text-shadow: 0 1px 2px rgba(255,249,240,.8);
+  }
+  body:has(.hero) .hero > .hero-inner > .brand-promises .brand-promise small {
+    color: #654f43;
+    font-size: 8px;
+    line-height: 1.12;
+    text-shadow: 0 1px 2px rgba(255,249,240,.8);
+  }
+}
+@media (max-width: 380px) {
+  body:has(.hero) .hero > .hero-inner > .brand-promises {
+    left: 9px;
+    top: 10px;
+    width: min(43%, 158px);
+  }
+}
