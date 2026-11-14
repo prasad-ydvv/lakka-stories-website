@@ -2166,7 +2166,7 @@ footer{padding:26px 16px}
     .how-ordering-heading .eyebrow{margin-bottom:8px}
     .how-ordering-heading h2{font-size:clamp(27px,3.2vw,36px);line-height:1.15;margin:0 0 9px}
     .how-ordering-heading>p:last-child{font-size:13px;line-height:1.65;color:var(--muted);margin:0}
-    .ordering-steps{list-style:none;counter-reset:ordering;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:0;padding:0}
+    .ordering-steps{list-style:none;counter-reset:ordering;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:0;padding:0}
     .ordering-step{min-width:0;padding:19px 16px 18px;background:#fffefa;border:1px solid var(--line);border-radius:8px;box-shadow:0 3px 12px rgba(87,35,41,.035)}
     .ordering-number{display:grid;place-items:center;width:39px;height:39px;margin-bottom:13px;border-radius:50%;background:#f5e8d4;border:1px solid #e3c99f;color:var(--maroon);font:normal 15px Georgia,serif}
     .ordering-step h3{font-size:17px;line-height:1.25;margin:0 0 8px}
@@ -2545,14 +2545,14 @@ footer{padding:26px 16px}
       visibleProductCount += PRODUCTS_PER_BATCH;
       renderCatalogue();
     });
-    function selectCategory(category, sourceButton) {
+    function selectCategory(category) {
       activeFilter = category;
       visibleProductCount = PRODUCTS_PER_BATCH;
       filters.forEach(item => item.classList.toggle("active", item.dataset.filter === category));
       renderCatalogue();
     }
     filters.forEach(button => button.addEventListener("click", () => {
-      selectCategory(button.dataset.filter, button);
+      selectCategory(button.dataset.filter);
     }));
     async function loadPublicCatalogue() {
       const grid = document.getElementById("productGrid");
