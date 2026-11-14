@@ -811,3 +811,72 @@ body:has(#checkout) #checkout .submit-order:hover {
     font-size: 9px;
   }
 }
+
+
+/* MOBILE QA FIX — remove sticky overlap, align consent and wrap footer links.
+   Addresses issues observed in the supplied phone screenshots. */
+@media (max-width: 700px) {
+  body:has(#checkout) #checkout .submit-order {
+    position: static !important;
+    inset: auto !important;
+    z-index: auto !important;
+    margin-top: 8px;
+    box-shadow: 0 3px 10px rgba(66,43,42,.10);
+  }
+  body:has(#checkout) #checkout .consent-row {
+    display: block;
+  }
+  body:has(#checkout) #checkout .consent-row > label {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: flex-start;
+    gap: 10px !important;
+    width: 100%;
+    line-height: 1.45;
+  }
+  body:has(#checkout) #checkout .consent-row input[type="checkbox"] {
+    display: block !important;
+    flex: 0 0 20px !important;
+    width: 20px !important;
+    min-width: 20px !important;
+    height: 20px !important;
+    min-height: 20px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    accent-color: #572329;
+  }
+  body:has(#checkout) #checkout .consent-row label span {
+    display: block;
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+  body:has(#checkout) footer.site-footer {
+    width: 100%;
+    overflow: hidden;
+    padding-left: 16px;
+    padding-right: 16px;
+    text-align: center;
+  }
+  body:has(#checkout) footer.site-footer .footer-links {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    justify-content: center;
+    align-items: center;
+    gap: 9px 15px;
+    width: 100%;
+    max-width: 100%;
+    margin: 14px auto;
+    white-space: normal !important;
+    overflow-wrap: anywhere;
+  }
+  body:has(#checkout) footer.site-footer .footer-links a {
+    display: inline-block;
+    flex: 0 1 auto;
+    max-width: 100%;
+    white-space: normal !important;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+}
