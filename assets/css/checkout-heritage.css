@@ -386,3 +386,141 @@ body:has(#checkout) .success-whatsapp:focus-visible {
     margin-top: 18px;
   }
 }
+
+
+/* COMPACT CHECKOUT V2 — Myntra-inspired information density, LAKKA order-request flow.
+   Visual-only overrides: preserve PIN lookup, validation, consent and order submission. */
+body:has(#checkout) .wrap {
+  max-width: 900px;
+  padding-top: 22px;
+}
+body:has(#checkout) h1 {
+  margin: 8px 0 4px;
+  font-size: clamp(28px, 3.5vw, 34px);
+}
+body:has(#checkout) .order-review {
+  margin: 10px 0 12px;
+  padding: 12px 16px;
+}
+body:has(#checkout) .order-review-heading {
+  min-height: 24px;
+  font-size: 14px;
+}
+body:has(#checkout) #checkout {
+  margin-top: 12px;
+  padding: 17px 20px 18px;
+}
+body:has(#checkout) #checkout h2 {
+  margin-bottom: 12px;
+  font-size: 21px;
+}
+body:has(#checkout) #checkout .grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px 12px;
+}
+body:has(#checkout) #checkout .field {
+  gap: 4px;
+}
+body:has(#checkout) #checkout input,
+body:has(#checkout) #checkout select {
+  min-height: 42px;
+  padding: 9px 11px;
+}
+body:has(#checkout) #checkout textarea {
+  min-height: 66px;
+  padding: 9px 11px;
+}
+body:has(#checkout) #checkout .field-hint {
+  min-height: 0;
+}
+body:has(#checkout) .optional-fields {
+  padding-top: 9px;
+}
+body:has(#checkout) .payment-summary {
+  margin: 11px 0 8px;
+  padding: 10px 12px;
+}
+body:has(#checkout) .privacy-details {
+  margin: 7px 0;
+}
+body:has(#checkout) .consent-row {
+  margin: 10px 0 9px;
+}
+body:has(#checkout) #checkout .submit-order {
+  min-height: 48px;
+}
+@media (max-width: 700px) {
+  body:has(#checkout) .wrap {
+    width: 100%;
+    max-width: 560px;
+    padding: 15px 12px 28px;
+  }
+  body:has(#checkout) .steps {
+    margin-bottom: 10px;
+  }
+  body:has(#checkout) h1 {
+    margin: 5px 0 2px;
+    font-size: 29px;
+  }
+  body:has(#checkout) .order-review {
+    margin: 9px 0 10px;
+    padding: 11px 12px;
+  }
+  body:has(#checkout) #checkout {
+    margin-top: 10px;
+    padding: 14px 12px 16px;
+  }
+  body:has(#checkout) #checkout h2 {
+    margin-bottom: 10px;
+    font-size: 20px;
+  }
+  body:has(#checkout) #checkout .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 9px 10px;
+  }
+  body:has(#checkout) #checkout .field.full,
+  body:has(#checkout) #checkout #city {
+    grid-column: 1 / -1;
+  }
+  body:has(#checkout) #checkout label {
+    font-size: 11px;
+  }
+  body:has(#checkout) #checkout input,
+  body:has(#checkout) #checkout select {
+    min-height: 42px;
+    padding: 8px 9px;
+    font-size: 15px;
+  }
+  body:has(#checkout) #checkout textarea {
+    min-height: 62px;
+    font-size: 15px;
+  }
+  body:has(#checkout) .payment-summary {
+    margin: 9px 0 7px;
+    padding: 9px 10px;
+    font-size: 11px;
+  }
+  body:has(#checkout) .consent-row {
+    margin: 8px 0;
+  }
+  body:has(#checkout) #checkout .submit-order {
+    position: sticky;
+    bottom: 8px;
+    z-index: 5;
+    width: 100%;
+    min-height: 50px;
+    margin-top: 5px;
+    border: 1px solid #452027;
+    box-shadow: 0 5px 20px rgba(66,43,42,.2);
+  }
+}
+@media (max-width: 370px) {
+  body:has(#checkout) #checkout .grid {
+    gap: 8px;
+  }
+  body:has(#checkout) #checkout input,
+  body:has(#checkout) #checkout select {
+    padding-left: 7px;
+    padding-right: 7px;
+  }
+}
