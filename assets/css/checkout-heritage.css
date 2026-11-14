@@ -345,3 +345,44 @@ body:has(#checkout) .success-whatsapp:focus-visible {
     transition: none !important;
   }
 }
+
+
+/* DESKTOP CART SUMMARY FIX — keep all summary rows visible.
+   Avoid sticky positioning inside the named grid area; use normal flow. */
+@media (min-width: 901px) {
+  body:has(#cartItems) #cartSummary {
+    position: static;
+    inset: auto;
+    display: block;
+    align-self: start;
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    overflow: visible;
+    padding: 20px 22px;
+  }
+  body:has(#cartItems) #cartSummary > .summary-row {
+    display: flex;
+    visibility: visible;
+    position: static;
+    width: 100%;
+    min-height: 28px;
+    margin: 6px 0;
+    overflow: visible;
+  }
+  body:has(#cartItems) #cartSummary > .summary-row.total {
+    display: flex;
+    min-height: 48px;
+    margin-top: 12px;
+    padding-top: 12px;
+  }
+  body:has(#cartItems) #cartSummary > .more-info {
+    display: block;
+    margin-top: 12px;
+  }
+  body:has(#cartItems) #cartSummary > .actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    margin-top: 18px;
+  }
+}
