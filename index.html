@@ -2493,9 +2493,6 @@ footer{padding:26px 16px}
         availabilityBadge.textContent = availability.label;
         price.appendChild(availabilityBadge);
 
-        const viewHint = document.createElement("div");
-        viewHint.className = "view-details-hint";
-        viewHint.textContent = "View Details";
         const addButton = document.createElement("button");
         addButton.type = "button";
         const canOrder = availability.className === "available" && Number(p.selling_price || 0) > 0;
@@ -2513,7 +2510,7 @@ footer{padding:26px 16px}
             showToast((p.name || "Product") + " added to your cart.");
           } else showToast("Please enquire with us to confirm availability.");
         });
-        body.append(cat, title, price, viewHint, addButton);
+        body.append(cat, title, price, addButton);
         card.append(photo, body);
         grid.appendChild(card);
       });
