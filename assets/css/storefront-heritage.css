@@ -839,3 +839,42 @@ body:has(.hero) .grid .photo img {
 @media (max-width: 700px) {
   body:has(.hero) .grid .photo { aspect-ratio: 2 / 3 !important; }
 }
+
+
+/* FINAL CATALOGUE BREAKPOINTS — preserve readable product cards at every width.
+   Desktop: 4 columns. Tablet: 3 columns. Phones: 2 columns.
+   Very narrow phones: 1 column to protect image and text legibility. */
+@media (min-width: 1001px) {
+  body:has(.hero) .grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+@media (min-width: 701px) and (max-width: 1000px) {
+  body:has(.hero) .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@media (min-width: 340px) and (max-width: 700px) {
+  body:has(.hero) .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+  body:has(.hero) .photo {
+    aspect-ratio: 1 / 1;
+  }
+}
+@media (max-width: 339px) {
+  body:has(.hero) .grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+  body:has(.hero) .photo {
+    aspect-ratio: 1 / 1;
+  }
+  body:has(.hero) .card-body {
+    padding: 12px;
+  }
+  body:has(.hero) .card h3 {
+    font-size: 16px;
+  }
+}
