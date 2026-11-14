@@ -818,3 +818,24 @@ body:has(.hero) .grid .photo img {
     aspect-ratio: 4 / 5 !important;
   }
 }
+
+
+/* CATALOGUE PHOTO PROPORTION — match the portrait source artwork.
+   A 4:5 frame left side gutters because the supplied branded images are taller.
+   Use a 2:3 frame so each full image fills the card width without cropping. */
+body:has(.hero) .grid .photo {
+  aspect-ratio: 2 / 3 !important;
+  height: auto !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+}
+body:has(.hero) .grid .photo img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+  object-position: center center !important;
+  padding: 0 !important;
+}
+@media (max-width: 700px) {
+  body:has(.hero) .grid .photo { aspect-ratio: 2 / 3 !important; }
+}
