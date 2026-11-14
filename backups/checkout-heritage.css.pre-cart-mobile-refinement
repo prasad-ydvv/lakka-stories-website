@@ -1,0 +1,526 @@
+/* LAKKA STORIES — Phase 3 cart, checkout and order-request experience
+   Presentation-only layer. Existing cart, validation, PIN lookup, order API,
+   confirmation and WhatsApp behaviours remain in their page scripts. */
+
+:where(body:has(#cartItems), body:has(#checkout)) {
+  background:
+    radial-gradient(ellipse at 8% 0%, rgba(193,138,61,.07), transparent 34rem),
+    linear-gradient(180deg, #fffdf8 0%, #f8f1e7 100%);
+  color: var(--ls-ink, #422b2a);
+}
+body:has(#cartItems) .wrap,
+body:has(#checkout) .wrap {
+  width: min(100%, 980px);
+  padding-top: clamp(24px, 4vw, 42px);
+}
+body:has(#cartItems) h1,
+body:has(#checkout) h1 {
+  letter-spacing: -.025em;
+  line-height: 1.12;
+}
+body:has(#cartItems) .steps,
+body:has(#checkout) .steps {
+  gap: 8px;
+  margin-bottom: 22px;
+}
+body:has(#cartItems) .steps span,
+body:has(#checkout) .steps span {
+  padding: 7px 12px;
+  border-color: #e8d9c5;
+  border-radius: 999px;
+  background: rgba(255,253,248,.85);
+  color: #796b60;
+  font-size: 11px;
+}
+body:has(#cartItems) .steps .active,
+body:has(#checkout) .steps .active {
+  background: #572329;
+  border-color: #572329;
+  color: #fffaf2;
+  font-weight: 700;
+}
+body:has(#cartItems) #cartItems,
+body:has(#checkout) .panel {
+  border: 1px solid #eadcc9;
+  border-radius: 10px;
+  background: rgba(255,253,248,.94);
+  box-shadow: 0 10px 30px rgba(66,43,42,.045);
+}
+body:has(#cartItems) #cartItems { overflow: hidden; }
+body:has(#cartItems) .item {
+  transition: background .18s ease;
+}
+body:has(#cartItems) .item:hover { background: rgba(248,240,228,.42); }
+body:has(#cartItems) .item img {
+  border: 1px solid #eadcc9;
+  border-radius: 7px;
+}
+body:has(#cartItems) .qty button,
+body:has(#cartItems) .remove {
+  transition: border-color .18s ease, background .18s ease, color .18s ease;
+}
+body:has(#cartItems) .qty button:hover {
+  border-color: #bd8b45;
+  background: #f7efe3;
+}
+body:has(#cartItems) .summary {
+  border: 1px solid #e7d5bb;
+  border-top: 3px solid #bd8b45;
+  border-radius: 9px;
+  background: linear-gradient(135deg,#fbf4e9,#fffdf8);
+  box-shadow: 0 9px 25px rgba(66,43,42,.045);
+}
+body:has(#cartItems) .summary-row.total {
+  font-size: 20px;
+}
+body:has(#cartItems) .actions .btn,
+body:has(#checkout) .submit-order {
+  min-height: 48px;
+  border-radius: 5px;
+  font-weight: 700;
+  letter-spacing: .01em;
+}
+body:has(#cartItems) .empty {
+  border: 0;
+  box-shadow: none;
+}
+body:has(#checkout) .wrap > a:first-of-type {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 8px;
+  color: #74333a;
+  font-weight: 650;
+}
+body:has(#checkout) .order-review {
+  border-top: 3px solid #bd8b45;
+}
+body:has(#checkout) .order-review-heading {
+  font-size: 15px;
+}
+body:has(#checkout) .checkout-item {
+  gap: 14px;
+}
+body:has(#checkout) .checkout-item > div:first-child {
+  min-width: 0;
+}
+body:has(#checkout) .checkout-item strong {
+  overflow-wrap: anywhere;
+}
+body:has(#checkout) #checkout {
+  border-top: 3px solid #572329;
+}
+body:has(#checkout) #checkout h2 {
+  font-size: clamp(21px, 2.5vw, 25px);
+  line-height: 1.25;
+}
+body:has(#checkout) #checkout .field {
+  min-width: 0;
+}
+body:has(#checkout) #checkout input,
+body:has(#checkout) #checkout select,
+body:has(#checkout) #checkout textarea {
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(66,43,42,.025);
+  transition: border-color .16s ease, box-shadow .16s ease;
+}
+body:has(#checkout) #checkout input:focus,
+body:has(#checkout) #checkout select:focus,
+body:has(#checkout) #checkout textarea:focus {
+  border-color: #bd8b45;
+  box-shadow: 0 0 0 3px rgba(189,139,69,.13);
+}
+body:has(#checkout) .payment-summary {
+  border-left-color: #bd8b45;
+  background: #f8f0e4;
+  border-radius: 5px;
+}
+body:has(#checkout) .success-panel {
+  border-top-color: #63845c;
+  box-shadow: 0 14px 34px rgba(66,43,42,.07);
+}
+body:has(#checkout) .success-reference {
+  background: #fbf4e9;
+}
+body:has(#checkout) .success-whatsapp {
+  min-height: 48px;
+  border: 1px solid #572329;
+}
+body:has(#checkout) .status {
+  border: 1px solid #e8d9c5;
+  border-left: 3px solid #bd8b45;
+}
+@media (max-width: 700px) {
+  body:has(#cartItems) .wrap,
+  body:has(#checkout) .wrap {
+    padding: 22px 13px 36px;
+  }
+  body:has(#cartItems) .steps,
+  body:has(#checkout) .steps {
+    gap: 6px;
+    margin-bottom: 16px;
+  }
+  body:has(#cartItems) .steps span,
+  body:has(#checkout) .steps span {
+    padding: 6px 9px;
+    font-size: 10px;
+  }
+  body:has(#cartItems) .summary {
+    margin-bottom: 12px;
+  }
+  body:has(#cartItems) .actions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+  body:has(#cartItems) .actions .btn {
+    width: 100%;
+    min-height: 48px;
+  }
+  body:has(#checkout) .panel {
+    padding: 17px 14px;
+  }
+  body:has(#checkout) #checkout .submit-order {
+    position: relative;
+    width: 100%;
+    min-height: 52px;
+    font-size: 14px;
+  }
+  body:has(#checkout) .success-panel {
+    padding: 19px 15px;
+  }
+}
+@media (max-width: 380px) {
+  body:has(#cartItems) .item {
+    grid-template-columns: 68px minmax(0,1fr);
+    gap: 9px;
+  }
+  body:has(#cartItems) .item img {
+    width: 68px;
+    height: 74px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  body:has(#cartItems) .item,
+  body:has(#cartItems) .qty button,
+  body:has(#cartItems) .remove,
+  body:has(#checkout) #checkout input,
+  body:has(#checkout) #checkout select,
+  body:has(#checkout) #checkout textarea {
+    transition: none;
+  }
+}
+
+
+/* PHASE 3 — cart and checkout hierarchy.
+   Desktop cart: product list beside a clear order summary.
+   Smaller screens: a single, comfortable reading column. */
+@media (min-width: 901px) {
+  body:has(#cartItems) .wrap {
+    display: grid;
+    grid-template-columns: minmax(0, 1.55fr) minmax(290px, .8fr);
+    grid-template-areas:
+      "steps steps"
+      "heading heading"
+      "items summary";
+    align-items: start;
+    column-gap: 24px;
+    row-gap: 0;
+    max-width: 1120px;
+  }
+  body:has(#cartItems) .steps { grid-area: steps; }
+  body:has(#cartItems) h1 { grid-area: heading; }
+  body:has(#cartItems) #cartItems { grid-area: items; min-width: 0; }
+  body:has(#cartItems) #cartSummary {
+    grid-area: summary;
+    position: sticky;
+    top: 108px;
+    min-width: 0;
+    margin-top: 0;
+  }
+  body:has(#cartItems) #cartSummary .actions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+  body:has(#cartItems) #cartSummary .actions .btn { width: 100%; }
+  body:has(#cartItems) #cartSummary .actions .btn:first-child {
+    background: transparent;
+    color: #572329;
+  }
+}
+@media (min-width: 701px) and (max-width: 900px) {
+  body:has(#cartItems) .wrap { max-width: 760px; }
+  body:has(#cartItems) #cartSummary { margin-top: 16px; }
+}
+
+/* Make the order-request journey feel like one coherent storefront. */
+body:has(#checkout) .top {
+  padding: 11px 14px;
+  font-size: 10px;
+  line-height: 1.4;
+  letter-spacing: .18em;
+}
+body:has(#checkout) .wrap {
+  max-width: 850px;
+}
+body:has(#checkout) .wrap > a:first-of-type {
+  min-height: 36px;
+  padding: 7px 0;
+}
+body:has(#checkout) .order-review {
+  margin-top: 16px;
+}
+body:has(#checkout) .order-review-heading {
+  min-height: 28px;
+}
+body:has(#checkout) .disclosure summary,
+body:has(#checkout) .optional-fields summary,
+body:has(#checkout) .privacy-details summary,
+body:has(#checkout) .safety-details summary {
+  padding: 5px 0;
+}
+body:has(#checkout) #checkout {
+  margin-top: 18px;
+}
+body:has(#checkout) #checkout .field-hint {
+  font-size: 11px;
+  line-height: 1.45;
+}
+body:has(#checkout) .payment-summary {
+  margin-top: 18px;
+  padding: 14px 15px;
+  line-height: 1.6;
+}
+body:has(#checkout) .consent-row {
+  margin: 18px 0 14px;
+}
+body:has(#checkout) .submit-order {
+  width: 100%;
+  min-height: 52px;
+  font-size: 14px;
+}
+body:has(#checkout) .success-panel {
+  max-width: 720px;
+  margin: 28px auto;
+}
+body:has(#checkout) .success-reference {
+  padding: 16px 18px;
+}
+body:has(#checkout) .success-whatsapp {
+  padding: 12px 18px;
+}
+
+/* Keyboard focus and reduced-motion comfort across the final purchase steps. */
+body:has(#cartItems) .btn:focus-visible,
+body:has(#cartItems) .qty button:focus-visible,
+body:has(#cartItems) .remove:focus-visible,
+body:has(#checkout) .btn:focus-visible,
+body:has(#checkout) summary:focus-visible,
+body:has(#checkout) .success-home:focus-visible,
+body:has(#checkout) .success-whatsapp:focus-visible {
+  outline: 3px solid rgba(189,139,69,.55);
+  outline-offset: 3px;
+}
+@media (max-width: 700px) {
+  body:has(#cartItems) .wrap {
+    display: block;
+  }
+  body:has(#cartItems) #cartSummary {
+    position: static;
+  }
+  body:has(#cartItems) #cartSummary .actions {
+    gap: 9px;
+  }
+  body:has(#checkout) .wrap {
+    max-width: 560px;
+  }
+  body:has(#checkout) .success-whatsapp {
+    display: flex;
+    width: 100%;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  body:has(#cartItems) .item,
+  body:has(#cartItems) .qty button,
+  body:has(#cartItems) .remove {
+    transition: none !important;
+  }
+}
+
+
+/* DESKTOP CART SUMMARY FIX — keep all summary rows visible.
+   Avoid sticky positioning inside the named grid area; use normal flow. */
+@media (min-width: 901px) {
+  body:has(#cartItems) #cartSummary {
+    position: static;
+    inset: auto;
+    display: block;
+    align-self: start;
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    overflow: visible;
+    padding: 20px 22px;
+  }
+  body:has(#cartItems) #cartSummary > .summary-row {
+    display: flex;
+    visibility: visible;
+    position: static;
+    width: 100%;
+    min-height: 28px;
+    margin: 6px 0;
+    overflow: visible;
+  }
+  body:has(#cartItems) #cartSummary > .summary-row.total {
+    display: flex;
+    min-height: 48px;
+    margin-top: 12px;
+    padding-top: 12px;
+  }
+  body:has(#cartItems) #cartSummary > .more-info {
+    display: block;
+    margin-top: 12px;
+  }
+  body:has(#cartItems) #cartSummary > .actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    margin-top: 18px;
+  }
+}
+
+
+/* COMPACT CHECKOUT V2 — Myntra-inspired information density, LAKKA order-request flow.
+   Visual-only overrides: preserve PIN lookup, validation, consent and order submission. */
+body:has(#checkout) .wrap {
+  max-width: 900px;
+  padding-top: 22px;
+}
+body:has(#checkout) h1 {
+  margin: 8px 0 4px;
+  font-size: clamp(28px, 3.5vw, 34px);
+}
+body:has(#checkout) .order-review {
+  margin: 10px 0 12px;
+  padding: 12px 16px;
+}
+body:has(#checkout) .order-review-heading {
+  min-height: 24px;
+  font-size: 14px;
+}
+body:has(#checkout) #checkout {
+  margin-top: 12px;
+  padding: 17px 20px 18px;
+}
+body:has(#checkout) #checkout h2 {
+  margin-bottom: 12px;
+  font-size: 21px;
+}
+body:has(#checkout) #checkout .grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px 12px;
+}
+body:has(#checkout) #checkout .field {
+  gap: 4px;
+}
+body:has(#checkout) #checkout input,
+body:has(#checkout) #checkout select {
+  min-height: 42px;
+  padding: 9px 11px;
+}
+body:has(#checkout) #checkout textarea {
+  min-height: 66px;
+  padding: 9px 11px;
+}
+body:has(#checkout) #checkout .field-hint {
+  min-height: 0;
+}
+body:has(#checkout) .optional-fields {
+  padding-top: 9px;
+}
+body:has(#checkout) .payment-summary {
+  margin: 11px 0 8px;
+  padding: 10px 12px;
+}
+body:has(#checkout) .privacy-details {
+  margin: 7px 0;
+}
+body:has(#checkout) .consent-row {
+  margin: 10px 0 9px;
+}
+body:has(#checkout) #checkout .submit-order {
+  min-height: 48px;
+}
+@media (max-width: 700px) {
+  body:has(#checkout) .wrap {
+    width: 100%;
+    max-width: 560px;
+    padding: 15px 12px 28px;
+  }
+  body:has(#checkout) .steps {
+    margin-bottom: 10px;
+  }
+  body:has(#checkout) h1 {
+    margin: 5px 0 2px;
+    font-size: 29px;
+  }
+  body:has(#checkout) .order-review {
+    margin: 9px 0 10px;
+    padding: 11px 12px;
+  }
+  body:has(#checkout) #checkout {
+    margin-top: 10px;
+    padding: 14px 12px 16px;
+  }
+  body:has(#checkout) #checkout h2 {
+    margin-bottom: 10px;
+    font-size: 20px;
+  }
+  body:has(#checkout) #checkout .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 9px 10px;
+  }
+  body:has(#checkout) #checkout .field.full,
+  body:has(#checkout) #checkout #city {
+    grid-column: 1 / -1;
+  }
+  body:has(#checkout) #checkout label {
+    font-size: 11px;
+  }
+  body:has(#checkout) #checkout input,
+  body:has(#checkout) #checkout select {
+    min-height: 42px;
+    padding: 8px 9px;
+    font-size: 15px;
+  }
+  body:has(#checkout) #checkout textarea {
+    min-height: 62px;
+    font-size: 15px;
+  }
+  body:has(#checkout) .payment-summary {
+    margin: 9px 0 7px;
+    padding: 9px 10px;
+    font-size: 11px;
+  }
+  body:has(#checkout) .consent-row {
+    margin: 8px 0;
+  }
+  body:has(#checkout) #checkout .submit-order {
+    position: sticky;
+    bottom: 8px;
+    z-index: 5;
+    width: 100%;
+    min-height: 50px;
+    margin-top: 5px;
+    border: 1px solid #452027;
+    box-shadow: 0 5px 20px rgba(66,43,42,.2);
+  }
+}
+@media (max-width: 370px) {
+  body:has(#checkout) #checkout .grid {
+    gap: 8px;
+  }
+  body:has(#checkout) #checkout input,
+  body:has(#checkout) #checkout select {
+    padding-left: 7px;
+    padding-right: 7px;
+  }
+}
