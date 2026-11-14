@@ -106,31 +106,50 @@ body:has(.hero) .collection .add-cart-card:hover { background: #74333a; border-c
   }
   .catalogue-sort-row {
     display: flex;
+    justify-content: flex-end;
     align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-    margin: 3px 1px 12px;
-    color: #75665d;
-    font-size: 11px;
+    min-height: 38px;
+    margin: 10px 1px 16px;
+    padding: 0;
   }
-  .catalogue-sort-row label {
-    display: flex;
+  .catalogue-sort-row .catalogue-sort-label {
+    display: inline-flex;
     align-items: center;
-    gap: 7px;
-    color: #572329;
-    font-weight: 700;
+    justify-content: flex-end;
+    gap: 9px;
+    margin: 0;
+    padding: 0;
+    color: #75665d;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1;
     white-space: nowrap;
   }
   .catalogue-sort-row select {
-    max-width: 160px;
-    min-height: 34px;
-    padding: 5px 25px 5px 9px;
+    display: block;
+    box-sizing: border-box;
+    width: 142px;
+    max-width: 142px;
+    min-height: 36px;
+    height: 36px;
+    margin: 0;
+    padding: 5px 28px 5px 10px;
     border: 1px solid #e6d8c5;
-    border-radius: 5px;
+    border-radius: 6px;
     background: #fffdf9;
     color: #572329;
-    font: inherit;
-    font-size: 11px;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: normal;
+    box-shadow: none;
+  }
+  .catalogue-sort-row select:focus,
+  .catalogue-sort-row select:focus-visible {
+    outline: 2px solid rgba(189,139,69,.45);
+    outline-offset: 2px;
+    box-shadow: none;
   }
   body:has(.hero) .collection .grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
