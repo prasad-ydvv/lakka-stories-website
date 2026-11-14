@@ -21,17 +21,8 @@ body:has(#productGrid) .collection .section-head p {
   margin-bottom: 0;
   font-size: 13px;
 }
-body:has(#productGrid) .catalog-transparency {
-  max-width: 1320px;
-  margin: 0 auto 14px;
-  padding: 10px 14px;
-  border-radius: 5px;
-  font-size: 11px;
-}
-body:has(#productGrid) .catalog-transparency p {
-  margin: 3px 0 0;
-  line-height: 1.45;
-}
+
+
 body:has(#productGrid) .catalog-tools {
   max-width: 1320px;
   margin-bottom: 14px;
@@ -116,11 +107,7 @@ body:has(#productGrid) .ls-interest-heading h2 {
   body:has(#productGrid) .collection .section-head p {
     font-size: 12px;
   }
-  body:has(#productGrid) .catalog-transparency {
-    padding: 9px 11px;
-    margin-bottom: 11px;
-    font-size: 10px;
-  }
+
   body:has(#productGrid) .catalog-tools {
     gap: 9px;
     margin-bottom: 11px;
