@@ -16,7 +16,7 @@ body:has(.hero) .hero::after {
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: linear-gradient(90deg, rgba(255,249,240,.96) 0%, rgba(255,249,240,.88) 35%, rgba(255,249,240,.30) 68%, rgba(69,32,39,.05) 100%);
+  background: linear-gradient(90deg, rgba(255,249,240,.95) 0%, rgba(255,249,240,.84) 30%, rgba(255,249,240,.16) 62%, rgba(69,32,39,0) 100%);
   pointer-events: none;
 }
 body:has(.hero) .hero-inner {
