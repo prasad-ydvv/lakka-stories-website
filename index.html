@@ -2243,8 +2243,9 @@ footer{padding:26px 16px}
           <button class="filter active" data-filter="All">All</button><button class="filter" data-filter="Traditional Toys">Traditional Toys</button><button class="filter" data-filter="Gifts & Keepsakes">Gifts &amp; Keepsakes</button><button class="filter" data-filter="Wedding & Return Gifts">Wedding &amp; Return Gifts</button><button class="filter" data-filter="Home Décor">Home Décor</button><button class="filter" data-filter="Functional & Lifestyle">Functional &amp; Lifestyle</button><button class="filter" data-filter="Corporate Gifting">Corporate Gifting</button>
         </div>
       </div>
-      <div class="mobile-catalogue-bar" aria-label="Catalogue tools">
-        <label class="mobile-sort-control"><span aria-hidden="true">↕</span><span>Sort</span>
+      <div class="catalogue-sort-row">
+        <span>Explore at your pace</span>
+        <label for="mobileSort">Sort by
           <select id="mobileSort" aria-label="Sort products">
             <option value="recommended">Featured</option>
             <option value="price-low">Price: Low to High</option>
@@ -2252,8 +2253,6 @@ footer{padding:26px 16px}
             <option value="name">Name: A to Z</option>
           </select>
         </label>
-        <button type="button" class="mobile-catalogue-action" id="mobileCategory"><span aria-hidden="true">▦</span><span>Category</span></button>
-        <button type="button" class="mobile-catalogue-action" id="mobileSearch"><span aria-hidden="true">⌕</span><span>Search</span></button>
       </div>
       <div class="grid" id="productGrid">
         <p class="empty" style="grid-column:1/-1">Loading the collection…</p>
@@ -2506,10 +2505,13 @@ footer{padding:26px 16px}
         }
 
         const availability = catalogueAvailability(p.availability);
-        const availabilityBadge = document.createElement("span");
-        availabilityBadge.className = "catalogue-availability " + availability.className;
-        availabilityBadge.textContent = availability.label;
-        price.appendChild(availabilityBadge);
+        // Only show availability labels when they add information beyond the action button.
+        if (["made-to-order", "unavailable"].includes(availability.className)) {
+          const availabilityBadge = document.createElement("span");
+          availabilityBadge.className = "catalogue-availability " + availability.className;
+          availabilityBadge.textContent = availability.label;
+          price.appendChild(availabilityBadge);
+        }
 
         const addButton = document.createElement("button");
         addButton.type = "button";
@@ -2553,13 +2555,6 @@ footer{padding:26px 16px}
       catalogueSort = mobileSort.value;
       visibleProductCount = PRODUCTS_PER_BATCH;
       renderCatalogue();
-    });
-    document.getElementById("mobileCategory").addEventListener("click", () => {
-      document.querySelector(".catalog-tools .filters").scrollIntoView({behavior:"smooth",block:"center"});
-    });
-    document.getElementById("mobileSearch").addEventListener("click", () => {
-      search.scrollIntoView({behavior:"smooth",block:"center"});
-      search.focus({preventScroll:true});
     });
     document.getElementById("loadMoreBtn").addEventListener("click", () => {
       visibleProductCount += PRODUCTS_PER_BATCH;
