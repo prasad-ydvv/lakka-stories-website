@@ -193,3 +193,24 @@ body:has(.hero) .collection .add-cart-card:hover { background: #74333a; border-c
 @media (prefers-reduced-motion: reduce) {
   body:has(.hero) .collection .card { transition: none; }
 }
+
+/* Final action colours: solid maroon cart action, green WhatsApp enquiry */
+body:has(.hero) .collection .card .add-cart-card.cart-action {
+  background: #572329 !important;
+  border: 1px solid #572329 !important;
+  color: #fffaf2 !important;
+}
+body:has(.hero) .collection .card .add-cart-card.cart-action:hover {
+  background: #74333a !important;
+  border-color: #74333a !important;
+  color: #fffaf2 !important;
+}
+body:has(.hero) .collection .card .add-cart-card.whatsapp-action {
+  background: #eff8f2 !important;
+  border: 1px solid #2f7653 !important;
+  color: #246344 !important;
+}
+body:has(.hero) .collection .card .add-cart-card.whatsapp-action:hover {
+  background: #e2f2e8 !important;
+  border-color: #246344 !important;
+}
