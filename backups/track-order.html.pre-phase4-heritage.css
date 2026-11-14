@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#572329">
+<meta name="description" content="Check the status of your LAKKA STORIES order request using your order reference and registered mobile number."><meta name="robots" content="noindex,follow"><title>Track Your Order | LAKKA STORIES</title>
+<style>
+:root{--maroon:#572329;--cream:#fffdf8;--sand:#f3e7d4;--gold:#bd8b45;--ink:#422b2a;--muted:#786b62;--line:#eadcc9}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(180deg,#fffdf8,#fbf5eb);color:var(--ink);font:15px/1.6 Arial,sans-serif}
+.top{background:var(--maroon);color:white;text-align:center;padding:10px 12px;letter-spacing:.16em;font-size:10px}
+.wrap{max-width:700px;margin:34px auto;padding:0 18px 55px}
+a{color:#8b6332;text-decoration:none}a:hover{text-decoration:underline}
+h1,h2{font-family:Georgia,serif;color:var(--maroon);font-weight:normal}
+h1{font-size:clamp(31px,5vw,40px);margin:17px 0 6px}
+.intro{color:var(--muted);font-size:13px;margin:0 0 22px}
+.panel{background:rgba(255,253,248,.95);border:1px solid var(--line);border-radius:10px;padding:clamp(19px,4vw,27px);margin:18px 0;box-shadow:0 8px 24px rgba(66,43,42,.04)}
+label{display:block;font-size:12px;font-weight:bold;color:var(--maroon);margin:14px 0 6px}
+input{width:100%;min-height:48px;padding:12px;border:1px solid #ddcdb8;border-radius:5px;font:16px Arial,sans-serif;color:var(--ink);background:#fff}
+input:focus{outline:2px solid #bd8b4566;outline-offset:1px}
+button{width:100%;min-height:49px;margin-top:19px;border:0;border-radius:5px;background:var(--maroon);color:white;font-weight:bold;font-size:14px;cursor:pointer}
+button:disabled{opacity:.65;cursor:wait}
+.muted{color:var(--muted);font-size:12px}
+.message{padding:12px 14px;border-radius:6px;background:#f5ecd9;margin-top:15px;font-size:13px}
+.error{background:#fbefed;color:#8c2929}
+.result h2{margin:0 0 5px;font-size:24px}
+.ref{font:600 20px Georgia,serif;color:var(--maroon);overflow-wrap:anywhere}
+.status{display:inline-block;margin:12px 0;padding:7px 12px;border-radius:30px;background:#f3e7d4;color:var(--maroon);font-weight:bold;font-size:13px}
+.timeline{margin:20px 0 0;padding-left:18px;border-left:2px solid var(--gold)}
+.timeline p{margin:0 0 12px}
+.hidden{display:none!important}
+@media(max-width:600px){.wrap{margin:22px auto;padding:0 13px 38px}.panel{padding:18px 15px}.top{font-size:9px}}
+
+.shipment-details{margin:16px 0;padding:14px 16px;border:1px solid #ead8bb;border-left:3px solid #bd8b45;border-radius:7px;background:#fbf2e4}.shipment-details h3{margin:0 0 8px;color:#6b3037;font:normal 18px Georgia,serif}.shipment-details p{margin:5px 0;font-size:13px}.shipment-details a{display:inline-block;margin-top:7px;color:#6b3037;font-weight:700;text-underline-offset:3px}
+</style>
+  <link rel="stylesheet" href="assets/css/design-system.css">
+</head>
+<body>
+<div class="top">LAKKA STORIES · EVERY LITTLE TREASURE HAS A STORY</div>
+<main class="wrap">
+<a href="index.html">← Back to LAKKA STORIES</a>
+<h1>Track Your Order</h1>
+<p class="intro">Enter the order reference from your confirmation and the mobile number registered with your order.</p>
+<section class="panel">
+<form id="trackingForm">
+<label for="reference">Order reference</label>
+<input id="reference" name="reference" required maxlength="50" placeholder="Example: LS-2026-92FBoC19" autocomplete="off">
+<label for="phone">Registered mobile number</label>
+<input id="phone" name="phone" required inputmode="tel" maxlength="14" placeholder="10-digit mobile number" autocomplete="tel">
+<p class="muted">Your details are used only to find the matching order. We will not display your delivery address or private contact information.</p>
+<button id="submit" type="submit">Check order status</button>
+<div id="message" class="message hidden" role="status" aria-live="polite"></div>
+</form>
+</section>
+<section id="result" class="panel result hidden" aria-live="polite">
+<p class="muted">ORDER REFERENCE</p><div id="resultReference" class="ref"></div>
+<div id="resultStatus" class="status"></div>
+<div id="timeline" class="timeline"></div>
+<div id="shipmentDetails" class="shipment-details"></div>
+<p id="updated" class="muted"></p>
+</section>
+<p class="muted">For help with your order, please use the contact details shared by LAKKA STORIES. Never share OTPs, UPI PINs or passwords.</p>
+</main>
+<script>
+const SUPABASE_URL='https://gsesangwrryzbpudusfl.supabase.co';
+const PUBLISHABLE_KEY='sb_publishable_2zVjR7EYlB4kSX-CtQr71w_xXZ35Ejz';
+const form=document.getElementById('trackingForm'),button=document.getElementById('submit'),message=document.getElementById('message'),result=document.getElementById('result');
+const labels={
+ pending_review:'Request received — awaiting review',
+ awaiting_customer_confirmation:'Waiting for your confirmation',
+ confirmed:'Order confirmed',
+ rejected:'Request could not be accepted',
+ dispatched:'Order dispatched',
+ delivered:'Order delivered',
+ cancelled:'Order cancelled'
+};
+const steps=[
+ ['pending_review','Request received'],
+ ['awaiting_customer_confirmation','Customer confirmation'],
+ ['confirmed','Order confirmed'],
+ ['dispatched','Dispatched'],
+ ['delivered','Delivered']
+];
+function showMessage(text,isError=false){message.textContent=text;message.classList.remove('hidden','error');if(isError)message.classList.add('error');}
+function safeDate(value){const d=new Date(value);return Number.isNaN(d.getTime())?'Not available':d.toLocaleString('en-IN',{dateStyle:'medium',timeStyle:'short'});}
+function renderResult(data){
+ document.getElementById('resultReference').textContent=data.order_reference;
+ const status=data.order_status;
+ document.getElementById('resultStatus').textContent=labels[status]||'Status update available';
+ const timeline=document.getElementById('timeline');timeline.replaceChildren();
+ const terminal=['rejected','cancelled'];
+ if(terminal.includes(status)){
+  const p=document.createElement('p');p.textContent=labels[status]+'. Please contact LAKKA STORIES if you need clarification.';timeline.append(p);
+ }else{
+  const current=steps.findIndex(x=>x[0]===status);
+  steps.forEach((step,index)=>{const p=document.createElement('p');p.textContent=(index<current?'✓ ':index===current?'● ':'○ ')+step[1];p.style.fontWeight=index===current?'bold':'normal';p.style.opacity=index<=current?'1':'.55';timeline.append(p);});
+ }
+ document.getElementById('updated').textContent='Last updated: '+safeDate(data.updated_at||data.created_at);
+ const shipment=document.getElementById('shipmentDetails');shipment.replaceChildren();
+ if(['dispatched','delivered'].includes(status)&&(data.courier_name||data.tracking_number||data.tracking_url)){
+  const heading=document.createElement('h3');heading.textContent='Shipment details';shipment.append(heading);
+  if(data.courier_name){const p=document.createElement('p');p.textContent='Courier: '+data.courier_name;shipment.append(p);}
+  if(data.tracking_number){const p=document.createElement('p');p.textContent='Tracking number: '+data.tracking_number;shipment.append(p);}
+  if(data.dispatched_at){const p=document.createElement('p');p.textContent='Dispatched: '+safeDate(data.dispatched_at);shipment.append(p);}
+  if(typeof data.tracking_url==='string'&&data.tracking_url.startsWith('https://')){const a=document.createElement('a');a.href=data.tracking_url;a.target='_blank';a.rel='noopener noreferrer';a.textContent='Track parcel with courier →';shipment.append(a);}
+ }
+ result.classList.remove('hidden');
+}
+form.addEventListener('submit',async e=>{
+ e.preventDefault();result.classList.add('hidden');message.classList.add('hidden');
+ const reference=document.getElementById('reference').value.trim();
+ const phone=document.getElementById('phone').value.replace(/\D/g,'');
+ if(!/^LS-[A-Z0-9-]{6,40}$/i.test(reference)){showMessage('Please enter a valid order reference.',true);return;}
+ let mobile=phone;if(mobile.startsWith('91')&&mobile.length===12)mobile=mobile.slice(2);if(mobile.startsWith('0')&&mobile.length===11)mobile=mobile.slice(1);
+ if(!/^[6-9][0-9]{9}$/.test(mobile)){showMessage('Please enter a valid 10-digit Indian mobile number.',true);return;}
+ button.disabled=true;button.textContent='Checking…';
+ try{
+  const response=await fetch(SUPABASE_URL+'/functions/v1/track-order',{method:'POST',headers:{'Content-Type':'application/json','apikey':PUBLISHABLE_KEY,'Authorization':'Bearer '+PUBLISHABLE_KEY},body:JSON.stringify({order_reference:reference,phone:mobile})});
+  const data=await response.json();
+  if(!response.ok)throw new Error(data.error||'Could not check your order.');
+  renderResult(data);showMessage('Order status found.');
+ }catch(error){showMessage(error.message||'Could not check your order. Please try again.',true);}
+ finally{button.disabled=false;button.textContent='Check order status';}
+});
+</script>
+<footer class="site-footer"><div class="footer-brand">LAKKA STORIES</div><p>Every Little Treasure Has a Story.</p><nav class="footer-links" aria-label="Footer navigation"><a href="index.html#home">Home</a><a href="index.html#collection">Collection</a><a href="bulk-gifting.html">Bulk Gifting</a><a href="track-order.html">Track Order</a><a href="delivery-returns.html">Delivery &amp; Returns</a><a href="faq.html">FAQs</a><a href="cart.html">Cart</a></nav><small>© 2026 LAKKA STORIES</small></footer>
+</body></html>
