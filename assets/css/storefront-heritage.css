@@ -729,3 +729,69 @@ body:has(.hero) .hero > .hero-inner > .hero-copy > .brand-promises .brand-promis
   body:has(.hero) .hero > .hero-inner > .hero-copy > .brand-promises .brand-promise strong { font-size: 11px; }
   body:has(.hero) .hero > .hero-inner > .hero-copy > .brand-promises .brand-promise small { font-size: 9px; }
 }
+
+
+/* FINAL HERO PROMISE FIX — override legacy absolute-position rules.
+   Promises are children of the copy card and must remain in normal flow. */
+body:has(.hero) .hero > .hero-inner > .hero-copy > .brand-promises {
+  position: static !important;
+  inset: auto !important;
+  top: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  left: auto !important;
+  z-index: auto !important;
+  transform: none !important;
+  float: none !important;
+  clear: both !important;
+  display: grid !important;
+  width: 100% !important;
+  max-width: none !important;
+  margin: 20px 0 0 !important;
+  padding: 13px 0 0 !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 12px !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-top: 1px solid rgba(183,123,53,.28) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+body:has(.hero) .hero > .hero-inner > .hero-copy > .brand-promises .brand-promise {
+  position: static !important;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  gap: 7px !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+@media (max-width: 700px) {
+  body:has(.hero) .hero > .hero-inner > .hero-copy > .brand-promises {
+    position: static !important;
+    inset: auto !important;
+    transform: none !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    width: 100% !important;
+    max-width: none !important;
+    margin: 16px 0 0 !important;
+    padding: 10px 0 0 !important;
+    gap: 8px !important;
+  }
+  body:has(.hero) .hero > .hero-inner > .hero-copy > .brand-promises .brand-promise {
+    position: static !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 9px !important;
+    padding: 3px 0 !important;
+    border: 0 !important;
+  }
+}
