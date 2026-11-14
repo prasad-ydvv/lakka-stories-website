@@ -2200,6 +2200,7 @@ footer{padding:26px 16px}
 </style>
   <link rel="stylesheet" href="assets/css/design-system.css">
   <link rel="stylesheet" href="assets/css/storefront-heritage.css">
+  <link rel="stylesheet" href="assets/css/catalogue-marketplace.css">
   <link rel="stylesheet" href="assets/css/product-first-homepage.css">
   <link rel="stylesheet" href="assets/css/about-heritage.css">
 </head>
@@ -2241,6 +2242,18 @@ footer{padding:26px 16px}
         <div class="filters" aria-label="Filter products">
           <button class="filter active" data-filter="All">All</button><button class="filter" data-filter="Traditional Toys">Traditional Toys</button><button class="filter" data-filter="Gifts & Keepsakes">Gifts &amp; Keepsakes</button><button class="filter" data-filter="Wedding & Return Gifts">Wedding &amp; Return Gifts</button><button class="filter" data-filter="Home Décor">Home Décor</button><button class="filter" data-filter="Functional & Lifestyle">Functional &amp; Lifestyle</button><button class="filter" data-filter="Corporate Gifting">Corporate Gifting</button>
         </div>
+      </div>
+      <div class="mobile-catalogue-bar" aria-label="Catalogue tools">
+        <label class="mobile-sort-control"><span aria-hidden="true">↕</span><span>Sort</span>
+          <select id="mobileSort" aria-label="Sort products">
+            <option value="recommended">Featured</option>
+            <option value="price-low">Price: Low to High</option>
+            <option value="price-high">Price: High to Low</option>
+            <option value="name">Name: A to Z</option>
+          </select>
+        </label>
+        <button type="button" class="mobile-catalogue-action" id="mobileCategory"><span aria-hidden="true">▦</span><span>Category</span></button>
+        <button type="button" class="mobile-catalogue-action" id="mobileSearch"><span aria-hidden="true">⌕</span><span>Search</span></button>
       </div>
       <div class="grid" id="productGrid">
         <p class="empty" style="grid-column:1/-1">Loading the collection…</p>
@@ -2338,6 +2351,7 @@ footer{padding:26px 16px}
     const filters = document.querySelectorAll(".catalog-tools .filter");
     let activeFilter = "All";
     let catalogueProducts = [];
+    let catalogueSort = "recommended";
     const PRODUCTS_PER_BATCH = 14;
     let visibleProductCount = PRODUCTS_PER_BATCH;
     function norm(v){ return String(v || "").trim().toLowerCase(); }
@@ -2382,7 +2396,11 @@ footer{padding:26px 16px}
         return matchesCategory && matchesSearch;
       });
 
-      const visibleProducts = filtered.slice(0, visibleProductCount);
+      const sorted = [...filtered];
+      if (catalogueSort === "price-low") sorted.sort((a,b) => (Number(a.selling_price)||Number.MAX_SAFE_INTEGER) - (Number(b.selling_price)||Number.MAX_SAFE_INTEGER));
+      if (catalogueSort === "price-high") sorted.sort((a,b) => (Number(b.selling_price)||0) - (Number(a.selling_price)||0));
+      if (catalogueSort === "name") sorted.sort((a,b) => String(a.name||"").localeCompare(String(b.name||"")));
+      const visibleProducts = sorted.slice(0, visibleProductCount);
       grid.innerHTML = "";
 
       if (!filtered.length) {
@@ -2515,7 +2533,7 @@ footer{padding:26px 16px}
         grid.appendChild(card);
       });
 
-      const remaining = filtered.length - visibleProducts.length;
+      const remaining = sorted.length - visibleProducts.length;
       loadMoreWrap.hidden = remaining <= 0;
       if (remaining > 0) {
         loadMoreBtn.innerHTML = 'Load More Products <span aria-hidden="true">↓</span>';
@@ -2529,6 +2547,19 @@ footer{padding:26px 16px}
     search.addEventListener("input", () => {
       visibleProductCount = PRODUCTS_PER_BATCH;
       renderCatalogue();
+    });
+    const mobileSort = document.getElementById("mobileSort");
+    mobileSort.addEventListener("change", () => {
+      catalogueSort = mobileSort.value;
+      visibleProductCount = PRODUCTS_PER_BATCH;
+      renderCatalogue();
+    });
+    document.getElementById("mobileCategory").addEventListener("click", () => {
+      document.querySelector(".catalog-tools .filters").scrollIntoView({behavior:"smooth",block:"center"});
+    });
+    document.getElementById("mobileSearch").addEventListener("click", () => {
+      search.scrollIntoView({behavior:"smooth",block:"center"});
+      search.focus({preventScroll:true});
     });
     document.getElementById("loadMoreBtn").addEventListener("click", () => {
       visibleProductCount += PRODUCTS_PER_BATCH;
