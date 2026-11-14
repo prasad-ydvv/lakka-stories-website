@@ -635,3 +635,179 @@ body:has(#cartItems) .empty a.btn:hover {
   }
   body:has(#cartItems) .empty h2 { font-size: 22px; }
 }
+
+
+/* CHECKOUT MOBILE REFINEMENT V1
+   Clear, compact review and delivery form. Presentation only:
+   no checkout markup, field requirements, PIN lookup or order submission logic changed. */
+body:has(#checkout) .steps {
+  margin-bottom: 12px;
+}
+body:has(#checkout) .order-review {
+  border-radius: 9px;
+  background: #fffaf2;
+}
+body:has(#checkout) .order-review-heading {
+  gap: 8px;
+  flex-wrap: wrap;
+}
+body:has(#checkout) #orderSummaryLabel {
+  color: #572329;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+body:has(#checkout) .disclosure summary {
+  min-height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+body:has(#checkout) .checkout-item {
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 12px;
+}
+body:has(#checkout) .checkout-item > div:first-child {
+  flex: 1 1 auto;
+}
+body:has(#checkout) .checkout-summary {
+  font-size: 13px;
+}
+body:has(#checkout) #checkout {
+  border-radius: 9px;
+}
+body:has(#checkout) #checkout .grid {
+  align-items: start;
+}
+body:has(#checkout) #checkout .field-hint {
+  overflow-wrap: anywhere;
+}
+body:has(#checkout) #checkout input:disabled,
+body:has(#checkout) #checkout select:disabled {
+  color: #887b70;
+  background: #f4eee5;
+  opacity: 1;
+}
+body:has(#checkout) .payment-summary strong {
+  color: #572329;
+}
+body:has(#checkout) #checkout .submit-order {
+  color: #fffaf2;
+  background: #572329;
+  border: 1px solid #572329;
+  box-shadow: 0 5px 15px rgba(87,35,41,.12);
+}
+body:has(#checkout) #checkout .submit-order:hover {
+  background: #452027;
+  border-color: #452027;
+}
+@media (max-width: 700px) {
+  body:has(#checkout) .wrap {
+    padding: 14px 12px 30px;
+  }
+  body:has(#checkout) .steps {
+    gap: 5px;
+    margin-bottom: 9px;
+  }
+  body:has(#checkout) .steps span {
+    padding: 6px 8px;
+    font-size: 10px;
+  }
+  body:has(#checkout) .wrap > a:first-of-type {
+    min-height: 30px;
+    margin-bottom: 3px;
+    font-size: 12px;
+  }
+  body:has(#checkout) h1 {
+    font-size: 27px;
+    line-height: 1.15;
+  }
+  body:has(#checkout) .order-review {
+    margin: 8px 0 9px;
+    padding: 10px 12px;
+  }
+  body:has(#checkout) .order-review-heading {
+    min-height: 22px;
+    font-size: 13px;
+  }
+  body:has(#checkout) .disclosure,
+  body:has(#checkout) .privacy-details,
+  body:has(#checkout) .optional-fields,
+  body:has(#checkout) .safety-details {
+    font-size: 11px;
+  }
+  body:has(#checkout) #checkout {
+    margin-top: 9px;
+    padding: 13px 12px 15px;
+  }
+  body:has(#checkout) #checkout h2 {
+    font-size: 19px;
+    margin-bottom: 9px;
+  }
+  body:has(#checkout) #checkout .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px 9px;
+  }
+  body:has(#checkout) #checkout .field.full,
+  body:has(#checkout) #checkout #city {
+    grid-column: 1 / -1;
+  }
+  body:has(#checkout) #checkout label {
+    font-size: 10px;
+    line-height: 1.35;
+  }
+  body:has(#checkout) #checkout input,
+  body:has(#checkout) #checkout select {
+    min-width: 0;
+    min-height: 40px;
+    padding: 7px 8px;
+    font-size: 14px;
+  }
+  body:has(#checkout) #checkout textarea {
+    min-height: 60px;
+    padding: 8px;
+    font-size: 14px;
+  }
+  body:has(#checkout) #checkout .field-hint {
+    font-size: 10px;
+    line-height: 1.35;
+  }
+  body:has(#checkout) .optional-fields {
+    padding-top: 8px;
+  }
+  body:has(#checkout) .payment-summary {
+    margin: 8px 0 6px;
+    padding: 8px 9px;
+    font-size: 10px;
+  }
+  body:has(#checkout) .privacy-details {
+    margin: 6px 0;
+  }
+  body:has(#checkout) .consent-row {
+    margin: 8px 0 7px;
+  }
+  body:has(#checkout) #checkout .consent-row label {
+    gap: 8px;
+    font-size: 10px;
+  }
+  body:has(#checkout) #checkout .submit-order {
+    position: sticky;
+    bottom: 8px;
+    z-index: 5;
+    min-height: 48px;
+    margin-top: 5px;
+    font-size: 13px;
+  }
+}
+@media (max-width: 370px) {
+  body:has(#checkout) .steps span {
+    padding: 5px 6px;
+    font-size: 9px;
+  }
+  body:has(#checkout) #checkout .grid {
+    gap: 7px;
+  }
+  body:has(#checkout) #checkout label {
+    font-size: 9px;
+  }
+}
