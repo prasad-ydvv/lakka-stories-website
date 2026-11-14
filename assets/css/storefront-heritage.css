@@ -373,3 +373,76 @@ body:has(.product) .mobile-buy-bar {
   body:has(.hero) .card,
   body:has(.hero) .ls-interest-card { transition: none; }
 }
+
+/* HOME — integrate the three brand promises into the hero */
+body:has(.hero) .hero {
+  position: relative;
+}
+body:has(.hero) .hero-copy .brand-promises {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  width: 100%;
+  max-width: 100%;
+  margin: 18px 0 0;
+  padding: 0;
+  background: transparent;
+  border: 0;
+}
+body:has(.hero) .hero-copy .brand-promise {
+  min-height: 0;
+  justify-content: flex-start;
+  gap: 12px;
+  padding: 10px 2px;
+  background: transparent;
+  border: 0;
+  border-top: 1px solid rgba(183,123,53,.24);
+  border-radius: 0;
+  box-shadow: none;
+}
+body:has(.hero) .hero-copy .promise-icon {
+  flex: 0 0 28px;
+  width: 28px;
+  text-align: center;
+  font-size: 23px;
+  color: #a56d2e;
+}
+body:has(.hero) .hero-copy .brand-promise strong {
+  font-size: 16px;
+  line-height: 1.2;
+}
+body:has(.hero) .hero-copy .brand-promise small {
+  margin-top: 2px;
+  font-size: 11px;
+}
+@media (max-width: 700px) {
+  body:has(.hero) .hero .brand-promises {
+    position: absolute;
+    z-index: 2;
+    top: 12px;
+    left: 12px;
+    width: min(48%, 190px);
+    margin: 0;
+    padding: 7px 9px;
+    background: rgba(255,249,240,.94);
+    border: 1px solid rgba(232,217,197,.95);
+    border-left: 2px solid var(--ls-gold);
+    border-radius: 5px;
+    box-shadow: 0 7px 20px rgba(69,32,39,.10);
+    backdrop-filter: blur(4px);
+  }
+  body:has(.hero) .hero .brand-promise {
+    min-height: 43px;
+    gap: 6px;
+    padding: 6px 0;
+    border-top: 1px solid rgba(183,123,53,.20);
+  }
+  body:has(.hero) .hero .brand-promise:first-child { border-top: 0; }
+  body:has(.hero) .hero .promise-icon {
+    flex-basis: 20px;
+    width: 20px;
+    font-size: 17px;
+  }
+  body:has(.hero) .hero .brand-promise strong { font-size: 10px; }
+  body:has(.hero) .hero .brand-promise small { font-size: 8px; line-height: 1.2; }
+}
