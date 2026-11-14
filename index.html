@@ -2206,6 +2206,7 @@ footer{padding:26px 16px}
 </style>
   <link rel="stylesheet" href="assets/css/design-system.css">
   <link rel="stylesheet" href="assets/css/storefront-heritage.css">
+  <link rel="stylesheet" href="assets/css/product-first-homepage.css">
 </head>
 <body>
   <div class="topline">Every Little Treasure Has a Story.</div>
@@ -2237,6 +2238,25 @@ footer{padding:26px 16px}
       <div class="brand-promise"><span class="promise-icon" aria-hidden="true">✿</span><span><strong>Etikoppaka Craft</strong><small>Traditional wooden toys</small></span></div>
       <div class="brand-promise"><span class="promise-icon" aria-hidden="true">♡</span><span><strong>Thoughtful Gifts</strong><small>Treasures for special moments</small></span></div>
       <div class="brand-promise"><span class="promise-icon" aria-hidden="true">✧</span><span><strong>Made to Be Treasured</strong><small>Little pieces, lasting memories</small></span></div>
+    </section>
+
+    <section class="collection" id="collection">
+      <div class="section-head"><p class="eyebrow">— The collection</p><h2>Find Your Little Treasure</h2><p>Explore our growing collection. Contact us for product details, availability and pricing.</p></div>
+      <div class="catalog-transparency" role="note" aria-label="Product image and detail information"><strong>A note about product images</strong><p>Product images may be illustrative representations and may not show the exact item you receive. Please ask us for current item photos and confirmed product details before you place an order.</p></div>
+      <div class="catalog-tools">
+        <input class="search" id="search" type="search" placeholder="Search the collection..." aria-label="Search products">
+        <div class="filters" aria-label="Filter products">
+          <button class="filter active" data-filter="All">All</button><button class="filter" data-filter="Traditional Toys">Traditional Toys</button><button class="filter" data-filter="Gifts & Keepsakes">Gifts &amp; Keepsakes</button><button class="filter" data-filter="Wedding & Return Gifts">Wedding &amp; Return Gifts</button><button class="filter" data-filter="Home Décor">Home Décor</button><button class="filter" data-filter="Functional & Lifestyle">Functional &amp; Lifestyle</button><button class="filter" data-filter="Corporate Gifting">Corporate Gifting</button>
+        </div>
+      </div>
+      <div class="grid" id="productGrid">
+        <p class="empty" style="grid-column:1/-1">Loading the collection…</p>
+      </div>
+      <div class="load-more-wrap" id="loadMoreWrap" hidden>
+        <button class="load-more-btn" id="loadMoreBtn" type="button">Load More Products <span aria-hidden="true">↓</span></button>
+        <p class="load-more-count" id="loadMoreCount" aria-live="polite"></p>
+      </div>
+      <p id="noResults" class="empty" hidden>No matching products found. Try another search.</p>
     </section>
 
     <section class="ls-interest-section" id="giftIdeas" aria-labelledby="giftIdeasTitle">
@@ -2272,6 +2292,8 @@ footer{padding:26px 16px}
         </button>
       </div>
     </section>
+
+    
 
 
     <section class="craft-highlights" aria-label="Etikoppaka craft introduction">
@@ -2354,24 +2376,7 @@ footer{padding:26px 16px}
       </div>
     </section>
 
-    <section class="collection" id="collection">
-      <div class="section-head"><p class="eyebrow">— The collection</p><h2>Find Your Little Treasure</h2><p>Explore our growing collection. Contact us for product details, availability and pricing.</p></div>
-      <div class="catalog-transparency" role="note" aria-label="Product image and detail information"><strong>A note about product images</strong><p>Product images may be illustrative representations and may not show the exact item you receive. Please ask us for current item photos and confirmed product details before you place an order.</p></div>
-      <div class="catalog-tools">
-        <input class="search" id="search" type="search" placeholder="Search the collection..." aria-label="Search products">
-        <div class="filters" aria-label="Filter products">
-          <button class="filter active" data-filter="All">All</button><button class="filter" data-filter="Traditional Toys">Traditional Toys</button><button class="filter" data-filter="Gifts & Keepsakes">Gifts &amp; Keepsakes</button><button class="filter" data-filter="Wedding & Return Gifts">Wedding &amp; Return Gifts</button><button class="filter" data-filter="Home Décor">Home Décor</button><button class="filter" data-filter="Functional & Lifestyle">Functional &amp; Lifestyle</button><button class="filter" data-filter="Corporate Gifting">Corporate Gifting</button>
-        </div>
-      </div>
-      <div class="grid" id="productGrid">
-        <p class="empty" style="grid-column:1/-1">Loading the collection…</p>
-      </div>
-      <div class="load-more-wrap" id="loadMoreWrap" hidden>
-        <button class="load-more-btn" id="loadMoreBtn" type="button">Load More Products <span aria-hidden="true">↓</span></button>
-        <p class="load-more-count" id="loadMoreCount" aria-live="polite"></p>
-      </div>
-      <p id="noResults" class="empty" hidden>No matching products found. Try another search.</p>
-    </section>
+    
 
     <section class="story story-designed" id="story">
       <div class="story-inner">
