@@ -417,19 +417,17 @@ body:has(.hero) .hero-copy .brand-promise small {
 }
 @media (max-width: 700px) {
   body:has(.hero) .hero .brand-promises {
-    position: absolute;
-    z-index: 2;
-    top: 12px;
-    left: 12px;
-    width: min(48%, 190px);
-    margin: 0;
-    padding: 7px 9px;
-    background: rgba(255,249,240,.94);
+    position: static;
+    z-index: auto;
+    width: 100%;
+    margin: 16px 0 0;
+    padding: 7px 12px;
+    background: rgba(255,249,240,.96);
     border: 1px solid rgba(232,217,197,.95);
     border-left: 2px solid var(--ls-gold);
     border-radius: 5px;
-    box-shadow: 0 7px 20px rgba(69,32,39,.10);
-    backdrop-filter: blur(4px);
+    box-shadow: 0 5px 14px rgba(69,32,39,.07);
+    backdrop-filter: none;
   }
   body:has(.hero) .hero .brand-promise {
     min-height: 43px;
