@@ -112,26 +112,9 @@ body:has(.hero) .collection .section-head h2 {
   font-size: clamp(31px, 4vw, 44px);
   letter-spacing: -.025em;
 }
-body:has(.hero) .catalog-transparency {
-  max-width: 1160px;
-  margin: 0 auto 20px;
-  padding: 13px 17px;
-  border: 1px solid #e8d9c5;
-  border-left: 3px solid var(--ls-gold);
-  border-radius: 4px;
-  background: #faf3e8;
-  color: var(--ls-muted);
-}
-body:has(.hero) .catalog-transparency strong {
-  color: var(--ls-maroon);
-  font-family: var(--ls-font-display);
-  font-size: 15px;
-}
-body:has(.hero) .catalog-transparency p {
-  margin: 3px 0 0;
-  font-size: 11px;
-  line-height: 1.6;
-}
+
+
+
 body:has(.hero) .catalog-tools {
   max-width: 1160px;
   align-items: flex-start;
