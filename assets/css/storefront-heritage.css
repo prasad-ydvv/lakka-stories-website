@@ -795,3 +795,26 @@ body:has(.hero) .hero > .hero-inner > .hero-copy > .brand-promises .brand-promis
     border: 0 !important;
   }
 }
+
+
+/* CATALOGUE PHOTOS — larger portrait presentation without cropping the toys.
+   Keep the complete branded product photograph visible on desktop and mobile. */
+body:has(.hero) .grid .photo {
+  height: auto !important;
+  aspect-ratio: 4 / 5 !important;
+  padding: 0 !important;
+  background: #f3e9dc !important;
+}
+body:has(.hero) .grid .photo img {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  padding: 0 !important;
+  object-fit: contain !important;
+  object-position: center center !important;
+}
+@media (max-width: 700px) {
+  body:has(.hero) .grid .photo {
+    aspect-ratio: 4 / 5 !important;
+  }
+}
