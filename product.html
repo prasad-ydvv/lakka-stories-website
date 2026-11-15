@@ -764,7 +764,7 @@
         setText("productCategory", data.category || "Collection");
         setText("productName", data.name || "Product");
         setText("productDescription", data.description || "Contact us for more details about this product.");
-        const storyText = String(data.story || "").trim().replace(/(?:\r?\n)\s*(?:\*\*)?\*?Tradition, thoughtfully gifted\.(?:\*\*)?\*?\s*$/i, "").trim();
+        const storyText = String(data.story || "").trim().replace(/(?:\r?\n)\s*(?:\*\*)?\*?(?:Every Little Treasure Has a Story|Tradition, thoughtfully gifted)\.(?:\*\*)?\*?\s*$/i, "").trim();
         const storySection = document.getElementById("productStory");
         document.getElementById("productStoryText").textContent = storyText;
         storySection.hidden = !storyText;
