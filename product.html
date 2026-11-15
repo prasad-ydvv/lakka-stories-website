@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#572329">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <meta name="description" content="Discover handcrafted wooden treasures in the LAKKA STORIES collection. Check product details, listed price and availability before ordering.">
+  <meta name="description" content="Discover thoughtfully curated wooden treasures in the LAKKA STORIES collection. Review verified product details, listed price and availability before ordering.">
   <title>Product Details | LAKKA STORIES</title>
   <style>
     /* Ensure hidden controls and single-image gallery elements stay hidden despite component display styles. */
@@ -306,10 +306,10 @@
   <link rel="stylesheet" href="assets/css/storefront-heritage.css">
 </head>
 <body>
-  <div class="topline">Every Little Treasure Has a Story.</div>
+  <div class="topline">Tradition, thoughtfully gifted.</div>
   <header>
     <div class="nav" id="siteNav">
-      <a class="brand" href="index.html#home" aria-label="LAKKA STORIES home"><strong>LAKKA STORIES</strong><span>EVERY LITTLE TREASURE HAS A STORY</span></a>
+      <a class="brand" href="index.html#home" aria-label="LAKKA STORIES home"><strong>LAKKA STORIES</strong><span>TRADITION, THOUGHTFULLY GIFTED</span></a>
       <a class="mobile-cart-shortcut" href="cart.html" aria-label="Open cart">Cart (<span data-cart-count>0</span>)</a>
       <button class="mobile-menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mainNavigation"><span></span><span></span><span></span></button>
       <nav id="mainNavigation" aria-label="Main navigation">
@@ -350,7 +350,7 @@
         <p class="eyebrow">— A little story to keep</p>
         <h2 id="productStoryTitle">The Story Behind This Treasure</h2>
         <p id="productStoryText"></p>
-        <p class="story-tagline">Every Little Treasure Has a Story.</p>
+        <p class="story-tagline">Tradition, thoughtfully gifted.</p>
       </section>
     </article>
     <div class="mobile-buy-bar" id="mobileBuyBar" hidden aria-label="Quick add to cart">
@@ -358,7 +358,7 @@
       <button class="btn" id="mobileAddToCartButton" type="button">Add to Cart</button>
     </div>
   </main>
-  <footer class="site-footer"><div class="footer-brand">LAKKA STORIES</div><p>Every Little Treasure Has a Story.</p><nav class="footer-links" aria-label="Footer navigation"><a href="index.html#home">Home</a><a href="index.html#collection">Collection</a><a href="index.html#story">Our Story</a><a href="index.html#contact">Contact</a><a href="track-order.html">Track Order</a><a href="delivery-returns.html">Delivery &amp; Returns</a><a href="cart.html">Cart</a></nav><small>© 2026 LAKKA STORIES · Etikoppaka Wooden Toys &amp; Keepsakes</small></footer>
+  <footer class="site-footer"><div class="footer-brand">LAKKA STORIES</div><p>Tradition, thoughtfully gifted.</p><nav class="footer-links" aria-label="Footer navigation"><a href="index.html#home">Home</a><a href="index.html#collection">Collection</a><a href="index.html#story">Our Story</a><a href="index.html#contact">Contact</a><a href="track-order.html">Track Order</a><a href="delivery-returns.html">Delivery &amp; Returns</a><a href="cart.html">Cart</a></nav><small>© 2026 LAKKA STORIES · Etikoppaka Wooden Toys &amp; Keepsakes</small></footer>
   <script src="cart.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script>
@@ -764,7 +764,7 @@
         setText("productCategory", data.category || "Collection");
         setText("productName", data.name || "Product");
         setText("productDescription", data.description || "Contact us for more details about this product.");
-        const storyText = String(data.story || "").trim().replace(/(?:\r?\n)\s*(?:\*\*)?\*?Every Little Treasure Has a Story\.(?:\*\*)?\*?\s*$/i, "").trim();
+        const storyText = String(data.story || "").trim().replace(/(?:\r?\n)\s*(?:\*\*)?\*?Tradition, thoughtfully gifted\.(?:\*\*)?\*?\s*$/i, "").trim();
         const storySection = document.getElementById("productStory");
         document.getElementById("productStoryText").textContent = storyText;
         storySection.hidden = !storyText;
