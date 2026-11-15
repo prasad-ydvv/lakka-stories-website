@@ -1131,3 +1131,16 @@ body:has(#orderSuccess:not(.hidden)) .confirmation-track:hover {
 @media (prefers-reduced-motion: reduce) {
   body:has(#orderSuccess:not(.hidden)) * { scroll-behavior: auto !important; }
 }
+
+
+/* CONFIRMATION VIEWPORT — once the request is submitted, remove checkout
+   navigation and form-stage headings so the success message is the focus. */
+body:has(#orderSuccess:not(.hidden)) .steps,
+body:has(#orderSuccess:not(.hidden)) .wrap > a:first-of-type,
+body:has(#orderSuccess:not(.hidden)) .wrap > h1,
+body:has(#orderSuccess:not(.hidden)) .safety-details {
+  display: none !important;
+}
+body:has(#orderSuccess:not(.hidden)) .wrap {
+  padding-top: clamp(22px, 4vw, 42px);
+}
