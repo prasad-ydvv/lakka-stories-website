@@ -362,8 +362,8 @@
   <script src="cart.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script>
-    const SUPABASE_URL = "https://gsesangwrryzbpudusfl.supabase.co";
-    const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_2zVjR7EYlB4kSX-CtQr71w_xXZ35Ejz";
+    const SUPABASE_URL = "https://jdoxpxoyhppjglmdvnfq.supabase.co";
+    const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_246akiIdyqyzsd3bFiE5zQ_H3qO6jfM";
     const WHATSAPP_BUSINESS_NUMBER = "919381317313";
     const state = document.getElementById("productState");
     const details = document.getElementById("productDetails");
@@ -742,45 +742,57 @@
       window.open(`https://wa.me/${WHATSAPP_BUSINESS_NUMBER}?text=${encodeURIComponent(message)}`, "_blank", "noopener,noreferrer");
     });
 
+    function renderProductData(data) {
+      loadedProduct = data;
+      document.title = `${data.name || "Product"} | LAKKA STORIES`;
+      setText("productCategory", data.category || "Collection");
+      setText("productName", data.name || "Product");
+      setText("productDescription", data.description || "Contact us for more details about this product.");
+      const storyText = String(data.story || "").trim();
+      const storySection = document.getElementById("productStory");
+      document.getElementById("productStoryText").textContent = storyText;
+      storySection.hidden = !storyText;
+      renderGallery(collectGalleryImages(data), data.name || "Product");
+      renderAvailability(data.availability);
+      renderVerifiedSpecs(data);
+      productForCart = data;
+      formatPrice(data);
+      setupMobileBuyBar(data);
+      state.hidden = true;
+      details.hidden = false;
+      document.getElementById("addToCartButton").onclick = event => addLoadedProductToCart(event.currentTarget);
+    }
+
     async function loadProduct() {
       if (!productId) {
         showState("No product was selected. Please return to the collection and choose a product.");
         return;
       }
+      const cacheKey = "lakka_product_v1_" + productId;
+      const ttl = 15 * 60 * 1000;
+      let cached = null;
+      try { cached = JSON.parse(localStorage.getItem(cacheKey) || "null"); } catch (_) {}
+      if (cached && cached.data && typeof cached.savedAt === "number") {
+        renderProductData(cached.data);
+        if (Date.now() - cached.savedAt < ttl) return;
+      }
       try {
         if (!window.supabase || !window.supabase.createClient) throw new Error("Catalogue service could not load.");
         const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
         const { data, error } = await client.from("public_catalogue")
-          .select("*")
+          .select("id,product_code,name,category,description,dimensions,image_url,reference_price,selling_price,availability")
           .eq("id", productId)
           .maybeSingle();
         if (error) throw error;
         if (!data) {
-          showState("We couldn't find that product. It may no longer be available.");
+          if (!cached) showState("We couldn't find that product. It may no longer be available.");
           return;
         }
-        loadedProduct = data;
-        document.title = `${data.name || "Product"} | LAKKA STORIES`;
-        setText("productCategory", data.category || "Collection");
-        setText("productName", data.name || "Product");
-        setText("productDescription", data.description || "Contact us for more details about this product.");
-        const storyText = String(data.story || "").trim().replace(/(?:\r?\n)\s*(?:\*\*)?\*?(?:Every Little Treasure Has a Story|Tradition, thoughtfully gifted)\.(?:\*\*)?\*?\s*$/i, "").trim();
-        const storySection = document.getElementById("productStory");
-        document.getElementById("productStoryText").textContent = storyText;
-        storySection.hidden = !storyText;
-        const images = collectGalleryImages(data);
-        renderGallery(images, data.name || "Product");
-        renderAvailability(data.availability);
-        renderVerifiedSpecs(data);
-        productForCart = data;
-        formatPrice(data);
-        setupMobileBuyBar(data);
-        state.hidden = true;
-        details.hidden = false;
-        document.getElementById("addToCartButton").addEventListener("click", event => addLoadedProductToCart(event.currentTarget));
+        try { localStorage.setItem(cacheKey, JSON.stringify({savedAt:Date.now(),data})); } catch (_) {}
+        renderProductData(data);
       } catch (error) {
-        console.error("Could not load product details:", error);
-        showState("We couldn't load this product right now. Please go back to the collection or contact us on WhatsApp.");
+        console.error("Could not refresh product details:", error);
+        if (!cached) showState("We couldn't load this product right now. Please go back to the collection or contact us on WhatsApp.");
       }
     }
     loadProduct();
