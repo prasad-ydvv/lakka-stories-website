@@ -7,19 +7,19 @@
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="shortcut icon" href="favicon.svg">
   <meta name="description" content="Discover thoughtfully curated Etikoppaka wooden toys and traditional gifts from LAKKA STORIES. Tradition, thoughtfully gifted.">
-  <link rel="canonical" href="https://prasad-ydvv.github.io/lakka-stories-website/">
+  <link rel="canonical" href="https://lakkastories.in/">
   <meta name="robots" content="index,follow">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="LAKKA STORIES">
   <meta property="og:title" content="LAKKA STORIES | Tradition, thoughtfully gifted">
   <meta property="og:description" content="Tradition, thoughtfully gifted. Explore thoughtfully curated Etikoppaka wooden toys, keepsakes and gifts from LAKKA STORIES.">
-  <meta property="og:url" content="https://prasad-ydvv.github.io/lakka-stories-website/">
-  <meta property="og:image" content="https://prasad-ydvv.github.io/lakka-stories-website/images/hero-banner.jpg">
+  <meta property="og:url" content="https://lakkastories.in/">
+  <meta property="og:image" content="https://lakkastories.in/images/hero-banner.jpg">
   <meta property="og:image:alt" content="Colourful Etikoppaka wooden toys from LAKKA STORIES">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="LAKKA STORIES | Tradition, thoughtfully gifted">
   <meta name="twitter:description" content="Tradition, thoughtfully gifted. Discover thoughtfully curated Etikoppaka wooden toys and keepsake gifts from LAKKA STORIES.">
-  <meta name="twitter:image" content="https://prasad-ydvv.github.io/lakka-stories-website/images/hero-banner.jpg">
+  <meta name="twitter:image" content="https://lakkastories.in/images/hero-banner.jpg">
   <title>LAKKA STORIES | Tradition, thoughtfully gifted</title>
   <style>
     :root{--maroon:#572329;--maroon2:#74333a;--cream:#fffdf8;--sand:#f3e7d4;--gold:#bd8b45;--ink:#422b2a;--muted:#786b62;--line:#eadcc9}
@@ -2346,8 +2346,8 @@ footer{padding:26px 16px}
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script>
     // Public project settings only. Never place database passwords or service-role keys here.
-    const SUPABASE_URL = "https://gsesangwrryzbpudusfl.supabase.co";
-    const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_2zVjR7EYlB4kSX-CtQr71w_xXZ35Ejz";
+    const SUPABASE_URL = "https://jdoxpxoyhppjglmdvnfq.supabase.co";
+    const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_246akiIdyqyzsd3bFiE5zQ_H3qO6jfM";
     // IMPORTANT: Add your WhatsApp business number below before publishing.
     // Use country code + number only, with no +, spaces or dashes. Example format: 919876543210
     const WHATSAPP_BUSINESS_NUMBER = "919381317313";
@@ -2601,29 +2601,32 @@ footer{padding:26px 16px}
       try {
         if (!window.supabase || !window.supabase.createClient) throw new Error("Catalogue service could not load. Please refresh.");
         const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
-        // Fetch every published row in predictable batches. Supabase/PostgREST
-        // applies a server row limit, so do not assume one request returns the full catalogue.
-        const pageSize = 500;
-        const allRows = [];
-        for (let from = 0; from < 50000; from += pageSize) {
-          const { data, error } = await client.from("public_catalogue")
-            .select("id,product_code,name,category,description,dimensions,image_url,reference_price,selling_price,availability")
-            .order("created_at", { ascending: false })
-            .range(from, from + pageSize - 1);
-          if (error) throw error;
-          const batch = data || [];
-          allRows.push(...batch);
-          if (batch.length < pageSize) break;
+        // Reuse a short-lived public catalogue cache to avoid repeat egress.
+        // Stale cached data is a graceful fallback if Supabase is temporarily unavailable.
+        const CACHE_KEY = "lakka_public_catalogue_v1";
+        const CACHE_TTL_MS = 15 * 60 * 1000;
+        let cached = null;
+        try { cached = JSON.parse(localStorage.getItem(CACHE_KEY) || "null"); } catch (_) {}
+        if (cached && Array.isArray(cached.rows) && cached.rows.length) {
+          catalogueProducts = cached.rows;
+          renderCatalogue();
+          if (Date.now() - Number(cached.savedAt || 0) < CACHE_TTL_MS) return;
         }
-        // Deduplicate defensively by product id while preserving the newest-first order.
+        const { data, error } = await client.from("public_catalogue")
+          .select("id,product_code,name,category,description,dimensions,image_url,reference_price,selling_price,availability")
+          .order("created_at", { ascending: false })
+          .limit(100);
+        if (error) throw error;
+        const rows = Array.isArray(data) ? data : [];
         const seen = new Set();
-        catalogueProducts = allRows.filter(row => {
+        catalogueProducts = rows.filter(row => {
           const key = row && row.id != null ? String(row.id) : null;
           if (key === null) return true;
           if (seen.has(key)) return false;
           seen.add(key);
           return true;
         });
+        try { localStorage.setItem(CACHE_KEY, JSON.stringify({savedAt:Date.now(),rows:catalogueProducts})); } catch (_) {}
         renderCatalogue();
         if (!catalogueProducts.length) {
           grid.innerHTML = '<p class="empty" style="grid-column:1/-1">Our collection is being prepared. Please check back soon or contact us for enquiries.</p>';
